@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOCKSCOM - Blocks Media</title>
+    <meta property="og:title" content="BLOCKSCOM - Blocks Media">
+    <meta property="og:description" content="Blocks Media for NFT, Website Creation & Games for your Community.">
+    <meta property="og:image" content="images/thumbnail.png">
+    <meta property="og:url" content="https://blockscom.media">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="images/thumbnail.png">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/chatbot.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    <canvas id="bg-canvas"></canvas>
+
+    <header>
+        <nav>
+            <div class="logo">BLOCKSCOM</div>
+            <ul>
+                <li><a href="#hero" class="nav-link">Home</a></li>
+                <li><a href="#nft-marketplace" class="nav-link">Collection</a></li>
+                <li><a href="#web-design" class="nav-link">Websites</a></li>
+                <li><a href="#games" class="nav-link">Games</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+            <section id="hero" class="scroll-section">
+                <div class="content hero-content">
+                    <h1 class="split-text">BLOCKSCOM <span class="accent-font">Media</span></h1>
+                    <p class="fade-in">Blocks Media for NFT, Website Creation & Games for your Community.</p>
+                    <div class="scroll-indicator">
+                        <span>Explore</span>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="nft-marketplace" class="scroll-section">
+                <h2 class="section-title">Curated <span class="italic">Collections</span></h2>
+                <div class="slider-container" id="nft-slider">
+                    <div class="slider-wrapper">
+                        <!-- Slides will be injected here -->
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="nftmarketplace/index.html" class="btn-primary">View All Collections</a>
+                </div>
+            </section>
+
+            <section id="memecoin-collections" class="scroll-section">
+                <h2 class="section-title">MEMECOIN <span class="italic">NFT Collections</span></h2>
+                <div class="slider-container" id="memecoin-slider">
+                    <div class="slider-wrapper">
+                        <!-- Slides will be injected here -->
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="nftmarketplace/index.html" class="btn-primary">View All Collections</a>
+                </div>
+            </section>
+
+            <section id="web-design" class="scroll-section">
+                <h2 class="section-title">Digital <span class="italic">Websites</span></h2>
+                <div class="slider-container" id="web-slider">
+                    <div class="slider-wrapper">
+                        <!-- Slides will be injected here -->
+                    </div>
+                </div>
+            </section>
+
+            <section id="games" class="scroll-section">
+                <h2 class="section-title">Community <span class="italic">Games</span></h2>
+                <div class="grid-container" id="games-grid">
+                    <!-- Games will be injected here -->
+                </div>
+            </section>
+
+            <section id="faq" class="scroll-section">
+                <h2 class="section-title">Frequently Asked <span class="italic">Questions</span></h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What is Blocks Media?</h3>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Blocks Media is a premier creative agency specializing in high-end NFT collections,
+                                bespoke website design, and immersive community games.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How can I purchase an NFT?</h3>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our collections are available on major marketplaces. Click on any collection in our
+                                "Curated Collections" section to view details and purchase options. All collections are
+                                metadata-rich and ready for the GO COLLECTION. You can also request higher trait counts.
+                                You retain full access and intellectual property (IP) rights for the collection's
+                                artwork. All artwork is 100% original, crafted by our team of 10 expert artists.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Do you offer custom NFT collections?</h3>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes. We create custom NFT collections tailored to your specific vision and design
+                                requirements, complete with full metadata.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Do you offer custom website development?</h3>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we create stunning, high-performance websites tailored to your brand. Check out our
+                                "Digital Websites" section for examples of our work.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Do you offer custom games for my project?</h3>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes. While full-scale game development is complex, we specialize in creating
+                                wallet-integrated mini-games perfect for meme coins and gamified NFT projects.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section id="contact" class="scroll-section">
+                <h2 class="section-title">Contact <span class="italic">Us</span></h2>
+                <p class="contact-text">For private commissions and inquiries.</p>
+
+                <div class="contact-form-container">
+                    <!-- REPLACE "https://formspree.io/f/YOUR_FORM_ID" with your actual Formspree Form ID -->
+                    <form class="contact-form" action="https://formspree.io/f/mblennpp" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-input" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-input" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="subject" class="form-input" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" class="form-textarea" placeholder="Your Message"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Message</button>
+                    </form>
+                </div>
+            </section>
+
+            <footer>
+                <div class="footer-links">
+                    <a href="#faq">FAQ</a>
+                    <a href="#" id="tos-link">Terms</a>
+                    <a href="#" id="privacy-link">Privacy</a>
+                    <a href="https://x.com/blocksmedia_" target="_blank">Twitter/X</a>
+                </div>
+                <p>&copy; 2025 BlocksCom. All rights reserved.</p>
+            </footer>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div id="tos-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Terms of Service</h2>
+            <div class="modal-body">
+                <p>Welcome to Blocks Media. By accessing our website, you agree to these terms.</p>
+                <h3>1. Usage</h3>
+                <p>You agree to use our services for lawful purposes only.</p>
+                <h3>2. Intellectual Property</h3>
+                <p>All content on this site is the property of Blocks Media.</p>
+                <h3>3. NFT Ownership</h3>
+                <p>Ownership of NFTs purchased through our platform is recorded on the blockchain.</p>
+                <p>Last updated: 2025</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="privacy-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Privacy Policy</h2>
+            <div class="modal-body">
+                <p>Your privacy is important to us.</p>
+                <h3>1. Data Collection</h3>
+                <p>We collect minimal data necessary to provide our services.</p>
+                <h3>2. Cookies</h3>
+                <p>We use cookies to enhance your browsing experience.</p>
+                <h3>3. Third Parties</h3>
+                <p>We do not sell your personal data to third parties.</p>
+                <p>Last updated: 2025</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="website-modal" class="modal">
+        <div class="modal-content" style="width: 90%; height: 90%; max-width: none;">
+            <span class="close-modal">&times;</span>
+            <iframe id="website-iframe" src="" style="width: 100%; height: 100%; border: none;"></iframe>
+        </div>
+    </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <div id="chat-window" class="chat-window">
+            <div class="chat-header">
+                <h3>Blocks AI</h3>
+                <button id="close-chat" class="close-chat">&times;</button>
+            </div>
+            <div id="chat-messages" class="chat-messages">
+                <div class="message system">Welcome to Blocks Media! How can I help you today?</div>
+                <div id="typing-indicator" class="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" class="chat-input" placeholder="Type a message...">
+                <button id="send-btn" class="send-btn">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <button id="chat-bubble" class="chat-bubble">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path>
+            </svg>
+        </button>
+    </div>
+
+
+    <script type="module" src="js/three-bg.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/chatbot.js"></script>
+
+</body>
+
+</html>

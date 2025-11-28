@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockscom | The Future of NFT Media</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --primary: #ff00cc;
+            --secondary: #333399;
+            --accent: #00ffff;
+            --dark: #050510;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Background & Canvas */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: url('assets/temple_background.png') no-repeat center center;
+            background-size: cover;
+        }
+
+        #canvas-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(5, 5, 16, 0.3), rgba(5, 5, 16, 0.8));
+            z-index: 0;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* Typography & Utilities */
+        h1,
+        h2,
+        h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .glass-panel {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 0, 204, 0.4);
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #ff00cc, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 0, 204, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* NFT Gallery */
+        #gallery {
+            padding: 100px 0;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--accent);
+        }
+
+        .gallery-track {
+            display: flex;
+            gap: 2rem;
+            padding: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nft-card {
+            min-width: 300px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 2;
+        }
+
+        .nft-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(255, 0, 204, 0.3);
+        }
+
+        .nft-image-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .nft-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gif-img {
+            opacity: 0;
+            z-index: 2;
+        }
+
+        .static-img {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .nft-card:hover .gif-img {
+            opacity: 1;
+        }
+
+        .nft-card:hover .static-img {
+            opacity: 0;
+        }
+
+        /* Roadmap */
+        #roadmap {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .roadmap-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+            transform: translateX(-50%);
+        }
+
+        .roadmap-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 100px;
+            position: relative;
+        }
+
+        .roadmap-content {
+            width: 45%;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--accent);
+            border-radius: 15px;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .roadmap-item:nth-child(odd) .roadmap-content {
+            margin-right: auto;
+            text-align: right;
+            border-right: 4px solid var(--accent);
+        }
+
+        .roadmap-item:nth-child(even) .roadmap-content {
+            margin-left: auto;
+            text-align: left;
+            border-left: 4px solid var(--accent);
+        }
+
+        .roadmap-dot {
+            position: absolute;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        /* Tokenomics */
+        #tokenomics {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        .stat-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: #aaa;
+            text-transform: uppercase;
+        }
+
+        /* Footer */
+        footer {
+            padding: 5rem 0;
+            background: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .roadmap-line {
+                left: 20px;
+            }
+
+            .roadmap-item {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-left: 50px;
+            }
+
+            .roadmap-content {
+                width: 100%;
+                margin: 0 !important;
+                text-align: left !important;
+            }
+
+            .roadmap-dot {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="canvas-container"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="container hero-content">
+                <h1 class="gsap-hero">BLOCKSCOM</h1>
+                <p class="gsap-hero">Blocks Media for NFT, Website Creation & Games for your Community.</p>
+                <a href="#gallery" class="btn gsap-hero">Explore Collection</a>
+            </div>
+        </section>
+
+        <!-- NFT Gallery -->
+        <section id="gallery">
+            <div class="container">
+                <h2 class="section-title">The Collection</h2>
+                <div class="gallery-track">
+                    <!-- apin -->
+                    <div class="nft-card">
+                        <div class="nft-image-container">
+                            <img src="nft1/apin.png" alt="apin" class="static-img">
+                            <img src="nft1/apin.gif" alt="apin animated" class="gif-img">
+                        </div>
+                    </div>
+                    <!-- ceat -->
+                    <div class="nft-card">
+                        <div class="nft-image-container">
+                            <img src="nft1/ceat.png" alt="ceat" class="static-img">
+                            <img src="nft1/ceat.gif" alt="ceat animated" class="gif-img">
+                        </div>
+                    </div>
+                    <!-- freedom -->
+                    <div class="nft-card">
+                        <div class="nft-image-container">
+                            <img src="nft1/freedom.png" alt="freedom" class="static-img">
+                            <img src="nft1/freedom.gif" alt="freedom animated" class="gif-img">
+                        </div>
+                    </div>
+                    <!-- hooman -->
+                    <div class="nft-card">
+                        <div class="nft-image-container">
+                            <img src="nft1/hooman.png" alt="hooman" class="static-img">
+                            <img src="nft1/hooman.gif" alt="hooman animated" class="gif-img">
+                        </div>
+                    </div>
+                    <!-- humanime -->
+                    <div class="nft-card">
+                        <div class="nft-image-container">
+                            <img src="nft1/humanime.jpg" alt="humanime" class="static-img">
+                            <img src="nft1/humanime.gif" alt="humanime animated" class="gif-img">
+                        </div>
+                    </div>
+                    <!-- pipi -->
+                    <div class="nft-card">
+                        <div class="nft-image-container">
+                            <img src="nft1/pipi.png" alt="pipi" class="static-img">
+                            <img src="nft1/pipi.gif" alt="pipi animated" class="gif-img">
+                        </div>
+                    </div>
+                    <!-- pixelhooman -->
+                    <div class="nft-card">
+                        <div class="nft-image-container">
+                            <img src="nft1/pixelhooman.png" alt="pixelhooman" class="static-img">
+                            <img src="nft1/pixelhooman.gif" alt="pixelhooman animated" class="gif-img">
+                        </div>
+                    </div>
+                    <!-- tigerr -->
+                    <div class="nft-card">
+                        <div class="nft-image-container">
+                            <img src="nft1/tigerr.png" alt="tigerr" class="static-img">
+                            <img src="nft1/tigerr.gif" alt="tigerr animated" class="gif-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap -->
+        <section id="roadmap">
+            <div class="container">
+                <h2 class="section-title">Roadmap</h2>
+                <div class="roadmap-line"></div>
+
+                <div class="roadmap-item">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <h3>Phase 1: Inception</h3>
+                        <p>Community building, website launch, and initial whitelist distribution.</p>
+                    </div>
+                </div>
+
+                <div class="roadmap-item">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <h3>Phase 2: The Drop</h3>
+                        <p>Public minting goes live. 1 Billion supply unleashed. Rarities revealed.</p>
+                    </div>
+                </div>
+
+                <div class="roadmap-item">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <h3>Phase 3: Expansion</h3>
+                        <p>Game development begins. Token staking and utility integration.</p>
+                    </div>
+                </div>
+
+                <div class="roadmap-item">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <h3>Phase 4: Metaverse</h3>
+                        <p>Full integration into the Blockscom ecosystem. Virtual events and more.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tokenomics -->
+        <section id="tokenomics">
+            <div class="container">
+                <h2 class="section-title">Token Info</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">1B</div>
+                        <div class="stat-label">Total Supply</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">5+</div>
+                        <div class="stat-label">Rarity Tiers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Community Owned</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="socials">
+                <a href="#" class="social-icon">TG</a>
+                <a href="#" class="social-icon">DC</a>
+                <a href="#" class="social-icon">X</a>
+            </div>
+            <p>&copy; 2025 Blockscom. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Three.js Cherry Blossom Effect ---
+        const initThreeJS = () => {
+            const container = document.getElementById('canvas-container');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            // Particles (Cherry Blossoms)
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 1500;
+            const posArray = new Float32Array(particlesCount * 3);
+            const speedArray = new Float32Array(particlesCount);
+            const wobbleArray = new Float32Array(particlesCount);
+
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 20; // Spread
+            }
+
+            for (let i = 0; i < particlesCount; i++) {
+                speedArray[i] = Math.random() * 0.02 + 0.005;
+                wobbleArray[i] = Math.random() * Math.PI * 2;
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+            // Texture for petal (simple circle/gradient for now to keep it single file compatible without external images if possible, 
+            // but let's use a generated canvas texture for performance and self-containment)
+            const getPetalTexture = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = 32;
+                canvas.height = 32;
+                const ctx = canvas.getContext('2d');
+                ctx.beginPath();
+                ctx.ellipse(16, 16, 8, 12, Math.PI / 4, 0, 2 * Math.PI);
+                ctx.fillStyle = '#ffb7c5';
+                ctx.fill();
+                const texture = new THREE.CanvasTexture(canvas);
+                return texture;
+            };
+
+            const material = new THREE.PointsMaterial({
+                size: 0.15,
+                map: getPetalTexture(),
+                transparent: true,
+                opacity: 0.8,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending,
+                color: 0xffccdd
+            });
+
+            const particlesMesh = new THREE.Points(particlesGeometry, material);
+            scene.add(particlesMesh);
+
+            camera.position.z = 5;
+
+            // Mouse interaction
+            let mouseX = 0;
+            let mouseY = 0;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = event.clientX / window.innerWidth - 0.5;
+                mouseY = event.clientY / window.innerHeight - 0.5;
+            });
+
+            // Animation Loop
+            const animate = () => {
+                requestAnimationFrame(animate);
+
+                const positions = particlesGeometry.attributes.position.array;
+
+                for (let i = 0; i < particlesCount; i++) {
+                    // Fall down
+                    positions[i * 3 + 1] -= speedArray[i];
+
+                    // Wobble
+                    positions[i * 3] += Math.sin(wobbleArray[i]) * 0.002;
+                    wobbleArray[i] += 0.05;
+
+                    // Reset if below screen
+                    if (positions[i * 3 + 1] < -5) {
+                        positions[i * 3 + 1] = 5;
+                        positions[i * 3] = (Math.random() - 0.5) * 20;
+                    }
+                }
+
+                particlesGeometry.attributes.position.needsUpdate = true;
+
+                // Parallax
+                particlesMesh.rotation.y = mouseX * 0.2;
+                particlesMesh.rotation.x = mouseY * 0.2;
+
+                renderer.render(scene, camera);
+            };
+
+            animate();
+
+            // Resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        };
+
+        // --- GSAP Animations ---
+        const initAnimations = () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero
+            gsap.from('.gsap-hero', {
+                duration: 1.5,
+                y: 100,
+                opacity: 0,
+                stagger: 0.2,
+                ease: 'power4.out'
+            });
+
+            // Gallery
+            gsap.from('.nft-card', {
+                scrollTrigger: {
+                    trigger: '#gallery',
+                    start: 'top 80%',
+                },
+                duration: 1,
+                y: 50,
+                // opacity: 0, // Removed opacity transition to avoid visibility issues
+                stagger: 0.1,
+                ease: 'power3.out'
+            });
+
+            // Roadmap
+            gsap.utils.toArray('.roadmap-item').forEach((item, i) => {
+                gsap.from(item, {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 85%',
+                    },
+                    duration: 1,
+                    x: i % 2 === 0 ? -50 : 50,
+                    opacity: 0,
+                    ease: 'power3.out'
+                });
+            });
+
+            // Tokenomics
+            gsap.from('.stat-card', {
+                scrollTrigger: {
+                    trigger: '#tokenomics',
+                    start: 'top 80%',
+                },
+                duration: 1,
+                scale: 0.8,
+                opacity: 0,
+                stagger: 0.2,
+                ease: 'back.out(1.7)'
+            });
+        };
+
+        // Initialize
+        window.addEventListener('load', () => {
+            initThreeJS();
+            initAnimations();
+        });
+
+    </script>
+</body>
+
+</html>
