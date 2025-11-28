@@ -131,10 +131,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Memecoin Slider Population & Animation
     const memecoinSliderWrapper = document.querySelector('#memecoin-slider .slider-wrapper');
-    // Using the same nftData for now as requested
+
+    // Dedicated data for Memecoin Collection
+    const memecoinData = [
+        { title: "Axolie", price: "0.05 ETH", traits: "50-80", supply: "1000", image: "nft1/meme/axolie.png", gif: "nft1/meme/axolie.png" },
+        { title: "Bonie", price: "0.08 ETH", traits: "80-100", supply: "500", image: "nft1/meme/bonie.png", gif: "nft1/meme/bonie.png" },
+        { title: "Cappie", price: "0.06 ETH", traits: "60-90", supply: "800", image: "nft1/meme/cappie.png", gif: "nft1/meme/cappie.png" },
+        { title: "Dogii", price: "0.12 ETH", traits: "70-90", supply: "900", image: "nft1/meme/dogii.png", gif: "nft1/meme/dogii.png" },
+        { title: "Duckie", price: "0.04 ETH", traits: "40-60", supply: "1200", image: "nft1/meme/duckie.png", gif: "nft1/meme/duckie.png" },
+        { title: "Foxie", price: "0.09 ETH", traits: "80-110", supply: "600", image: "nft1/meme/foxie.png", gif: "nft1/meme/foxie.png" },
+        { title: "Germie", price: "0.03 ETH", traits: "30-50", supply: "1500", image: "nft1/meme/germie.png", gif: "nft1/meme/germie.png" },
+        { title: "Gori", price: "0.15 ETH", traits: "100-150", supply: "300", image: "nft1/meme/gori.png", gif: "nft1/meme/gori.png" },
+        { title: "Penie", price: "0.07 ETH", traits: "60-80", supply: "700", image: "nft1/meme/penie.png", gif: "nft1/meme/penie.png" },
+        { title: "Sharkie", price: "0.11 ETH", traits: "90-120", supply: "400", image: "nft1/meme/sharkie.png", gif: "nft1/meme/sharkie.png" },
+        { title: "Slothie", price: "0.05 ETH", traits: "50-70", supply: "1000", image: "nft1/meme/slothie.png", gif: "nft1/meme/slothie.png" },
+        { title: "Tedted", price: "0.06 ETH", traits: "60-90", supply: "800", image: "nft1/meme/tedted.png", gif: "nft1/meme/tedted.png" },
+        { title: "Whalie", price: "0.10 ETH", traits: "80-100", supply: "500", image: "nft1/meme/whalie.png", gif: "nft1/meme/whalie.png" },
+        { title: "Wopie", price: "0.08 ETH", traits: "70-90", supply: "600", image: "nft1/meme/wopie.png", gif: "nft1/meme/wopie.png" },
+    ];
+
     if (memecoinSliderWrapper) {
         memecoinSliderWrapper.innerHTML = '';
-        nftData.forEach((nft) => {
+        memecoinData.forEach((nft) => {
             const slide = document.createElement('div');
             slide.className = 'slide-item';
             slide.innerHTML = `
