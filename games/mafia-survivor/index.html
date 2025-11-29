@@ -15,86 +15,128 @@
 
     <div id="ui-layer">
 
-        <!-- HUD -->
-        <div id="hud" class="hud-top hidden">
-            <div class="stats-left">
+        <!-- TOP HUD -->
+        <div class="hud-top">
+            <!-- LEFT: Player Status -->
+            <div class="hud-section hud-left">
                 <div class="bar-container" id="hp-bar-container">
                     <div class="bar-wrapper">
                         <div class="bar-fill" id="hp-fill"></div>
                     </div>
                 </div>
-                <div class="stat-text">HP <span id="hp-text">100/100</span></div>
-            </div>
-
-            <div id="timer">00:00</div>
-
-            <div class="stats-right">
-                <div class="bar-container" id="xp-bar-container" style="border-color: var(--ui-gold);">
-                    <div class="bar-fill" id="xp-fill"></div>
+                <div class="stat-label">
+                    <span>HP</span>
+                    <span id="hp-text">100/100</span>
                 </div>
-                <div class="stat-text">LVL <span id="lvl-text">1</span> | CASH: $<span id="cash-text">0</span></div>
-                <div class="stat-text" style="font-size: 10px; color: #aaa; margin-top: 5px;">
-                    HP RATE: x<span id="hp-rate">1</span> | CASH RATE: x<span id="cash-rate">1</span>
+
+                <div class="bar-container" id="xp-bar-container"
+                    style="border-color: var(--ui-gold); width: 200px; height: 16px;">
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" id="xp-fill"></div>
+                    </div>
+                </div>
+                <div class="stat-label" style="width: 200px;">
+                    <span>XP</span>
+                    <span id="lvl-text">LVL 1</span>
+                </div>
+            </div>
+
+            <!-- CENTER: Timer -->
+            <div class="hud-section hud-center">
+                <div id="timer-container">
+                    <div id="timer">00:00</div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Currency & Score -->
+            <div class="hud-section hud-right">
+                <div class="info-panel">
+                    <div class="info-text">CASH: $<span id="cash-text">0</span></div>
+                    <div class="sub-text">MULTIPLIER: x<span id="cash-rate">1</span></div>
+                </div>
+                <!-- Placeholder for Wave or other stats -->
+                <div class="info-panel">
+                    <div class="info-text" style="color: #fff;">WAVE <span id="wave-text">1</span></div>
                 </div>
             </div>
         </div>
 
-        <!-- OUTPOST CONTROLS -->
-        <div id="outpost-controls"
-            style="position: absolute; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px;">
-            <button id="buy-outpost-btn" class="btn btn-gold" onclick="buyOutpost()"
-                style="font-size: 10px; padding: 10px;">BUY OUTPOST ($500)</button>
-            <button id="upgrade-btn" class="btn hidden"
-                style="font-size: 10px; padding: 10px; background: #55ffff; color: #000;">UPGRADE</button>
-        </div>
+        <!-- BOTTOM HUD -->
+        <div class="hud-bottom">
+            <!-- LEFT: Buffs & Items -->
+            <div class="hud-section hud-left">
+                <div id="buff-tracker">
+                    <div class="buff-item" style="color: var(--ui-red);">DMG: <span id="stack-dmg">0</span></div>
+                    <div class="buff-item" style="color: var(--ui-green);">HP: <span id="stack-hp">0</span></div>
+                    <div class="buff-item" style="color: var(--ui-blue);">SPD: <span id="stack-spd">0</span></div>
+                </div>
 
-        <!-- BUFF STACK TRACKER -->
-        <div id="buff-tracker" class="buff-tracker hidden">
-            <div style="color: #ff5555;">DMG STACKS: <span id="stack-dmg">0</span>/20</div>
-            <div style="color: #ff88ff;">HP STACKS: <span id="stack-hp">0</span>/20</div>
-            <div style="color: #55ffff;">SPD STACKS: <span id="stack-spd">0</span>/20</div>
-        </div>
-
-        <!-- PLAYER STATS PANEL -->
-        <div id="stats-panel" class="stats-panel hidden">
-            <div class="stat-header">PLAYER STATS</div>
-            <div id="stat-weapon" style="color: var(--ui-gold);">WEAPON: PISTOL</div>
-            <div class="stat-row">DMG: <span id="stat-dmg">10</span></div>
-            <div class="stat-row">FIRE RATE: <span id="stat-fr">35</span></div>
-            <div class="stat-row">SPEED: <span id="stat-spd">1.5</span></div>
-            <div class="stat-row">PROJECTILES: <span id="stat-proj">1</span></div>
-            <div id="ability-list"></div>
-        </div>
-
-        <!-- SAFETY BOX SPINNER UI -->
-        <div id="safety-box-ui" class="hidden">
-            <div class="spin-label">OPENING SAFETY BOX...</div>
-            <div class="spinner-window">
-                <div id="spinner-text">???</div>
+                <!-- Safety Box UI (Moved here) -->
+                <div id="safety-box-ui" class="hidden">
+                    <div class="spin-label">OPENING SAFETY BOX...</div>
+                    <div class="spinner-window">
+                        <div id="spinner-text">???</div>
+                    </div>
+                    <div id="box-pending" class="pending-count">PENDING: 0</div>
+                </div>
             </div>
-            <div id="box-pending" class="pending-count">PENDING: 0</div>
+
+            <!-- RIGHT: Controls & Weapon -->
+            <div class="hud-section hud-right">
+                <div id="stats-panel" class="hidden">
+                    <div class="stat-header">STATS</div>
+                    <div id="stat-weapon" style="color: var(--ui-gold);">PISTOL</div>
+                    <div class="stat-row">DMG: <span id="stat-dmg">10</span></div>
+                    <div class="stat-row">ATK SPD: <span id="stat-fr">35</span></div>
+                    <div class="stat-row">SPD: <span id="stat-spd">1.5</span></div>
+                    <div class="stat-row">PROJ: <span id="stat-proj">1</span></div>
+                    <div id="ability-list"></div>
+                </div>
+
+                <div id="outpost-controls">
+                    <button id="buy-outpost-btn" class="btn btn-gold" onclick="buyOutpost()">
+                        BUY OUTPOST ($500)
+                    </button>
+                    <button id="upgrade-btn" class="btn hidden">
+                        UPGRADE
+                    </button>
+                </div>
+            </div>
         </div>
+
+        <!-- MODALS -->
 
         <!-- LOGIN SCREEN -->
         <div id="login-screen" class="modal">
-            <h1>MAFIA CITY<br>SURVIVORS</h1>
-            <p style="margin-bottom: 30px; color: #aaa; font-size: 12px;">Get the Money. Get the Power.</p>
-            <button class="btn btn-gold" onclick="connectWallet()">CONNECT WALLET</button>
-            <button class="btn" onclick="startGame()">PLAY AS GUEST</button>
-            <p id="wallet-status" style="margin-top:20px; font-size: 10px; color: #ff5555;"></p>
+            <div class="pixel-window">
+                <h1>MAFIA CITY<br>SURVIVORS</h1>
+                <p>GET THE MONEY. GET THE POWER.</p>
+                <button class="btn btn-gold" onclick="connectWallet()">CONNECT WALLET</button>
+                <button class="btn" onclick="startGame()">PLAY AS GUEST</button>
+                <p id="wallet-status" style="margin-top:20px; font-size: 10px; color: var(--ui-red);"></p>
+            </div>
         </div>
 
         <!-- LEVEL UP SCREEN -->
         <div id="levelup-screen" class="modal hidden">
-            <h1 style="font-size: 24px;">LEVEL UP!</h1>
-            <div class="card-container" id="upgrade-cards"></div>
+            <div class="pixel-window" style="max-width: 1000px;">
+                <div class="tabs-header">
+                    <div class="tab active">UPGRADES</div>
+                    <div class="tab">STATS</div>
+                    <div class="tab">WEAPONS</div>
+                </div>
+                <h1>LEVEL UP!</h1>
+                <div class="card-container" id="upgrade-cards"></div>
+            </div>
         </div>
 
         <!-- GAME OVER SCREEN -->
         <div id="gameover-screen" class="modal hidden">
-            <h1 style="color: var(--ui-red);">WASTED</h1>
-            <p id="final-stats" style="margin-bottom: 20px;">Survived: 00:00</p>
-            <button class="btn" onclick="location.reload()">TRY AGAIN</button>
+            <div class="pixel-window">
+                <h1 style="color: var(--ui-red);">WASTED</h1>
+                <p id="final-stats">Survived: 00:00</p>
+                <button class="btn" onclick="location.reload()">TRY AGAIN</button>
+            </div>
         </div>
 
     </div>
@@ -104,6 +146,7 @@
     <script src="js/player.js"></script>
     <script src="js/outpost.js"></script>
     <script src="js/ui.js"></script>
+    <script src="js/mobile.js"></script>
     <script src="js/game.js"></script>
 </body>
 

@@ -241,7 +241,7 @@ class Pickup {
 
         if (this.type === 'XP') {
             const size = 3 + Math.min(this.value / 10, 5);
-            ctx.fillStyle = "#88ff88"; ctx.beginPath(); ctx.arc(this.x, this.y, size, 0, Math.PI * 2); ctx.fill();
+            ctx.fillStyle = "#ff00ff"; ctx.beginPath(); ctx.arc(this.x, this.y, size, 0, Math.PI * 2); ctx.fill(); // Neon Pink
             ctx.strokeStyle = "#fff"; ctx.stroke();
         }
         else if (this.type === 'CASH') {
@@ -261,8 +261,15 @@ class Pickup {
             if (this.type === 'HP') ctx.fillStyle = "#ff88ff";
             if (this.type === 'SPD') ctx.fillStyle = "#55ffff";
 
+            // Glow Effect
+            ctx.save();
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = ctx.fillStyle;
+
             ctx.beginPath(); ctx.rect(this.x - 6, this.y - 6, 12, 12);
             ctx.fill(); ctx.stroke();
+
+            ctx.restore(); // Reset shadow
 
             ctx.fillStyle = "#000"; ctx.font = "8px sans-serif";
             let txt = this.type === 'DMG' ? 'D' : (this.type === 'HP' ? 'H' : 'S');
@@ -403,8 +410,36 @@ class MolotovBottle {
 
 class FirePool {
     constructor(x, y, d) { this.x = x; this.y = y; this.d = d; this.l = 300; this.r = 40; }
-    update() { this.l--; if (this.l % 30 === 0) { const nearby = enemyGrid.query(this.x, this.y); nearby.forEach(e => { if (e.hp > 0 && Math.hypot(e.x - this.x, e.y - this.y) < this.r) e.takeHit(this.d, 0, this.x, this.y); }); } }
-    draw() { ctx.globalAlpha = 0.6; ctx.fillStyle = (Math.floor(frame / 10) % 2 == 0) ? "#c20" : "#f60"; ctx.beginPath(); ctx.ellipse(this.x, this.y, this.r, this.r / 2, 0, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1; }
+    update() {
+        this.l--;
+
+        // Damage Logic
+        if (this.l % 30 === 0) {
+            const nearby = enemyGrid.query(this.x, this.y);
+            nearby.forEach(e => {
+                if (e.hp > 0 && Math.hypot(e.x - this.x, e.y - this.y) < this.r) e.takeHit(this.d, 0, this.x, this.y);
+            });
+        }
+
+        // Particle Spawning
+        if (frame % 5 === 0) {
+            const angle = Math.random() * Math.PI * 2;
+            const dist = Math.random() * this.r;
+            const px = this.x + Math.cos(angle) * dist;
+            const py = this.y + Math.sin(angle) * (dist / 2); // Flattened for perspective
+
+            // Fire colors: Yellow -> Orange -> Red
+            const colors = ["#ffff00", "#ffaa00", "#ff5500"];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            // Upward drift
+            const p = new Particle(px, py, color, 1, 40, Math.random() * 4 + 2);
+            p.vx = (Math.random() - 0.5) * 0.5;
+            p.vy = -Math.random() * 1.5 - 0.5; // Move up
+            particles.push(p);
+        }
+    }
+    draw() { Visuals.drawFirePool(ctx, this); }
 }
 
 class Landmine {

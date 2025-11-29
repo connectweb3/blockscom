@@ -436,5 +436,23 @@ const Visuals = {
         ctx.fillStyle = p.color;
         ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
         ctx.globalAlpha = 1;
+    },
+
+    drawFirePool(ctx, fp) {
+        // Base Glow
+        ctx.globalAlpha = 0.3;
+        ctx.fillStyle = "#ff5500";
+        ctx.beginPath();
+        ctx.ellipse(fp.x, fp.y, fp.r, fp.r / 2, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Inner Hot Spot
+        ctx.globalAlpha = 0.5;
+        ctx.fillStyle = "#ffff00";
+        ctx.beginPath();
+        ctx.ellipse(fp.x, fp.y, fp.r * 0.6, fp.r * 0.3, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.globalAlpha = 1;
     }
 };

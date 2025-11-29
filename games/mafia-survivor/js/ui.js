@@ -27,7 +27,6 @@ function updateHUD() {
     const s = (time % 60).toString().padStart(2, '0');
     document.getElementById('timer').innerText = `${m}:${s}`;
 
-    document.getElementById('hp-rate').innerText = difficultyMultiplier;
     document.getElementById('cash-rate').innerText = difficultyMultiplier;
 
     updateStatsPanel();
@@ -78,7 +77,7 @@ function processSafetyBox() {
     const prizes = [
         { txt: "FULL HEAL", c: "#0f0", fn: () => { player.hp = player.maxHp; createFloatingText(player.x, player.y - 30, "FULL HEAL!", "#0f0"); } },
         { txt: "+5 DAMAGE", c: "#f00", fn: () => { player.damage += 5; createFloatingText(player.x, player.y - 30, "DMG UP!", "#f00"); } },
-        { txt: "FIRE RATE UP", c: "#ff0", fn: () => { player.fireRate *= 0.8; createFloatingText(player.x, player.y - 30, "ROF UP!", "#ff0"); } },
+        { txt: "ATTACK SPEED UP", c: "#ff0", fn: () => { player.fireRate *= 0.8; createFloatingText(player.x, player.y - 30, "ATK SPD UP!", "#ff0"); } },
         { txt: "+100 CASH", c: "#88ff88", fn: () => { player.gainXp(100); createFloatingText(player.x, player.y - 30, "+100 CASH!", "#8f8"); } }
     ];
 
@@ -126,7 +125,9 @@ function connectWallet() {
 
 function startGame() {
     document.getElementById('login-screen').classList.add('hidden');
-    document.getElementById('hud').classList.remove('hidden');
+    document.getElementById('login-screen').classList.add('hidden');
+    document.querySelector('.hud-top').classList.remove('hidden');
+    document.querySelector('.hud-bottom').classList.remove('hidden');
     document.getElementById('buff-tracker').classList.remove('hidden');
     gameState = "PLAYING";
     player = new Player();
@@ -145,7 +146,7 @@ function triggerLevelUp() {
     container.innerHTML = "";
 
     const upgradePool = [
-        { type: "WEAPON", name: "Tommy Drum", desc: "Fire Rate +15%", effect: () => player.fireRate = Math.max(5, player.fireRate * 0.85) },
+        { type: "WEAPON", name: "Tommy Drum", desc: "Attack Speed +15%", effect: () => player.fireRate = Math.max(5, player.fireRate * 0.85) },
         { type: "AMMO", name: "Hollow Points", desc: "Damage +5", effect: () => player.damage += 5 },
         { type: "GEAR", name: "Running Shoes", desc: "Speed +10%", effect: () => player.speed *= 1.1 },
         { type: "GEAR", name: "Magnet", desc: "Pickup Range +20%", effect: () => player.pickupRange *= 1.2 },
@@ -157,11 +158,12 @@ function triggerLevelUp() {
         { type: "NEW", name: "Proximity Mine", desc: "Drop Landmines", effect: () => { player.hasLandmine = true; player.landmineLevel++; } },
         { type: "WEAPON", name: "Bazooka", desc: "Explosive Rounds", effect: () => player.weapon = 'BAZOOKA' },
         { type: "WEAPON", name: "Lazer Beam", desc: "High Tech Piercing", effect: () => player.weapon = 'LAZER' },
+        { type: "WEAPON", name: "Submachine Gun", desc: "High Fire Rate, Low Dmg", effect: () => player.weapon = 'SUBMACHINE_GUN' },
         { type: "NEW", name: "Spinning Knife", desc: "Orbital Protection", effect: () => player.knifeCount++ },
         { type: "NEW", name: "Throwing Axe", desc: "High Dmg Arcs", effect: () => player.axeLevel++ },
         { type: "STATS", name: "Bodyguard", desc: "Max HP +20 & Heal", effect: () => { player.maxHp += 20; player.hp += 20; } },
         { type: "AMMO", name: "Heavy Rounds", desc: "Knockback +50%", effect: () => player.knockback += 0.5 },
-        { type: "STATS", name: "Adrenaline", desc: "Fire Rate +5%", effect: () => player.fireRate *= 0.95 },
+        { type: "STATS", name: "Adrenaline", desc: "Attack Speed +5%", effect: () => player.fireRate *= 0.95 },
         { type: "GEAR", name: "Kevlar Vest", desc: "Heal 20 HP", effect: () => player.hp = Math.min(player.maxHp, player.hp + 20) }
     ];
 
@@ -187,7 +189,9 @@ function endGame() {
     const s = (time % 60).toString().padStart(2, '0');
     document.getElementById('final-stats').innerText = `You Survived ${m}:${s} and reached Level ${player.level}`;
     document.getElementById('gameover-screen').classList.remove('hidden');
-    document.getElementById('hud').classList.add('hidden');
+    document.getElementById('gameover-screen').classList.remove('hidden');
+    document.querySelector('.hud-top').classList.add('hidden');
+    document.querySelector('.hud-bottom').classList.add('hidden');
     document.getElementById('buff-tracker').classList.add('hidden');
     document.getElementById('safety-box-ui').classList.add('hidden');
 }

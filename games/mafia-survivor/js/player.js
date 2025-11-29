@@ -50,8 +50,8 @@ class Player {
         this.facingRight = true;
 
         // Weapons
-        this.weapon = 'PISTOL'; // PISTOL, MACHINE_GUN, BAZOOKA, LAZER
-        this.weapons = ['PISTOL', 'MACHINE_GUN', 'BAZOOKA', 'LAZER'];
+        this.weapon = 'PISTOL'; // PISTOL, MACHINE_GUN, BAZOOKA, LAZER, SUBMACHINE_GUN
+        this.weapons = ['PISTOL', 'MACHINE_GUN', 'BAZOOKA', 'LAZER', 'SUBMACHINE_GUN'];
 
         // Animation
         this.animState = 'idle'; // idle, walk, run, attack
@@ -83,9 +83,21 @@ class Player {
         if (keys['KeyA'] || keys['ArrowLeft']) dx = -1;
         if (keys['KeyD'] || keys['ArrowRight']) dx = 1;
 
+        // Joystick Input Override
+        if (mobileControls.joystick.active) {
+            dx = mobileControls.joystick.x;
+            dy = mobileControls.joystick.y;
+        }
+
         if (dx !== 0 || dy !== 0) {
-            const length = Math.sqrt(dx * dx + dy * dy);
-            dx /= length; dy /= length;
+            // Normalize keyboard input only (Joystick is already normalized/clamped)
+            if (!mobileControls.joystick.active) {
+                const length = Math.sqrt(dx * dx + dy * dy);
+                if (length > 0) {
+                    dx /= length; dy /= length;
+                }
+            }
+
             this.x += dx * this.speed;
             this.y += dy * this.speed;
             if (dx > 0) this.facingRight = true;
@@ -234,6 +246,11 @@ class Player {
                 currentSpeed = 20; // Instant
                 bulletType = 'LAZER';
                 count = this.projectileCount; // Enable Projectile Upgrades
+            } else if (this.weapon === 'SUBMACHINE_GUN') {
+                currentFireRate = 5; // Very Fast
+                currentDamage = this.damage * 0.3; // Low Damage
+                currentSpread = 0.4; // Spray
+                currentSpeed = this.bulletSpeed * 1.2;
             }
 
             if (frame - this.lastShot > currentFireRate) {
