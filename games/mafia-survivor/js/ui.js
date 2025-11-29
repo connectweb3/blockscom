@@ -29,6 +29,33 @@ function updateHUD() {
 
     document.getElementById('hp-rate').innerText = difficultyMultiplier;
     document.getElementById('cash-rate').innerText = difficultyMultiplier;
+
+    updateStatsPanel();
+}
+
+function updateStatsPanel() {
+    const panel = document.getElementById('stats-panel');
+    if (gameState !== "PLAYING") {
+        panel.classList.add('hidden');
+        return;
+    }
+    panel.classList.remove('hidden');
+
+    document.getElementById('stat-weapon').innerText = `WEAPON: ${player.weapon}`;
+    document.getElementById('stat-dmg').innerText = Math.floor(player.damage);
+    document.getElementById('stat-fr').innerText = Math.floor(player.fireRate);
+    document.getElementById('stat-spd').innerText = player.speed.toFixed(1);
+    document.getElementById('stat-proj').innerText = player.projectileCount;
+
+    const list = document.getElementById('ability-list');
+    list.innerHTML = "";
+
+    if (player.hasGrenade) list.innerHTML += `<div class="ability-item">GRENADE LVL ${player.grenadeLevel}</div>`;
+    if (player.hasMolotov) list.innerHTML += `<div class="ability-item">MOLOTOV LVL ${player.molotovLevel}</div>`;
+    if (player.hasLandmine) list.innerHTML += `<div class="ability-item">LANDMINE LVL ${player.landmineLevel}</div>`;
+    if (player.knifeCount > 0) list.innerHTML += `<div class="ability-item">KNIVES: ${player.knifeCount}</div>`;
+    if (player.axeLevel > 0) list.innerHTML += `<div class="ability-item">AXE LVL ${player.axeLevel}</div>`;
+    if (player.associateCount > 0) list.innerHTML += `<div class="ability-item">ASSOCIATES: ${player.associateCount}</div>`;
 }
 
 // --- NON-BLOCKING SAFETY BOX LOGIC ---
