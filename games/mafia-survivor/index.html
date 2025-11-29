@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mafia City Survivors 4.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="ui-layer">
+
+        <!-- HUD -->
+        <div id="hud" class="hud-top hidden">
+            <div class="stats-left">
+                <div class="bar-container" id="hp-bar-container">
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" id="hp-fill"></div>
+                    </div>
+                </div>
+                <div class="stat-text">HP <span id="hp-text">100/100</span></div>
+            </div>
+
+            <div id="timer">00:00</div>
+
+            <div class="stats-right">
+                <div class="bar-container" id="xp-bar-container" style="border-color: var(--ui-gold);">
+                    <div class="bar-fill" id="xp-fill"></div>
+                </div>
+                <div class="stat-text">LVL <span id="lvl-text">1</span> | CASH: $<span id="cash-text">0</span></div>
+                <div class="stat-text" style="font-size: 10px; color: #aaa; margin-top: 5px;">
+                    HP RATE: x<span id="hp-rate">1</span> | CASH RATE: x<span id="cash-rate">1</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- OUTPOST CONTROLS -->
+        <div id="outpost-controls"
+            style="position: absolute; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px;">
+            <button id="buy-outpost-btn" class="btn btn-gold" onclick="buyOutpost()"
+                style="font-size: 10px; padding: 10px;">BUY OUTPOST ($500)</button>
+            <button id="upgrade-btn" class="btn hidden"
+                style="font-size: 10px; padding: 10px; background: #55ffff; color: #000;">UPGRADE</button>
+        </div>
+
+        <!-- BUFF STACK TRACKER -->
+        <div id="buff-tracker" class="buff-tracker hidden">
+            <div style="color: #ff5555;">DMG STACKS: <span id="stack-dmg">0</span>/20</div>
+            <div style="color: #ff88ff;">HP STACKS: <span id="stack-hp">0</span>/20</div>
+            <div style="color: #55ffff;">SPD STACKS: <span id="stack-spd">0</span>/20</div>
+        </div>
+
+        <!-- SAFETY BOX SPINNER UI -->
+        <div id="safety-box-ui" class="hidden">
+            <div class="spin-label">OPENING SAFETY BOX...</div>
+            <div class="spinner-window">
+                <div id="spinner-text">???</div>
+            </div>
+            <div id="box-pending" class="pending-count">PENDING: 0</div>
+        </div>
+
+        <!-- LOGIN SCREEN -->
+        <div id="login-screen" class="modal">
+            <h1>MAFIA CITY<br>SURVIVORS</h1>
+            <p style="margin-bottom: 30px; color: #aaa; font-size: 12px;">Get the Money. Get the Power.</p>
+            <button class="btn btn-gold" onclick="connectWallet()">CONNECT WALLET</button>
+            <button class="btn" onclick="startGame()">PLAY AS GUEST</button>
+            <p id="wallet-status" style="margin-top:20px; font-size: 10px; color: #ff5555;"></p>
+        </div>
+
+        <!-- LEVEL UP SCREEN -->
+        <div id="levelup-screen" class="modal hidden">
+            <h1 style="font-size: 24px;">LEVEL UP!</h1>
+            <div class="card-container" id="upgrade-cards"></div>
+        </div>
+
+        <!-- GAME OVER SCREEN -->
+        <div id="gameover-screen" class="modal hidden">
+            <h1 style="color: var(--ui-red);">WASTED</h1>
+            <p id="final-stats" style="margin-bottom: 20px;">Survived: 00:00</p>
+            <button class="btn" onclick="location.reload()">TRY AGAIN</button>
+        </div>
+
+    </div>
+
+    <script src="js/visuals.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/outpost.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
+</body>
+
+</html>

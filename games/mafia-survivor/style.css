@@ -1,0 +1,437 @@
+:root {
+    --bg-color: #2c2c2c;
+    --ui-gold: #ffcc00;
+    --ui-red: #d32f2f;
+    --ui-blue: #2196f3;
+    --ui-green: #4caf50;
+    --ui-dark: #1a1a1a;
+    --font-pixel: 'Press Start 2P', cursive;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: var(--bg-color);
+    font-family: var(--font-pixel);
+    color: white;
+    user-select: none;
+}
+
+/* --- UI LAYER --- */
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* HUD */
+.hud-top {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.bar-container {
+    position: relative;
+    width: 300px;
+    height: 24px;
+    background: #000;
+    border: 4px solid #fff;
+    box-shadow: 4px 4px 0px #000;
+}
+
+/* HP Bar specific wrapper to ensure it doesn't overflow */
+.bar-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    transition: width 0.2s;
+}
+
+#hp-fill {
+    background-color: var(--ui-red);
+    width: 100%;
+}
+
+#xp-fill {
+    background-color: var(--ui-gold);
+    width: 0%;
+}
+
+.stat-text {
+    margin-top: 8px;
+    font-size: 10px;
+    text-shadow: 2px 2px 0 #000;
+}
+
+#timer {
+    font-size: 24px;
+    text-shadow: 3px 3px 0 #000;
+}
+
+/* BUFF TRACKER HUD */
+.buff-tracker {
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 10px;
+    color: #ddd;
+}
+
+/* SCREENS */
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    z-index: 20;
+}
+
+.hidden {
+    display: none !important;
+}
+
+h1 {
+    color: var(--ui-gold);
+    text-shadow: 4px 4px 0 #8b0000;
+    margin-bottom: 30px;
+    font-size: 36px;
+    text-align: center;
+}
+
+.btn {
+    background: var(--ui-red);
+    border: 4px solid #fff;
+    color: white;
+    padding: 15px 30px;
+    font-family: var(--font-pixel);
+    font-size: 14px;
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 6px 6px 0px #000;
+    transition: transform 0.1s;
+}
+
+.btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 2px 2px 0px #000;
+}
+
+.btn-gold {
+    background: var(--ui-gold);
+    color: black;
+}
+
+/* UPGRADE GRID */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 900px;
+}
+
+.card {
+    background: var(--ui-dark);
+    border: 4px solid var(--ui-gold);
+    padding: 15px;
+    width: 200px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 6px 6px 0 #000;
+}
+
+.card:hover {
+    background: #333;
+    transform: translateY(-5px);
+    border-color: #fff;
+}
+
+.card h3 {
+    color: var(--ui-gold);
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 8px;
+    color: #ccc;
+}
+
+.card .type {
+    font-size: 8px;
+    color: var(--ui-red);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+/* SAFETY BOX SPINNER (Lower Left) */
+#safety-box-ui {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 280px;
+    height: 140px;
+    background: #222;
+    border: 6px solid var(--ui-gold);
+    box-shadow: 8px 8px 0 #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 15;
+    /* Below modals */
+    padding: 10px;
+    transition: opacity 0.5s;
+}
+
+.spinner-window {
+    width: 100%;
+    height: 50px;
+    background: #000;
+    border: 2px solid #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+#spinner-text {
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.spin-label {
+    padding: 20px;
+}
+
+.bar-container {
+    position: relative;
+    width: 300px;
+    height: 24px;
+    background: #000;
+    border: 4px solid #fff;
+    box-shadow: 4px 4px 0px #000;
+}
+
+/* HP Bar specific wrapper to ensure it doesn't overflow */
+.bar-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    transition: width 0.2s;
+}
+
+#hp-fill {
+    background-color: var(--ui-red);
+    width: 100%;
+}
+
+#xp-fill {
+    background-color: var(--ui-gold);
+    width: 0%;
+}
+
+.stat-text {
+    margin-top: 8px;
+    font-size: 10px;
+    text-shadow: 2px 2px 0 #000;
+}
+
+#timer {
+    font-size: 24px;
+    text-shadow: 3px 3px 0 #000;
+}
+
+/* BUFF TRACKER HUD */
+.buff-tracker {
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 10px;
+    color: #ddd;
+}
+
+/* SCREENS */
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    z-index: 20;
+}
+
+.hidden {
+    display: none !important;
+}
+
+h1 {
+    color: var(--ui-gold);
+    text-shadow: 4px 4px 0 #8b0000;
+    margin-bottom: 30px;
+    font-size: 36px;
+    text-align: center;
+}
+
+.btn {
+    background: var(--ui-red);
+    border: 4px solid #fff;
+    color: white;
+    padding: 15px 30px;
+    font-family: var(--font-pixel);
+    font-size: 14px;
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 6px 6px 0px #000;
+    transition: transform 0.1s;
+}
+
+.btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 2px 2px 0px #000;
+}
+
+.btn-gold {
+    background: var(--ui-gold);
+    color: black;
+}
+
+/* UPGRADE GRID */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 900px;
+}
+
+.card {
+    background: var(--ui-dark);
+    border: 4px solid var(--ui-gold);
+    padding: 15px;
+    width: 200px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 6px 6px 0 #000;
+}
+
+.card:hover {
+    background: #333;
+    transform: translateY(-5px);
+    border-color: #fff;
+}
+
+.card h3 {
+    color: var(--ui-gold);
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 8px;
+    color: #ccc;
+}
+
+.card .type {
+    font-size: 8px;
+    color: var(--ui-red);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+/* SAFETY BOX SPINNER (Lower Left) */
+#safety-box-ui {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 280px;
+    height: 140px;
+    background: #222;
+    border: 6px solid var(--ui-gold);
+    box-shadow: 8px 8px 0 #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 15;
+    /* Below modals */
+    padding: 10px;
+    transition: opacity 0.5s;
+}
+
+.spinner-window {
+    width: 100%;
+    height: 50px;
+    background: #000;
+    border: 2px solid #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+#spinner-text {
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.spin-label {
+    font-size: 10px;
+    color: var(--ui-gold);
+    margin-bottom: 5px;
+}
+
+.pending-count {
+    font-size: 8px;
+    color: #aaa;
+    margin-top: 5px;
+}
+
+#outpost-controls {
+    pointer-events: auto;
+}
