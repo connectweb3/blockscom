@@ -197,9 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Games Grid Population
     const gamesGrid = document.getElementById('games-grid');
     const gamesData = [
-        { title: "Dino Survivor", description: "Survive the prehistoric era.", image: "https://via.placeholder.com/300x200/222/fff?text=Dino+Survivor" },
-        { title: "Space Blocks", description: "Build your galactic empire.", image: "https://via.placeholder.com/300x200/222/fff?text=Space+Blocks" },
-        { title: "Crypto Quest", description: "Earn rewards in this RPG.", image: "https://via.placeholder.com/300x200/222/fff?text=Crypto+Quest" },
+        { title: "Mafia Survivor", description: "Survive the mafia world in this intense game.", image: "images/blockscommafia.jpg", url: "games/mafia-survivor/index.html" },
     ];
 
     if (gamesGrid) {
@@ -211,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <img src="${game.image}" style="width:100%; opacity:0.8; margin-bottom:20px;">
                 <h3>${game.title}</h3>
                 <p style="font-family:'Montserrat'; color:#aaa; margin-bottom:15px;">${game.description}</p>
-                <button class="btn-primary" style="font-size:0.7rem; padding:10px 20px;">Play Now</button>
+                <a href="${game.url}" class="btn-primary" style="font-size:0.7rem; padding:10px 20px; text-decoration: none; display: inline-block;">Play Now</a>
             `;
             gamesGrid.appendChild(card);
 
