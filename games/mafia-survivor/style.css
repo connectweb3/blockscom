@@ -493,6 +493,201 @@ body {
 
 .stat-row {
     display: flex;
+    border: 2px solid var(--retro-cream);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+    min-width: 140px;
+}
+
+/* --- BUTTONS (RETRO STYLE) --- */
+.btn {
+    position: relative;
+    background: var(--retro-orange);
+    border: 4px solid var(--retro-brown);
+    padding: 12px 20px;
+    font-family: var(--font-pixel);
+    font-size: 12px;
+    color: var(--retro-brown);
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow:
+        inset 2px 2px 0px rgba(255, 255, 255, 0.4),
+        inset -2px -2px 0px rgba(0, 0, 0, 0.2),
+        4px 4px 0px #000;
+    transition: transform 0.1s;
+    margin: 5px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    background: var(--retro-orange-light);
+    box-shadow:
+        inset 2px 2px 0px rgba(255, 255, 255, 0.4),
+        inset -2px -2px 0px rgba(0, 0, 0, 0.2),
+        4px 6px 0px #000;
+}
+
+.btn:active {
+    transform: translateY(2px);
+    box-shadow:
+        inset 2px 2px 0px rgba(255, 255, 255, 0.4),
+        inset -2px -2px 0px rgba(0, 0, 0, 0.2),
+        2px 2px 0px #000;
+}
+
+.btn-gold {
+    background: var(--retro-gold);
+}
+
+/* --- MODALS & WINDOWS (SHOP STYLE) --- */
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(2px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    z-index: 100;
+}
+
+.pixel-window {
+    background: var(--panel-bg);
+    /* Cream */
+    border: 6px solid var(--retro-brown);
+    padding: 20px;
+    text-align: center;
+    box-shadow:
+        inset 0 0 0 4px var(--retro-orange),
+        /* Inner orange border */
+        10px 10px 0 rgba(0, 0, 0, 0.6);
+    max-width: 900px;
+    line-height: 1.6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- UPGRADE CARDS (SHOP ITEM STYLE) --- */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 100%;
+    padding: 10px;
+    background: #D7CCC8;
+    /* Slightly darker cream for container */
+    border: 4px solid var(--retro-brown);
+    box-shadow: inset 4px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    background: #FFF;
+    border: 4px solid var(--retro-brown);
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.1s;
+    position: relative;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 140px;
+    justify-content: space-between;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: var(--retro-orange);
+    box-shadow: 4px 6px 0 rgba(0, 0, 0, 0.2);
+    background: #FFF8E1;
+}
+
+.card .type {
+    font-size: 8px;
+    color: #FFF;
+    background: var(--retro-orange);
+    padding: 4px 8px;
+    border-radius: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid var(--retro-brown);
+}
+
+.card h3 {
+    color: var(--retro-brown);
+    font-size: 12px;
+    margin: 8px 0;
+}
+
+.card p {
+    font-size: 9px;
+    color: var(--retro-brown-light);
+    margin: 0;
+}
+
+/* --- SAFETY BOX --- */
+#safety-box-ui {
+    position: relative;
+    width: 240px;
+    background: var(--retro-brown);
+    border: 4px solid var(--retro-gold);
+    padding: 10px;
+    box-shadow: 6px 6px 0 #000;
+    text-align: center;
+    pointer-events: none;
+}
+
+.spinner-window {
+    background: #000;
+    border: 4px solid var(--retro-cream);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+#spinner-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFF;
+}
+
+.spin-label {
+    color: var(--retro-gold);
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+/* --- STATS PANEL --- */
+#stats-panel {
+    background: rgba(62, 39, 35, 0.9);
+    border: 2px solid var(--retro-cream);
+    padding: 10px;
+    width: 180px;
+    font-size: 10px;
+    color: var(--retro-cream);
+    pointer-events: none;
+}
+
+.stat-header {
+    color: var(--retro-gold);
+    border-bottom: 2px solid var(--retro-brown-light);
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.stat-row {
+    display: flex;
     justify-content: space-between;
     font-size: 10px;
     text-shadow: 1px 1px 0 #000;
@@ -504,7 +699,7 @@ body {
 /* --- MOBILE RESPONSIVE --- */
 @media (max-width: 768px) {
     .card-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
         max-height: 50vh;
         /* Limit height of card container */
         overflow-y: auto;
