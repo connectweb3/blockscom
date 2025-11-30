@@ -75,14 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // NFT Slider Population & Animation
     const sliderWrapper = document.querySelector('#nft-slider .slider-wrapper');
     const nftData = [
-        { title: "humanime #001", price: "0.5 ETH", traits: "120-150", supply: "10-20", image: "nft1/humanime.jpg", gif: "nft1/humanime.gif" },
-        { title: "ceat #042", price: "1.2 ETH", traits: "150-180", supply: "5-15", image: "nft1/ceat.png", gif: "nft1/ceat.gif" },
-        { title: "freedom #999", price: "0.8 ETH", traits: "100-130", supply: "20-40", image: "nft1/freedom.png", gif: "nft1/freedom.gif" },
-        { title: "apin #123", price: "1.1 ETH", traits: "140-160", supply: "15-25", image: "nft1/apin.png", gif: "nft1/apin.gif" },
-        { title: "hooman #777", price: "2.5 ETH", traits: "200-250", supply: "5-10", image: "nft1/hooman.png", gif: "nft1/hooman.gif" },
-        { title: "pipi #000", price: "5.0 ETH", traits: "300+", supply: "1", image: "nft1/pipi.png", gif: "nft1/pipi.gif" },
-        { title: "pixelhooman #123", price: "1.1 ETH", traits: "140-160", supply: "15-25", image: "nft1/pixelhooman.png", gif: "nft1/pixelhooman.gif" },
-        { title: "tigerr #123", price: "1.1 ETH", traits: "140-160", supply: "15-25", image: "nft1/tigerr.png", gif: "nft1/tigerr.gif" },
+        { title: "humanime #001", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/humanime.jpg", gif: "nft1/humanime.gif" },
+        { title: "ceat #042", price: "125$ USD", traits: "150-200", supply: "1000 - 9999", image: "nft1/ceat.png", gif: "nft1/ceat.gif" },
+        { title: "freedom #999", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/freedom.png", gif: "nft1/freedom.gif" },
+        { title: "apin #123", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/apin.png", gif: "nft1/apin.gif" },
+        { title: "hooman #777", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/hooman.png", gif: "nft1/hooman.gif" },
+        { title: "pipi #000", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/pipi.png", gif: "nft1/pipi.gif" },
+        { title: "pixelhooman #123", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/pixelhooman.png", gif: "nft1/pixelhooman.gif" },
+        { title: "tigerr #123", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/tigerr.png", gif: "nft1/tigerr.gif" },
     ];
 
     if (sliderWrapper) {
@@ -134,20 +134,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Dedicated data for Memecoin Collection
     const memecoinData = [
-        { title: "Axolie", price: "0.05 ETH", traits: "50-80", supply: "1000", image: "nft1/meme/axolie.png", gif: "nft1/meme/axolie.png" },
-        { title: "Bonie", price: "0.08 ETH", traits: "80-100", supply: "500", image: "nft1/meme/bonie.png", gif: "nft1/meme/bonie.png" },
-        { title: "Cappie", price: "0.06 ETH", traits: "60-90", supply: "800", image: "nft1/meme/cappie.png", gif: "nft1/meme/cappie.png" },
-        { title: "Dogii", price: "0.12 ETH", traits: "70-90", supply: "900", image: "nft1/meme/dogii.png", gif: "nft1/meme/dogii.png" },
-        { title: "Duckie", price: "0.04 ETH", traits: "40-60", supply: "1200", image: "nft1/meme/duckie.png", gif: "nft1/meme/duckie.png" },
-        { title: "Foxie", price: "0.09 ETH", traits: "80-110", supply: "600", image: "nft1/meme/foxie.png", gif: "nft1/meme/foxie.png" },
-        { title: "Germie", price: "0.03 ETH", traits: "30-50", supply: "1500", image: "nft1/meme/germie.png", gif: "nft1/meme/germie.png" },
-        { title: "Gori", price: "0.15 ETH", traits: "100-150", supply: "300", image: "nft1/meme/gori.png", gif: "nft1/meme/gori.png" },
-        { title: "Penie", price: "0.07 ETH", traits: "60-80", supply: "700", image: "nft1/meme/penie.png", gif: "nft1/meme/penie.png" },
-        { title: "Sharkie", price: "0.11 ETH", traits: "90-120", supply: "400", image: "nft1/meme/sharkie.png", gif: "nft1/meme/sharkie.png" },
-        { title: "Slothie", price: "0.05 ETH", traits: "50-70", supply: "1000", image: "nft1/meme/slothie.png", gif: "nft1/meme/slothie.png" },
-        { title: "Tedted", price: "0.06 ETH", traits: "60-90", supply: "800", image: "nft1/meme/tedted.png", gif: "nft1/meme/tedted.png" },
-        { title: "Whalie", price: "0.10 ETH", traits: "80-100", supply: "500", image: "nft1/meme/whalie.png", gif: "nft1/meme/whalie.png" },
-        { title: "Wopie", price: "0.08 ETH", traits: "70-90", supply: "600", image: "nft1/meme/wopie.png", gif: "nft1/meme/wopie.png" },
+        { title: "Axolie", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/meme/axolie.png", gif: "nft1/meme/axolie.png" },
+        { title: "Bonie", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/meme/bonie.png", gif: "nft1/meme/bonie.png" },
+        { title: "Cappie", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/meme/cappie.png", gif: "nft1/meme/cappie.png" },
+        { title: "Dogii", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/meme/dogii.png", gif: "nft1/meme/dogii.png" },
+        { title: "Duckie", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/meme/duckie.png", gif: "nft1/meme/duckie.png" },
+        { title: "Foxie", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/meme/foxie.png", gif: "nft1/meme/foxie.png" },
+        { title: "Germie", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/meme/germie.png", gif: "nft1/meme/germie.png" },
+        { title: "Gori", price: "125$ USD", traits: "50-200", supply: "31000 - 999900", image: "nft1/meme/gori.png", gif: "nft1/meme/gori.png" },
+        { title: "Penie", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/meme/penie.png", gif: "nft1/meme/penie.png" },
+        { title: "Sharkie", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/meme/sharkie.png", gif: "nft1/meme/sharkie.png" },
+        { title: "Slothie", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/meme/slothie.png", gif: "nft1/meme/slothie.png" },
+        { title: "Tedted", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/meme/tedted.png", gif: "nft1/meme/tedted.png" },
+        { title: "Whalie", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/meme/whalie.png", gif: "nft1/meme/whalie.png" },
+        { title: "Wopie", price: "125$ USD", traits: "50-200", supply: "1000 - 9999", image: "nft1/meme/wopie.png", gif: "nft1/meme/wopie.png" },
     ];
 
     if (memecoinSliderWrapper) {
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Games Grid Population
     const gamesGrid = document.getElementById('games-grid');
     const gamesData = [
-        { title: "Mafia Survivor", description: "Survive the mafia world in this intense game.", image: "images/blockscommafia.jpg", url: "games/mafia-survivor/index.html" },
+        { title: "Mafia Survivor", description: "Survive the mafia world in this intense game.", image: "images/blockscommafia.jpg", url: "games/mafia-survivor" },
     ];
 
     if (gamesGrid) {
