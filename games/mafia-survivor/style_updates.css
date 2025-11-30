@@ -1,0 +1,67 @@
+/* ... existing code ... */
+
+/* --- BAR TEXT OVERLAY --- */
+.bar-text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+    box-sizing: border-box;
+    z-index: 10;
+    font-size: 10px;
+    color: #FFF;
+    text-shadow: 1px 1px 0 #000;
+    pointer-events: none;
+}
+
+/* ... existing code ... */
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+    .card-container {
+        grid-template-columns: 1fr;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+
+    .hud-top {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .bar-container {
+        width: 200px;
+    }
+
+    #timer {
+        font-size: 16px;
+    }
+
+    .modal h1 {
+        font-size: 16px;
+        /* Reduced font size */
+    }
+
+    .pixel-window {
+        padding: 10px;
+        max-width: 95%;
+        /* Ensure it fits width */
+        max-height: 90vh;
+        /* Ensure it fits height */
+        overflow-y: auto;
+        /* Scroll if content overflows */
+    }
+
+    .card {
+        height: auto;
+        /* Allow auto height */
+        min-height: 100px;
+    }
+}

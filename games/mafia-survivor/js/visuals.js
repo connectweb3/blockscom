@@ -53,13 +53,15 @@ const Visuals = {
     sprites: {
         enemy: new Image(),
         enemyVariant: new Image(),
-        boss: new Image()
+        boss: new Image(),
+        mafiaOutpost: new Image()
     },
 
     init() {
         this.sprites.enemy.src = 'asset/enemysprite.png';
         this.sprites.enemyVariant.src = 'asset/enemy_variant.png';
         this.sprites.boss.src = 'asset/boss_sprite.png';
+        this.sprites.mafiaOutpost.src = 'asset/mafiaoutpost.png';
     },
 
     // --- DRAWING METHODS ---
@@ -229,46 +231,40 @@ const Visuals = {
     },
 
     drawOutpost(ctx, o) {
-        // TOWER VISUAL
+        const sprite = this.sprites.mafiaOutpost;
 
-        // 1. Base (Concrete Foundation)
-        ctx.fillStyle = this.colors.outpost.base;
-        ctx.fillRect(o.x - 20, o.y - 10, 40, 20); // Perspective base
-        ctx.strokeStyle = "#111";
-        ctx.lineWidth = 2;
-        ctx.strokeRect(o.x - 20, o.y - 10, 40, 20);
+        if (sprite && sprite.complete && sprite.naturalWidth !== 0) {
+            ctx.save();
+            ctx.translate(o.x, o.y);
 
-        // 2. Tower Body (Vertical)
-        ctx.fillStyle = this.colors.outpost.body;
-        ctx.fillRect(o.x - 15, o.y - 50, 30, 40);
-        ctx.strokeRect(o.x - 15, o.y - 50, 30, 40);
+            // Calculate Aspect Ratio
+            const ratio = sprite.naturalHeight / sprite.naturalWidth;
+            const drawWidth = o.size;
+            const drawHeight = o.size * ratio;
 
-        // Details (Vents)
-        ctx.fillStyle = this.colors.outpost.detail;
-        ctx.fillRect(o.x - 10, o.y - 40, 20, 4);
-        ctx.fillRect(o.x - 10, o.y - 30, 20, 4);
+            // Shadow
+            ctx.fillStyle = "rgba(0,0,0,0.3)";
+            ctx.beginPath();
+            // Draw shadow at the base
+            ctx.ellipse(0, 0, drawWidth / 2, drawWidth / 4, 0, 0, Math.PI * 2);
+            ctx.fill();
 
-        // 3. Turret Head (Rotates)
-        // Since we don't track angle in Outpost state explicitly for drawing, we can just draw a cool head
-        ctx.fillStyle = o.color || this.colors.outpost.turret;
-        ctx.beginPath();
-        ctx.arc(o.x, o.y - 55, 16, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.stroke();
+            // Draw Sprite (Centered)
+            ctx.drawImage(sprite, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight);
 
-        // Turret Barrel (Generic direction or up)
-        ctx.fillStyle = "#333";
-        ctx.fillRect(o.x - 4, o.y - 70, 8, 15);
-
-        // Shine
-        ctx.fillStyle = this.colors.outpost.highlight;
-        ctx.beginPath();
-        ctx.arc(o.x + 5, o.y - 60, 4, 0, Math.PI * 2);
-        ctx.fill();
+            ctx.restore();
+        } else {
+            // Fallback if image not loaded
+            ctx.fillStyle = o.color || this.colors.outpost.turret;
+            ctx.beginPath();
+            ctx.arc(o.x, o.y, o.size / 2, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+        }
 
         // Range Indicator (if close)
         const distToPlayer = Math.hypot(player.x - o.x, player.y - o.y);
-        if (distToPlayer < 60) {
+        if (distToPlayer < 60 + o.size) {
             ctx.strokeStyle = "rgba(68, 136, 255, 0.2)";
             ctx.lineWidth = 1;
             ctx.beginPath();
@@ -278,8 +274,9 @@ const Visuals = {
             // Text
             ctx.fillStyle = "#fff";
             ctx.font = "8px 'Press Start 2P'";
-            ctx.fillText(`LVL ${o.level}`, o.x - 15, o.y - 80);
-            ctx.fillText(`$${o.upgradeCost}`, o.x - 15, o.y + 20);
+            ctx.textAlign = "center";
+            ctx.fillText(`LVL ${o.level}`, o.x, o.y - o.size / 2 - 10);
+            ctx.fillText(`$${o.upgradeCost}`, o.x, o.y + o.size / 2 + 15);
         }
     },
 
