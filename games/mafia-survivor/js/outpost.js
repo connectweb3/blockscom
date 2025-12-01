@@ -11,6 +11,9 @@ class Outpost {
         this.color = "#4488ff";
         this.upgradeCost = 10000; // Reduced from 100k
         this.projectileCount = 1;
+        this.territoryRadius = 300; // Territory for placing towers
+        this.maxHp = 100;
+        this.hp = 100;
     }
 
     update() {
@@ -23,7 +26,7 @@ class Outpost {
                 for (let i = 0; i < this.projectileCount; i++) {
                     const spread = (i - (this.projectileCount - 1) / 2) * 0.2;
                     // Bigger size (8), Orange Fire color
-                    bullets.push(new Bullet(this.x, this.y, baseAngle + spread, this.damage, 10, 2, 8, "#ffaa00"));
+                    bullets.push(new Bullet(this.x, this.y, baseAngle + spread, this.damage, 10, 2, 8, "#ffaa00", false, "OUTPOST_FIRE"));
                 }
 
                 // Muzzle Flash
@@ -49,6 +52,8 @@ class Outpost {
             this.projectileCount++; // Add projectile
             this.damage += 5;
             this.range += 20;
+            this.maxHp += 50; // Increase HP on upgrade
+            this.hp = this.maxHp; // Heal on upgrade
 
             // Visual Upgrades
             this.size += 10; // Get bigger
@@ -60,5 +65,13 @@ class Outpost {
             return true;
         }
         return false;
+    }
+
+    takeDamage(amount) {
+        this.hp -= amount;
+        if (this.hp <= 0) {
+            this.hp = 0;
+            // Game Over logic handled in game.js
+        }
     }
 }

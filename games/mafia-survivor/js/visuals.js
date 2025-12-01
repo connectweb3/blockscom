@@ -39,7 +39,8 @@ const Visuals = {
         bullet: {
             trail: "rgba(100, 100, 100, 0.3)",
             body: "#560",
-            flame: "#ffaa00" // Default flame color
+            flame: "#ffaa00", // Default flame color
+            outpostFire: "#ff8800"
         },
         effects: {
             muzzleFlash: "#ffaa00",
@@ -51,17 +52,25 @@ const Visuals = {
 
     // --- ASSETS ---
     sprites: {
+        player: new Image(),
         enemy: new Image(),
         enemyVariant: new Image(),
         boss: new Image(),
-        mafiaOutpost: new Image()
+        mafiaOutpost: new Image(),
+        tower: new Image(),
+        grass: new Image(),
+        territoryTile: new Image()
     },
 
     init() {
+        this.sprites.player.src = 'asset/character_spritesheet.png';
         this.sprites.enemy.src = 'asset/enemysprite.png';
         this.sprites.enemyVariant.src = 'asset/enemy_variant.png';
         this.sprites.boss.src = 'asset/boss_sprite.png';
         this.sprites.mafiaOutpost.src = 'asset/mafiaoutpost.png';
+        this.sprites.tower.src = 'asset/towerpost.png';
+        this.sprites.grass.src = 'asset/grass.png';
+        this.sprites.territoryTile.src = 'asset/territorytile.png';
     },
 
     // --- DRAWING METHODS ---
@@ -73,7 +82,7 @@ const Visuals = {
         ctx.fillStyle = "rgba(0,0,0,0.3)";
         ctx.beginPath(); ctx.ellipse(p.x, p.y + s / 2, s / 2, s / 4, 0, 0, Math.PI * 2); ctx.fill();
 
-        if (typeof characterSprite !== 'undefined' && characterSprite.complete && characterSprite.naturalWidth !== 0) {
+        if (this.sprites.player && this.sprites.player.complete && this.sprites.player.naturalWidth !== 0) {
             let row = 0;
             // Mapping based on p.animState and p.animDir
             // Idle: 0-3, Walk: 4-7, Run: 8-11, Attack: 12-19
@@ -93,7 +102,7 @@ const Visuals = {
 
             // Draw centered, scaled down to reasonable size (e.g. 64x64 for a 24-size hitbox)
             const drawSize = 64;
-            ctx.drawImage(characterSprite,
+            ctx.drawImage(this.sprites.player,
                 frame * fw, row * fh, fw, fh,
                 p.x - drawSize / 2, p.y - drawSize / 2 - 10, drawSize, drawSize // Offset Y slightly up
             );
@@ -197,6 +206,10 @@ const Visuals = {
             if (e.flash > 0) {
                 ctx.globalCompositeOperation = "source-atop";
                 ctx.fillStyle = "white";
+            } else if (e.isBurning) {
+                // Tint Red/Orange for burn
+                ctx.globalCompositeOperation = "source-atop";
+                ctx.fillStyle = "rgba(255, 85, 0, 0.5)";
             }
 
             ctx.drawImage(sprite,
@@ -214,6 +227,10 @@ const Visuals = {
                 ctx.fillStyle = "white";
                 ctx.beginPath(); ctx.arc(0, 0, s, 0, Math.PI * 2); ctx.fill();
                 ctx.globalAlpha = 1.0;
+            } else if (e.isBurning) {
+                ctx.globalCompositeOperation = "source-over";
+                ctx.fillStyle = "rgba(255, 85, 0, 0.5)";
+                ctx.beginPath(); ctx.arc(0, 0, s / 2, 0, Math.PI * 2); ctx.fill();
             }
 
             ctx.restore();
@@ -231,6 +248,83 @@ const Visuals = {
     },
 
     drawOutpost(ctx, o) {
+        // 1. Draw Territory (Background)
+        let drawn = false;
+        const radius = o.territoryRadius; // This is now half-width of the square
+
+        if (this.sprites.territoryTile && this.sprites.territoryTile.complete && this.sprites.territoryTile.naturalWidth !== 0) {
+            try {
+                ctx.save();
+                ctx.beginPath();
+                // Square Territory
+                ctx.rect(o.x - radius, o.y - radius, radius * 2, radius * 2);
+                ctx.closePath();
+                // Create pattern
+                const pattern = ctx.createPattern(this.sprites.territoryTile, 'repeat');
+                ctx.fillStyle = pattern;
+                ctx.fill();
+
+                // Add a border
+                ctx.strokeStyle = "rgba(68, 255, 68, 0.5)";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.restore();
+                drawn = true;
+            } catch (e) {
+                console.error("Failed to draw territory pattern:", e);
+            }
+        }
+
+        if (!drawn) {
+            ctx.strokeStyle = "rgba(68, 255, 68, 0.1)";
+            ctx.lineWidth = 2;
+            ctx.setLineDash([10, 10]);
+            ctx.beginPath();
+            ctx.rect(o.x - radius, o.y - radius, radius * 2, radius * 2);
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+
+        // Draw Tower Slots (8 spots)
+        // Corners: (-r, -r), (r, -r), (r, r), (-r, r)
+        // Mids: (0, -r), (r, 0), (0, r), (-r, 0)
+        const slots = [
+            { dx: -radius, dy: -radius }, { dx: 0, dy: -radius }, { dx: radius, dy: -radius },
+            { dx: radius, dy: 0 },
+            { dx: radius, dy: radius }, { dx: 0, dy: radius }, { dx: -radius, dy: radius },
+            { dx: -radius, dy: 0 }
+        ];
+
+        ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+        ctx.lineWidth = 1;
+
+        slots.forEach(slot => {
+            const sx = o.x + slot.dx;
+            const sy = o.y + slot.dy;
+
+            // Check if occupied (simple check if a tower is close)
+            // We can't easily access 'towers' array here without passing it or making it global.
+            // Assuming 'towers' is global as per game.js
+            let occupied = false;
+            if (typeof towers !== 'undefined') {
+                for (let t of towers) {
+                    if (Math.hypot(t.x - sx, t.y - sy) < 20) {
+                        occupied = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!occupied) {
+                ctx.beginPath();
+                ctx.arc(sx, sy, 10, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+            }
+        });
+
+        // 2. Draw Outpost Sprite
         const sprite = this.sprites.mafiaOutpost;
 
         if (sprite && sprite.complete && sprite.naturalWidth !== 0) {
@@ -241,13 +335,6 @@ const Visuals = {
             const ratio = sprite.naturalHeight / sprite.naturalWidth;
             const drawWidth = o.size;
             const drawHeight = o.size * ratio;
-
-            // Shadow
-            ctx.fillStyle = "rgba(0,0,0,0.3)";
-            ctx.beginPath();
-            // Draw shadow at the base
-            ctx.ellipse(0, 0, drawWidth / 2, drawWidth / 4, 0, 0, Math.PI * 2);
-            ctx.fill();
 
             // Draw Sprite (Centered)
             ctx.drawImage(sprite, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight);
@@ -262,7 +349,7 @@ const Visuals = {
             ctx.stroke();
         }
 
-        // Range Indicator (if close)
+        // 3. Range Indicator (Foreground UI)
         const distToPlayer = Math.hypot(player.x - o.x, player.y - o.y);
         if (distToPlayer < 60 + o.size) {
             ctx.strokeStyle = "rgba(68, 136, 255, 0.2)";
@@ -277,6 +364,63 @@ const Visuals = {
             ctx.textAlign = "center";
             ctx.fillText(`LVL ${o.level}`, o.x, o.y - o.size / 2 - 10);
             ctx.fillText(`$${o.upgradeCost}`, o.x, o.y + o.size / 2 + 15);
+        }
+    },
+
+    drawTower(ctx, t) {
+        const sprite = this.sprites.tower;
+
+        if (sprite && sprite.complete && sprite.naturalWidth !== 0) {
+            ctx.save();
+            ctx.translate(t.x, t.y);
+
+            // Frame dimensions
+            const fw = 176;
+            const fh = 317;
+
+            // Animation: 4 frames
+            // Use fire rate to determine frame? Or just loop?
+            // "4 attack frame" implies it animates when attacking.
+            // t.lastShot is the frame of the last shot.
+            // Let's animate for a short duration after firing.
+            // Fire rate is 60. Let's say animation takes 20 frames.
+            const framesSinceShot = frame - t.lastShot;
+            let animFrame = 0;
+
+            if (framesSinceShot < 20) {
+                // 4 frames over 20 ticks = 5 ticks per frame
+                animFrame = Math.floor(framesSinceShot / 5) % 4;
+            } else {
+                animFrame = 0; // Idle frame (first frame)
+            }
+
+            // Draw Size
+            // Original is 176x317. That's huge.
+            // Let's scale it down.
+            // If base width is t.size (30), scale = 30 / 176 = 0.17
+            // Height = 317 * 0.17 = 54.
+            // Let's make it a bit bigger visually, maybe width 60?
+            const drawWidth = 60;
+            const scale = drawWidth / fw;
+            const drawHeight = fh * scale;
+
+            // Draw centered horizontally, bottom aligned to t.y
+            ctx.drawImage(sprite,
+                animFrame * fw, 0, fw, fh,
+                -drawWidth / 2, -drawHeight + (t.size / 2), drawWidth, drawHeight
+            );
+
+            ctx.restore();
+        } else {
+            // Fallback
+            ctx.fillStyle = t.color;
+            ctx.fillRect(t.x - t.size / 2, t.y - t.size / 2, t.size, t.size);
+
+            // Turret
+            ctx.fillStyle = "#222";
+            ctx.beginPath();
+            ctx.arc(t.x, t.y, t.size / 3, 0, Math.PI * 2);
+            ctx.fill();
         }
     },
 
@@ -381,16 +525,84 @@ const Visuals = {
             ctx.restore();
 
             ctx.shadowBlur = 0;
-        } else {
-            ctx.fillStyle = this.colors.bullet.body;
-            if (b.type === 'explosive') ctx.fillStyle = "#ff5500"; // Bazooka rocket color
-
+        } else if (b.type === 'FLAME') {
+            // Flame Particle Visual
+            ctx.globalAlpha = b.life / 60; // Fade out
+            ctx.fillStyle = Math.random() < 0.5 ? "#ff5500" : "#ffff00";
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, b.size * (1 + (60 - b.life) / 20), 0, Math.PI * 2); // Grow
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        } else if (b.type === 'KNIFE') {
+            // Spinning Knife Projectile
             ctx.save();
-            // Simple rotation based on velocity
+            ctx.translate(b.x, b.y);
+            // Spin based on life or frame
+            ctx.rotate(frame * 0.5);
+
+            // Draw Knife (Reuse logic or simplified)
+            ctx.fillStyle = "#ddd";
+            ctx.beginPath();
+            ctx.moveTo(0, -8);
+            ctx.lineTo(3, 0);
+            ctx.lineTo(0, 10);
+            ctx.lineTo(-3, 0);
+            ctx.closePath();
+            ctx.fill();
+
+            // Handle
+            ctx.fillStyle = "#530";
+            ctx.fillRect(-1.5, -12, 3, 4);
+
+            ctx.restore();
+        } else if (b.type === 'OUTPOST_FIRE') {
+            // Outpost Fire Effect
+            ctx.save();
+            ctx.translate(b.x, b.y);
+            const angle = Math.atan2(b.vy, b.vx);
+            ctx.rotate(angle);
+
+            // Core
+            ctx.fillStyle = "#ffffaa";
+            ctx.beginPath();
+            ctx.arc(0, 0, b.size / 2, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Outer Fire
+            ctx.fillStyle = this.colors.bullet.outpostFire;
+            ctx.beginPath();
+            // Teardrop shape
+            ctx.moveTo(b.size, 0);
+            ctx.quadraticCurveTo(0, b.size, -b.size * 2, 0);
+            ctx.quadraticCurveTo(0, -b.size, b.size, 0);
+            ctx.fill();
+
+            // Glow
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = "#ff5500";
+            ctx.stroke(); // Just to apply shadow
+
+            ctx.restore();
+        } else {
+            // High Quality Default Bullet
+            ctx.save();
             const angle = Math.atan2(b.vy, b.vx);
             ctx.translate(b.x, b.y);
             ctx.rotate(angle);
-            ctx.fillRect(-4, -2, 8, 4);
+
+            // Glow
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = b.color;
+
+            // Core
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(-b.size, -b.size / 2, b.size * 2, b.size);
+
+            // Outer Shell
+            ctx.strokeStyle = b.color;
+            ctx.lineWidth = 2;
+            ctx.strokeRect(-b.size, -b.size / 2, b.size * 2, b.size);
+
             ctx.restore();
         }
     },

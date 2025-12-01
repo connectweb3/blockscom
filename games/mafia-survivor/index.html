@@ -13,7 +13,15 @@
 
     <canvas id="gameCanvas"></canvas>
 
+    <div id="rotate-overlay">
+        <div class="rotate-message">
+            <h1>ROTATE DEVICE</h1>
+            <p>Please rotate your device to landscape mode to play.</p>
+        </div>
+    </div>
+
     <div id="ui-layer">
+        <div id="debug-console" class="hidden"></div>
 
         <!-- TOP HUD -->
         <div class="hud-top">
@@ -26,6 +34,18 @@
                     <div class="bar-text-overlay">
                         <span>HP</span>
                         <span id="hp-text">100/100</span>
+                    </div>
+                </div>
+
+                <!-- ARMOR BAR (Hidden by default) -->
+                <div class="bar-container hidden" id="armor-bar-container"
+                    style="border-color: #ffff00; margin-top: 4px;">
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" id="armor-fill" style="background-color: #ffff00;"></div>
+                    </div>
+                    <div class="bar-text-overlay" style="color: #ffff00;">
+                        <span>ARMOR</span>
+                        <span id="armor-text">0/0</span>
                     </div>
                 </div>
 
@@ -53,6 +73,9 @@
                 <!-- Placeholder for Wave or other stats -->
                 <div class="info-panel">
                     <div class="info-text" style="color: #fff;">WAVE <span id="wave-text">1</span></div>
+                </div>
+                <div class="info-panel">
+                    <div class="info-text" style="color: #ff5555;">KILLS <span id="kill-count">0</span></div>
                 </div>
             </div>
         </div>
@@ -90,61 +113,61 @@
                 </div>
 
                 <div id="outpost-controls">
-                    <button id="buy-outpost-btn" class="btn btn-gold" onclick="buyOutpost()"
-                        style="padding: 8px 12px; font-size: 10px;">
-                        BUY OUTPOST ($500)
-                    </button>
                     <button id="upgrade-btn" class="btn hidden" style="padding: 8px 12px; font-size: 10px;">
                         UPGRADE
                     </button>
+                    <button id="build-tower-btn" class="btn hidden"
+                        style="padding: 8px 12px; font-size: 10px; background-color: #44ff44; color: #000;">
+                        BUILD TOWER ($200)
+                    </button>
                 </div>
             </div>
-        </div>
 
-        <!-- MODALS -->
+            <!-- MODALS -->
 
-        <!-- LOGIN SCREEN -->
-        <div id="login-screen" class="modal">
-            <div class="pixel-window">
-                <h1>Blockscom Mafia<br>Survival Game</h1>
-                <p>make your own game with Blockscom</p>
-                <button class="btn btn-gold" onclick="connectWallet()">CONNECT WALLET</button>
-                <button class="btn" onclick="startGame()">PLAY AS GUEST</button>
-                <p id="wallet-status" style="margin-top:20px; font-size: 10px; color: var(--ui-red);"></p>
-            </div>
-        </div>
-
-        <!-- LEVEL UP SCREEN -->
-        <div id="levelup-screen" class="modal hidden">
-            <div class="pixel-window" style="max-width: 1000px;">
-                <div class="tabs-header">
-                    <div class="tab active">UPGRADES</div>
-                    <div class="tab">STATS</div>
-                    <div class="tab">WEAPONS</div>
+            <!-- LOGIN SCREEN -->
+            <div id="login-screen" class="modal">
+                <div class="pixel-window">
+                    <h1>Blockscom Mafia<br>Survival Game</h1>
+                    <p>make your own game with Blockscom</p>
+                    <button class="btn btn-gold" onclick="connectWallet()">CONNECT WALLET</button>
+                    <button class="btn" onclick="startGame()">PLAY AS GUEST</button>
+                    <p id="wallet-status" style="margin-top:20px; font-size: 10px; color: var(--ui-red);"></p>
                 </div>
-                <h1>LEVEL UP!</h1>
-                <div class="card-container" id="upgrade-cards"></div>
             </div>
+
+            <!-- LEVEL UP SCREEN -->
+            <div id="levelup-screen" class="modal hidden">
+                <div class="pixel-window" style="max-width: 1000px;">
+                    <div class="tabs-header">
+                        <div class="tab active">UPGRADES</div>
+                        <div class="tab">STATS</div>
+                        <div class="tab">WEAPONS</div>
+                    </div>
+                    <h1>LEVEL UP!</h1>
+                    <div class="card-container" id="upgrade-cards"></div>
+                </div>
+            </div>
+
+            <!-- GAME OVER SCREEN -->
+            <div id="gameover-screen" class="modal hidden">
+                <div class="pixel-window">
+                    <h1 style="color: var(--ui-red);">WASTED</h1>
+                    <p id="final-stats">Survived: 00:00</p>
+                    <button class="btn" onclick="location.reload()">TRY AGAIN</button>
+                </div>
+            </div>
+
         </div>
 
-        <!-- GAME OVER SCREEN -->
-        <div id="gameover-screen" class="modal hidden">
-            <div class="pixel-window">
-                <h1 style="color: var(--ui-red);">WASTED</h1>
-                <p id="final-stats">Survived: 00:00</p>
-                <button class="btn" onclick="location.reload()">TRY AGAIN</button>
-            </div>
-        </div>
-
-    </div>
-
-    <script src="js/visuals.js"></script>
-    <script src="js/map.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/outpost.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/mobile.js"></script>
-    <script src="js/game.js"></script>
+        <script src="js/visuals.js"></script>
+        <script src="js/map.js"></script>
+        <script src="js/player.js"></script>
+        <script src="js/outpost.js"></script>
+        <script src="js/tower.js"></script>
+        <script src="js/ui.js"></script>
+        <script src="js/mobile.js"></script>
+        <script src="js/game.js"></script>
 </body>
 
 </html>

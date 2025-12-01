@@ -10,6 +10,10 @@ class Player {
         this.nextLevelXp = 10;
         this.level = 1;
         this.cash = 0;
+        this.cashMultiplier = 1;
+        this.xpMultiplier = 1;
+        this.armor = 0;
+        this.maxArmor = 0;
 
         // Stats
         this.fireRate = 35;
@@ -50,8 +54,19 @@ class Player {
         this.facingRight = true;
 
         // Weapons
-        this.weapon = 'PISTOL'; // PISTOL, MACHINE_GUN, BAZOOKA, LAZER, SUBMACHINE_GUN
-        this.weapons = ['PISTOL', 'MACHINE_GUN', 'BAZOOKA', 'LAZER', 'SUBMACHINE_GUN'];
+        // Weapons
+        this.weapon = 'PISTOL';
+        this.weapons = ['PISTOL', 'GRENADE_LAUNCHER', 'LAZER', 'FLAMETHROWER', 'THROWING_KNIFE'];
+        this.weaponLevels = {
+            'PISTOL': 1,
+
+            'GRENADE_LAUNCHER': 0,
+            'LAZER': 0,
+
+            'FLAMETHROWER': 0,
+
+            'THROWING_KNIFE': 0
+        };
 
         // Animation
         this.animState = 'idle'; // idle, walk, run, attack
@@ -98,8 +113,48 @@ class Player {
                 }
             }
 
-            this.x += dx * this.speed;
-            this.y += dy * this.speed;
+            // Calculate potential new position
+            let nextX = this.x + dx * this.speed;
+            let nextY = this.y + dy * this.speed;
+
+            // Collision Check with Outposts
+            let collision = false;
+            for (let o of outposts) {
+                const dist = Math.hypot(nextX - o.x, nextY - o.y);
+                const minDist = o.size / 2 + this.size / 2;
+                if (dist < minDist) {
+                    // Allow moving AWAY if already stuck
+                    const currentDist = Math.hypot(this.x - o.x, this.y - o.y);
+                    if (currentDist < minDist && dist > currentDist) {
+                        continue;
+                    }
+                    collision = true;
+                    break;
+                }
+            }
+
+            // Collision Check with Towers
+            if (!collision) {
+                for (let t of towers) {
+                    const dist = Math.hypot(nextX - t.x, nextY - t.y);
+                    const minDist = t.size / 2 + this.size / 2;
+                    if (dist < minDist) {
+                        // Allow moving AWAY if already stuck
+                        const currentDist = Math.hypot(this.x - t.x, this.y - t.y);
+                        if (currentDist < minDist && dist > currentDist) {
+                            continue;
+                        }
+                        collision = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!collision) {
+                this.x = nextX;
+                this.y = nextY;
+            }
+
             if (dx > 0) this.facingRight = true;
             if (dx < 0) this.facingRight = false;
         }
@@ -227,30 +282,60 @@ class Player {
             let bulletType = 'normal';
             let count = this.projectileCount;
 
-            if (this.weapon === 'MACHINE_GUN') {
-                currentFireRate = 8; // Fast
-                currentDamage = this.damage * 0.4;
-                currentSpread = 0.3;
-            } else if (this.weapon === 'BAZOOKA') {
-                // Scale fire rate based on player's fire rate (Base 35)
-                // 120 is base Bazooka rate. If player.fireRate < 35, this decreases.
+            // Weapon Level Scaling
+            const level = this.weaponLevels[this.weapon] || 1;
+            const levelDmgMult = 1 + (level - 1) * 0.5; // +50% damage per level
+            const levelProjAdd = (level - 1); // +1 projectile per level (except some weapons)
+
+            if (this.weapon === 'GRENADE_LAUNCHER') {
                 currentFireRate = 120 * (this.fireRate / 35);
-                currentDamage = this.damage * 3;
+                currentDamage = this.damage * 3 * levelDmgMult;
                 currentSpeed = this.bulletSpeed * 0.6;
                 bulletType = 'explosive';
-                count = this.projectileCount; // Enable Projectile Upgrades
+                count = this.projectileCount + levelProjAdd;
             } else if (this.weapon === 'LAZER') {
-                // Scale fire rate based on player's fire rate
                 currentFireRate = 10 * (this.fireRate / 35);
-                currentDamage = this.damage * 0.5;
-                currentSpeed = 20; // Instant
+                currentDamage = (this.damage + 10) * 0.5 * levelDmgMult;
+                currentSpeed = 20;
                 bulletType = 'LAZER';
-                count = this.projectileCount; // Enable Projectile Upgrades
-            } else if (this.weapon === 'SUBMACHINE_GUN') {
-                currentFireRate = 5; // Very Fast
-                currentDamage = this.damage * 0.3; // Low Damage
-                currentSpread = 0.4; // Spray
-                currentSpeed = this.bulletSpeed * 1.2;
+                count = this.projectileCount + levelProjAdd;
+
+            } else if (this.weapon === 'FLAMETHROWER') {
+                currentFireRate = 3; // Super fast
+                // Stronger scaling: Base 20% + 10% per level (was just multiplier)
+                // Actually, let's make it depend more heavily on level.
+                // Base damage is 10. 0.2 * 10 = 2 damage per tick.
+                // Level 1: 2 * 1 = 2.
+                // Level 5: 2 * 3 = 6.
+                // Level 5: 2 * 3 = 6.
+                // Let's boost the base scaling factor a bit more.
+                currentDamage = (this.damage + 10) * (0.2 + (level * 0.1)) * levelDmgMult;
+                currentSpeed = 6;
+                // AOE Scaling: Spread increases with level
+                currentSpread = 0.5 + (level * 0.1);
+                bulletType = 'FLAME';
+                count = 1 + Math.floor(levelProjAdd / 2); // Thicker stream
+                // Size Scaling: Flames get bigger
+                // We need to pass this size to bullet creation below, but bullet creation uses a local var 'bSize'
+                // We can set a flag or just handle it in the loop below if we had access to 'bSize' there.
+                // But 'bSize' is defined inside the loop.
+                // Wait, I can just define a variable here and use it there?
+                // No, 'bSize' is defined inside the loop: let bSize = 4;
+                // I should change the loop logic or add a special case for FLAMETHROWER size there.
+                // OR, I can just set a property on 'this' temporarily? No that's messy.
+                // Let's just modify the loop logic in the next block.
+                // Actually, I can't modify the loop logic easily from here without replacing the whole shoot function or a larger chunk.
+                count = this.projectileCount + level;
+            } else if (this.weapon === 'THROWING_KNIFE') {
+                currentFireRate = 25;
+                currentDamage = this.damage * 1.5 * levelDmgMult;
+                currentSpeed = 10;
+                bulletType = 'KNIFE';
+                count = this.projectileCount + level;
+            } else {
+                // Pistol / Default
+                currentDamage *= levelDmgMult;
+                count += levelProjAdd;
             }
 
             if (frame - this.lastShot > currentFireRate) {
@@ -261,9 +346,16 @@ class Player {
 
                     let bSize = 4;
                     let bColor = "#ffff00";
-                    if (this.weapon === 'BAZOOKA') { bSize = 8; bColor = "#ffaa00"; }
+                    if (this.weapon === 'GRENADE_LAUNCHER') { bSize = 8; bColor = "#ffaa00"; }
+                    if (this.weapon === 'FLAMETHROWER') {
+                        // Size scales with level: 4 + (level * 2)
+                        const level = this.weaponLevels[this.weapon] || 1;
+                        bSize = 4 + (level * 2);
+                    }
 
-                    bullets.push(new Bullet(this.x, this.y, angle + spread, currentDamage, currentSpeed, this.knockback, bSize, bColor, false, bulletType));
+                    const spawnX = this.x + Math.cos(angle) * 20;
+                    const spawnY = this.y + Math.sin(angle) * 20;
+                    bullets.push(new Bullet(spawnX, spawnY, angle + spread, currentDamage, currentSpeed, this.knockback, bSize, bColor, false, bulletType));
                 }
                 // Muzzle Flash
                 for (let i = 0; i < 8; i++) {
@@ -333,13 +425,25 @@ class Player {
     }
 
     takeDamage(amt) {
-        this.hp -= amt;
-        if (this.hp <= 0) endGame();
+        // Armor Absorption
+        if (this.armor > 0) {
+            let armorDmg = Math.min(this.armor, amt);
+            this.armor -= armorDmg;
+            amt -= armorDmg;
+        }
+
+        if (amt > 0) {
+            this.hp -= amt;
+            if (this.hp <= 0) {
+                this.hp = 0;
+                if (gameState !== "GAME_OVER") endGame();
+            }
+        }
         updateHUD();
     }
 
     gainXp(amount) {
-        this.xp += amount;
+        this.xp += amount * this.xpMultiplier;
         if (this.xp >= this.nextLevelXp) {
             this.xp -= this.nextLevelXp;
             this.level++;
@@ -350,7 +454,7 @@ class Player {
     }
 
     gainCash(amount) {
-        this.cash += amount;
+        this.cash += amount * this.cashMultiplier;
         updateHUD();
     }
 }

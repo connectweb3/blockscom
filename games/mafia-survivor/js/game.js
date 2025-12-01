@@ -6,8 +6,8 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
 // Load Assets
-const characterSprite = new Image();
-characterSprite.src = 'asset/character_spritesheet.png';
+// characterSprite moved to Visuals
+
 
 window.addEventListener('resize', resize);
 resize();
@@ -35,9 +35,28 @@ window.addEventListener('keydown', e => {
     if (e.key === '3') player.switchWeapon(2);
 });
 
+// UI Event Listeners
+const buildTowerBtn = document.getElementById('build-tower-btn');
+if (buildTowerBtn) {
+    buildTowerBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent focus/default issues
+        e.stopPropagation();
+        console.log("Build Tower Button Clicked (Listener)");
+        buildTower();
+    });
+    // Add touch support just in case
+    buildTowerBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Prevent ghost clicks
+        e.stopPropagation();
+        console.log("Build Tower Button Touched");
+        buildTower();
+    });
+}
+
 // --- CLASSES ---
 
 let difficultyMultiplier = 1;
+let dropMultiplier = 1;
 let lastDifficultyIncrease = 0;
 let lastBossSpawn = 0;
 let lastBomberSpawn = 0;
@@ -57,15 +76,19 @@ class SpatialGrid {
     getKey(x, y) {
         const cx = Math.floor(x / this.cellSize);
         const cy = Math.floor(y / this.cellSize);
-        return `${cx},${cy}`;
+        // Pack coordinates into a single integer (assuming world isn't massive)
+        // Supports -32768 to 32767 for both x and y grid coordinates
+        return (cx & 0xFFFF) << 16 | (cy & 0xFFFF);
     }
 
     add(entity) {
         const key = this.getKey(entity.x, entity.y);
-        if (!this.grid.has(key)) {
-            this.grid.set(key, []);
+        let cell = this.grid.get(key);
+        if (!cell) {
+            cell = [];
+            this.grid.set(key, cell);
         }
-        this.grid.get(key).push(entity);
+        cell.push(entity);
     }
 
     // Get entities in the same cell and adjacent cells (3x3 area)
@@ -76,9 +99,16 @@ class SpatialGrid {
 
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
-                const key = `${cx + i},${cy + j}`;
-                if (this.grid.has(key)) {
-                    results = results.concat(this.grid.get(key));
+                // Manually calculate key to avoid function call overhead if needed, 
+                // but getKey is fast enough.
+                const key = ((cx + i) & 0xFFFF) << 16 | ((cy + j) & 0xFFFF);
+                const cell = this.grid.get(key);
+                if (cell) {
+                    // Use a loop to push to avoid concat creation if possible, 
+                    // but concat is okay. For max perf, push individually.
+                    for (let k = 0; k < cell.length; k++) {
+                        results.push(cell[k]);
+                    }
                 }
             }
         }
@@ -121,6 +151,12 @@ class Enemy {
             this.size = 18;
             this.color = "#ff0000";
         }
+
+        // Status Effects
+        this.isBurning = false;
+        this.burnDamage = 0;
+        this.burnTick = 0;
+        this.dead = false;
     }
 
     update() {
@@ -157,12 +193,41 @@ class Enemy {
             }
         }
 
+        // Check collision with Outposts (Base)
+        for (let o of outposts) {
+            if (Math.hypot(this.x - o.x, this.y - o.y) < (this.size + o.size) / 2) {
+                o.takeDamage(this.damage * 0.1); // Reduced damage to base so it lasts a bit
+                this.x -= Math.cos(angle) * 10; // Bounce back slightly
+                this.y -= Math.sin(angle) * 10;
+
+                // Visual feedback
+                createFloatingText(o.x, o.y - 50, "BASE UNDER ATTACK!", "#ff0000");
+            }
+        }
+
         if (dist < (this.size + player.size) / 2) {
             player.takeDamage(this.damage);
             this.x -= Math.cos(angle) * 30;
             this.y -= Math.sin(angle) * 30;
         }
         if (this.flash > 0) this.flash--;
+
+        // Burn Logic
+        if (this.isBurning) {
+            this.burnTick++;
+            if (this.burnTick % 30 === 0) { // Tick every 0.5 seconds
+                this.hp -= this.burnDamage;
+                // Visual Burn Tick
+                createFloatingText(this.x, this.y - 20, Math.floor(this.burnDamage), "#ff5500");
+                if (this.hp <= 0) {
+                    this.takeHit(0, 0, this.x, this.y); // Trigger death logic
+                }
+            }
+            // Burn Particles
+            if (Math.random() < 0.1) {
+                particles.push(new Particle(this.x + (Math.random() - 0.5) * 10, this.y + (Math.random() - 0.5) * 10, "#ff5500", 1, 20, 3));
+            }
+        }
     }
 
     takeHit(dmg, knockback, sx, sy) {
@@ -172,25 +237,26 @@ class Enemy {
         this.x += Math.cos(angle) * (knockback * 10);
         this.y += Math.sin(angle) * (knockback * 10);
 
-        if (this.hp <= 0) {
+        if (this.hp <= 0 && !this.dead) {
+            this.dead = true;
             score++;
             // DROP LOGIC
             // Safety Box: Only high level enemies, 0.5% chance
             if (this.type >= 1 && Math.random() < 0.005) {
                 pickups.push(new Pickup(this.x, this.y, 'BOX'));
             }
-            // Stat Drops (5% chance each)
-            else if (Math.random() < 0.05) { pickups.push(new Pickup(this.x, this.y, 'DMG')); }
-            else if (Math.random() < 0.05) { pickups.push(new Pickup(this.x, this.y, 'HP')); }
-            else if (Math.random() < 0.05) { pickups.push(new Pickup(this.x, this.y, 'SPD')); }
+            // Stat Drops (8% chance each)
+            else if (Math.random() < 0.08) { pickups.push(new Pickup(this.x, this.y, 'DMG')); }
+            else if (Math.random() < 0.08) { pickups.push(new Pickup(this.x, this.y, 'HP')); }
+            else if (Math.random() < 0.08) { pickups.push(new Pickup(this.x, this.y, 'SPD')); }
             // Cash (Standard)
             else {
                 // Drop Cash (Green Bills)
-                spawnPickup(this.x, this.y, 'CASH', (10 + this.type * 10) * difficultyMultiplier);
+                spawnPickup(this.x, this.y, 'CASH', (10 + this.type * 10) * difficultyMultiplier * dropMultiplier);
                 // Small chance for XP as well or just give XP on kill automatically?
                 // Let's drop XP orbs separately or just give XP on kill.
                 // For now, let's drop XP orbs too but less frequently or as a separate drop.
-                spawnPickup(this.x + 5, this.y, 'XP', (5 + this.type * 5) * difficultyMultiplier);
+                spawnPickup(this.x + 5, this.y, 'XP', (5 + this.type * 5) * difficultyMultiplier * dropMultiplier);
             }
         }
     }
@@ -207,14 +273,22 @@ class Pickup {
         this.value = value;
         this.magnetized = false;
         this.size = 10;
+        // Expiration for CASH and XP (2 minutes @ 60fps)
+        this.life = (type === 'CASH' || type === 'XP') ? 7200 : Infinity;
     }
 
     update() {
+        // Expiration Logic
+        if (this.life !== Infinity) {
+            this.life--;
+            if (this.life <= 0) return true; // Remove if expired
+        }
+
         const dist = Math.hypot(player.x - this.x, player.y - this.y);
 
         // Magnetize only works on XP, Buffs sit still
-        if (this.type === 'XP' && dist < player.pickupRange) this.magnetized = true;
-        if (this.type !== 'XP' && dist < player.size + 10) this.magnetized = true;
+        // Magnetize all drops if within range
+        if (dist < player.pickupRange) this.magnetized = true;
 
         if (this.magnetized) {
             const angle = Math.atan2(player.y - this.y, player.x - this.x);
@@ -330,8 +404,6 @@ class Bullet {
         if (this.trail.length > 5) this.trail.shift(); // Shorter, tighter trail
         this.x += this.vx; this.y += this.vy;
         this.life--; if (this.life <= 0) this.dead = true;
-
-        this.trail = [];
     }
 
     draw() {
@@ -541,10 +613,12 @@ class Axe {
     }
 }
 
+
+
 // --- INSTANCES ---
 let player = new Player();
 let camera = new Camera();
-var bullets = [], enemies = [], pickups = [], projectiles = [], explosions = [], aoeEffects = [], floatingTexts = [], particles = [], outposts = [];
+var bullets = [], enemies = [], pickups = [], projectiles = [], explosions = [], aoeEffects = [], floatingTexts = [], particles = [], outposts = [], towers = [];
 var knives = [], axes = [];
 
 // --- SYSTEMS ---
@@ -568,6 +642,7 @@ function spawnPickup(x, y, type, value) {
         for (let p of pickups) {
             if (p.type === type && Math.hypot(p.x - x, p.y - y) < 50) {
                 p.value += value;
+                p.life = 7200; // Reset expiration timer on merge
                 // Reset magnet to give player a chance to pick up the bigger pile if they are close
                 // p.magnetized = false; 
                 return;
@@ -638,7 +713,13 @@ function checkCollisions() {
                     b.dead = true;
 
                     if (b.type === 'explosive') {
-                        explosions.push(new Explosion(b.x, b.y, 60, b.damage));
+                        explosions.push(new Explosion(b.x, b.y, 120, b.damage));
+                    }
+
+                    if (b.type === 'FLAME') {
+                        e.isBurning = true;
+                        // Burn damage = 20% of hit damage per tick (0.5s), min 1
+                        e.burnDamage = Math.max(1, b.damage * 0.2);
                     }
 
                     // Impact Particles
@@ -652,12 +733,13 @@ function checkCollisions() {
     });
 
     // 3. Cleanup Dead Entities (In-place to reduce GC)
-    // Helper to remove dead items
+    // Helper to remove dead items (Swap and Pop for O(1) - Order not preserved but much faster)
     function removeDead(arr, checkFn) {
         let i = arr.length;
         while (i--) {
             if (checkFn(arr[i])) {
-                arr.splice(i, 1);
+                arr[i] = arr[arr.length - 1];
+                arr.pop();
             }
         }
     }
@@ -669,12 +751,60 @@ function checkCollisions() {
     removeDead(explosions, e => { e.update(); return e.l <= 0; });
     removeDead(aoeEffects, a => { a.update(); return a.l <= 0; });
     removeDead(floatingTexts, t => { t.update(); return t.life <= 0; });
+
+    // Limit particles to prevent lag
+    if (particles.length > 200) {
+        // Remove oldest (start of array) - splice is O(N) but only runs when over limit
+        // Since we want to keep newest, and removeDead scrambles order, we might lose "oldest" concept if we use removeDead on particles.
+        // Actually, removeDead iterates backwards.
+        // Let's just hard limit.
+        particles.length = 200;
+    }
     removeDead(particles, p => { p.update(); return p.life <= 0; });
 
-    outposts.forEach(o => o.update());
+    outposts.forEach(o => {
+        o.update();
+        if (o.hp <= 0) {
+            // Game Over
+            gameState = "GAME_OVER";
+            createFloatingText(player.x, player.y, "BASE DESTROYED!", "#ff0000");
+            endGame(); // Assuming endGame exists or we trigger it
+        }
+    });
+    towers.forEach(t => t.update());
     knives.forEach(k => k.update());
     removeDead(axes, a => { a.update(); return a.dead; });
 }
+
+
+// --- ERROR HANDLING ---
+
+function logError(error) {
+    const msg = error.message || error.toString();
+    // Filter known external extension errors
+    if (msg.includes("initEternlDomAPI") || msg.includes("tabReply")) return;
+
+    console.error(error);
+    const debugConsole = document.getElementById('debug-console');
+    if (debugConsole) {
+        debugConsole.classList.remove('hidden');
+        debugConsole.innerText += `\n[ERROR] ${msg}`;
+        // Auto-scroll to bottom
+        debugConsole.scrollTop = debugConsole.scrollHeight;
+    }
+}
+
+window.onerror = function (message, source, lineno, colno, error) {
+    logError(`Global Error: ${message} at ${source}:${lineno}:${colno}`);
+    return false; // Let default handler run too
+};
+
+// Filter console warnings
+const originalWarn = console.warn;
+console.warn = function (...args) {
+    if (args[0] && typeof args[0] === 'string' && args[0].includes('tabReply')) return;
+    originalWarn.apply(console, args);
+};
 
 // --- GAME LOOP ---
 
@@ -682,6 +812,9 @@ function update() {
     if (gameState !== "PLAYING") return;
     frame++;
     time = Math.floor(frame / 60);
+
+    // Drop Multiplier: +10% every minute
+    dropMultiplier = 1 + (Math.floor(time / 60) * 0.1);
 
     // Difficulty Scaling: Double every 5 minutes (300 seconds)
     if (time > 0 && time % 300 === 0 && time !== lastDifficultyIncrease) {
@@ -712,7 +845,7 @@ function checkOutpostInteraction() {
     let targetOutpost = null;
 
     for (let o of outposts) {
-        if (Math.hypot(player.x - o.x, player.y - o.y) < 60) {
+        if (Math.hypot(player.x - o.x, player.y - o.y) < 100) {
             nearOutpost = true;
             targetOutpost = o;
             break;
@@ -727,23 +860,90 @@ function checkOutpostInteraction() {
     } else {
         btn.classList.add('hidden');
     }
+
+    // Check Territory for Building Towers
+    let inTerritory = false;
+    for (let o of outposts) {
+        // Square check (radius is half-width)
+        if (Math.abs(player.x - o.x) < o.territoryRadius && Math.abs(player.y - o.y) < o.territoryRadius) {
+            inTerritory = true;
+            break;
+        }
+    }
+
+    const buildBtn = document.getElementById('build-tower-btn');
+    if (inTerritory && !nearOutpost) { // Don't show if upgrading outpost
+        buildBtn.classList.remove('hidden');
+    } else {
+        buildBtn.classList.add('hidden');
+    }
 }
 
-function buyOutpost() {
-    const limit = Math.floor(time / 300); // 1 every 5 mins (300s)
-    if (outposts.length >= limit) {
-        createFloatingText(player.x, player.y - 40, `LIMIT REACHED! (${outposts.length}/${limit})`, "#ff5555");
+
+function buildTower() {
+    console.log("buildTower called");
+    const cost = 200;
+
+    if (player.cash < cost) {
+        createFloatingText(player.x, player.y - 40, "NEED $200!", "#ff5555");
         return;
     }
 
-    const cost = 500;
-    if (player.cash >= cost) {
+    // Find nearest outpost
+    let nearestOutpost = null;
+    let minDist = Infinity;
+    for (let o of outposts) {
+        const d = Math.hypot(player.x - o.x, player.y - o.y);
+        if (d < minDist) {
+            minDist = d;
+            nearestOutpost = o;
+        }
+    }
+
+    if (!nearestOutpost) return;
+
+    // Define Slots (Same as Visuals)
+    const radius = nearestOutpost.territoryRadius;
+    const slots = [
+        { dx: -radius, dy: -radius }, { dx: 0, dy: -radius }, { dx: radius, dy: -radius },
+        { dx: radius, dy: 0 },
+        { dx: radius, dy: radius }, { dx: 0, dy: radius }, { dx: -radius, dy: radius },
+        { dx: -radius, dy: 0 }
+    ];
+
+    let validSlot = null;
+    let slotDist = Infinity;
+
+    // Check if player is near a valid, empty slot
+    for (let slot of slots) {
+        const sx = nearestOutpost.x + slot.dx;
+        const sy = nearestOutpost.y + slot.dy;
+        const d = Math.hypot(player.x - sx, player.y - sy);
+
+        // Check if occupied
+        let occupied = false;
+        for (let t of towers) {
+            if (Math.hypot(t.x - sx, t.y - sy) < 20) {
+                occupied = true;
+                break;
+            }
+        }
+
+        if (!occupied && d < 40) { // Must be within 40px of the slot center
+            if (d < slotDist) {
+                slotDist = d;
+                validSlot = { x: sx, y: sy };
+            }
+        }
+    }
+
+    if (validSlot) {
         player.cash -= cost;
-        outposts.push(new Outpost(player.x, player.y));
-        createFloatingText(player.x, player.y - 40, "OUTPOST BUILT!", "#55ffff");
+        towers.push(new Tower(validSlot.x, validSlot.y));
+        createFloatingText(player.x, player.y - 40, "TOWER BUILT!", "#44ff44");
         updateHUD();
     } else {
-        createFloatingText(player.x, player.y - 40, "NEED $500!", "#ff5555");
+        createFloatingText(player.x, player.y - 40, "STAND ON A SLOT!", "#ff5555");
     }
 }
 
@@ -756,8 +956,9 @@ function draw() {
     ctx.translate(-camera.x, -camera.y);
 
     aoeEffects.forEach(a => { if (isOnScreen(a, 50)) a.draw(); });
-    pickups.forEach(p => { if (isOnScreen(p, 20)) p.draw(); });
     outposts.forEach(o => { if (isOnScreen(o, 60)) o.draw(); });
+    towers.forEach(t => { if (isOnScreen(t, 30)) t.draw(ctx); });
+    pickups.forEach(p => { if (isOnScreen(p, 20)) p.draw(); });
     enemies.forEach(e => { if (isOnScreen(e, 50)) e.draw(); });
     player.draw(); // Always draw player
     bullets.forEach(b => { if (isOnScreen(b, 20)) b.draw(); });
@@ -771,9 +972,19 @@ function draw() {
     ctx.restore();
 }
 
+let errorCount = 0;
 function loop() {
-    update();
-    draw();
+    try {
+        update();
+        draw();
+    } catch (e) {
+        logError(e);
+        errorCount++;
+        if (errorCount > 10) {
+            logError("Too many errors, stopping game loop.");
+            return; // Stop loop
+        }
+    }
     requestAnimationFrame(loop);
 }
 

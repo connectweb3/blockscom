@@ -1,7 +1,14 @@
 function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Small delay to allow browser layout to stabilize on mobile
+    setTimeout(() => {
+        window.scrollTo(0, 0); // Try to hide address bar
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }, 100);
 }
+
+window.addEventListener('orientationchange', resize);
+window.addEventListener('resize', resize);
 
 function updateStackUI() {
     document.getElementById('stack-dmg').innerText = player.stackDmg;
@@ -18,6 +25,16 @@ function updateHUD() {
     document.getElementById('hp-fill').style.width = hpPct + "%";
     document.getElementById('hp-text').innerText = `${Math.floor(player.hp)}/${player.maxHp}`;
 
+    // Armor Bar Update
+    if (player.maxArmor > 0) {
+        document.getElementById('armor-bar-container').classList.remove('hidden');
+        let armorPct = (player.armor / player.maxArmor) * 100;
+        document.getElementById('armor-fill').style.width = armorPct + "%";
+        document.getElementById('armor-text').innerText = `${Math.floor(player.armor)}/${player.maxArmor}`;
+    } else {
+        document.getElementById('armor-bar-container').classList.add('hidden');
+    }
+
     const xpPct = (player.xp / player.nextLevelXp) * 100;
     document.getElementById('xp-fill').style.width = xpPct + "%";
     document.getElementById('lvl-text').innerText = player.level;
@@ -28,6 +45,7 @@ function updateHUD() {
     document.getElementById('timer').innerText = `${m}:${s}`;
 
     document.getElementById('cash-rate').innerText = difficultyMultiplier;
+    document.getElementById('kill-count').innerText = score;
 
     updateStatsPanel();
 }
@@ -125,18 +143,33 @@ function connectWallet() {
 
 function startGame() {
     document.getElementById('login-screen').classList.add('hidden');
-    document.getElementById('login-screen').classList.add('hidden');
     document.querySelector('.hud-top').classList.remove('hidden');
     document.querySelector('.hud-bottom').classList.remove('hidden');
     document.getElementById('buff-tracker').classList.remove('hidden');
+
+    // Reset Game Globals
     gameState = "PLAYING";
+    time = 0;
+    frame = 0;
+    score = 0;
+    difficultyMultiplier = 1;
+
     player = new Player();
     enemies = []; bullets = []; pickups = []; projectiles = [];
     outposts = []; // Reset outposts
-    outposts.push(new Outpost(player.x, player.y)); // Spawn initial base
+    const initialOutpost = new Outpost(0, 0);
+    outposts.push(initialOutpost); // Spawn initial base at 0,0
+
+    // Spawn Player outside Outpost collision
+    // Outpost size 100 (radius 50), Player size 24 (radius 12). Collision < 62.
+    // Spawn at 80 to be safe.
+    player.x = initialOutpost.x;
+    player.y = initialOutpost.y + (initialOutpost.size / 2) + 40;
     boxQueue = 0;
     updateStackUI();
-    loop();
+
+    // Do not call loop() here, as it is already running from game.js
+    // If loop stopped due to errors, reload is required anyway.
 }
 
 function triggerLevelUp() {
@@ -145,33 +178,105 @@ function triggerLevelUp() {
     const container = document.getElementById('upgrade-cards');
     container.innerHTML = "";
 
-    const upgradePool = [
-        { type: "WEAPON", name: "Tommy Drum", desc: "Attack Speed +15%", effect: () => player.fireRate = Math.max(5, player.fireRate * 0.85) },
+    const upgradePool = [];
+
+    // 1. Weapon Upgrades (Dynamic)
+    const weapons = [
+        { id: 'PISTOL', name: 'Pistol', desc: 'Standard Issue' },
+        { id: 'GRENADE_LAUNCHER', name: 'Grenade Launcher', desc: 'Explosive Rounds' },
+        { id: 'LAZER', name: 'Lazer', desc: 'Piercing Beam' },
+
+        { id: 'FLAMETHROWER', name: 'Flamethrower', desc: 'Burn them all' },
+
+        { id: 'THROWING_KNIFE', name: 'Assassin Knife', desc: 'Silent Killer' }
+    ];
+
+    weapons.forEach(w => {
+        const currentLvl = player.weaponLevels[w.id] || 0;
+        if (currentLvl < 5) {
+            let title, desc, type;
+
+            if (currentLvl === 0) {
+                type = "NEW WEAPON";
+                title = `NEW ${w.name}`;
+                desc = w.desc;
+            } else {
+                type = "UPGRADE";
+                title = `UPGRADE ${w.name} (LVL ${currentLvl + 1})`;
+                desc = "Damage +50%, Proj +1";
+                if (w.id === 'FLAMETHROWER') desc = "Damage +20%, Thicker Stream";
+
+            }
+
+            upgradePool.push({
+                type: type,
+                name: title,
+                desc: desc,
+                effect: () => {
+                    player.weapon = w.id;
+                    player.weaponLevels[w.id] = currentLvl + 1;
+                    createFloatingText(player.x, player.y - 50, `${w.name} LVL ${player.weaponLevels[w.id]}`, "#fff");
+                }
+            });
+        }
+    });
+
+    // 2. Stat Upgrades
+    const stats = [
         { type: "AMMO", name: "Hollow Points", desc: "Damage +5", effect: () => player.damage += 5 },
         { type: "GEAR", name: "Running Shoes", desc: "Speed +10%", effect: () => player.speed *= 1.1 },
-        { type: "GEAR", name: "Magnet", desc: "Pickup Range +20%", effect: () => player.pickupRange *= 1.2 },
-        { type: "AMMO", name: "High Velocity", desc: "Bullet Speed +", effect: () => player.bulletSpeed += 2 },
-        { type: "WEAPON", name: "Dual Wield", desc: "Projectiles +1", effect: () => player.projectileCount += 1 },
+        { type: "GEAR", name: "Magnet", desc: "Pickup Range +1 Tile", effect: () => player.pickupRange += 60 },
+        { type: "AMMO", name: "High Velocity", desc: "Bullet Speed +2", effect: () => player.bulletSpeed += 2 },
+        { type: "WEAPON", name: "Dual Wield", desc: "Projectiles +1 (Global)", effect: () => player.projectileCount += 1 },
         { type: "NEW", name: "The Pineapple", desc: "Throws Grenades", effect: () => { player.hasGrenade = true; player.grenadeLevel++; } },
         { type: "NEW", name: "Spicy Cocktail", desc: "Throws Molotovs", effect: () => { player.hasMolotov = true; player.molotovLevel++; } },
         { type: "NEW", name: "Associates", desc: "Call the Boys", effect: () => { player.addAssociate(); } },
         { type: "NEW", name: "Proximity Mine", desc: "Drop Landmines", effect: () => { player.hasLandmine = true; player.landmineLevel++; } },
-        { type: "WEAPON", name: "Bazooka", desc: "Explosive Rounds", effect: () => player.weapon = 'BAZOOKA' },
-        { type: "WEAPON", name: "Lazer Beam", desc: "High Tech Piercing", effect: () => player.weapon = 'LAZER' },
-        { type: "WEAPON", name: "Submachine Gun", desc: "High Fire Rate, Low Dmg", effect: () => player.weapon = 'SUBMACHINE_GUN' },
         { type: "NEW", name: "Spinning Knife", desc: "Orbital Protection", effect: () => player.knifeCount++ },
         { type: "NEW", name: "Throwing Axe", desc: "High Dmg Arcs", effect: () => player.axeLevel++ },
         { type: "STATS", name: "Bodyguard", desc: "Max HP +20 & Heal", effect: () => { player.maxHp += 20; player.hp += 20; } },
         { type: "AMMO", name: "Heavy Rounds", desc: "Knockback +50%", effect: () => player.knockback += 0.5 },
         { type: "STATS", name: "Adrenaline", desc: "Attack Speed +5%", effect: () => player.fireRate *= 0.95 },
-        { type: "GEAR", name: "Kevlar Vest", desc: "Heal 20 HP", effect: () => player.hp = Math.min(player.maxHp, player.hp + 20) }
+        { type: "STATS", name: "Awakening", desc: "Attack Speed +15%", effect: () => player.fireRate *= 0.85 },
+        { type: "GEAR", name: "Kevlar Vest", desc: "Armor +50", effect: () => { player.maxArmor += 50; player.armor += 50; } },
+        { type: "STATS", name: "FULL HEAL", desc: "Full Heal HP & Armor", effect: () => { player.hp = player.maxHp; player.armor = player.maxArmor; } }
     ];
 
-    const choices = upgradePool.sort(() => 0.5 - Math.random()).slice(0, 6);
+    // Merge pools
+    // const fullPool = [...upgradePool, ...stats];
+
+    // Pick 3-4 random choices (or 6 as before)
+    // const choices = fullPool.sort(() => 0.5 - Math.random()).slice(0, 6);
+
+    let choices = [];
+
+    if (upgradePool.length > 0) {
+        // 1. Pick one guaranteed weapon upgrade
+        const guaranteedWeaponIndex = Math.floor(Math.random() * upgradePool.length);
+        const guaranteedWeapon = upgradePool[guaranteedWeaponIndex];
+        choices.push(guaranteedWeapon);
+
+        // 2. Create a pool of the rest (remaining weapons + stats)
+        const remainingWeapons = upgradePool.filter((_, index) => index !== guaranteedWeaponIndex);
+        const remainingPool = [...remainingWeapons, ...stats];
+
+        // 3. Pick 5 more random choices
+        const randomExtras = remainingPool.sort(() => 0.5 - Math.random()).slice(0, 5);
+        choices = [...choices, ...randomExtras];
+
+        // 4. Shuffle the final result so the weapon isn't always first
+        choices.sort(() => 0.5 - Math.random());
+    } else {
+        // No weapons available, just pick from stats
+        choices = stats.sort(() => 0.5 - Math.random()).slice(0, 6);
+    }
 
     choices.forEach(opt => {
         const card = document.createElement('div');
         card.className = "card";
+        // Add special class for new weapons to style them if needed
+        if (opt.type === "NEW WEAPON") card.style.borderColor = "#ffaa00";
+
         card.innerHTML = `<span class="type">${opt.type}</span><h3>${opt.name}</h3><p>${opt.desc}</p>`;
         card.onclick = () => {
             opt.effect();
@@ -185,13 +290,18 @@ function triggerLevelUp() {
 
 function endGame() {
     gameState = "GAME_OVER";
+    // Show Game Over Screen
+    document.getElementById('gameover-screen').classList.remove('hidden');
+
+    // Update Final Stats
     const m = Math.floor(time / 60).toString().padStart(2, '0');
     const s = (time % 60).toString().padStart(2, '0');
-    document.getElementById('final-stats').innerText = `You Survived ${m}:${s} and reached Level ${player.level}`;
-    document.getElementById('gameover-screen').classList.remove('hidden');
-    document.getElementById('gameover-screen').classList.remove('hidden');
+    document.getElementById('final-stats').innerText = `Survived: ${m}:${s}`;
+
+    // Hide HUD
     document.querySelector('.hud-top').classList.add('hidden');
     document.querySelector('.hud-bottom').classList.add('hidden');
     document.getElementById('buff-tracker').classList.add('hidden');
     document.getElementById('safety-box-ui').classList.add('hidden');
+    document.getElementById('login-screen').classList.add('hidden');
 }
