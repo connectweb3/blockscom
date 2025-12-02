@@ -235,7 +235,7 @@ function triggerLevelUp() {
         { type: "✨", name: "Proximity Mine", desc: "Drop Landmines", effect: () => { player.hasLandmine = true; player.landmineLevel++; } },
         { type: "✨", name: "Spinning Knife", desc: "Orbital Protection", effect: () => player.knifeCount++ },
         { type: "✨", name: "Throwing Axe", desc: "High Dmg Arcs", effect: () => player.axeLevel++ },
-        { type: "📊", name: "Bodyguard", desc: "Max HP +20 & Heal", effect: () => { player.maxHp += 20; player.hp += 20; } },
+        { type: "📊", name: "Bodyguard", desc: "Max HP +60 & Armor +20", effect: () => { player.maxHp += 60; player.hp += 60; player.maxArmor += 20; player.armor += 20; } },
         { type: "🔋", name: "Heavy Rounds", desc: "Knockback +50%", effect: () => player.knockback += 0.5 },
         { type: "📊", name: "Adrenaline", desc: "Attack Speed +5%", effect: () => player.fireRate *= 0.95 },
         { type: "📊", name: "Awakening", desc: "Attack Speed +15%", effect: () => player.fireRate *= 0.85 },

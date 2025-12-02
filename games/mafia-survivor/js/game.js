@@ -679,25 +679,103 @@ class Knife {
 Knife.timer = 0;
 
 class Axe {
-    constructor(x, y, tx, ty, damage) {
+    constructor(x, y, tx, ty, damage, angleOffset = 0, baseAngle = null) {
         this.x = x; this.y = y;
         this.damage = damage;
         this.rotation = 0;
+        this.angleOffset = angleOffset;
 
-        // Arc Logic
-        const dist = Math.hypot(tx - x, ty - y);
-        const angle = Math.atan2(ty - y, tx - x);
-        this.vx = Math.cos(angle) * 6;
-        this.vy = Math.sin(angle) * 6;
-        this.life = 60; // 1 second flight
+        // Initial Angle
+        let angle;
+        if (baseAngle !== null) {
+            angle = baseAngle + angleOffset;
+        } else {
+            angle = Math.atan2(ty - y, tx - x) + angleOffset;
+        }
+
+        this.vx = Math.cos(angle) * 8;
+        this.vy = Math.sin(angle) * 8;
+
+        this.state = 'OUT1';
+        this.timer = 0;
         this.dead = false;
+
+        // Orbit vars
+        this.orbitRadius = 60;
+        this.orbitSpeed = 0.2;
+        this.orbitAngle = 0;
     }
     update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.rotation += 0.3;
-        this.life--;
-        if (this.life <= 0) this.dead = true;
+        this.rotation += 0.4;
+        this.timer++;
+
+        if (this.state === 'OUT1') {
+            this.x += this.vx;
+            this.y += this.vy;
+
+            // Decelerate
+            this.vx *= 0.95;
+            this.vy *= 0.95;
+
+            if (this.timer > 40) { // ~0.7s
+                this.state = 'RETURN1';
+            }
+        }
+        else if (this.state === 'RETURN1') {
+            const dx = player.x - this.x;
+            const dy = player.y - this.y;
+            const dist = Math.hypot(dx, dy);
+            const angle = Math.atan2(dy, dx);
+
+            // Accelerate towards player
+            const speed = 12;
+            this.x += Math.cos(angle) * speed;
+            this.y += Math.sin(angle) * speed;
+
+            if (dist < 40) {
+                this.state = 'ORBIT';
+                this.timer = 0;
+                // Start orbit from current angle relative to player
+                this.orbitAngle = Math.atan2(this.y - player.y, this.x - player.x);
+            }
+        }
+        else if (this.state === 'ORBIT') {
+            this.orbitAngle += this.orbitSpeed;
+            this.x = player.x + Math.cos(this.orbitAngle) * this.orbitRadius;
+            this.y = player.y + Math.sin(this.orbitAngle) * this.orbitRadius;
+
+            // Spin 360 (2 PI)
+            // speed 0.2 -> 2PI / 0.2 = ~31 frames.
+            if (this.timer > 35) {
+                this.state = 'OUT2';
+                this.timer = 0;
+                // Fly out in current direction
+                const angle = this.orbitAngle;
+                this.vx = Math.cos(angle) * 10;
+                this.vy = Math.sin(angle) * 10;
+            }
+        }
+        else if (this.state === 'OUT2') {
+            this.x += this.vx;
+            this.y += this.vy;
+
+            if (this.timer > 30) {
+                this.state = 'RETURN2';
+            }
+        }
+        else if (this.state === 'RETURN2') {
+            const dx = player.x - this.x;
+            const dy = player.y - this.y;
+            const dist = Math.hypot(dx, dy);
+            const angle = Math.atan2(dy, dx);
+
+            this.x += Math.cos(angle) * 12;
+            this.y += Math.sin(angle) * 12;
+
+            if (dist < 20) {
+                this.dead = true;
+            }
+        }
 
         // Collision (Pierce)
         const nearby = enemyGrid.query(this.x, this.y);

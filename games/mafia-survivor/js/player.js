@@ -270,7 +270,7 @@ class Player {
                     }
 
                     if (nextTarget) {
-                        currentDamage = Math.floor(currentDamage / 2);
+                        currentDamage = currentDamage - 1;
                         if (currentDamage < 1) currentDamage = 1;
 
                         nextTarget.takeHit(currentDamage, 0, currentTarget.x, currentTarget.y);
@@ -566,7 +566,18 @@ class Player {
         if (enemies.length > 0) {
             // Throw at random enemy or nearest? Random is more chaotic/fun for axe
             let target = enemies[Math.floor(Math.random() * enemies.length)];
-            axes.push(new Axe(this.x, this.y, target.x, target.y, 30 + (this.axeLevel * 10)));
+            const count = this.axeLevel;
+            const baseAngle = Math.atan2(target.y - this.y, target.x - this.x);
+
+            for (let i = 0; i < count; i++) {
+                // Spread axes by ~20 degrees (0.35 radians)
+                const spread = 0.35;
+                const offset = (count > 1)
+                    ? (i - (count - 1) / 2) * spread
+                    : 0;
+
+                axes.push(new Axe(this.x, this.y, target.x, target.y, 30 + (this.axeLevel * 10), offset, baseAngle));
+            }
             this.axeCooldown = frame + Math.max(40, 100 - (this.axeLevel * 10));
         }
     }
