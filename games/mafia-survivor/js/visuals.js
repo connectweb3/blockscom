@@ -380,6 +380,28 @@ const Visuals = {
             ctx.fillText(`LVL ${o.level}`, o.x, o.y - o.size / 2 - 10);
             ctx.fillText(`$${o.upgradeCost}`, o.x, o.y + o.size / 2 + 15);
         }
+
+        // 4. HP Bar
+        // Always show HP bar
+        {
+            const barWidth = 60;
+            const barHeight = 6;
+            const barX = o.x - barWidth / 2;
+            const barY = o.y - o.size / 2 - 25;
+
+            // Background
+            ctx.fillStyle = "#000";
+            ctx.fillRect(barX - 1, barY - 1, barWidth + 2, barHeight + 2);
+
+            // Fill (Red background for missing health)
+            ctx.fillStyle = "#ff0000";
+            ctx.fillRect(barX, barY, barWidth, barHeight);
+
+            // Current HP (Green)
+            const hpPercent = Math.max(0, o.hp / o.maxHp);
+            ctx.fillStyle = "#00ff00";
+            ctx.fillRect(barX, barY, barWidth * hpPercent, barHeight);
+        }
     },
 
     drawTower(ctx, t) {

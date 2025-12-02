@@ -518,22 +518,115 @@ class Knife {
         this.total = total;
         this.angle = 0;
         this.dist = 60;
-        this.damage = 20;
+        this.baseDamage = 20;
         this.x = 0; this.y = 0;
+
+        // Boomerang Logic
+        this.state = 'ORBIT'; // ORBIT, OUT, RETURN
+        // Timer is now shared/static
+
+        this.targetX = 0;
+        this.targetY = 0;
+        this.outSpeed = 12;
+        this.returnSpeed = 15;
+        this.maxOutDist = 350;
+        this.comboMult = 2.5; // Combo Damage Multiplier
     }
+
+    // Static properties for shared state
+    static timer = 0;
+    static attackCooldown = 300; // 5 seconds
+
+    static triggerAttack() {
+        Knife.timer = 0;
+        const range = 500;
+        // Find potential targets
+        let candidates = enemies.filter(e => e.hp > 0 && Math.hypot(e.x - player.x, e.y - player.y) < range);
+
+        // Sort by distance
+        candidates.sort((a, b) => Math.hypot(a.x - player.x, a.y - player.y) - Math.hypot(b.x - player.x, b.y - player.y));
+
+        knives.forEach((k, i) => {
+            k.state = 'OUT';
+            if (i < candidates.length) {
+                // Assign unique target
+                k.targetX = candidates[i].x;
+                k.targetY = candidates[i].y;
+            } else {
+                // No unique target available, shoot in spread pattern
+                const angle = (Math.PI * 2 / knives.length) * i;
+                k.targetX = player.x + Math.cos(angle) * 350;
+                k.targetY = player.y + Math.sin(angle) * 350;
+            }
+        });
+    }
+
     update() {
         this.angle += 0.05; // Spin speed
-        const offset = (Math.PI * 2 / this.total) * this.index;
-        this.x = player.x + Math.cos(this.angle + offset) * this.dist;
-        this.y = player.y + Math.sin(this.angle + offset) * this.dist;
+
+        // Shared Timer Logic (Managed by the first knife to avoid multiple ticks)
+        if (this.index === 0) {
+            Knife.timer++;
+            if (Knife.timer > Knife.attackCooldown) {
+                // Only trigger if ALL knives are back in orbit
+                const allOrbit = knives.every(k => k.state === 'ORBIT');
+                if (allOrbit) {
+                    Knife.triggerAttack();
+                }
+            }
+        }
+
+        if (this.state === 'ORBIT') {
+            const offset = (Math.PI * 2 / this.total) * this.index;
+            this.x = player.x + Math.cos(this.angle + offset) * this.dist;
+            this.y = player.y + Math.sin(this.angle + offset) * this.dist;
+        }
+        else if (this.state === 'OUT') {
+            const angle = Math.atan2(this.targetY - this.y, this.targetX - this.x);
+            this.x += Math.cos(angle) * this.outSpeed;
+            this.y += Math.sin(angle) * this.outSpeed;
+
+            // Check if reached target or max distance
+            const distToTarget = Math.hypot(this.targetX - this.x, this.targetY - this.y);
+            const distToPlayer = Math.hypot(player.x - this.x, player.y - this.y);
+
+            if (distToTarget < 10 || distToPlayer > this.maxOutDist) {
+                this.state = 'RETURN';
+            }
+        }
+        else if (this.state === 'RETURN') {
+            const angle = Math.atan2(player.y - this.y, player.x - this.x);
+            this.x += Math.cos(angle) * this.returnSpeed;
+            this.y += Math.sin(angle) * this.returnSpeed;
+
+            if (Math.hypot(player.x - this.x, player.y - this.y) < 20) {
+                this.state = 'ORBIT';
+            }
+        }
 
         // Collision
         const nearby = enemyGrid.query(this.x, this.y);
         nearby.forEach(e => {
-            if (e.hp > 0 && Math.hypot(e.x - this.x, e.y - this.y) < e.size + 10) {
-                e.takeHit(this.damage, 2, player.x, player.y);
+            if (e.hp > 0 && Math.hypot(e.x - this.x, e.y - this.y) < e.size + 15) {
+                // Calculate Damage
+                let dmg = this.baseDamage;
+                let isCombo = false;
+
+                if (this.state !== 'ORBIT') {
+                    dmg *= this.comboMult;
+                    isCombo = true;
+                }
+
+                e.takeHit(dmg, 2, player.x, player.y);
+
                 // Visual Spark
-                particles.push(new Particle(this.x, this.y, "#fff", 2, 5, 2));
+                const color = isCombo ? "#ff00ff" : "#fff";
+                const size = isCombo ? 4 : 2;
+                particles.push(new Particle(this.x, this.y, color, 2, 10, size));
+
+                if (isCombo) {
+                    createFloatingText(this.x, this.y - 30, "COMBO!", "#ff00ff");
+                }
             }
         });
     }
@@ -541,6 +634,8 @@ class Knife {
         Visuals.drawKnife(ctx, this);
     }
 }
+// Initialize static timer
+Knife.timer = 0;
 
 class Axe {
     constructor(x, y, tx, ty, damage) {

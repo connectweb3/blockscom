@@ -26,14 +26,16 @@ function updateHUD() {
     document.getElementById('hp-text').innerText = `${Math.floor(player.hp)}/${player.maxHp}`;
 
     // Armor Bar Update
+    // Always show armor bar
+    // document.getElementById('armor-bar-container').classList.remove('hidden'); // Already visible in HTML
+
+    let armorPct = 0;
     if (player.maxArmor > 0) {
-        document.getElementById('armor-bar-container').classList.remove('hidden');
-        let armorPct = (player.armor / player.maxArmor) * 100;
-        document.getElementById('armor-fill').style.width = armorPct + "%";
-        document.getElementById('armor-text').innerText = `${Math.floor(player.armor)}/${player.maxArmor}`;
-    } else {
-        document.getElementById('armor-bar-container').classList.add('hidden');
+        armorPct = (player.armor / player.maxArmor) * 100;
     }
+
+    document.getElementById('armor-fill').style.width = armorPct + "%";
+    document.getElementById('armor-text').innerText = `${Math.floor(player.armor)}/${player.maxArmor}`;
 
     const xpPct = (player.xp / player.nextLevelXp) * 100;
     document.getElementById('xp-fill').style.width = xpPct + "%";

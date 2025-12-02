@@ -484,3 +484,102 @@ body {
 .btn {
     pointer-events: auto;
 }
+
+/* --- MOBILE LANDSCAPE OPTIMIZATIONS --- */
+@media (max-height: 500px) and (orientation: landscape) {
+    #ui-layer {
+        padding: 5px;
+    }
+
+    /* Scale down bars */
+    .bar-container {
+        width: 100px;
+        height: 10px;
+        margin-bottom: 2px;
+    }
+
+    #xp-bar-container {
+        width: 80px !important;
+        height: 8px !important;
+    }
+
+    .bar-text-overlay {
+        font-size: 6px;
+    }
+
+    /* Adjust Right HUD (Stats) */
+    .hud-right {
+        padding: 4px;
+        gap: 2px;
+    }
+
+    .info-text {
+        font-size: 6px;
+        margin: 1px 0;
+    }
+
+    .sub-text {
+        font-size: 5px;
+    }
+
+    #timer {
+        font-size: 10px;
+        margin-bottom: 2px;
+    }
+
+    /* Adjust Bottom HUD */
+    #buff-tracker {
+        min-width: 100px;
+        padding: 4px;
+        gap: 2px;
+    }
+
+    .buff-item {
+        font-size: 8px;
+    }
+
+    /* Adjust Buttons */
+    #outpost-controls .btn {
+        padding: 4px 8px !important;
+        font-size: 8px !important;
+        width: 100px !important;
+        margin: 2px !important;
+        border-width: 2px !important;
+    }
+
+    /* Adjust Stats Panel */
+    #stats-panel {
+        width: 120px;
+        padding: 5px;
+        font-size: 8px;
+    }
+
+    .stat-row {
+        margin-bottom: 2px;
+    }
+
+    /* Adjust Modals for small height */
+    .pixel-window {
+        padding: 10px;
+        max-width: 80%;
+    }
+
+    .card-container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+    }
+
+    .card {
+        height: 100px;
+        padding: 5px;
+    }
+
+    .card h3 {
+        font-size: 8px;
+        margin: 4px 0;
+    }
+
+    .card p {
+        font-size: 6px;
+    }
+}

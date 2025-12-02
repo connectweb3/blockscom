@@ -447,7 +447,7 @@ class Player {
                 count = this.projectileCount + level;
             } else if (this.weapon === 'THROWING_KNIFE') {
                 currentFireRate = 15;
-                currentDamage = 2 * 1.5 * levelDmgMult;
+                currentDamage = (2 + 3) * 1.5 * levelDmgMult; // Base 2 -> 5, +3 damage
                 currentSpeed = 10;
                 bulletType = 'KNIFE';
                 count = this.projectileCount + level;
