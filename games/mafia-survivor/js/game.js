@@ -128,6 +128,7 @@ function isOnScreen(e, buffer = 100) {
 
 class Enemy {
     constructor(x, y, type) {
+        this.id = Math.random().toString(36).substr(2, 9);
         this.x = x; this.y = y;
         this.size = 20;
         this.type = type; // 0: Thug, 1: Brute, 2: Boss, 3: Bomber
@@ -534,6 +535,7 @@ class Knife {
 
         this.targetX = 0;
         this.targetY = 0;
+        this.targetEnemy = null;
         this.outSpeed = 12;
         this.returnSpeed = 15;
         this.maxOutDist = 350;
@@ -562,11 +564,13 @@ class Knife {
                 // Assign unique target
                 k.targetX = candidates[i].x;
                 k.targetY = candidates[i].y;
+                k.targetEnemy = candidates[i];
             } else {
                 // No unique target available, shoot in spread pattern
                 const angle = (Math.PI * 2 / knives.length) * i;
                 k.targetX = player.x + Math.cos(angle) * 350;
                 k.targetY = player.y + Math.sin(angle) * 350;
+                k.targetEnemy = null;
             }
         });
     }
@@ -610,13 +614,22 @@ class Knife {
 
                     // Query nearby enemies
                     const nearby = enemyGrid.query(this.x, this.y);
+
+                    // Collect IDs of enemies targeted by other knives
+                    const targetedIds = new Set();
+                    knives.forEach(k => {
+                        if (k !== this && k.state === 'OUT' && k.targetEnemy) {
+                            targetedIds.add(k.targetEnemy.id);
+                        }
+                    });
+
                     for (let e of nearby) {
                         if (e.hp > 0) {
                             const d = Math.hypot(e.x - this.x, e.y - this.y);
                             // Avoid current target location (approx)
                             const distToOldTarget = Math.hypot(e.x - this.targetX, e.y - this.targetY);
 
-                            if (d < range && d < minD && distToOldTarget > 20) {
+                            if (d < range && d < minD && distToOldTarget > 20 && !targetedIds.has(e.id)) {
                                 minD = d;
                                 nextTarget = e;
                             }
@@ -626,12 +639,15 @@ class Knife {
                     if (nextTarget) {
                         this.targetX = nextTarget.x;
                         this.targetY = nextTarget.y;
+                        this.targetEnemy = nextTarget;
                         this.chainCount--;
                     } else {
                         this.state = 'RETURN';
+                        this.targetEnemy = null;
                     }
                 } else {
                     this.state = 'RETURN';
+                    this.targetEnemy = null;
                 }
             }
         }
@@ -642,6 +658,7 @@ class Knife {
 
             if (Math.hypot(player.x - this.x, player.y - this.y) < 20) {
                 this.state = 'ORBIT';
+                this.targetEnemy = null;
             }
         }
 
@@ -672,6 +689,16 @@ class Knife {
         });
     }
     draw() {
+        if (this.state === 'OUT') {
+            ctx.save();
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(this.targetX, this.targetY);
+            ctx.stroke();
+            ctx.restore();
+        }
         Visuals.drawKnife(ctx, this);
     }
 }

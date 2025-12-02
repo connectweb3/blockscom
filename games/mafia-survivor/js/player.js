@@ -67,8 +67,11 @@ class Player {
 
         // Time Freeze
         this.hasTimeFreeze = false;
+        this.timeFreezeLevel = 0;
         this.timeFreezeTimer = 0;
         this.isTimeFrozen = false;
+        this.timeFreezeMaxCooldown = 900; // 15 seconds
+        this.timeFreezeDuration = 60; // 1 second
 
         this.lastShot = 0;
         this.facingRight = true;
@@ -291,15 +294,15 @@ class Player {
         // Time Freeze Logic
         if (this.hasTimeFreeze) {
             this.timeFreezeTimer++;
-            // Every 15 seconds (900 frames)
-            if (this.timeFreezeTimer >= 900) {
+            // Dynamic Cooldown
+            if (this.timeFreezeTimer >= this.timeFreezeMaxCooldown) {
                 this.isTimeFrozen = true;
-                if (this.timeFreezeTimer === 900) {
+                if (this.timeFreezeTimer === this.timeFreezeMaxCooldown) {
                     createFloatingText(this.x, this.y - 50, "TIME FREEZE!", "#ffffff");
                 }
 
-                // Reset after 1 second (60 frames)
-                if (this.timeFreezeTimer >= 960) {
+                // Dynamic Duration
+                if (this.timeFreezeTimer >= this.timeFreezeMaxCooldown + this.timeFreezeDuration) {
                     this.isTimeFrozen = false;
                     this.timeFreezeTimer = 0;
                 }
@@ -578,7 +581,7 @@ class Player {
 
                 axes.push(new Axe(this.x, this.y, target.x, target.y, 30 + (this.axeLevel * 10), offset, baseAngle));
             }
-            this.axeCooldown = frame + Math.max(40, 100 - (this.axeLevel * 10));
+            this.axeCooldown = frame + Math.max(60, 220 - (this.axeLevel * 20));
         }
     }
 

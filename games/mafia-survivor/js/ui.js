@@ -245,7 +245,19 @@ function triggerLevelUp() {
         // New Gears
         { type: "✨", name: "Killer Instinct", desc: "AOE Damage Aura", effect: () => { player.hasKillerInstinct = true; player.killerInstinctLevel++; } },
         { type: "✨", name: "Lightning Chain", desc: "Chain Lightning Attack", effect: () => { player.hasLightningChain = true; player.lightningChainLevel++; } },
-        { type: "✨", name: "Time Freeze", desc: "Freeze Enemies every 15s", effect: () => { player.hasTimeFreeze = true; } }
+        {
+            type: "✨",
+            name: "Time Freeze",
+            desc: player.hasTimeFreeze ? "Cooldown -2s, Duration +0.5s" : "Freeze Enemies every 15s",
+            effect: () => {
+                player.hasTimeFreeze = true;
+                player.timeFreezeLevel++;
+                // Cooldown -2s (120 frames) per level
+                player.timeFreezeMaxCooldown = Math.max(60, 900 - ((player.timeFreezeLevel - 1) * 120));
+                // Duration +0.5s (30 frames) per level
+                player.timeFreezeDuration = 60 + ((player.timeFreezeLevel - 1) * 30);
+            }
+        }
     ];
 
     // Merge pools
