@@ -60,6 +60,11 @@ class Player {
         this.lightningChainLevel = 0;
         this.lightningChainCooldown = 0;
 
+        // Psychic Power
+        this.psychicPowerCooldown = 0;
+        this.psychicBlastCount = 0;
+        this.psychicReloadTimer = 0;
+
         // Time Freeze
         this.hasTimeFreeze = false;
         this.timeFreezeTimer = 0;
@@ -71,7 +76,7 @@ class Player {
         // Weapons
         // Weapons
         this.weapon = 'PISTOL';
-        this.weapons = ['PISTOL', 'GRENADE_LAUNCHER', 'LAZER', 'FLAMETHROWER', 'THROWING_KNIFE'];
+        this.weapons = ['PISTOL', 'GRENADE_LAUNCHER', 'LAZER', 'FLAMETHROWER', 'THROWING_KNIFE', 'PSYCHIC_POWER'];
         this.weaponLevels = {
             'PISTOL': 1,
 
@@ -80,7 +85,8 @@ class Player {
 
             'FLAMETHROWER': 0,
 
-            'THROWING_KNIFE': 0
+            'THROWING_KNIFE': 0,
+            'PSYCHIC_POWER': 0
         };
 
         // Animation
@@ -194,6 +200,9 @@ class Player {
         if (this.axeLevel > 0 && frame > this.axeCooldown) {
             this.throwAxe();
         }
+
+        // Psychic Power Logic
+        this.updatePsychicPower();
 
         // Killer Instinct Logic (AOE Aura)
         if (this.hasKillerInstinct) {
@@ -407,11 +416,18 @@ class Player {
             const levelProjAdd = (level - 1); // +1 projectile per level (except some weapons)
 
             if (this.weapon === 'GRENADE_LAUNCHER') {
-                currentFireRate = 120 * (this.fireRate / 35);
+                currentFireRate = 90 * (this.fireRate / 35); // Buffed Attack Speed
+
+                // Attack Speed Scaling: +2 Speed (approx -2 frames delay?) per upgrade > 2
+                if (level > 2) {
+                    currentFireRate -= (level - 2) * 5; // Reducing delay by 5 frames per level to be noticeable
+                }
+
                 currentDamage = this.damage * 3 * levelDmgMult;
                 currentSpeed = this.bulletSpeed * 0.6;
                 bulletType = 'explosive';
                 count = this.projectileCount + levelProjAdd;
+                currentSpread = 0.5; // Increase spread randomness
             } else if (this.weapon === 'LAZER') {
                 currentFireRate = 10 * (this.fireRate / 35);
                 currentDamage = (this.damage + 10) * 0.5 * levelDmgMult;
@@ -447,7 +463,7 @@ class Player {
                 count = this.projectileCount + level;
             } else if (this.weapon === 'THROWING_KNIFE') {
                 currentFireRate = 15;
-                currentDamage = (2 + 3) * 1.5 * levelDmgMult; // Base 2 -> 5, +3 damage
+                currentDamage = (5 + (level * 2)) * 1.5 * levelDmgMult; // Base 5 + 2 per level
                 currentSpeed = 10;
                 bulletType = 'KNIFE';
                 count = this.projectileCount + level;
@@ -461,20 +477,35 @@ class Player {
                 for (let i = 0; i < count; i++) {
                     const angle = Math.atan2(nearest.enemy.y - this.y, nearest.enemy.x - this.x);
                     this.aimAngle = angle; // Update aim angle
-                    const spread = (i - (count - 1) / 2) * 0.2 + (Math.random() - 0.5) * currentSpread;
 
-                    let bSize = 4;
-                    let bColor = "#ffff00";
-                    if (this.weapon === 'GRENADE_LAUNCHER') { bSize = 8; bColor = "#ffaa00"; }
-                    if (this.weapon === 'FLAMETHROWER') {
-                        // Size scales with level: 4 + (level * 2)
-                        const level = this.weaponLevels[this.weapon] || 1;
-                        bSize = 4 + (level * 2);
+                    let angleStep = 0.2;
+                    if (this.weapon === 'GRENADE_LAUNCHER') angleStep = 0.4; // Wider cone for Grenade Launcher
+
+                    const spread = (i - (count - 1) / 2) * angleStep + (Math.random() - 0.5) * currentSpread;
+
+                    if (this.weapon === 'GRENADE_LAUNCHER') {
+                        // Grenade Launcher Logic (Lobbed Grenades)
+                        const dist = Math.hypot(nearest.enemy.x - this.x, nearest.enemy.y - this.y);
+                        // Add some randomness to distance for spread?
+                        const targetDist = dist + (Math.random() - 0.5) * 50;
+                        const tx = this.x + Math.cos(angle + spread) * targetDist;
+                        const ty = this.y + Math.sin(angle + spread) * targetDist;
+
+                        projectiles.push(new Grenade(this.x, this.y, tx, ty, currentDamage));
+                    } else {
+                        let bSize = 4;
+                        let bColor = "#ffff00";
+                        // if (this.weapon === 'GRENADE_LAUNCHER') { bSize = 8; bColor = "#ffaa00"; } // Handled above
+                        if (this.weapon === 'FLAMETHROWER') {
+                            // Size scales with level: 4 + (level * 2)
+                            const level = this.weaponLevels[this.weapon] || 1;
+                            bSize = 4 + (level * 2);
+                        }
+
+                        const spawnX = this.x + Math.cos(angle) * 20;
+                        const spawnY = this.y + Math.sin(angle) * 20;
+                        bullets.push(new Bullet(spawnX, spawnY, angle + spread, currentDamage, currentSpeed, this.knockback, bSize, bColor, false, bulletType));
                     }
-
-                    const spawnX = this.x + Math.cos(angle) * 20;
-                    const spawnY = this.y + Math.sin(angle) * 20;
-                    bullets.push(new Bullet(spawnX, spawnY, angle + spread, currentDamage, currentSpeed, this.knockback, bSize, bColor, false, bulletType));
                 }
                 // Muzzle Flash
                 for (let i = 0; i < 8; i++) {
@@ -495,7 +526,30 @@ class Player {
     throwGrenade() {
         if (enemies.length > 0) {
             let target = enemies[Math.floor(Math.random() * enemies.length)];
-            projectiles.push(new Grenade(this.x, this.y, target.x, target.y, 40 + (this.grenadeLevel * 10)));
+            let damage = 40 + (this.grenadeLevel * 10);
+            let radius = 80;
+            let color = "#ffaa00";
+
+            // Combo: Grenade Launcher + The Pineapple
+            if (this.weapon === 'GRENADE_LAUNCHER') {
+                // Target farthest enemy
+                let farthest = null;
+                let maxDist = -1;
+                enemies.forEach(e => {
+                    if (e.hp > 0 && isOnScreen(e)) {
+                        const d = Math.hypot(e.x - this.x, e.y - this.y);
+                        if (d > maxDist) { maxDist = d; farthest = e; }
+                    }
+                });
+                if (farthest) target = farthest;
+
+                // Buffs
+                damage *= 1.5; // More damage
+                radius = 120; // More AOE
+                color = "#00ff00"; // Different Color Blast (Green)
+            }
+
+            projectiles.push(new Grenade(this.x, this.y, target.x, target.y, damage, radius, color));
             this.grenadeCooldown = frame + Math.max(60, 200 - (this.grenadeLevel * 20));
         }
     }
@@ -514,6 +568,77 @@ class Player {
             let target = enemies[Math.floor(Math.random() * enemies.length)];
             axes.push(new Axe(this.x, this.y, target.x, target.y, 30 + (this.axeLevel * 10)));
             this.axeCooldown = frame + Math.max(40, 100 - (this.axeLevel * 10));
+        }
+    }
+
+    updatePsychicPower() {
+        const level = this.weaponLevels['PSYCHIC_POWER'];
+
+        // Reload Logic
+        if (this.psychicReloadTimer > 0) {
+            this.psychicReloadTimer--;
+            if (this.psychicReloadTimer <= 0) {
+                this.psychicBlastCount = 0;
+                createFloatingText(this.x, this.y - 40, "READY!", "#ff00ff");
+            }
+            return; // Reloading, cannot fire
+        }
+
+        if (level > 0 && frame > this.psychicPowerCooldown) {
+            // Check if we need to reload
+            if (this.psychicBlastCount >= 10) {
+                this.psychicReloadTimer = 120; // 2 seconds
+                return;
+            }
+
+            let targetCount = 1 + (level - 1); // Base 1, +1 per level upgrade
+            let isCombo = false;
+
+            // Time Freeze Combo
+            if (this.isTimeFrozen) {
+                targetCount *= 2;
+                isCombo = true;
+            }
+
+            // Find targets
+            let potentialTargets = enemies.filter(e => e.hp > 0 && isOnScreen(e, 100));
+            if (potentialTargets.length === 0) return;
+
+            // Sort by distance for Nearest
+            potentialTargets.sort((a, b) => Math.hypot(a.x - this.x, a.y - this.y) - Math.hypot(b.x - this.x, b.y - this.y));
+
+            let targets = [];
+
+            if (!isCombo) {
+                // Just take nearest
+                targets = potentialTargets.slice(0, targetCount);
+            } else {
+                // Half nearest, Half farthest
+                const half = targetCount / 2;
+                // Nearest
+                targets = targets.concat(potentialTargets.slice(0, half));
+
+                // Farthest (Reverse the remaining array or just pick from end)
+                // Filter out already selected
+                let remaining = potentialTargets.filter(e => !targets.includes(e));
+                // Sort remaining by distance descending (Farthest first)
+                remaining.sort((a, b) => Math.hypot(b.x - this.x, b.y - this.y) - Math.hypot(a.x - this.x, a.y - this.y));
+
+                targets = targets.concat(remaining.slice(0, half));
+            }
+
+            if (targets.length > 0) {
+                const damage = 50 + (level * 25);
+                // Attack Speed increases with level (Cooldown decreases)
+                const cooldown = Math.max(60, 180 - (level * 20));
+
+                targets.forEach(t => {
+                    projectiles.push(new PsychicBlast(t, damage, 60)); // 1 second delay
+                    this.psychicBlastCount++; // Increment shot count per projectile
+                });
+
+                this.psychicPowerCooldown = frame + cooldown;
+            }
         }
     }
 
@@ -541,6 +666,23 @@ class Player {
     draw() {
         Visuals.drawPlayer(ctx, this);
         this.associates.forEach(a => a.draw());
+
+        // Draw Psychic Reload Bar
+        if (this.psychicReloadTimer > 0) {
+            const barWidth = 40;
+            const barHeight = 6;
+            const x = this.x - barWidth / 2;
+            const y = this.y - this.size - 15;
+            const pct = this.psychicReloadTimer / 120; // 120 frames max
+
+            // Background
+            ctx.fillStyle = "#000";
+            ctx.fillRect(x, y, barWidth, barHeight);
+
+            // Fill (Inverse because timer counts down)
+            ctx.fillStyle = "#ff00ff";
+            ctx.fillRect(x + 1, y + 1, (barWidth - 2) * (1 - pct), barHeight - 2);
+        }
     }
 
     takeDamage(amt) {

@@ -187,10 +187,9 @@ function triggerLevelUp() {
         { id: 'PISTOL', name: 'Pistol', desc: 'Standard Issue' },
         { id: 'GRENADE_LAUNCHER', name: 'Grenade Launcher', desc: 'Explosive Rounds' },
         { id: 'LAZER', name: 'Lazer', desc: 'Piercing Beam' },
-
         { id: 'FLAMETHROWER', name: 'Flamethrower', desc: 'Burn them all' },
-
-        { id: 'THROWING_KNIFE', name: 'Assassin Knife', desc: 'Silent Killer' }
+        { id: 'THROWING_KNIFE', name: 'Assassin Knife', desc: 'Silent Killer' },
+        { id: 'PSYCHIC_POWER', name: 'Psychic Power', desc: 'Mind Blast' }
     ];
 
     weapons.forEach(w => {
@@ -207,7 +206,7 @@ function triggerLevelUp() {
                 title = `UPGRADE ${w.name} (LVL ${currentLvl + 1})`;
                 desc = "Damage +50%, Proj +1";
                 if (w.id === 'FLAMETHROWER') desc = "Damage +20%, Thicker Stream";
-
+                if (w.id === 'PSYCHIC_POWER') desc = "Targets +1, Attack Speed Up";
             }
 
             upgradePool.push({
@@ -311,4 +310,22 @@ function endGame() {
     document.getElementById('buff-tracker').classList.add('hidden');
     document.getElementById('safety-box-ui').classList.add('hidden');
     document.getElementById('login-screen').classList.add('hidden');
+}
+
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().then(() => {
+            if (screen.orientation && screen.orientation.lock) {
+                screen.orientation.lock('landscape').catch(err => {
+                    console.log("Orientation lock failed: ", err);
+                });
+            }
+        }).catch(err => {
+            console.log(`Error attempting to enable fullscreen: ${err.message} (${err.name})`);
+        });
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
 }

@@ -377,10 +377,11 @@ class Bullet {
 }
 
 class Explosion {
-    constructor(x, y, r, d) {
+    constructor(x, y, r, d, color = "#ffaa00") {
         this.x = x; this.y = y; this.r = r; this.d = d;
         this.l = 30; // Longer life for animation
         this.maxLife = 30;
+        this.color = color;
 
         // Damage Enemies
         const nearby = enemyGrid.query(x, y);
@@ -393,7 +394,11 @@ class Explosion {
             const angle = Math.random() * Math.PI * 2;
             const speed = Math.random() * 5 + 2;
             const pSize = Math.random() * 6 + 2;
-            const pColor = Math.random() < 0.5 ? "#ffaa00" : (Math.random() < 0.5 ? "#ff5500" : "#888888");
+            // Use custom color or random fire colors if default
+            let pColor = this.color;
+            if (this.color === "#ffaa00") {
+                pColor = Math.random() < 0.5 ? "#ffaa00" : (Math.random() < 0.5 ? "#ff5500" : "#888888");
+            }
 
             // Create particle manually since Particle constructor might be simple
             // Assuming Particle(x, y, color, speed, life, size)
@@ -407,10 +412,12 @@ class Explosion {
 }
 
 class Grenade {
-    constructor(x, y, tx, ty, damage) {
+    constructor(x, y, tx, ty, damage, radius = 80, color = "#ffaa00") {
         this.x = x; this.y = y;
         this.tx = tx; this.ty = ty;
         this.damage = damage;
+        this.radius = radius;
+        this.color = color;
         this.p = 0; // Progress
         this.dead = false;
     }
@@ -424,7 +431,7 @@ class Grenade {
 
         if (this.p >= 1) {
             this.dead = true;
-            explosions.push(new Explosion(this.x, this.y, 80, this.damage));
+            explosions.push(new Explosion(this.x, this.y, this.radius, this.damage, this.color));
         }
     }
     draw() {
@@ -530,7 +537,9 @@ class Knife {
         this.outSpeed = 12;
         this.returnSpeed = 15;
         this.maxOutDist = 350;
+        this.maxOutDist = 350;
         this.comboMult = 2.5; // Combo Damage Multiplier
+        this.chainCount = 5; // Chain up to 5 enemies
     }
 
     // Static properties for shared state
@@ -548,6 +557,7 @@ class Knife {
 
         knives.forEach((k, i) => {
             k.state = 'OUT';
+            k.chainCount = 5; // Reset chain count
             if (i < candidates.length) {
                 // Assign unique target
                 k.targetX = candidates[i].x;
@@ -591,7 +601,38 @@ class Knife {
             const distToPlayer = Math.hypot(player.x - this.x, player.y - this.y);
 
             if (distToTarget < 10 || distToPlayer > this.maxOutDist) {
-                this.state = 'RETURN';
+                // Chain Logic
+                if (this.chainCount > 0 && distToPlayer <= this.maxOutDist) {
+                    // Find new target
+                    const range = 200;
+                    let nextTarget = null;
+                    let minD = Infinity;
+
+                    // Query nearby enemies
+                    const nearby = enemyGrid.query(this.x, this.y);
+                    for (let e of nearby) {
+                        if (e.hp > 0) {
+                            const d = Math.hypot(e.x - this.x, e.y - this.y);
+                            // Avoid current target location (approx)
+                            const distToOldTarget = Math.hypot(e.x - this.targetX, e.y - this.targetY);
+
+                            if (d < range && d < minD && distToOldTarget > 20) {
+                                minD = d;
+                                nextTarget = e;
+                            }
+                        }
+                    }
+
+                    if (nextTarget) {
+                        this.targetX = nextTarget.x;
+                        this.targetY = nextTarget.y;
+                        this.chainCount--;
+                    } else {
+                        this.state = 'RETURN';
+                    }
+                } else {
+                    this.state = 'RETURN';
+                }
             }
         }
         else if (this.state === 'RETURN') {
@@ -670,6 +711,62 @@ class Axe {
     }
     draw() {
         Visuals.drawAxe(ctx, this);
+    }
+}
+
+class PsychicBlast {
+    constructor(target, damage, delay) {
+        this.target = target;
+        this.damage = damage;
+        this.timer = delay;
+        this.maxTimer = delay;
+        this.dead = false;
+        // Initial position of target
+        this.x = target.x;
+        this.y = target.y;
+    }
+
+    update() {
+        // Track target if alive
+        if (this.target && this.target.hp > 0) {
+            this.x = this.target.x;
+            this.y = this.target.y;
+        }
+
+        this.timer--;
+        if (this.timer <= 0) {
+            this.dead = true;
+            // Explode
+            explosions.push(new Explosion(this.x, this.y, 100, this.damage));
+            createFloatingText(this.x, this.y - 40, "PSYCHIC BLAST!", "#ff00ff");
+        }
+    }
+
+    draw() {
+        // Draw Crosshair
+        const progress = 1 - (this.timer / this.maxTimer);
+        const size = 30 - (progress * 10); // Shrink slightly
+        const alpha = 0.5 + (progress * 0.5); // Fade in
+
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(frame * 0.1); // Spin
+
+        ctx.strokeStyle = `rgba(255, 0, 255, ${alpha})`;
+        ctx.lineWidth = 3;
+
+        // Circle
+        ctx.beginPath();
+        ctx.arc(0, 0, size, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Cross
+        ctx.beginPath();
+        ctx.moveTo(-size - 5, 0); ctx.lineTo(size + 5, 0);
+        ctx.moveTo(0, -size - 5); ctx.lineTo(0, size + 5);
+        ctx.stroke();
+
+        ctx.restore();
     }
 }
 

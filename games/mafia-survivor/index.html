@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Blockscom Mafia Survival Game</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -60,22 +60,39 @@
                 </div>
             </div>
 
-            <!-- RIGHT: Currency & Score -->
-            <div class="hud-section hud-right">
-                <div id="timer-container">
-                    <div id="timer">00:00</div>
+            <!-- RIGHT COLUMN -->
+            <div class="hud-column-right">
+                <!-- RIGHT: Currency & Score -->
+                <div class="hud-section hud-right">
+                    <div id="timer-container">
+                        <div id="timer">00:00</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="info-text">CASH: $<span id="cash-text">0</span></div>
+                        <div class="sub-text">MULTIPLIER: x<span id="cash-rate">1</span></div>
+                    </div>
+                    <!-- Placeholder for Wave or other stats -->
+                    <div class="info-panel">
+                        <div class="info-text" style="color: #fff;">WAVE <span id="wave-text">1</span></div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="info-text" style="color: #ff5555;">KILLS <span id="kill-count">0</span></div>
+                    </div>
                 </div>
-                <div class="info-panel">
-                    <div class="info-text">CASH: $<span id="cash-text">0</span></div>
-                    <div class="sub-text">MULTIPLIER: x<span id="cash-rate">1</span></div>
-                </div>
-                <!-- Placeholder for Wave or other stats -->
-                <div class="info-panel">
-                    <div class="info-text" style="color: #fff;">WAVE <span id="wave-text">1</span></div>
-                </div>
-                <div class="info-panel">
-                    <div class="info-text" style="color: #ff5555;">KILLS <span id="kill-count">0</span></div>
-                </div>
+
+                <!-- FULLSCREEN ICON BTN -->
+                <button id="fullscreen-icon-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10V7H10" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M17 10V7H14" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M7 14V17H10" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M17 14V17H14" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
             </div>
         </div>
 
