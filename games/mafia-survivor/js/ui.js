@@ -198,11 +198,11 @@ function triggerLevelUp() {
             let title, desc, type;
 
             if (currentLvl === 0) {
-                type = "NEW WEAPON";
+                type = "🔫"; // NEW WEAPON
                 title = `NEW ${w.name}`;
                 desc = w.desc;
             } else {
-                type = "UPGRADE";
+                type = "⬆️"; // UPGRADE
                 title = `UPGRADE ${w.name} (LVL ${currentLvl + 1})`;
                 desc = "Damage +50%, Proj +1";
                 if (w.id === 'FLAMETHROWER') desc = "Damage +20%, Thicker Stream";
@@ -224,28 +224,28 @@ function triggerLevelUp() {
 
     // 2. Stat Upgrades
     const stats = [
-        { type: "AMMO", name: "Hollow Points", desc: "Damage +5", effect: () => player.damage += 5 },
-        { type: "GEAR", name: "Running Shoes", desc: "Speed +10%", effect: () => player.speed *= 1.1 },
-        { type: "GEAR", name: "Magnet", desc: "Pickup Range +1 Tile", effect: () => player.pickupRange += 60 },
-        { type: "AMMO", name: "High Velocity", desc: "Bullet Speed +2", effect: () => player.bulletSpeed += 2 },
-        { type: "WEAPON", name: "Dual Wield", desc: "Projectiles +1 (Global)", effect: () => player.projectileCount += 1 },
-        { type: "NEW", name: "The Pineapple", desc: "Throws Grenades", effect: () => { player.hasGrenade = true; player.grenadeLevel++; } },
-        { type: "NEW", name: "Spicy Cocktail", desc: "Throws Molotovs", effect: () => { player.hasMolotov = true; player.molotovLevel++; } },
-        { type: "NEW", name: "Associates", desc: "Call the Boys", effect: () => { player.addAssociate(); } },
-        { type: "NEW", name: "Proximity Mine", desc: "Drop Landmines", effect: () => { player.hasLandmine = true; player.landmineLevel++; } },
-        { type: "NEW", name: "Spinning Knife", desc: "Orbital Protection", effect: () => player.knifeCount++ },
-        { type: "NEW", name: "Throwing Axe", desc: "High Dmg Arcs", effect: () => player.axeLevel++ },
-        { type: "STATS", name: "Bodyguard", desc: "Max HP +20 & Heal", effect: () => { player.maxHp += 20; player.hp += 20; } },
-        { type: "AMMO", name: "Heavy Rounds", desc: "Knockback +50%", effect: () => player.knockback += 0.5 },
-        { type: "STATS", name: "Adrenaline", desc: "Attack Speed +5%", effect: () => player.fireRate *= 0.95 },
-        { type: "STATS", name: "Awakening", desc: "Attack Speed +15%", effect: () => player.fireRate *= 0.85 },
-        { type: "GEAR", name: "Kevlar Vest", desc: "Armor +50", effect: () => { player.maxArmor += 50; player.armor += 50; } },
-        { type: "STATS", name: "FULL HEAL", desc: "Full Heal HP & Armor", effect: () => { player.hp = player.maxHp; player.armor = player.maxArmor; } },
+        { type: "🔋", name: "Hollow Points", desc: "Damage +5", effect: () => player.damage += 5 },
+        { type: "⚙️", name: "Running Shoes", desc: "Speed +10%", effect: () => player.speed *= 1.1 },
+        { type: "⚙️", name: "Magnet", desc: "Pickup Range +1 Tile", effect: () => player.pickupRange += 60 },
+        { type: "🔋", name: "High Velocity", desc: "Bullet Speed +2", effect: () => player.bulletSpeed += 2 },
+        { type: "🔫", name: "Dual Wield", desc: "Projectiles +1 (Global)", effect: () => player.projectileCount += 1 },
+        { type: "✨", name: "The Pineapple", desc: "Throws Grenades", effect: () => { player.hasGrenade = true; player.grenadeLevel++; } },
+        { type: "✨", name: "Spicy Cocktail", desc: "Throws Molotovs", effect: () => { player.hasMolotov = true; player.molotovLevel++; } },
+        { type: "✨", name: "Associates", desc: "Call the Boys", effect: () => { player.addAssociate(); } },
+        { type: "✨", name: "Proximity Mine", desc: "Drop Landmines", effect: () => { player.hasLandmine = true; player.landmineLevel++; } },
+        { type: "✨", name: "Spinning Knife", desc: "Orbital Protection", effect: () => player.knifeCount++ },
+        { type: "✨", name: "Throwing Axe", desc: "High Dmg Arcs", effect: () => player.axeLevel++ },
+        { type: "📊", name: "Bodyguard", desc: "Max HP +20 & Heal", effect: () => { player.maxHp += 20; player.hp += 20; } },
+        { type: "🔋", name: "Heavy Rounds", desc: "Knockback +50%", effect: () => player.knockback += 0.5 },
+        { type: "📊", name: "Adrenaline", desc: "Attack Speed +5%", effect: () => player.fireRate *= 0.95 },
+        { type: "📊", name: "Awakening", desc: "Attack Speed +15%", effect: () => player.fireRate *= 0.85 },
+        { type: "⚙️", name: "Kevlar Vest", desc: "Armor +50", effect: () => { player.maxArmor += 50; player.armor += 50; } },
+        { type: "📊", name: "FULL HEAL", desc: "Full Heal HP & Armor", effect: () => { player.hp = player.maxHp; player.armor = player.maxArmor; } },
 
         // New Gears
-        { type: "NEW", name: "Killer Instinct", desc: "AOE Damage Aura", effect: () => { player.hasKillerInstinct = true; player.killerInstinctLevel++; } },
-        { type: "NEW", name: "Lightning Chain", desc: "Chain Lightning Attack", effect: () => { player.hasLightningChain = true; player.lightningChainLevel++; } },
-        { type: "NEW", name: "Time Freeze", desc: "Freeze Enemies every 15s", effect: () => { player.hasTimeFreeze = true; } }
+        { type: "✨", name: "Killer Instinct", desc: "AOE Damage Aura", effect: () => { player.hasKillerInstinct = true; player.killerInstinctLevel++; } },
+        { type: "✨", name: "Lightning Chain", desc: "Chain Lightning Attack", effect: () => { player.hasLightningChain = true; player.lightningChainLevel++; } },
+        { type: "✨", name: "Time Freeze", desc: "Freeze Enemies every 15s", effect: () => { player.hasTimeFreeze = true; } }
     ];
 
     // Merge pools
