@@ -148,34 +148,55 @@ const Visuals = {
     },
 
     drawAssociate(ctx, a) {
-        const s = 16; // Smaller size
+        const scale = 0.6; // 60% size of player
+        const s = 24 * scale; // Player size is 24
 
         // Shadow
         ctx.fillStyle = "rgba(0,0,0,0.3)";
         ctx.beginPath(); ctx.ellipse(a.x, a.y + s / 2, s / 2, s / 4, 0, 0, Math.PI * 2); ctx.fill();
 
-        // Body
-        ctx.fillStyle = this.colors.associate.body; ctx.fillRect(a.x - s / 2, a.y - s / 2, s, s);
+        if (this.sprites.player && this.sprites.player.complete && this.sprites.player.naturalWidth !== 0) {
+            // Use Player Sprite (Mini Version)
+            // Default to idle animation since Associate doesn't track anim state yet
+            const row = 0; // Idle
+            // Animate slowly based on frame
+            const frameIdx = Math.floor(frame / 10) % 4;
 
-        // Shirt
-        ctx.fillStyle = this.colors.associate.shirt; ctx.fillRect(a.x - 3, a.y - s / 2 + 3, 6, 8);
+            const fw = 128;
+            const fh = 128;
+            const drawSize = 64 * scale;
 
-        // Tie
-        ctx.fillStyle = this.colors.associate.tie; ctx.fillRect(a.x - 1.5, a.y - s / 2 + 3, 3, 6);
+            ctx.drawImage(this.sprites.player,
+                frameIdx * fw, row * fh, fw, fh,
+                a.x - drawSize / 2, a.y - drawSize / 2 - (10 * scale), drawSize, drawSize
+            );
+        } else {
+            // Fallback Drawing (Mini Player Style)
+            // Body (Black Suit)
+            ctx.fillStyle = this.colors.player.body; ctx.fillRect(a.x - s / 2, a.y - s / 2, s, s);
 
-        // Skin
-        ctx.fillStyle = this.colors.associate.skin; ctx.fillRect(a.x - s / 2 + 1, a.y - s + 3, s - 2, s / 2);
+            // Shirt (White)
+            ctx.fillStyle = this.colors.player.shirt; ctx.fillRect(a.x - (4 * scale), a.y - s / 2 + (4 * scale), 8 * scale, 12 * scale);
 
-        // Hat
-        ctx.fillStyle = this.colors.associate.hat;
-        ctx.fillRect(a.x - s / 2, a.y - s + 1, s, 4);
-        ctx.fillRect(a.x - s / 2 + 2, a.y - s - 3, s - 4, 4);
+            // Tie (Red)
+            ctx.fillStyle = this.colors.player.tie; ctx.fillRect(a.x - (2 * scale), a.y - s / 2 + (4 * scale), 4 * scale, 8 * scale);
 
-        // Gun
-        ctx.fillStyle = this.colors.associate.gun;
-        const facingRight = player.facingRight; // Follow player facing
-        const gunX = facingRight ? a.x + 6 : a.x - 14;
-        ctx.fillRect(gunX, a.y + 2, 10, 4);
+            // Skin (Face)
+            ctx.fillStyle = this.colors.player.skin; ctx.fillRect(a.x - s / 2 + (2 * scale), a.y - s + (4 * scale), s - (4 * scale), s / 2);
+
+            // Hat (Black)
+            ctx.fillStyle = this.colors.player.hat;
+            ctx.fillRect(a.x - s / 2, a.y - s, s, 6 * scale);
+            ctx.fillRect(a.x - s / 2 + (4 * scale), a.y - s - (6 * scale), s - (8 * scale), 8 * scale);
+
+            // Gun
+            ctx.fillStyle = this.colors.player.gun;
+            // Always face right for now or use player facing? 
+            // Associates usually face their target, but we don't track that easily in draw.
+            // Let's just face right.
+            const gunX = a.x + (10 * scale);
+            ctx.fillRect(gunX, a.y, 14 * scale, 6 * scale);
+        }
     },
 
     drawEnemy(ctx, e, frame) {

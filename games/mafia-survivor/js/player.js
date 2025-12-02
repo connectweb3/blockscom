@@ -724,24 +724,52 @@ class Associate {
     constructor(x, y, offsetAngle) {
         this.x = x; this.y = y;
         this.offsetAngle = offsetAngle;
-        this.dist = 40;
+        this.dist = 100; // Orbit distance (inside 300 territory)
         this.lastShot = 0;
         this.fireRate = 50;
+
+        // Find nearest outpost to revolve around
+        this.outpost = null;
+        if (typeof outposts !== 'undefined' && outposts.length > 0) {
+            let minDist = Infinity;
+            for (let o of outposts) {
+                const d = Math.hypot(x - o.x, y - o.y);
+                if (d < minDist) {
+                    minDist = d;
+                    this.outpost = o;
+                }
+            }
+        }
+        // If no outpost found yet (e.g. game init), try to find one later in update or fallback to player
     }
     update() {
-        // Follow Player
-        const targetX = player.x + Math.cos(this.offsetAngle + frame * 0.02) * this.dist;
-        const targetY = player.y + Math.sin(this.offsetAngle + frame * 0.02) * this.dist;
+        // Re-check outpost if missing (in case created before outposts)
+        if (!this.outpost && typeof outposts !== 'undefined' && outposts.length > 0) {
+            this.outpost = outposts[0]; // Default to first
+        }
 
-        this.x += (targetX - this.x) * 0.1;
-        this.y += (targetY - this.y) * 0.1;
+        if (this.outpost) {
+            // Revolve around Outpost
+            const targetX = this.outpost.x + Math.cos(this.offsetAngle + frame * 0.02) * this.dist;
+            const targetY = this.outpost.y + Math.sin(this.offsetAngle + frame * 0.02) * this.dist;
+
+            this.x += (targetX - this.x) * 0.1;
+            this.y += (targetY - this.y) * 0.1;
+        } else {
+            // Fallback: Follow Player
+            const targetX = player.x + Math.cos(this.offsetAngle + frame * 0.02) * 40;
+            const targetY = player.y + Math.sin(this.offsetAngle + frame * 0.02) * 40;
+            this.x += (targetX - this.x) * 0.1;
+            this.y += (targetY - this.y) * 0.1;
+        }
 
         // Shoot
         if (frame - this.lastShot > this.fireRate) {
             let nearest = getNearestEnemy(this.x, this.y);
             if (nearest.enemy && nearest.dist < 400) {
                 const angle = Math.atan2(nearest.enemy.y - this.y, nearest.enemy.x - this.x);
-                bullets.push(new Bullet(this.x, this.y, angle, player.damage * 0.8, player.bulletSpeed, 0));
+                // Damage is half of player damage
+                bullets.push(new Bullet(this.x, this.y, angle, player.damage * 0.5, player.bulletSpeed, 0));
                 this.lastShot = frame;
             }
         }
