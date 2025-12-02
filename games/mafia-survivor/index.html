@@ -113,61 +113,67 @@
                 </div>
 
                 <div id="outpost-controls">
-                    <button id="upgrade-btn" class="btn hidden" style="padding: 8px 12px; font-size: 10px;">
+                    <button id="upgrade-btn" class="btn hidden"
+                        style="padding: 8px 12px; font-size: 10px; width: 160px;">
                         UPGRADE
                     </button>
                     <button id="build-tower-btn" class="btn hidden"
-                        style="padding: 8px 12px; font-size: 10px; background-color: #44ff44; color: #000;">
+                        style="padding: 8px 12px; font-size: 10px; width: 160px;">
                         BUILD TOWER ($200)
                     </button>
                 </div>
             </div>
 
-            <!-- MODALS -->
 
-            <!-- LOGIN SCREEN -->
-            <div id="login-screen" class="modal">
-                <div class="pixel-window">
-                    <h1>Blockscom Mafia<br>Survival Game</h1>
-                    <p>make your own game with Blockscom</p>
-                    <button class="btn btn-gold" onclick="connectWallet()">CONNECT WALLET</button>
-                    <button class="btn" onclick="startGame()">PLAY AS GUEST</button>
-                    <p id="wallet-status" style="margin-top:20px; font-size: 10px; color: var(--ui-red);"></p>
-                </div>
-            </div>
-
-            <!-- LEVEL UP SCREEN -->
-            <div id="levelup-screen" class="modal hidden">
-                <div class="pixel-window" style="max-width: 1000px;">
-                    <div class="tabs-header">
-                        <div class="tab active">UPGRADES</div>
-                        <div class="tab">STATS</div>
-                        <div class="tab">WEAPONS</div>
-                    </div>
-                    <h1>LEVEL UP!</h1>
-                    <div class="card-container" id="upgrade-cards"></div>
-                </div>
-            </div>
-
-            <!-- GAME OVER SCREEN -->
-            <div id="gameover-screen" class="modal hidden">
-                <div class="pixel-window">
-                    <h1 style="color: var(--ui-red);">WASTED</h1>
-                    <p id="final-stats">Survived: 00:00</p>
-                    <button class="btn" onclick="location.reload()">TRY AGAIN</button>
-                </div>
-            </div>
 
         </div>
 
-        <script src="js/visuals.js"></script>
-        <script src="js/map.js"></script>
-        <script src="js/player.js"></script>
-        <script src="js/outpost.js"></script>
-        <script src="js/tower.js"></script>
-        <script src="js/ui.js"></script>
-        <script src="js/mobile.js"></script>
-        <script src="js/game.js"></script>
+        <!-- MODALS -->
+
+        <!-- LOGIN SCREEN -->
+        <div id="login-screen" class="modal">
+            <div class="pixel-window">
+                <h1>Blockscom Mafia<br>Survival Game</h1>
+                <p>make your own game with Blockscom</p>
+                <button class="btn btn-gold" onclick="connectWallet()">CONNECT WALLET</button>
+                <button class="btn" onclick="startGame()">PLAY AS GUEST</button>
+                <p id="wallet-status" style="margin-top:20px; font-size: 10px; color: var(--ui-red);"></p>
+            </div>
+        </div>
+
+        <!-- LEVEL UP SCREEN -->
+        <div id="levelup-screen" class="modal hidden">
+            <div class="pixel-window" style="max-width: 1000px;">
+                <div class="tabs-header">
+                    <div class="tab active">UPGRADES</div>
+                    <div class="tab">STATS</div>
+                    <div class="tab">WEAPONS</div>
+                </div>
+                <h1>LEVEL UP!</h1>
+                <div class="card-container" id="upgrade-cards"></div>
+            </div>
+        </div>
+
+        <!-- GAME OVER SCREEN -->
+        <div id="gameover-screen" class="modal hidden">
+            <div class="pixel-window">
+                <h1 style="color: var(--ui-red);">WASTED</h1>
+                <p id="final-stats">Survived: 00:00</p>
+                <button class="btn" onclick="location.reload()">TRY AGAIN</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/visuals.js"></script>
+    <script src="js/lightning.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/outpost.js"></script>
+    <script src="js/tower.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/mobile.js"></script>
+    <script src="js/game.js"></script>
 </body>
 
 </html>

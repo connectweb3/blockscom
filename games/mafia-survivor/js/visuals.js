@@ -83,6 +83,21 @@ const Visuals = {
         ctx.beginPath(); ctx.ellipse(p.x, p.y + s / 2, s / 2, s / 4, 0, 0, Math.PI * 2); ctx.fill();
 
         if (this.sprites.player && this.sprites.player.complete && this.sprites.player.naturalWidth !== 0) {
+            // Killer Instinct Aura
+            if (p.hasKillerInstinct) {
+                const range = 100 + (p.killerInstinctLevel * 20);
+                ctx.save();
+                ctx.globalAlpha = 0.2;
+                ctx.fillStyle = "#ff00ff"; // Magenta Aura
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, range, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = "#ff00ff";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.globalAlpha = 1.0;
+                ctx.restore();
+            }
             let row = 0;
             // Mapping based on p.animState and p.animDir
             // Idle: 0-3, Walk: 4-7, Run: 8-11, Attack: 12-19
@@ -663,5 +678,119 @@ const Visuals = {
         ctx.fill();
 
         ctx.globalAlpha = 1;
+    },
+
+    drawLightning(ctx, l) {
+        ctx.save();
+        ctx.strokeStyle = "#00ffff";
+        ctx.lineWidth = 2;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = "#00ffff";
+        ctx.globalAlpha = l.life / 10;
+
+        ctx.beginPath();
+        if (l.segments.length > 0) {
+            ctx.moveTo(l.segments[0].x1, l.segments[0].y1);
+            for (let s of l.segments) {
+                ctx.lineTo(s.x2, s.y2);
+            }
+        } else {
+            ctx.moveTo(l.x1, l.y1);
+            ctx.lineTo(l.x2, l.y2);
+        }
+        ctx.stroke();
+
+        // White core
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 1;
+        ctx.shadowBlur = 0;
+        ctx.stroke();
+
+        ctx.restore();
+    },
+
+    drawPickup(ctx, p) {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+
+        // Bobbing animation
+        const bob = Math.sin(frame * 0.1) * 3;
+        ctx.translate(0, bob);
+
+        if (p.type === 'XP') {
+            const size = 3 + Math.min(p.value / 10, 5);
+            ctx.fillStyle = "#ff00ff"; ctx.beginPath(); ctx.arc(0, 0, size, 0, Math.PI * 2); ctx.fill();
+            ctx.strokeStyle = "#fff"; ctx.lineWidth = 1; ctx.stroke();
+        }
+        else if (p.type === 'CASH') {
+            const w = 12 + Math.min(p.value / 10, 8);
+            const h = 6 + Math.min(p.value / 20, 4);
+            ctx.fillStyle = "#85bb65"; ctx.fillRect(-w / 2, -h / 2, w, h);
+            ctx.strokeRect(-w / 2, -h / 2, w, h);
+            ctx.fillStyle = "#004400"; ctx.font = "8px sans-serif"; ctx.fillText("$", -2, 2.5);
+        }
+        else if (p.type === 'BOX') {
+            // Treasure Chest Icon
+            const size = 20;
+
+            // Glow
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = "#ffd700";
+
+            // Base (Brown/Gold)
+            ctx.fillStyle = "#8B4513"; // SaddleBrown
+            ctx.fillRect(-10, -8, 20, 14);
+
+            // Lid (Lighter)
+            ctx.fillStyle = "#A0522D"; // Sienna
+            ctx.beginPath();
+            ctx.arc(0, -8, 10, Math.PI, 0);
+            ctx.fill();
+
+            // Gold Trim
+            ctx.strokeStyle = "#FFD700"; // Gold
+            ctx.lineWidth = 2;
+            ctx.strokeRect(-10, -8, 20, 14);
+            ctx.beginPath();
+            ctx.arc(0, -8, 10, Math.PI, 0);
+            ctx.stroke();
+
+            // Lock
+            ctx.fillStyle = "#FFD700";
+            ctx.fillRect(-2, -6, 4, 6);
+
+            ctx.shadowBlur = 0;
+        }
+        else {
+            // Buffs
+            let color = "#fff";
+            let icon = "?";
+            if (p.type === 'DMG') { color = "#ff5555"; icon = "⚔️"; }
+            if (p.type === 'HP') { color = "#ff88ff"; icon = "❤️"; }
+            if (p.type === 'SPD') { color = "#55ffff"; icon = "⚡"; }
+
+            // Glow
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = color;
+
+            // Background Circle
+            ctx.fillStyle = "rgba(0,0,0,0.5)";
+            ctx.beginPath(); ctx.arc(0, 0, 10, 0, Math.PI * 2); ctx.fill();
+
+            // Border
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Icon
+            ctx.shadowBlur = 0;
+            ctx.fillStyle = "#fff";
+            ctx.font = "12px sans-serif";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(icon, 0, 1);
+        }
+
+        ctx.restore();
     }
 };

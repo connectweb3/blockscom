@@ -239,7 +239,12 @@ function triggerLevelUp() {
         { type: "STATS", name: "Adrenaline", desc: "Attack Speed +5%", effect: () => player.fireRate *= 0.95 },
         { type: "STATS", name: "Awakening", desc: "Attack Speed +15%", effect: () => player.fireRate *= 0.85 },
         { type: "GEAR", name: "Kevlar Vest", desc: "Armor +50", effect: () => { player.maxArmor += 50; player.armor += 50; } },
-        { type: "STATS", name: "FULL HEAL", desc: "Full Heal HP & Armor", effect: () => { player.hp = player.maxHp; player.armor = player.maxArmor; } }
+        { type: "STATS", name: "FULL HEAL", desc: "Full Heal HP & Armor", effect: () => { player.hp = player.maxHp; player.armor = player.maxArmor; } },
+
+        // New Gears
+        { type: "NEW", name: "Killer Instinct", desc: "AOE Damage Aura", effect: () => { player.hasKillerInstinct = true; player.killerInstinctLevel++; } },
+        { type: "NEW", name: "Lightning Chain", desc: "Chain Lightning Attack", effect: () => { player.hasLightningChain = true; player.lightningChainLevel++; } },
+        { type: "NEW", name: "Time Freeze", desc: "Freeze Enemies every 15s", effect: () => { player.hasTimeFreeze = true; } }
     ];
 
     // Merge pools

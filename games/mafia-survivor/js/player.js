@@ -50,6 +50,21 @@ class Player {
         this.axeLevel = 0;
         this.axeCooldown = 0;
 
+        // Killer Instinct
+        this.hasKillerInstinct = false;
+        this.killerInstinctLevel = 0;
+        this.killerInstinctTimer = 0;
+
+        // Lightning Chain
+        this.hasLightningChain = false;
+        this.lightningChainLevel = 0;
+        this.lightningChainCooldown = 0;
+
+        // Time Freeze
+        this.hasTimeFreeze = false;
+        this.timeFreezeTimer = 0;
+        this.isTimeFrozen = false;
+
         this.lastShot = 0;
         this.facingRight = true;
 
@@ -178,6 +193,110 @@ class Player {
 
         if (this.axeLevel > 0 && frame > this.axeCooldown) {
             this.throwAxe();
+        }
+
+        // Killer Instinct Logic (AOE Aura)
+        if (this.hasKillerInstinct) {
+            this.killerInstinctTimer++;
+            // Damage tick every 1 second (60 frames)
+            if (this.killerInstinctTimer % 60 === 0) {
+                const range = 100 + (this.killerInstinctLevel * 20);
+                const damage = 3 * this.killerInstinctLevel; // 3 damage per stack/level
+
+                // Query enemies in range
+                // We can use the grid but since it's a circle around player, iterating nearby cells is good.
+                // Or just iterate all enemies if count is low, but grid is better.
+                // Let's use the grid query centered on player.
+                // Grid cell size is 150. Range might be up to 200+.
+                // query(x,y) gets 3x3 cells. 150*3 = 450. Should be enough.
+                const nearby = enemyGrid.query(this.x, this.y);
+                nearby.forEach(e => {
+                    if (e.hp > 0 && Math.hypot(e.x - this.x, e.y - this.y) < range) {
+                        e.takeHit(damage, 0, this.x, this.y);
+                        // Visual effect for hit
+                        createFloatingText(e.x, e.y - 20, Math.floor(damage), "#ff00ff");
+                    }
+                });
+            }
+        }
+
+        // Lightning Chain Logic
+        if (this.hasLightningChain && frame > this.lightningChainCooldown) {
+            // Find nearest enemy
+            const nearest = getNearestEnemy(this.x, this.y);
+            if (nearest.enemy && nearest.dist < 300) {
+                // Fire Lightning
+                const damage = 10 + (this.lightningChainLevel * 5);
+                const chainCount = 2 + this.lightningChainLevel;
+                const chainRange = 150;
+
+                let currentTarget = nearest.enemy;
+                let currentX = this.x;
+                let currentY = this.y;
+                let currentDamage = damage;
+                let hitList = [currentTarget]; // Keep track to avoid hitting same enemy twice in one chain
+
+                // Initial Hit
+                currentTarget.takeHit(currentDamage, 0, currentX, currentY);
+                lightningBolts.push(new LightningBolt(currentX, currentY, currentTarget.x, currentTarget.y));
+                createFloatingText(currentTarget.x, currentTarget.y - 20, Math.floor(currentDamage), "#00ffff");
+
+                // Chain
+                for (let i = 0; i < chainCount; i++) {
+                    // Find next target from currentTarget
+                    let nextTarget = null;
+                    let minD = Infinity;
+
+                    // Query nearby enemies from currentTarget
+                    const nearby = enemyGrid.query(currentTarget.x, currentTarget.y);
+
+                    for (let e of nearby) {
+                        if (e.hp > 0 && !hitList.includes(e)) {
+                            const d = Math.hypot(e.x - currentTarget.x, e.y - currentTarget.y);
+                            if (d < chainRange && d < minD) {
+                                minD = d;
+                                nextTarget = e;
+                            }
+                        }
+                    }
+
+                    if (nextTarget) {
+                        currentDamage = Math.floor(currentDamage / 2);
+                        if (currentDamage < 1) currentDamage = 1;
+
+                        nextTarget.takeHit(currentDamage, 0, currentTarget.x, currentTarget.y);
+                        lightningBolts.push(new LightningBolt(currentTarget.x, currentTarget.y, nextTarget.x, nextTarget.y));
+                        createFloatingText(nextTarget.x, nextTarget.y - 20, Math.floor(currentDamage), "#00ffff");
+
+                        hitList.push(nextTarget);
+                        currentTarget = nextTarget;
+                    } else {
+                        break; // No more targets to chain to
+                    }
+                }
+
+                this.lightningChainCooldown = frame + Math.max(60, 180 - (this.lightningChainLevel * 20));
+            }
+        }
+
+        // Time Freeze Logic
+        if (this.hasTimeFreeze) {
+            this.timeFreezeTimer++;
+            // Every 15 seconds (900 frames)
+            if (this.timeFreezeTimer >= 900) {
+                this.isTimeFrozen = true;
+                if (this.timeFreezeTimer === 900) {
+                    createFloatingText(this.x, this.y - 50, "TIME FREEZE!", "#ffffff");
+                }
+
+                // Reset after 1 second (60 frames)
+                if (this.timeFreezeTimer >= 960) {
+                    this.isTimeFrozen = false;
+                    this.timeFreezeTimer = 0;
+                }
+            } else {
+                this.isTimeFrozen = false;
+            }
         }
 
         // Associates
@@ -327,8 +446,8 @@ class Player {
                 // Actually, I can't modify the loop logic easily from here without replacing the whole shoot function or a larger chunk.
                 count = this.projectileCount + level;
             } else if (this.weapon === 'THROWING_KNIFE') {
-                currentFireRate = 25;
-                currentDamage = this.damage * 1.5 * levelDmgMult;
+                currentFireRate = 15;
+                currentDamage = 2 * 1.5 * levelDmgMult;
                 currentSpeed = 10;
                 bulletType = 'KNIFE';
                 count = this.projectileCount + level;

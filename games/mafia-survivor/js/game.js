@@ -160,6 +160,9 @@ class Enemy {
     }
 
     update() {
+        // Time Freeze Check
+        if (player.isTimeFrozen && this.type !== 2) return; // Boss (type 2) is immune
+
         const angle = Math.atan2(player.y - this.y, player.x - this.x);
         this.x += Math.cos(angle) * this.speed;
         this.y += Math.sin(angle) * this.speed;
@@ -310,45 +313,7 @@ class Pickup {
     }
 
     draw() {
-        ctx.strokeStyle = "#000";
-        ctx.lineWidth = 1;
-
-        if (this.type === 'XP') {
-            const size = 3 + Math.min(this.value / 10, 5);
-            ctx.fillStyle = "#ff00ff"; ctx.beginPath(); ctx.arc(this.x, this.y, size, 0, Math.PI * 2); ctx.fill(); // Neon Pink
-            ctx.strokeStyle = "#fff"; ctx.stroke();
-        }
-        else if (this.type === 'CASH') {
-            const w = 12 + Math.min(this.value / 10, 8);
-            const h = 6 + Math.min(this.value / 20, 4);
-            ctx.fillStyle = "#85bb65"; ctx.fillRect(this.x - w / 2, this.y - h / 2, w, h);
-            ctx.strokeRect(this.x - w / 2, this.y - h / 2, w, h);
-            ctx.fillStyle = "#004400"; ctx.font = "8px sans-serif"; ctx.fillText("$", this.x - 2, this.y + 2.5);
-        }
-        else if (this.type === 'BOX') {
-            ctx.fillStyle = "#ffd700"; ctx.fillRect(this.x - 8, this.y - 8, 16, 16);
-            ctx.strokeRect(this.x - 8, this.y - 8, 16, 16);
-            ctx.fillStyle = "#000"; ctx.font = "10px sans-serif"; ctx.fillText("?", this.x - 3, this.y + 4);
-        }
-        else {
-            if (this.type === 'DMG') ctx.fillStyle = "#ff5555";
-            if (this.type === 'HP') ctx.fillStyle = "#ff88ff";
-            if (this.type === 'SPD') ctx.fillStyle = "#55ffff";
-
-            // Glow Effect
-            ctx.save();
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = ctx.fillStyle;
-
-            ctx.beginPath(); ctx.rect(this.x - 6, this.y - 6, 12, 12);
-            ctx.fill(); ctx.stroke();
-
-            ctx.restore(); // Reset shadow
-
-            ctx.fillStyle = "#000"; ctx.font = "8px sans-serif";
-            let txt = this.type === 'DMG' ? 'D' : (this.type === 'HP' ? 'H' : 'S');
-            ctx.fillText(txt, this.x - 3, this.y + 3);
-        }
+        Visuals.drawPickup(ctx, this);
     }
 }
 
@@ -619,7 +584,7 @@ class Axe {
 let player = new Player();
 let camera = new Camera();
 var bullets = [], enemies = [], pickups = [], projectiles = [], explosions = [], aoeEffects = [], floatingTexts = [], particles = [], outposts = [], towers = [];
-var knives = [], axes = [];
+var knives = [], axes = [], lightningBolts = [];
 
 // --- SYSTEMS ---
 
@@ -774,6 +739,7 @@ function checkCollisions() {
     towers.forEach(t => t.update());
     knives.forEach(k => k.update());
     removeDead(axes, a => { a.update(); return a.dead; });
+    removeDead(lightningBolts, l => { l.update(); return l.life <= 0; });
 }
 
 
@@ -949,6 +915,7 @@ function buildTower() {
 
 function draw() {
     if (gameState === "LOGIN") return;
+
     ctx.fillStyle = "#1e1e1e"; ctx.fillRect(0, 0, canvas.width, canvas.height);
     drawFloor();
 
@@ -960,14 +927,22 @@ function draw() {
     towers.forEach(t => { if (isOnScreen(t, 30)) t.draw(ctx); });
     pickups.forEach(p => { if (isOnScreen(p, 20)) p.draw(); });
     enemies.forEach(e => { if (isOnScreen(e, 50)) e.draw(); });
+
+    // Time Freeze Overlay (Lightweight)
+    if (player.isTimeFrozen) {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+        ctx.fillRect(camera.x, camera.y, canvas.width, canvas.height);
+    }
+
     player.draw(); // Always draw player
     bullets.forEach(b => { if (isOnScreen(b, 20)) b.draw(); });
     projectiles.forEach(p => { if (isOnScreen(p, 20)) p.draw(); });
     explosions.forEach(e => { if (isOnScreen(e, 80)) e.draw(); });
     particles.forEach(p => { if (isOnScreen(p, 10)) p.draw(); });
     floatingTexts.forEach(t => { if (isOnScreen(t, 50)) t.draw(); });
-    knives.forEach(k => k.draw()); // Always draw knives (attached to player)
+    knives.forEach(k => k.draw());
     axes.forEach(a => { if (isOnScreen(a, 30)) a.draw(); });
+    lightningBolts.forEach(l => l.draw());
 
     ctx.restore();
 }
