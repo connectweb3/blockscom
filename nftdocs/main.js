@@ -144,14 +144,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize Pricing Calculators
     initPricingCalculators();
-
-    // Hamburger Menu Toggle
-    const hamburgerBtn = document.querySelector('.hamburger-menu');
-    const sidebar = document.querySelector('.sidebar');
-
-    if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('mobile-menu-open');
-        });
-    }
 });
