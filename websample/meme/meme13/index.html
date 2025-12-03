@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$BLOCKS | Blockscom Media</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Fredoka for that round, happy feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600;700&family=VT323&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Alpine JS for interactions -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #FFD233; /* Snek-like Yellow */
+            --secondary: #5D5FEF; /* Blurple */
+            --accent: #FF6B6B; /* Red */
+            --dark: #1a1a1a;
+            --off-white: #FFF9F0;
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background-color: var(--off-white);
+            background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+            background-size: 20px 20px;
+            overflow-x: hidden;
+        }
+
+        .font-pixel {
+            font-family: 'VT323', monospace;
+        }
+
+        /* Neo-Brutalist Shadow Classes */
+        .hard-shadow {
+            box-shadow: 6px 6px 0px 0px var(--dark);
+            transition: all 0.2s ease;
+            border: 3px solid var(--dark);
+        }
+
+        .hard-shadow:active {
+            box-shadow: 2px 2px 0px 0px var(--dark);
+            transform: translate(4px, 4px);
+        }
+
+        .hard-shadow-static {
+            box-shadow: 8px 8px 0px 0px var(--dark);
+            border: 3px solid var(--dark);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .snek-gradient {
+            background: linear-gradient(180deg, #FFFFFF 0%, #FFF9F0 100%);
+        }
+    </style>
+</head>
+<body class="text-gray-900" x-data="{ copied: false }">
+
+    <!-- TOP MARQUEE -->
+    <div class="bg-yellow-400 border-b-4 border-black py-2 overflow-hidden font-bold text-lg font-pixel tracking-widest uppercase">
+        <div class="marquee-container">
+            <div class="marquee-content">
+                BUILDING THE FUTURE • $BLOCKS • NO JEETS ALLOWED • WE CREATE WEBSITES • WE MAKE GAMES • NFT WIZARDS • PUMP IT UP • BUILDING THE FUTURE • $BLOCKS • NO JEETS ALLOWED • WE CREATE WEBSITES • WE MAKE GAMES • NFT WIZARDS • PUMP IT UP •
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="container mx-auto px-4 py-6 flex justify-between items-center relative z-20">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-blue-500 rounded-full border-4 border-black overflow-hidden">
+                <img src="https://blockscom.xyz/images/meme1.png" alt="Logo" class="w-full h-full object-cover">
+            </div>
+            <span class="text-3xl font-black tracking-tight hidden md:block">BLOCKSCOM</span>
+        </div>
+
+        <div class="hidden md:flex gap-6 font-bold text-xl">
+            <a href="#about" class="hover:text-blue-600 hover:underline decoration-4 decoration-black underline-offset-4">About</a>
+            <a href="#services" class="hover:text-blue-600 hover:underline decoration-4 decoration-black underline-offset-4">Services</a>
+            <a href="#tokenomics" class="hover:text-blue-600 hover:underline decoration-4 decoration-black underline-offset-4">Tokenomics</a>
+        </div>
+
+        <a href="#pump" class="bg-red-500 text-white font-bold px-6 py-2 rounded-xl hard-shadow hover:bg-red-600 transform transition-transform">
+            BUY $BLOCKS
+        </a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="container mx-auto px-4 mt-8 md:mt-16 flex flex-col md:flex-row items-center justify-between relative">
+        
+        <!-- Text Content -->
+        <div class="md:w-1/2 text-center md:text-left z-10">
+            <div class="inline-block bg-blue-100 text-blue-800 border-2 border-blue-800 px-3 py-1 rounded-full font-bold text-sm mb-4 transform -rotate-2">
+                Sample Website: Design Services Demo
+            </div>
+            <h1 class="text-6xl md:text-8xl font-black leading-none mb-6 text-stroke-white">
+                STACK THEM<br>
+                <span class="text-blue-600 text-stroke-black">BLOCKS</span> UP!
+            </h1>
+            <p class="text-xl md:text-2xl font-bold text-gray-700 mb-8 max-w-lg mx-auto md:mx-0">
+                The memecoin that actually builds stuff. NFTs, Websites, and Games for your community.
+            </p>
+
+            <!-- CA Box -->
+            <div class="bg-white border-4 border-black rounded-2xl p-4 max-w-md mx-auto md:mx-0 flex items-center justify-between gap-2 shadow-[8px_8px_0_0_rgba(0,0,0,1)]">
+                <span class="font-pixel text-xl truncate text-gray-500">BhNu...sample...CA...123</span>
+                <button 
+                    @click="copied = true; setTimeout(() => copied = false, 2000)" 
+                    class="bg-yellow-400 hover:bg-yellow-500 border-2 border-black font-bold px-4 py-1 rounded-lg transition-colors text-sm">
+                    <span x-show="!copied">COPY</span>
+                    <span x-show="copied">COPIED!</span>
+                </button>
+            </div>
+
+            <div class="mt-8 flex gap-4 justify-center md:justify-start">
+                <a href="#" class="w-12 h-12 bg-black text-white flex items-center justify-center rounded-lg hover:scale-110 transition border-2 border-black">
+                    <i data-lucide="twitter"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-blue-500 text-white flex items-center justify-center rounded-lg hover:scale-110 transition border-2 border-black">
+                    <i data-lucide="send"></i> <!-- Telegram Icon substitute -->
+                </a>
+            </div>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="md:w-1/2 mt-12 md:mt-0 relative">
+            <!-- Decorative Blobs -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-yellow-300 rounded-full blur-3xl opacity-50 -z-10"></div>
+            <div class="absolute bottom-0 left-10 w-64 h-64 bg-blue-300 rounded-full blur-3xl opacity-50 -z-10"></div>
+            
+            <img src="https://blockscom.xyz/images/meme2.png" alt="Blocks Character" class="w-full max-w-lg mx-auto animate-float object-contain drop-shadow-2xl">
+        </div>
+    </header>
+
+    <!-- SERVICES / "THE LORE" SECTION -->
+    <section id="services" class="py-20 bg-white border-y-4 border-black mt-20 relative">
+        <div class="container mx-auto px-4">
+            <h2 class="text-5xl font-black text-center mb-16 uppercase transform -rotate-1">
+                We Don't Just Meme. <br><span class="text-purple-600">We Build.</span>
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-[#FF90E8] border-4 border-black rounded-3xl p-8 hard-shadow hover:rotate-1 transition-transform">
+                    <div class="bg-white w-16 h-16 rounded-xl border-4 border-black flex items-center justify-center mb-6 text-3xl">
+                        🎨
+                    </div>
+                    <h3 class="text-3xl font-black mb-4">NFT Collections</h3>
+                    <p class="font-bold text-lg opacity-90">
+                        We generate thousands of unique jpegs that people will screenshot anyway. But ours look better.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-[#23A094] border-4 border-black rounded-3xl p-8 hard-shadow-static transform -translate-y-4">
+                    <div class="bg-white w-16 h-16 rounded-xl border-4 border-black flex items-center justify-center mb-6 text-3xl">
+                        💻
+                    </div>
+                    <h3 class="text-3xl font-black mb-4 text-white">Web Creation</h3>
+                    <p class="font-bold text-lg text-white opacity-90">
+                        High-converting websites like this one. If you can read this, our code works. 
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-[#FFC900] border-4 border-black rounded-3xl p-8 hard-shadow hover:-rotate-1 transition-transform">
+                    <div class="bg-white w-16 h-16 rounded-xl border-4 border-black flex items-center justify-center mb-6 text-3xl">
+                        🎮
+                    </div>
+                    <h3 class="text-3xl font-black mb-4">Community Games</h3>
+                    <p class="font-bold text-lg opacity-90">
+                        Play-to-Earn? More like Play-to-Have-Fun. Browser games that glue your community to the screen.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOKENOMICS -->
+    <section id="tokenomics" class="py-20 container mx-auto px-4 relative">
+        <div class="flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2">
+                <img src="https://blockscom.xyz/images/meme3.png" alt="Blocks Stats" class="w-full max-w-md mx-auto transform rotate-3 hard-shadow-static rounded-2xl bg-white">
+            </div>
+            <div class="md:w-1/2">
+                <h2 class="text-5xl font-black mb-8">TOKENOMICS</h2>
+                
+                <div class="space-y-6">
+                    <div class="bg-blue-600 text-white p-6 rounded-2xl border-4 border-black hard-shadow w-full">
+                        <div class="font-pixel text-xl opacity-80">TOTAL SUPPLY</div>
+                        <div class="text-4xl font-black">1,000,000,000</div>
+                    </div>
+
+                    <div class="flex gap-6">
+                        <div class="bg-red-500 text-white p-6 rounded-2xl border-4 border-black hard-shadow flex-1 text-center">
+                            <div class="font-pixel text-xl">TAX</div>
+                            <div class="text-4xl font-black">0/0</div>
+                        </div>
+                        <div class="bg-green-500 text-white p-6 rounded-2xl border-4 border-black hard-shadow flex-1 text-center">
+                            <div class="font-pixel text-xl">LP</div>
+                            <div class="text-4xl font-black">BURNT</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-2xl border-4 border-black">
+                        <p class="font-bold text-xl text-center">
+                            "It's literally just blocks on the blockchain."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUMP FUN SECTION -->
+    <section id="pump" class="py-20 bg-black text-white relative overflow-hidden">
+        <!-- Grid Background -->
+        <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <img src="https://blockscom.xyz/images/meme1.png" class="w-24 h-24 mx-auto mb-6 rounded-full border-4 border-white animate-bounce">
+            
+            <h2 class="text-5xl md:text-7xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+                APE IN NOW
+            </h2>
+            <p class="text-xl mb-10 max-w-2xl mx-auto font-pixel">
+                The bonding curve is calling your name. Don't let your dreams be dreams. Grab some $BLOCKS and let us build the future for you.
+            </p>
+
+            <a href="https://pump.fun" target="_blank" class="inline-block bg-green-500 hover:bg-green-400 text-black text-2xl font-black px-12 py-6 rounded-2xl border-b-8 border-r-8 border-green-700 active:border-0 active:translate-y-2 transition-all">
+                BUY ON PUMP.FUN 💊
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-yellow-400 border-t-4 border-black py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center items-center gap-4 mb-8">
+                <img src="https://blockscom.xyz/images/meme1.png" class="w-12 h-12 border-2 border-black rounded-full bg-white">
+                <h3 class="text-3xl font-black">BLOCKSCOM</h3>
+            </div>
+            
+            <div class="flex justify-center gap-8 mb-8 font-bold text-xl">
+                <a href="#" class="hover:underline">Twitter</a>
+                <a href="#" class="hover:underline">Telegram</a>
+                <a href="#" class="hover:underline">Chart</a>
+            </div>
+
+            <div class="max-w-xl mx-auto text-sm font-bold opacity-60">
+                <p class="mb-4">
+                    DISCLAIMER: $BLOCKS is a memecoin for entertainment purposes only. The information on this website is a sample showcase for Blockscom Media design services.
+                </p>
+                <p>&copy; 2024 Blockscom Media. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

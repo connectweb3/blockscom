@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$BLOCKS | Blockscom Media</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom Theme Setup mimicking Snek.com's brutalist/retro vibe */
+        :root {
+            --primary: #8B5CF6; /* Violet */
+            --secondary: #22C55E; /* Green (Snek-ish but brighter) */
+            --dark: #121212;
+            --light: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Chakra Petch', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        .font-retro {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        /* Brutalist Hard Shadows */
+        .hard-shadow {
+            box-shadow: 6px 6px 0px 0px #000000;
+            border: 2px solid #000;
+        }
+        
+        .hard-shadow-hover:hover {
+            box-shadow: 2px 2px 0px 0px #000000;
+            transform: translate(4px, 4px);
+            transition: all 0.1s ease;
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            background: var(--secondary);
+            border-top: 3px solid #000;
+            border-bottom: 3px solid #000;
+            padding: 10px 0;
+        }
+        
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Image Floater */
+        .floater {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Grid Background pattern */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image:
+            linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-grid">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 bg-[#121212]/90 backdrop-blur-md border-b-2 border-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-2">
+                    <!-- Logo Placeholder -->
+                    <div class="w-10 h-10 bg-green-500 border-2 border-black flex items-center justify-center font-bold text-black hard-shadow">B</div>
+                    <span class="font-retro text-xl text-white ml-2 tracking-tighter">BLOCKSCOM</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#about" class="hover:text-green-400 px-3 py-2 rounded-md text-lg font-bold uppercase">Services</a>
+                        <a href="#tokenomics" class="hover:text-green-400 px-3 py-2 rounded-md text-lg font-bold uppercase">Tokenomics</a>
+                        <a href="#pump" class="hover:text-green-400 px-3 py-2 rounded-md text-lg font-bold uppercase">Pump.fun</a>
+                    </div>
+                </div>
+                <div>
+                    <a href="#pump" class="bg-green-500 text-black px-6 py-2 font-retro text-xs md:text-sm border-2 border-black hard-shadow hard-shadow-hover inline-block">
+                        BUY $BLOCKS
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="pt-32 pb-20 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
+            <!-- Text Content -->
+            <div class="w-full md:w-1/2 text-center md:text-left z-10">
+                <div class="inline-block bg-purple-600 text-white px-4 py-1 mb-4 border-2 border-black font-bold transform -rotate-2">
+                    Sample Website • Service Demo
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight uppercase text-white shadow-black drop-shadow-lg">
+                    Build Your <br><span class="text-green-500">Community</span> With Blocks
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 max-w-lg mx-auto md:mx-0 font-medium">
+                    Blockscom Media is your all-in-one hub for NFTs, Website Creation, and Community Games. Powered by the $BLOCKS memecoin.
+                </p>
+                
+                <!-- CA Box -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <div class="bg-gray-800 p-3 rounded border-2 border-green-500 flex items-center justify-between min-w-[300px] relative group cursor-pointer" onclick="copyToClipboard()">
+                        <code id="ca-text" class="text-green-400 font-mono text-sm truncate mr-2">8locksComM3diaPumpFunContractAddress123</code>
+                        <i data-lucide="copy" class="w-5 h-5 text-white group-hover:text-green-400"></i>
+                        <div id="copy-feedback" class="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-green-500 text-black px-2 py-1 text-xs font-bold hidden border border-black">COPIED!</div>
+                    </div>
+                    <a href="https://blockscom.xyz" class="bg-white text-black px-8 py-3 font-bold border-2 border-black hard-shadow hard-shadow-hover text-center">
+                        VISIT STUDIO
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Image -->
+            <div class="w-full md:w-1/2 flex justify-center z-10">
+                <div class="relative w-80 h-80 md:w-[500px] md:h-[500px]">
+                    <!-- Blob Background -->
+                    <div class="absolute inset-0 bg-purple-600 rounded-full blur-3xl opacity-30 animate-pulse"></div>
+                    <img src="https://blockscom.xyz/images/meme1.png" alt="Blocks Meme Character" class="floater relative z-10 w-full h-full object-contain drop-shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-container">
+        <div class="marquee-content font-retro text-black text-xl md:text-3xl">
+            $BLOCKS • WEBSITES • NFTS • GAMES • BLOCKSCOM MEDIA • $BLOCKS • WEBSITES • NFTS • GAMES • BLOCKSCOM MEDIA • $BLOCKS • WEBSITES • NFTS • GAMES • BLOCKSCOM MEDIA •
+        </div>
+    </div>
+
+    <!-- SERVICES SECTION (ABOUT) -->
+    <section id="about" class="py-20 bg-[#1a1a1a] relative border-b-2 border-black">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="font-retro text-3xl md:text-5xl text-center mb-16 text-white"><span class="text-purple-500">OUR</span> SERVICES</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-[#121212] border-2 border-white p-6 hard-shadow hover:border-green-500 transition-colors">
+                    <div class="h-16 w-16 bg-purple-600 border-2 border-black mb-4 flex items-center justify-center">
+                        <i data-lucide="monitor" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 uppercase text-green-400">Website Creation</h3>
+                    <p class="text-gray-400">Custom, high-converting meme websites designed to pump your project's narrative.</p>
+                </div>
+
+                <!-- Card 2 (Center with Image) -->
+                <div class="bg-green-500 border-2 border-black p-6 hard-shadow transform md:-translate-y-6">
+                    <img src="https://blockscom.xyz/images/meme2.png" alt="NFT Art" class="w-32 h-32 mx-auto mb-4 object-contain filter drop-shadow-lg">
+                    <h3 class="text-2xl font-bold mb-2 uppercase text-black text-center">NFT Collections</h3>
+                    <p class="text-black font-semibold text-center">We generate and mint unique block-style NFT collections for your community holders.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-[#121212] border-2 border-white p-6 hard-shadow hover:border-green-500 transition-colors">
+                    <div class="h-16 w-16 bg-purple-600 border-2 border-black mb-4 flex items-center justify-center">
+                        <i data-lucide="gamepad-2" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 uppercase text-green-400">Community Games</h3>
+                    <p class="text-gray-400">Engage your telegram with mini-games developed specifically for the $BLOCKS ecosystem.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOKENOMICS -->
+    <section id="tokenomics" class="py-20 bg-purple-900 border-b-2 border-black bg-opacity-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="font-retro text-3xl md:text-5xl text-center mb-12 text-white">TOKENOMICS</h2>
+            
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                <div class="w-full md:w-1/2">
+                    <div class="space-y-6">
+                        <!-- Stat Box -->
+                        <div class="bg-white p-4 border-2 border-black hard-shadow flex justify-between items-center">
+                            <span class="text-black font-bold text-xl uppercase">Supply</span>
+                            <span class="text-purple-700 font-retro text-lg">1,000,000,000</span>
+                        </div>
+                        <div class="bg-white p-4 border-2 border-black hard-shadow flex justify-between items-center">
+                            <span class="text-black font-bold text-xl uppercase">Tax</span>
+                            <span class="text-purple-700 font-retro text-lg">0/0</span>
+                        </div>
+                        <div class="bg-white p-4 border-2 border-black hard-shadow flex justify-between items-center">
+                            <span class="text-black font-bold text-xl uppercase">LP Status</span>
+                            <span class="text-purple-700 font-retro text-lg">BURNT 🔥</span>
+                        </div>
+                        <div class="bg-white p-4 border-2 border-black hard-shadow flex justify-between items-center">
+                            <span class="text-black font-bold text-xl uppercase">Authority</span>
+                            <span class="text-purple-700 font-retro text-lg">REVOKED</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-1/2 flex justify-center">
+                    <!-- Pie Chart Visual Representation -->
+                    <div class="relative w-64 h-64 bg-black rounded-full border-4 border-white flex items-center justify-center hard-shadow">
+                        <div class="absolute w-full h-full rounded-full border-8 border-green-500 border-t-purple-500 animate-spin" style="animation-duration: 10s;"></div>
+                        <h3 class="font-retro text-2xl text-center">100%<br>COMMUNITY</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUMP.FUN SECTION -->
+    <section id="pump" class="py-24 bg-[#121212] relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-green-500 opacity-10 rounded-full blur-3xl"></div>
+
+        <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
+            <img src="https://blockscom.xyz/images/meme3.png" alt="Pump Blocks" class="w-40 mx-auto mb-6 animate-bounce">
+            
+            <h2 class="font-retro text-3xl md:text-5xl mb-6 text-green-500">LAUNCHING ON PUMP.FUN</h2>
+            <p class="text-xl text-white mb-8 max-w-2xl mx-auto">
+                We are using the bonding curve model to ensure a fair launch for everyone. Once the market cap hits $60k, we migrate to Raydium.
+            </p>
+
+            <div class="bg-gray-900 border-2 border-gray-700 p-6 rounded-lg max-w-2xl mx-auto mb-8">
+                <div class="flex justify-between text-sm text-gray-400 mb-2 font-mono">
+                    <span>Bonding Curve Progress</span>
+                    <span>King of the Hill</span>
+                </div>
+                <div class="w-full bg-gray-700 h-6 rounded-full overflow-hidden border border-black">
+                    <div class="bg-gradient-to-r from-green-400 to-purple-500 h-full w-[0%] animate-pulse" id="progress-bar"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2 text-left">* Sample representation</p>
+            </div>
+
+            <button class="bg-green-500 hover:bg-green-400 text-black font-retro text-lg px-8 py-4 border-4 border-black hard-shadow hard-shadow-hover transition-transform">
+                VIEW ON PUMP.FUN 💊
+            </button>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-10 border-t-4 border-green-600">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
+            
+            <div class="flex items-center gap-2 mb-6">
+                 <div class="w-8 h-8 bg-green-500 border border-white flex items-center justify-center font-bold text-black text-xs">B</div>
+                 <span class="font-retro text-white text-lg">BLOCKSCOM MEDIA</span>
+            </div>
+
+            <div class="flex gap-6 mb-8">
+                <a href="#" class="w-12 h-12 bg-[#1a1a1a] border-2 border-white flex items-center justify-center hover:bg-green-500 hover:text-black hover:border-black transition-all">
+                    <i data-lucide="twitter" class="w-6 h-6"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-[#1a1a1a] border-2 border-white flex items-center justify-center hover:bg-blue-500 hover:text-white hover:border-black transition-all">
+                    <i data-lucide="send" class="w-6 h-6"></i> <!-- Telegram Icon replacement -->
+                </a>
+            </div>
+
+            <div class="text-center text-gray-500 text-sm max-w-3xl">
+                <p class="mb-4 font-bold text-red-500 uppercase border border-red-900 bg-red-900/20 p-2 inline-block">
+                    Disclaimer: This is a sample website for demonstration purposes only.
+                </p>
+                <p>
+                    $BLOCKS is a memecoin with no intrinsic value or expectation of financial return. 
+                    The Blockscom Media services mentioned are part of the fictional ecosystem created for this design demo. 
+                    Always DYOR (Do Your Own Research).
+                </p>
+                <p class="mt-4">
+                    &copy; 2024 Blockscom Media. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Copy Clipboard Function
+        function copyToClipboard() {
+            const text = document.getElementById('ca-text').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const feedback = document.getElementById('copy-feedback');
+                feedback.classList.remove('hidden');
+                setTimeout(() => {
+                    feedback.classList.add('hidden');
+                }, 2000);
+            });
+        }
+
+        // Simulate Progress Bar for Pump.fun
+        setTimeout(() => {
+            document.getElementById('progress-bar').style.width = "45%";
+            document.getElementById('progress-bar').style.transition = "width 2s ease-out";
+        }, 500);
+    </script>
+</body>
+</html>

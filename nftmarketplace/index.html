@@ -27,6 +27,7 @@
             <ul>
                 <li><a href="../index.html#hero" class="nav-link">Home</a></li>
                 <li><a href="#" class="nav-link active" style="color: var(--accent-color);">Collection</a></li>
+                <li><a href="../nftdocs" class="nav-link">NFT Docs</a></li>
                 <li><a href="../index.html#web-design" class="nav-link">Atelier</a></li>
                 <li><a href="../index.html#games" class="nav-link">Games</a></li>
                 <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
@@ -50,7 +51,34 @@
                         <option>Photography</option>
                         <option>Virtual Worlds</option>
                     </select>
-                    </script>
+                </div>
+
+                <div id="marketplace-grid" class="marketplace-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.onkeydown = function (e) {
+            if (event.keyCode == 123) {
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                return false;
+            }
+        }
+    </script>
+
 </body>
 
 </html>

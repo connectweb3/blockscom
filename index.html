@@ -41,6 +41,7 @@
             <ul>
                 <li><a href="#hero" class="nav-link">Home</a></li>
                 <li><a href="#nft-marketplace" class="nav-link">Collection</a></li>
+                <li><a href="nftdocs" class="nav-link">NFT Docs</a></li>
                 <li><a href="#web-design" class="nav-link">Websites</a></li>
                 <li><a href="#games" class="nav-link">Games</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -81,6 +82,15 @@
                 <h2 class="section-title">Digital <span class="italic">Websites</span></h2>
                 <div class="slider-container" id="web-slider">
                     <div class="slider-wrapper"></div>
+                </div>
+            </section>
+            <section id="memecoin-websites" class="scroll-section">
+                <h2 class="section-title">MEMECOIN <span class="italic">Website</span></h2>
+                <div class="slider-container" id="memecoin-website-slider">
+                    <div class="slider-wrapper"></div>
+                </div>
+                <div style="text-align:center; margin-top:40px;">
+                    <a href="memecoinmarket.html" class="btn-primary">View All Websites</a>
                 </div>
             </section>
             <section id="games" class="scroll-section">
@@ -246,6 +256,23 @@
     <script type="module" src="js/three-bg.js"></script>
     <script src="js/main.js"></script>
     <script src="js/chatbot.js"></script>
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C' || e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && (e.key === 'U' || e.keyCode === 85)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$BLOCKS | Blocks Media Memecoin</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: 'Bangers' for titles, 'Fredoka' for body to give that playful vibe -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles for Animations and Specific Overrides -->
+    <style>
+        :root {
+            --primary: #FFD600; /* Bright Meme Yellow */
+            --secondary: #00A3FF; /* Bright Cyan/Blue */
+            --accent: #FF4D8D; /* Hot Pink */
+            --dark: #1a1a1a;
+            --light: #FFFBF0;
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .meme-font {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 1px;
+        }
+
+        /* Brutalist Hard Shadows (Snek style) */
+        .hard-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+            transition: all 0.2s ease;
+        }
+        .hard-shadow:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
+        }
+        .hard-shadow:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px 0px rgba(0,0,0,1);
+        }
+
+        /* Scrolling Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Floating Animation for Meme Images */
+        .float-anim {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Background Pattern */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image:
+              linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-grid">
+
+    <!-- DISCLAIMER BAR -->
+    <div class="bg-black text-white text-center py-2 text-sm font-bold tracking-wider">
+        ⚠ SAMPLE WEBSITE ONLY: DEMONSTRATION FOR BLOCKS MEDIA SERVICES ⚠
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+        <div class="flex items-center gap-2">
+            <!-- Logo Placeholder -->
+            <div class="w-10 h-10 bg-yellow-400 border-2 border-black rounded-full flex items-center justify-center font-bold text-xl hard-shadow">
+                B
+            </div>
+            <span class="text-2xl meme-font pt-1">BLOCKS MEDIA</span>
+        </div>
+        <div class="hidden md:flex gap-6 font-bold text-lg">
+            <a href="#about" class="hover:text-blue-500">About</a>
+            <a href="#services" class="hover:text-blue-500">Services</a>
+            <a href="#tokenomics" class="hover:text-blue-500">Tokenomics</a>
+        </div>
+        <a href="#pump" class="bg-red-500 text-white px-6 py-2 rounded-full border-2 border-black font-bold hard-shadow hover:bg-red-400 transition">
+            BUY $BLOCKS
+        </a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="max-w-7xl mx-auto px-6 py-12 md:py-20 flex flex-col-reverse md:flex-row items-center gap-10">
+        <div class="w-full md:w-1/2 text-center md:text-left z-10">
+            <span class="inline-block bg-yellow-300 px-3 py-1 border-2 border-black rounded-lg font-bold mb-4 transform -rotate-2">
+                🚀 THE ULTIMATE UTILITY MEMECOIN
+            </span>
+            <h1 class="text-6xl md:text-8xl leading-none mb-6 text-blue-500 drop-shadow-[3px_3px_0_rgba(0,0,0,1)]">
+                BUILD BIG.<br>
+                <span class="text-black">MEME HARD.</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 font-semibold text-gray-700">
+                Blocks Media is here. We build NFTs, Websites & Games for your community while we moon.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
+                <a href="#pump" class="bg-blue-500 text-white text-xl px-8 py-4 rounded-xl border-2 border-black hard-shadow meme-font w-full md:w-auto text-center">
+                    APE IN NOW 🍌
+                </a>
+                <a href="https://telegram.org" target="_blank" class="bg-white text-black text-xl px-8 py-4 rounded-xl border-2 border-black hard-shadow meme-font w-full md:w-auto text-center">
+                    JOIN TELEGRAM ✈️
+                </a>
+            </div>
+        </div>
+        <div class="w-full md:w-1/2 flex justify-center relative">
+            <!-- Decorative blobs -->
+            <div class="absolute w-64 h-64 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob top-0 right-10"></div>
+            <div class="absolute w-64 h-64 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob bottom-0 left-10"></div>
+            
+            <!-- Hero Image -->
+            <img src="https://blockscom.xyz/images/meme1.png" alt="Blocks Meme Character" class="relative z-10 w-3/4 md:w-full max-w-md float-anim drop-shadow-[0_10px_20px_rgba(0,0,0,0.2)]">
+        </div>
+    </header>
+
+    <!-- SCROLLING MARQUEE -->
+    <div class="bg-yellow-400 border-y-4 border-black py-4 marquee-container rotate-1 scale-105 transform origin-center my-10">
+        <div class="marquee-content text-4xl font-bold meme-font">
+            $BLOCKS 💥 NFT UTILITY 💥 WEBSITE CREATION 💥 GAMES 💥 PUMP.FUN 💥 MOON MISSION 💥 $BLOCKS 💥 NFT UTILITY 💥 WEBSITE CREATION 💥 GAMES 💥 PUMP.FUN 💥 MOON MISSION 💥
+        </div>
+    </div>
+
+    <!-- SERVICES (BLOCKS MEDIA) SECTION -->
+    <section id="services" class="py-16 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl md:text-6xl mb-4 text-black">$BLOCKS UTILITY</h2>
+            <p class="text-xl">We don't just meme, we build blocks.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div class="bg-blue-100 p-8 rounded-3xl border-4 border-black hard-shadow flex flex-col items-center text-center">
+                <div class="w-16 h-16 bg-blue-500 rounded-xl border-2 border-black mb-4 flex items-center justify-center text-3xl">🎨</div>
+                <h3 class="text-3xl mb-2">NFT Collections</h3>
+                <p>We launch pixel-perfect NFT collections that your community will actually want to hold.</p>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="bg-pink-100 p-8 rounded-3xl border-4 border-black hard-shadow flex flex-col items-center text-center transform md:-translate-y-4">
+                <div class="w-16 h-16 bg-pink-500 rounded-xl border-2 border-black mb-4 flex items-center justify-center text-3xl">💻</div>
+                <h3 class="text-3xl mb-2">Web Creation</h3>
+                <p>Top-tier websites (like this one) designed to convert visitors into holders.</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-green-100 p-8 rounded-3xl border-4 border-black hard-shadow flex flex-col items-center text-center">
+                <div class="w-16 h-16 bg-green-500 rounded-xl border-2 border-black mb-4 flex items-center justify-center text-3xl">🎮</div>
+                <h3 class="text-3xl mb-2">Community Games</h3>
+                <p>Play-to-earn mechanics and fun mini-games to keep the chat active and hyped.</p>
+            </div>
+        </div>
+
+        <!-- Section Image -->
+        <div class="mt-16 flex justify-center">
+            <div class="relative bg-white p-6 rounded-full border-4 border-black hard-shadow">
+                <img src="https://blockscom.xyz/images/meme2.png" alt="Blocks Services Meme" class="w-64 h-auto">
+                <div class="absolute -bottom-4 -right-4 bg-red-500 text-white px-4 py-2 border-2 border-black rounded-lg font-bold rotate-12">
+                    SO SHINY!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOKENOMICS -->
+    <section id="tokenomics" class="py-16 bg-black text-white relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-10" style="background-image: radial-gradient(#fff 2px, transparent 2px); background-size: 30px 30px;"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <h2 class="text-5xl md:text-6xl text-center mb-12 text-yellow-400">TOKENOMICS</h2>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-10">
+                
+                <div class="w-full md:w-1/2 space-y-6">
+                    <!-- Stat 1 -->
+                    <div class="bg-gray-800 p-6 rounded-2xl border-2 border-gray-600 flex justify-between items-center hover:bg-gray-700 transition">
+                        <span class="text-2xl font-bold text-blue-300">Total Supply</span>
+                        <span class="text-xl font-mono">1,000,000,000</span>
+                    </div>
+                    <!-- Stat 2 -->
+                    <div class="bg-gray-800 p-6 rounded-2xl border-2 border-gray-600 flex justify-between items-center hover:bg-gray-700 transition">
+                        <span class="text-2xl font-bold text-pink-300">Liquidity</span>
+                        <span class="text-xl font-mono">BURNED 🔥</span>
+                    </div>
+                    <!-- Stat 3 -->
+                    <div class="bg-gray-800 p-6 rounded-2xl border-2 border-gray-600 flex justify-between items-center hover:bg-gray-700 transition">
+                        <span class="text-2xl font-bold text-green-300">Tax</span>
+                        <span class="text-xl font-mono">0% / 0%</span>
+                    </div>
+                    
+                    <div class="bg-yellow-400 text-black p-4 rounded-xl font-bold text-center mt-4">
+                        CA: 87a...sample...contract...address
+                    </div>
+                </div>
+
+                <!-- Chart Visual Placeholder -->
+                <div class="w-full md:w-1/2 flex justify-center">
+                    <div class="w-64 h-64 rounded-full border-8 border-white flex items-center justify-center bg-blue-500 relative">
+                        <div class="text-center">
+                            <span class="block text-4xl font-bold">100%</span>
+                            <span class="text-sm">FAIR LAUNCH</span>
+                        </div>
+                        <div class="absolute -top-2 -right-2 text-6xl">🚀</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUMP.FUN SECTION -->
+    <section id="pump" class="py-20 px-6 bg-gradient-to-b from-blue-400 to-blue-600 text-center relative border-t-4 border-black">
+        <div class="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-[3rem] border-4 border-black hard-shadow relative">
+            
+            <img src="https://blockscom.xyz/images/meme3.png" alt="Pump Fun Meme" class="absolute -top-16 -left-10 w-40 md:w-56 float-anim hidden md:block">
+            
+            <h2 class="text-5xl md:text-7xl mb-4 text-black">PUMP.FUN LAUNCH</h2>
+            <p class="text-2xl mb-8 font-semibold text-gray-600">
+                We are launching exclusively on Pump.fun. <br>
+                Don't miss the bonding curve!
+            </p>
+
+            <a href="#" class="inline-flex items-center gap-3 bg-green-500 text-white text-3xl px-10 py-5 rounded-2xl border-4 border-black hard-shadow hover:bg-green-400 transition meme-font">
+                <span>💊</span> BUY ON PUMP.FUN
+            </a>
+
+            <div class="mt-8 text-sm text-gray-500 font-bold uppercase tracking-widest">
+                Safe • Doxxed Devs • Based
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-white py-10 px-6 border-t-4 border-black">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <h3 class="text-3xl text-yellow-400 mb-2">BLOCKS MEDIA</h3>
+                <p class="text-gray-400 text-sm max-w-xs">
+                    This is a sample demonstration website. $BLOCKS is a fictional project for design purposes.
+                </p>
+            </div>
+            
+            <div class="flex gap-4">
+                <a href="#" class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center border-2 border-white hover:bg-blue-400 transition">
+                    <!-- Twitter Icon SVG -->
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                </a>
+                <a href="#" class="w-12 h-12 bg-blue-400 rounded-lg flex items-center justify-center border-2 border-white hover:bg-blue-300 transition">
+                    <!-- Telegram Icon SVG -->
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.694 0zm5.696 7.425-1.63 7.662c-.122.544-.445.676-.9.42l-2.486-1.83-1.2 1.155c-.133.133-.244.244-.5.244l.178-2.53 4.604-4.16c.2-.178-.044-.278-.31-.1l-5.69 3.58-2.46-.767c-.534-.166-.545-.533.11-.788l9.6-3.7c.445-.166.834.1.684.814z"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="text-center mt-8 text-gray-600 text-xs">
+            © 2024 Blocks Media. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
