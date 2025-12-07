@@ -116,7 +116,7 @@ Use the following detailed context to answer user questions accurately:
 
 Be concise, professional, and friendly. Do not hallucinate prices or services not listed here.
 ALWAYS use the JSON format with specific 'cards' for services/packages/links if possible.
-IMPORTANT: In the 'features' array, provide ONLY the text content. DO NOT include bullet points, dashes, or special characters at the start of the string (e.g. avoid "• Feature", just use "Feature").
+IMPORTANT: In the 'features' array, provide ONLY the text content. DO NOT include bullet points, dashes, emojis, or any special characters. Write in plain text.
 If you must provide a textual link in the 'full_response' or plain text, use Markdown format: [Link Title](URL).
 Avoid mentioning "index.html" in the visible text. Example: Say "View Meme Package" instead of "View package/memepackage/index.html".
 
@@ -310,9 +310,11 @@ Example:
                     const ul = document.createElement('ul');
                     card.features.forEach(feat => {
                         const li = document.createElement('li');
-                        // Aggressively strip ANY non-alphanumeric characters from the start (except $)
-                        // This handles all encoding artifacts like â–, bullets, dashes, etc.
-                        li.textContent = feat.replace(/^[^a-zA-Z0-9$]+/, '').trim();
+                        // 1. Remove non-ASCII characters (fixes encoding artifacts like â€¢)
+                        let cleanText = feat.replace(/[^\x20-\x7E]/g, '');
+                        // 2. Remove any remaining leading non-alphanumeric characters (like - or *)
+                        cleanText = cleanText.replace(/^[^a-zA-Z0-9$]+/, '').trim();
+                        li.textContent = cleanText;
                         ul.appendChild(li);
                     });
                     cardEl.appendChild(ul);

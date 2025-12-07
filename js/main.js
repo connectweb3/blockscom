@@ -237,13 +237,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Website Slider Population & Animation
     const webSliderWrapper = document.querySelector('#web-slider .slider-wrapper');
     const webData = [
-        { title: "Galaxy 1", price: "View Sample", image: "images/galaxy1.jpg", url: "websample/Galaxy1/index.html" },
-        { title: "Atlantis 1", price: "View Sample", image: "images/atlantis1.jpg", url: "websample/atlantis1/index.html" },
-        { title: "Cyberpunk", price: "View Sample", image: "images/cyberpunk.jpg", url: "websample/cyberpunk/index.html" },
-        { title: "Cyberpunk 2", price: "View Sample", image: "images/cyberpunk2.jpg", url: "websample/cyberpunk2/index.html" },
-        { title: "Galaxy 2", price: "View Sample", image: "images/galaxy2.jpg", url: "websample/galaxy2/index.html" },
-        { title: "Japan 1", price: "View Sample", image: "images/japan1.jpg", url: "websample/japan1/index.html" },
-        { title: "Japan 2", price: "View Sample", image: "images/japan2.jpg", url: "websample/japan2/index.html" },
+        { title: "Galaxy 1", price: "View Sample", image: "images/galaxy1.jpg", url: "websample/Galaxy1/" },
+        { title: "Atlantis 1", price: "View Sample", image: "images/atlantis1.jpg", url: "websample/atlantis1/" },
+        { title: "Cyberpunk", price: "View Sample", image: "images/cyberpunk.jpg", url: "websample/cyberpunk/" },
+        { title: "Cyberpunk 2", price: "View Sample", image: "images/cyberpunk2.jpg", url: "websample/cyberpunk2/" },
+        { title: "Galaxy 2", price: "View Sample", image: "images/galaxy2.jpg", url: "websample/galaxy2/" },
+        { title: "Japan 1", price: "View Sample", image: "images/japan1.jpg", url: "websample/japan1/" },
+        { title: "Japan 2", price: "View Sample", image: "images/japan2.jpg", url: "websample/japan2/" },
     ];
 
     const websiteModal = document.getElementById('website-modal');
