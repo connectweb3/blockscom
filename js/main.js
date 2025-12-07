@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     `<button class="btn-primary" style="font-size:0.6rem; padding:5px 10px; margin-top: 0; background: #555; cursor: not-allowed;">SOLD</button>` :
                     `<a href="#contact" class="btn-primary" style="font-size:0.6rem; padding:5px 10px; margin-top: 0;">Inquire</a>`
                 }
-                         <a href="https://x.com/blocksmedia_" target="_blank" class="btn-primary" style="font-size:0.6rem; padding:5px; margin-top: 0; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px;">
+                         <a href="https://x.com/Blockscom_Media" target="_blank" class="btn-primary" style="font-size:0.6rem; padding:5px; margin-top: 0; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px;">
                             <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         </a>
                     </div>
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p style="font-size: 0.8rem; color:#aaa; margin: 2px 0;">Supply: ${nft.supply}</p>
                     <div style="display: flex; gap: 10px; justify-content: center; align-items: center; margin-top: 10px;">
                         <a href="#contact" class="btn-primary" style="font-size:0.6rem; padding:5px 10px; margin-top: 0;">Inquire</a>
-                         <a href="https://x.com/blocksmedia_" target="_blank" class="btn-primary" style="font-size:0.6rem; padding:5px; margin-top: 0; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px;">
+                         <a href="https://x.com/Blockscom_Media" target="_blank" class="btn-primary" style="font-size:0.6rem; padding:5px; margin-top: 0; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px;">
                             <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         </a>
                     </div>

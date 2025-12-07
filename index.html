@@ -17,6 +17,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/chatbot.css">
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -40,6 +41,14 @@
             <div class="logo">BLOCKSCOM</div>
             <ul>
                 <li><a href="#hero" class="nav-link">Home</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="nav-link">Packages</a>
+                    <div class="dropdown-content">
+                        <a href="package/memepackage/index.html">Meme Package</a>
+                        <a href="package/nftpackage/index.html">NFT Package</a>
+                        <a href="package/websitepackage/index.html">Website Package</a>
+                    </div>
+                </li>
                 <li><a href="#nft-marketplace" class="nav-link">Collection</a></li>
                 <li><a href="nftdocs" class="nav-link">NFT Docs</a></li>
                 <li><a href="#web-design" class="nav-link">Websites</a></li>
@@ -57,6 +66,20 @@
                     <div class="scroll-indicator">
                         <span>Explore</span>
                         <div class="line"></div>
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <div class="social-icons-hero"
+                            style="display: flex; gap: 25px; justify-content: center; align-items: center;">
+                            <a href="https://discord.gg/pKPmkyTCN4" target="_blank" aria-label="Discord"
+                                style="color: #fff; font-size: 1.8rem; transition: all 0.3s ease;"><i
+                                    class="fab fa-discord"></i></a>
+                            <a href="https://x.com/Blockscom_Media" target="_blank" aria-label="X (Twitter)"
+                                style="color: #fff; font-size: 1.8rem; transition: all 0.3s ease;"><i
+                                    class="fab fa-x-twitter"></i></a>
+                            <a href="https://m.me/blockscommedia" target="_blank" aria-label="Facebook"
+                                style="color: #fff; font-size: 1.8rem; transition: all 0.3s ease;"><i
+                                    class="fab fa-facebook-f"></i></a>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -182,7 +205,15 @@
                     <a href="#faq">FAQ</a>
                     <a href="#" id="tos-link">Terms</a>
                     <a href="#" id="privacy-link">Privacy</a>
-                    <a href="https://x.com/blocksmedia_" target="_blank">Twitter/X</a>
+                    <!-- Social Icons Only -->
+                    <div class="social-icons" style="display: inline-flex; gap: 15px; margin-left: 15px;">
+                        <a href="https://discord.gg/pKPmkyTCN4" target="_blank" aria-label="Discord"><i
+                                class="fab fa-discord"></i></a>
+                        <a href="https://x.com/Blockscom_Media" target="_blank" aria-label="X (Twitter)"><i
+                                class="fab fa-x-twitter"></i></a>
+                        <a href="https://m.me/blockscommedia" target="_blank" aria-label="Facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                    </div>
                 </div>
                 <p>&copy; 2025 BlocksCom. All rights reserved.</p>
             </footer>

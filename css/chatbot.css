@@ -39,8 +39,10 @@
     position: absolute;
     bottom: 80px;
     right: 0;
-    width: 350px;
-    height: 500px;
+    width: 380px;
+    /* Slightly wider for cards */
+    height: 600px;
+    /* Taller for content */
     background-color: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(10px);
     border: 1px solid var(--accent-color);
@@ -103,7 +105,7 @@
     gap: 15px;
 }
 
-/* Scrollbar for chat messages */
+/* Scrollbar */
 .chat-messages::-webkit-scrollbar {
     width: 5px;
 }
@@ -119,11 +121,11 @@
 
 /* Message Bubbles */
 .message {
-    max-width: 80%;
+    max-width: 85%;
     padding: 10px 15px;
     border-radius: 10px;
     font-size: 0.9rem;
-    line-height: 1.4;
+    line-height: 1.5;
     word-wrap: break-word;
 }
 
@@ -136,10 +138,32 @@
 
 .message.ai {
     align-self: flex-start;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+    /* Slightly darker for better contrast with cards */
     color: var(--text-color);
     border-bottom-left-radius: 2px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    /* Allow AI container to be full width for cards */
+    max-width: 95%;
+    /* But slightly constrained */
+    padding: 0;
+    /* Let content handle padding */
+    background: transparent;
+    /* Remove bg for container, apply to text bubble only */
+    border: none;
+    /* Remove border for container */
+}
+
+/* Inner Text Bubble for AI - mimics old .message.ai */
+.ai-text-bubble {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    border-radius: 10px;
+    border-bottom-left-radius: 2px;
+    display: inline-block;
+    margin-bottom: 10px;
 }
 
 .message.system {
@@ -149,6 +173,89 @@
     font-size: 0.8rem;
     text-align: center;
     border: none;
+}
+
+/* Rich UI Elements - Cards */
+.bot-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.bot-card {
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 10px;
+    padding: 15px;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.bot-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+}
+
+.bot-card h4 {
+    margin: 0 0 5px 0;
+    color: var(--accent-color);
+    font-family: var(--font-cinzel);
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bot-card .price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    background: rgba(212, 175, 55, 0.2);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.bot-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+.bot-card ul li {
+    margin-bottom: 5px;
+    padding-left: 15px;
+    position: relative;
+}
+
+.bot-card ul li::before {
+    content: "â€¢";
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+}
+
+.bot-action-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 8px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.bot-action-btn:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
 }
 
 /* Typing Indicator */

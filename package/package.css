@@ -1,0 +1,164 @@
+/* Shared styles for service packages */
+
+/* Pricing Grid from nftdocs */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pricing-card {
+    background: var(--secondary-color, #1a1a1a);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    min-height: 500px;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-color, #D4AF37);
+}
+
+.price-tag {
+    font-family: var(--font-heading, serif);
+    font-size: 2.5rem;
+    color: var(--accent-color, #D4AF37);
+    margin-bottom: 0.5rem;
+}
+
+.price-title {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: var(--font-heading, serif);
+}
+
+.price-features {
+    list-style: none;
+    margin-bottom: 2rem;
+    flex: 1;
+    text-align: left;
+    padding-left: 1rem;
+}
+
+.price-features li {
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.price-features li::before {
+    content: '•';
+    color: var(--accent-color, #D4AF37);
+    display: inline-block;
+    width: 1em;
+    font-size: 1.5rem;
+    line-height: 1;
+    margin-right: 0.5rem;
+}
+
+.price-features li strong {
+    color: #fff;
+    margin-right: 0.3rem;
+    margin-left: 0.3rem;
+}
+
+.pricing-calculator {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.calc-row {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calc-total {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-family: var(--font-heading, serif);
+    font-size: 1.5rem;
+    color: #fff;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+}
+
+.total-amount {
+    color: var(--accent-color, #D4AF37);
+    font-weight: 700;
+}
+
+/* Add-ons Section */
+.addons-section {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.addons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.addon-item {
+    text-align: center;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+}
+
+.addon-item:hover {
+    border-color: var(--accent-color, #D4AF37);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.addon-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color, #D4AF37);
+}
+
+.addon-title {
+    font-family: var(--font-heading, serif);
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+/* Feature List */
+.feature-list {
+    list-style: none;
+    margin: 2rem 0;
+}
+
+.feature-list li {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.feature-list li span {
+    color: var(--accent-color, #D4AF37);
+    font-family: var(--font-heading, serif);
+    margin-right: 0.5rem;
+}

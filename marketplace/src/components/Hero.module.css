@@ -1,0 +1,115 @@
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: var(--header-height);
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 50%);
+}
+
+.content {
+    text-align: center;
+    max-width: 800px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(124, 58, 237, 0.1);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+    border-radius: var(--radius-full);
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    backdrop-filter: blur(4px);
+}
+
+.title {
+    font-size: 64px;
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: 24px;
+    letter-spacing: -2px;
+}
+
+.description {
+    font-size: 20px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.secondaryBtn {
+    background: transparent;
+    border: 1px solid var(--border-light);
+    color: white;
+    padding: 12px 32px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.secondaryBtn:hover {
+    border-color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Floating Elements Animation */
+.floating {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 10s infinite ease-in-out;
+    opacity: 0.5;
+}
+
+.float1 {
+    top: -10%;
+    left: -10%;
+    animation-delay: 0s;
+}
+
+.float2 {
+    bottom: 10%;
+    right: -10%;
+    animation-delay: -5s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(30px, -30px);
+    }
+}
