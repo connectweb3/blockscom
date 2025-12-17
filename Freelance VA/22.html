@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Flaviano Portfolio</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Maven Flaviano - Virtual Assistant Portfolio">
+    <meta property="og:description"
+        content="Professional Virtual Assistant Services. Organization, Management, and Creative Solutions.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://www.maryvalerie.com">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpg" href="favicon.jpg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-black': '#1a1a1a',
+                        'brand-gray': '#f4f4f2',
+                        'brand-accent': '#d4d4d0',
+                        'brand-text': '#4a4a4a'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Manrope"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for specific animations and marquee -->
+    <style>
+        body {
+            background-color: #f9f9f7;
+            /* Very subtle warm white */
+            color: #1a1a1a;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Smooth reveal classes for GSAP */
+        .reveal-text {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .char-reveal {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+        /* Card Hover Effects */
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            background-color: #ffffff;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Portfolio Image Hover */
+        .portfolio-item img {
+            transition: transform 0.7s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Button styling */
+        .btn-anim {
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s;
+            z-index: 1;
+        }
+
+        .btn-anim::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: #1a1a1a;
+            z-index: -1;
+            transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .btn-anim:hover::before {
+            width: 100%;
+        }
+
+        .btn-anim:hover {
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="selection:bg-brand-black selection:text-white">
+
+    <!-- Flowing Note Header -->
+    <div class="bg-brand-black text-white py-2 text-xs uppercase tracking-widest font-sans z-50 relative">
+        <div class="marquee-container flex">
+            <div class="marquee-content px-4">
+                Everything is customizable — you can edit, remove, or change anything. We handle it all. &nbsp; • &nbsp;
+                Everything is customizable — you can edit, remove, or change anything. We handle it all. &nbsp; • &nbsp;
+                Everything is customizable — you can edit, remove, or change anything. We handle it all. &nbsp; • &nbsp;
+            </div>
+            <div class="marquee-content px-4">
+                Everything is customizable — you can edit, remove, or change anything. We handle it all. &nbsp; • &nbsp;
+                Everything is customizable — you can edit, remove, or change anything. We handle it all. &nbsp; • &nbsp;
+                Everything is customizable — you can edit, remove, or change anything. We handle it all. &nbsp; • &nbsp;
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-8 left-0 w-full z-40 px-6 py-6 mix-blend-difference text-white pointer-events-none">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="font-serif text-2xl font-bold tracking-tighter pointer-events-auto">MF.</div>
+            <a href="#contact"
+                class="pointer-events-auto font-sans text-sm tracking-widest uppercase hover:underline underline-offset-4">Get
+                in touch</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="min-h-screen flex flex-col items-center justify-center relative px-4 pt-20">
+        <div class="text-center z-10">
+            <p class="gsap-hero-sub font-sans text-sm md:text-base tracking-[0.2em] text-brand-text mb-4 uppercase">
+                Virtual Assistant & Strategist</p>
+            <h1 class="gsap-hero-title font-serif text-6xl md:text-8xl lg:text-9xl text-brand-black leading-[0.9] mb-8">
+                Mary<br>
+                <span class="italic font-light">Maven</span>
+            </h1>
+        </div>
+
+        <div
+            class="gsap-hero-img mt-12 w-full max-w-md md:max-w-lg aspect-[3/4] overflow-hidden rounded-sm relative shadow-2xl">
+            <!-- Professional Photo -->
+            <img src="photo.png" alt="Maven Flaviano Professional"
+                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=988&auto=format&fit=crop'">
+            <div class="absolute inset-0 ring-1 ring-inset ring-black/10 pointer-events-none"></div>
+        </div>
+
+        <div class="absolute bottom-10 animate-bounce">
+            <i data-lucide="arrow-down" class="w-6 h-6 text-brand-text/50"></i>
+        </div>
+    </header>
+
+    <!-- Introduction / About -->
+    <section class="py-24 md:py-32 px-6 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="order-2 md:order-1 relative gsap-reveal-img">
+                <div class="aspect-[4/5] overflow-hidden rounded-sm bg-brand-accent">
+                    <!-- Garden/Laptop Photo -->
+                    <img src="photo.jpg" alt="Mary Working in Garden" class="w-full h-full object-cover opacity-90"
+                        onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop'">
+                </div>
+            </div>
+            <div class="order-1 md:order-2">
+                <h2 class="gsap-title font-serif text-4xl md:text-5xl mb-8 leading-tight">Efficiency meets <span
+                        class="italic">elegance.</span></h2>
+                <div
+                    class="gsap-text space-y-6 text-brand-text font-sans font-light text-lg md:text-xl leading-relaxed">
+                    <p>
+                        I'm Maven Flaviano, a dedicated Virtual Assistant based in the cloud. I specialize in turning
+                        chaos into structure and ideas into action.
+                    </p>
+                    <p>
+                        With a background in administrative management and creative direction, I help entrepreneurs
+                        reclaim their time. Whether it's managing your inbox while sitting in a garden or coordinating a
+                        launch strategy, I bring a calm, focused approach to every task.
+                    </p>
+                </div>
+                <div class="mt-10">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Signature_sample.svg/1200px-Signature_sample.svg.png"
+                        alt="Signature" class="h-12 opacity-50">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Softwares -->
+    <section class="py-20 bg-brand-gray px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-4">
+                    <h3 class="font-serif text-3xl mb-4">My Toolkit</h3>
+                    <p class="font-sans text-brand-text mb-6">The software and tools I use daily to ensure seamless
+                        operations.</p>
+                </div>
+                <div class="md:col-span-8">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <!-- Software Items -->
+                        <div
+                            class="gsap-fade-up bg-white p-6 rounded-sm text-center shadow-sm hover:shadow-md transition-all">
+                            <i data-lucide="trello" class="w-8 h-8 mx-auto mb-3 text-brand-black"></i>
+                            <span class="font-sans text-sm font-semibold">Trello/Notion</span>
+                        </div>
+                        <div
+                            class="gsap-fade-up bg-white p-6 rounded-sm text-center shadow-sm hover:shadow-md transition-all">
+                            <i data-lucide="mail" class="w-8 h-8 mx-auto mb-3 text-brand-black"></i>
+                            <span class="font-sans text-sm font-semibold">G-Suite</span>
+                        </div>
+                        <div
+                            class="gsap-fade-up bg-white p-6 rounded-sm text-center shadow-sm hover:shadow-md transition-all">
+                            <i data-lucide="figma" class="w-8 h-8 mx-auto mb-3 text-brand-black"></i>
+                            <span class="font-sans text-sm font-semibold">Canva/Figma</span>
+                        </div>
+                        <div
+                            class="gsap-fade-up bg-white p-6 rounded-sm text-center shadow-sm hover:shadow-md transition-all">
+                            <i data-lucide="message-circle" class="w-8 h-8 mx-auto mb-3 text-brand-black"></i>
+                            <span class="font-sans text-sm font-semibold">Slack/Zoom</span>
+                        </div>
+                        <div
+                            class="gsap-fade-up bg-white p-6 rounded-sm text-center shadow-sm hover:shadow-md transition-all">
+                            <i data-lucide="shopping-bag" class="w-8 h-8 mx-auto mb-3 text-brand-black"></i>
+                            <span class="font-sans text-sm font-semibold">Shopify</span>
+                        </div>
+                        <div
+                            class="gsap-fade-up bg-white p-6 rounded-sm text-center shadow-sm hover:shadow-md transition-all">
+                            <i data-lucide="calendar" class="w-8 h-8 mx-auto mb-3 text-brand-black"></i>
+                            <span class="font-sans text-sm font-semibold">Calendly</span>
+                        </div>
+                        <div
+                            class="gsap-fade-up bg-white p-6 rounded-sm text-center shadow-sm hover:shadow-md transition-all">
+                            <i data-lucide="file-text" class="w-8 h-8 mx-auto mb-3 text-brand-black"></i>
+                            <span class="font-sans text-sm font-semibold">Office 365</span>
+                        </div>
+                        <div
+                            class="gsap-fade-up bg-white p-6 rounded-sm text-center shadow-sm hover:shadow-md transition-all">
+                            <i data-lucide="instagram" class="w-8 h-8 mx-auto mb-3 text-brand-black"></i>
+                            <span class="font-sans text-sm font-semibold">Social Media</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Bars -->
+            <div class="mt-20 border-t border-brand-accent/30 pt-16">
+                <h3 class="font-serif text-3xl mb-8 text-center">Core Competencies</h3>
+                <div class="grid md:grid-cols-3 gap-8 text-center font-sans">
+                    <div class="gsap-fade-up p-4 border border-brand-accent/50 rounded-sm">
+                        <h4 class="font-bold text-lg mb-2">Organization</h4>
+                        <p class="text-sm text-brand-text">Inbox Zero, Calendar Management, File Structure</p>
+                    </div>
+                    <div class="gsap-fade-up p-4 border border-brand-accent/50 rounded-sm">
+                        <h4 class="font-bold text-lg mb-2">Communication</h4>
+                        <p class="text-sm text-brand-text">Customer Support, Email Drafting, Stakeholder Liaison</p>
+                    </div>
+                    <div class="gsap-fade-up p-4 border border-brand-accent/50 rounded-sm">
+                        <h4 class="font-bold text-lg mb-2">Creativity</h4>
+                        <p class="text-sm text-brand-text">Basic Graphics, Social Content, Presentation Design</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="font-sans text-xs tracking-[0.2em] uppercase text-brand-text">What I Do</span>
+            <h2 class="font-serif text-4xl md:text-5xl mt-4">Curated Services</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Service 1 -->
+            <div class="service-card bg-white border border-brand-gray p-8 rounded-sm gsap-stagger">
+                <div class="w-12 h-12 bg-brand-gray rounded-full flex items-center justify-center mb-6">
+                    <i data-lucide="briefcase" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-serif text-2xl mb-4">Executive Assistance</h3>
+                <p class="font-sans text-brand-text leading-relaxed text-sm">
+                    Comprehensive calendar management, travel arrangements, and inbox detoxification. I act as the
+                    gatekeeper to your time.
+                </p>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="service-card bg-white border border-brand-gray p-8 rounded-sm gsap-stagger">
+                <div class="w-12 h-12 bg-brand-gray rounded-full flex items-center justify-center mb-6">
+                    <i data-lucide="pen-tool" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-serif text-2xl mb-4">Content Management</h3>
+                <p class="font-sans text-brand-text leading-relaxed text-sm">
+                    Scheduling social media posts, basic graphic creation in Canva, and blog formatting. Keeping your
+                    brand visible.
+                </p>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card bg-white border border-brand-gray p-8 rounded-sm gsap-stagger">
+                <div class="w-12 h-12 bg-brand-gray rounded-full flex items-center justify-center mb-6">
+                    <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-serif text-2xl mb-4">Project Coordination</h3>
+                <p class="font-sans text-brand-text leading-relaxed text-sm">
+                    Overseeing launch timelines, coordinating with other freelancers, and ensuring deadlines are met
+                    with precision.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="py-24 bg-brand-black text-white px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="font-sans text-xs tracking-[0.2em] uppercase opacity-70">Selected Works</span>
+                    <h2 class="font-serif text-4xl md:text-5xl mt-4">Recent Projects</h2>
+                </div>
+                <a href="#"
+                    class="hidden md:block font-sans text-sm underline underline-offset-4 hover:opacity-70 transition-opacity">View
+                    All</a>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="portfolio-item group cursor-pointer gsap-fade-up">
+                    <div class="overflow-hidden rounded-sm mb-4">
+                        <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop"
+                            alt="Project 1" class="w-full aspect-video object-cover">
+                    </div>
+                    <h3 class="font-serif text-2xl">Lifestyle Blog Management</h3>
+                    <p class="font-sans text-sm opacity-60 mt-2">Content Scheduling • SEO</p>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="portfolio-item group cursor-pointer gsap-fade-up">
+                    <div class="overflow-hidden rounded-sm mb-4">
+                        <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=2055&auto=format&fit=crop"
+                            alt="Project 2" class="w-full aspect-video object-cover">
+                    </div>
+                    <h3 class="font-serif text-2xl">E-commerce Launch</h3>
+                    <p class="font-sans text-sm opacity-60 mt-2">Shopify Setup • Inventory</p>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="portfolio-item group cursor-pointer gsap-fade-up">
+                    <div class="overflow-hidden rounded-sm mb-4">
+                        <img src="https://images.unsplash.com/photo-1554774853-71015e28c1ea?q=80&w=2070&auto=format&fit=crop"
+                            alt="Project 3" class="w-full aspect-video object-cover">
+                    </div>
+                    <h3 class="font-serif text-2xl">Real Estate Admin</h3>
+                    <p class="font-sans text-sm opacity-60 mt-2">Lead Gen • CRM Management</p>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="portfolio-item group cursor-pointer gsap-fade-up">
+                    <div class="overflow-hidden rounded-sm mb-4">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop"
+                            alt="Project 4" class="w-full aspect-video object-cover">
+                    </div>
+                    <h3 class="font-serif text-2xl">Podcast Coordination</h3>
+                    <p class="font-sans text-sm opacity-60 mt-2">Guest Booking • Transcription</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rates -->
+    <section class="py-24 px-6 max-w-4xl mx-auto">
+        <h2 class="font-serif text-4xl text-center mb-16">Investment</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Rate Card 1 -->
+            <div class="border border-brand-accent p-8 rounded-sm bg-white relative overflow-hidden gsap-fade-up">
+                <div class="absolute top-0 right-0 bg-brand-black text-white text-xs px-3 py-1 font-sans uppercase">
+                    Popular</div>
+                <h3 class="font-serif text-2xl mb-2">Retainer Package</h3>
+                <div class="text-4xl font-light font-serif mb-6">$800<span class="text-base text-brand-text">/mo</span>
+                </div>
+                <p class="font-sans text-sm text-brand-text mb-6">Perfect for ongoing support and stability.</p>
+                <ul class="space-y-3 mb-8 font-sans text-sm text-brand-black">
+                    <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-green-600"></i> 20 Hours of
+                        support</li>
+                    <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-green-600"></i> Priority email
+                        support</li>
+                    <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-green-600"></i> Weekly check-in
+                        calls</li>
+                    <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-green-600"></i> Monthly report
+                    </li>
+                </ul>
+                <a href="#contact"
+                    class="block text-center btn-anim border border-brand-black py-3 text-sm uppercase tracking-widest font-sans font-bold">Choose
+                    Retainer</a>
+            </div>
+
+            <!-- Rate Card 2 -->
+            <div class="border border-brand-accent p-8 rounded-sm bg-white gsap-fade-up" style="transition-delay: 0.1s">
+                <h3 class="font-serif text-2xl mb-2">Hourly Rate</h3>
+                <div class="text-4xl font-light font-serif mb-6">$45<span class="text-base text-brand-text">/hr</span>
+                </div>
+                <p class="font-sans text-sm text-brand-text mb-6">Flexible support for ad-hoc projects.</p>
+                <ul class="space-y-3 mb-8 font-sans text-sm text-brand-black">
+                    <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-black"></i> Minimum 5 hours
+                    </li>
+                    <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-black"></i> Time tracking
+                        provided</li>
+                    <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-black"></i> Standard
+                        response time</li>
+                    <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-black"></i> No long-term
+                        commitment</li>
+                </ul>
+                <a href="#contact"
+                    class="block text-center btn-anim border border-brand-black py-3 text-sm uppercase tracking-widest font-sans font-bold">Book
+                    Hourly</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-24 bg-brand-gray px-6">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16">
+            <div>
+                <h2 class="font-serif text-5xl mb-6">Let's work<br>together.</h2>
+                <p class="font-sans text-brand-text mb-8 text-lg">
+                    Ready to reclaim your time? Fill out the form or send me a direct email to discuss your needs.
+                </p>
+                <div class="space-y-4 font-sans">
+                    <div class="flex items-center gap-4">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                        <a href="mailto:hello@maryvalerie.com" class="hover:underline">hello@maryvalerie.com</a>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                        <a href="#" class="hover:underline">@maryvalerie.va</a>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                        <span>New York, NY (Available Globally)</span>
+                    </div>
+                </div>
+            </div>
+
+            <form class="space-y-6 bg-white p-8 rounded-sm shadow-sm">
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="block font-sans text-xs uppercase tracking-widest mb-2">First Name</label>
+                        <input type="text"
+                            class="w-full border-b border-brand-accent pb-2 focus:border-brand-black outline-none transition-colors">
+                    </div>
+                    <div>
+                        <label class="block font-sans text-xs uppercase tracking-widest mb-2">Last Name</label>
+                        <input type="text"
+                            class="w-full border-b border-brand-accent pb-2 focus:border-brand-black outline-none transition-colors">
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-sans text-xs uppercase tracking-widest mb-2">Email Address</label>
+                    <input type="email"
+                        class="w-full border-b border-brand-accent pb-2 focus:border-brand-black outline-none transition-colors">
+                </div>
+                <div>
+                    <label class="block font-sans text-xs uppercase tracking-widest mb-2">Service Interested In</label>
+                    <select
+                        class="w-full border-b border-brand-accent pb-2 focus:border-brand-black outline-none transition-colors bg-transparent">
+                        <option>Executive Assistance</option>
+                        <option>Social Media</option>
+                        <option>Project Management</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-sans text-xs uppercase tracking-widest mb-2">Message</label>
+                    <textarea rows="4"
+                        class="w-full border-b border-brand-accent pb-2 focus:border-brand-black outline-none transition-colors resize-none"></textarea>
+                </div>
+                <button type="button"
+                    class="btn-anim w-full py-4 bg-brand-black text-white font-sans uppercase tracking-widest text-sm font-bold">Send
+                    Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-white/40 py-8 px-6 border-t border-white/10">
+        <div
+            class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs font-sans tracking-widest uppercase">
+            <div>&copy; 2024 Maven Flaviano Portfolio</div>
+            <div class="mt-2 md:mt-0">Design by : Blockscom Media</div>
+        </div>
+    </footer>
+
+    <!-- GSAP for High Quality Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animations
+        const tl = gsap.timeline();
+
+        tl.from(".gsap-hero-title", {
+            y: 100,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power4.out",
+            delay: 0.2
+        })
+            .from(".gsap-hero-sub", {
+                y: 20,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            }, "-=1")
+            .from(".gsap-hero-img", {
+                y: 50,
+                opacity: 0,
+                duration: 1.5,
+                scale: 0.95,
+                ease: "expo.out"
+            }, "-=1");
+
+        // Section Reveal Animations
+        gsap.utils.toArray('.gsap-fade-up').forEach(element => {
+            gsap.from(element, {
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 40,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            });
+        });
+
+        // Staggered Lists
+        gsap.from(".gsap-stagger", {
+            scrollTrigger: {
+                trigger: ".gsap-stagger",
+                start: "top 80%"
+            },
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power3.out"
+        });
+
+        // Image Parallax Effect (Like Locomotive)
+        gsap.utils.toArray('.gsap-reveal-img img').forEach(img => {
+            gsap.to(img, {
+                scrollTrigger: {
+                    trigger: img.parentElement,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                },
+                y: -50,
+                ease: "none"
+            });
+        });
+
+        // Text Reveals
+        gsap.from(".gsap-text p", {
+            scrollTrigger: {
+                trigger: ".gsap-text",
+                start: "top 85%"
+            },
+            y: 20,
+            opacity: 0,
+            stagger: 0.2,
+            duration: 1,
+            ease: "power2.out"
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$BLOCKS | Blocks Media Memecoin</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Fredoka One (Fun/Chunky) & VT323 (Pixel/Tech) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600;700&family=VT323&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'blocks-yellow': '#FFD028',
+                        'blocks-blue': '#3B82F6',
+                        'blocks-pink': '#F472B6',
+                        'blocks-bg': '#FFFBF0',
+                        'blocks-dark': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        'heading': ['"Fredoka"', 'sans-serif'],
+                        'pixel': ['"VT323"', 'monospace'],
+                    },
+                    boxShadow: {
+                        'neo': '6px 6px 0px 0px rgba(0,0,0,1)',
+                        'neo-hover': '2px 2px 0px 0px rgba(0,0,0,1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FFFBF0;
+            background-image: radial-gradient(#FFD028 1px, transparent 1px);
+            background-size: 20px 20px;
+            overflow-x: hidden;
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 15s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Floating Animation for Images */
+        .float-img {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFFBF0;
+            border-left: 2px solid black;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3B82F6;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body class="font-heading text-blocks-dark">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b-4 border-black bg-blocks-yellow py-3 px-4 md:px-8 flex justify-between items-center">
+        <div class="flex items-center gap-2" data-aos="fade-down">
+            <div class="w-10 h-10 bg-white border-2 border-black rounded-full overflow-hidden flex items-center justify-center">
+                <img src="https://blockscom.xyz/images/meme1.png" alt="Logo" class="w-8">
+            </div>
+            <span class="text-2xl font-bold tracking-wider">$BLOCKS</span>
+        </div>
+        
+        <div class="hidden md:flex gap-6 text-lg font-bold">
+            <a href="#about" class="hover:text-white transition-colors">SERVICES</a>
+            <a href="#tokenomics" class="hover:text-white transition-colors">TOKENOMICS</a>
+            <a href="#pump" class="hover:text-white transition-colors">PUMP.FUN</a>
+        </div>
+
+        <button class="bg-blocks-blue text-white font-bold py-2 px-6 border-2 border-black shadow-neo hover:shadow-neo-hover hover:translate-x-1 hover:translate-y-1 transition-all rounded-xl" data-aos="fade-left">
+            BUY NOW
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen pt-24 flex flex-col items-center justify-center relative overflow-hidden px-4">
+        
+        <!-- Decorative blobs -->
+        <div class="absolute top-32 left-10 text-6xl opacity-20 rotate-12">🧱</div>
+        <div class="absolute bottom-20 right-10 text-6xl opacity-20 -rotate-12">🎮</div>
+
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+            
+            <!-- Text Content -->
+            <div class="text-center md:text-left z-10 order-2 md:order-1" data-aos="fade-right">
+                <div class="inline-block bg-blocks-pink text-white px-4 py-1 border-2 border-black shadow-neo mb-4 font-pixel text-xl rotate-[-2deg]">
+                    Sample Website for Blocks Media Services
+                </div>
+                <h1 class="text-6xl md:text-8xl font-extrabold leading-none mb-4 drop-shadow-md">
+                    WE STACK <br>
+                    <span class="text-blocks-blue text-stroke">BLOCKS</span> Not Ls
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 font-medium">
+                    "Why buy a lambo when you can build a metaverse?" <br>
+                    The memecoin for NFT degens, builders & gamers.
+                </p>
+
+                <!-- CA Box -->
+                <div class="bg-white border-4 border-black p-4 shadow-neo max-w-md mx-auto md:mx-0 flex items-center justify-between gap-4 rounded-xl group cursor-pointer" onclick="copyCA()">
+                    <div class="overflow-hidden">
+                        <p class="text-xs text-gray-500 font-bold">CONTRACT ADDRESS (SOL)</p>
+                        <p id="ca-text" class="font-pixel text-xl truncate">8L0cksM3diaPumpFunG3nerat0rExamp1e</p>
+                    </div>
+                    <i class="fa-regular fa-copy text-2xl group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div id="copy-msg" class="text-green-600 font-bold text-sm mt-2 opacity-0 transition-opacity">Copied to clipboard!</div>
+            </div>
+
+            <!-- Hero Image -->
+            <div class="order-1 md:order-2 flex justify-center" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="relative w-80 h-80 md:w-[500px] md:h-[500px]">
+                    <div class="absolute inset-0 bg-blocks-blue rounded-full border-4 border-black translate-x-4 translate-y-4"></div>
+                    <div class="absolute inset-0 bg-blocks-yellow rounded-full border-4 border-black flex items-center justify-center overflow-hidden">
+                        <img src="https://blockscom.xyz/images/meme1.png" alt="Blocks Meme" class="float-img w-3/4 object-contain">
+                    </div>
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-4 -right-4 bg-white border-4 border-black p-3 rotate-12 shadow-neo">
+                        <span class="font-bold text-xl">100% SAFU</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Section -->
+    <div class="bg-black text-white border-y-4 border-black py-4 rotate-1 z-20 relative">
+        <div class="marquee-container">
+            <div class="marquee-content text-4xl font-bold font-pixel">
+                BUILDING THE FUTURE • WEB DESIGN • NFT MINTING • GAMING COMMUNITY • BLOCKS MEDIA • NO RUGS JUST HUGS • BUILDING THE FUTURE • WEB DESIGN • NFT MINTING • GAMING COMMUNITY •
+            </div>
+        </div>
+    </div>
+
+    <!-- About / Services Section -->
+    <section id="about" class="py-20 px-4 bg-white">
+        <div class="container mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-extrabold mb-4">WHAT THE $BLOCK?</h2>
+                <p class="text-2xl text-gray-600 max-w-2xl mx-auto">Blocks Media isn't just a coin, it's a factory. We build the cool stuff so you can just meme.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-blocks-bg border-4 border-black p-6 rounded-2xl shadow-neo hover:-translate-y-2 transition-transform" data-aos="flip-left" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-blocks-pink border-2 border-black rounded-lg mb-4 flex items-center justify-center text-3xl">🎨</div>
+                    <h3 class="text-2xl font-bold mb-2">NFT Creation</h3>
+                    <p>We mint JPEGs that actually go hard. From pixel art to 3D blocks, we handle the metadata and the art.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-blocks-bg border-4 border-black p-6 rounded-2xl shadow-neo hover:-translate-y-2 transition-transform" data-aos="flip-left" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-blocks-blue border-2 border-black rounded-lg mb-4 flex items-center justify-center text-3xl">💻</div>
+                    <h3 class="text-2xl font-bold mb-2">Website Building</h3>
+                    <p>Like this site? We build 'em. Clean code, meme vibes, and animations that make your GPU sweat (in a good way).</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-blocks-bg border-4 border-black p-6 rounded-2xl shadow-neo hover:-translate-y-2 transition-transform" data-aos="flip-left" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-blocks-yellow border-2 border-black rounded-lg mb-4 flex items-center justify-center text-3xl">🕹️</div>
+                    <h3 class="text-2xl font-bold mb-2">Community Games</h3>
+                    <p>Play-to-earn? More like Play-to-Laugh. Simple, addictive web games for your Telegram or Discord fam.</p>
+                </div>
+            </div>
+
+            <!-- Mid Section Meme -->
+            <div class="mt-20 flex flex-col items-center" data-aos="zoom-in-up">
+                <div class="bg-blocks-yellow border-4 border-black p-2 rounded-xl rotate-2">
+                    <img src="https://blockscom.xyz/images/meme2.png" alt="Meme 2" class="w-64 md:w-96 rounded-lg border-2 border-black">
+                </div>
+                <h3 class="mt-6 text-3xl font-pixel text-center">"Me explaining to my mom why $BLOCKS <br>is a solid investment"</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section -->
+    <section id="tokenomics" class="py-20 px-4 bg-blocks-blue border-y-4 border-black relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000), linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000); background-size: 20px 20px; background-position: 0 0, 10px 10px;"></div>
+
+        <div class="container mx-auto relative z-10 text-white">
+            <h2 class="text-5xl md:text-6xl font-extrabold text-center mb-12 text-stroke-black drop-shadow-[4px_4px_0_#000]" data-aos="fade-down">TOKENOMICS</h2>
+
+            <div class="flex flex-col md:flex-row gap-8 justify-center items-center">
+                <!-- Supply Box -->
+                <div class="bg-white text-black border-4 border-black p-8 rounded-xl shadow-neo w-full md:w-1/3 text-center" data-aos="fade-right">
+                    <h3 class="text-2xl font-bold text-gray-500">TOTAL SUPPLY</h3>
+                    <p class="text-4xl md:text-5xl font-extrabold text-blocks-blue mt-2">1 BILLION</p>
+                </div>
+
+                <!-- Tax Box -->
+                <div class="bg-blocks-yellow text-black border-4 border-black p-8 rounded-xl shadow-neo w-full md:w-1/3 text-center rotate-1" data-aos="zoom-in">
+                    <h3 class="text-2xl font-bold">TAXES</h3>
+                    <p class="text-6xl font-extrabold mt-2">0/0</p>
+                    <p class="font-pixel text-xl">NO BS. PURE MEME.</p>
+                </div>
+
+                <!-- LP Box -->
+                <div class="bg-blocks-pink text-black border-4 border-black p-8 rounded-xl shadow-neo w-full md:w-1/3 text-center" data-aos="fade-left">
+                    <h3 class="text-2xl font-bold text-white">LIQUIDITY</h3>
+                    <p class="text-4xl md:text-5xl font-extrabold mt-2">BURNED</p>
+                    <p class="text-sm font-bold mt-2">🔥 FOREVER 🔥</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pump Fun Section -->
+    <section id="pump" class="py-20 px-4">
+        <div class="container mx-auto">
+            <div class="bg-blocks-dark text-green-400 p-6 md:p-12 rounded-3xl border-4 border-black shadow-neo relative" data-aos="zoom-in">
+                <!-- Terminal Buttons -->
+                <div class="absolute top-4 left-4 flex gap-2">
+                    <div class="w-4 h-4 rounded-full bg-red-500 border border-black"></div>
+                    <div class="w-4 h-4 rounded-full bg-yellow-500 border border-black"></div>
+                    <div class="w-4 h-4 rounded-full bg-green-500 border border-black"></div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center gap-10 mt-6">
+                    <div class="w-full md:w-1/2 text-center md:text-left">
+                        <h2 class="text-4xl md:text-6xl font-pixel mb-4 text-white">LAUNCHING ON <br><span class="text-green-400">PUMP.FUN</span></h2>
+                        <p class="text-xl font-pixel mb-6 text-gray-300">
+                            > INITIALIZING BONDING CURVE...<br>
+                            > LOADING MEME ASSETS...<br>
+                            > STATUS: READY FOR MOON.<br>
+                        </p>
+                        <a href="#" class="inline-block bg-green-500 text-black text-2xl font-bold font-pixel py-3 px-8 border-4 border-green-700 hover:bg-green-400 hover:scale-105 transition-all shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
+                            [ CLICK TO APE IN ]
+                        </a>
+                    </div>
+                    <div class="w-full md:w-1/2 flex justify-center">
+                        <div class="relative">
+                            <img src="https://blockscom.xyz/images/meme3.png" alt="Pump Meme" class="w-64 md:w-80 border-4 border-green-500 rounded-lg animate-pulse">
+                            <div class="absolute -top-6 -right-6 bg-yellow-400 text-black font-bold p-2 border-2 border-black rotate-12">
+                                ONLY UP! 🚀
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blocks-yellow border-t-4 border-black py-10 px-4">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <img src="https://blockscom.xyz/images/meme1.png" class="w-12 h-12 grayscale hover:grayscale-0 transition-all cursor-pointer">
+                <div>
+                    <h4 class="font-bold text-2xl">$BLOCKS</h4>
+                    <p class="text-sm font-bold">Blocks Media © 2025</p>
+                </div>
+            </div>
+
+            <div class="text-center md:text-right max-w-md">
+                <p class="text-xs font-bold mb-2 uppercase">Disclaimer:</p>
+                <p class="text-xs opacity-70">
+                    This is a sample website for Blocks Media services (NFT, Website Creation & Games). $BLOCKS is a memecoin for entertainment purposes only. Don't spend money you can't afford to lose.
+                </p>
+            </div>
+
+            <div class="flex gap-4">
+                <a href="#" class="w-12 h-12 bg-white border-2 border-black rounded-lg flex items-center justify-center text-2xl hover:-translate-y-1 transition-transform shadow-neo-hover">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-white border-2 border-black rounded-lg flex items-center justify-center text-2xl hover:-translate-y-1 transition-transform shadow-neo-hover">
+                    <i class="fa-brands fa-telegram"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Animations
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Copy to Clipboard Function
+        function copyCA() {
+            const caText = document.getElementById('ca-text').innerText;
+            navigator.clipboard.writeText(caText).then(() => {
+                const msg = document.getElementById('copy-msg');
+                msg.classList.remove('opacity-0');
+                setTimeout(() => {
+                    msg.classList.add('opacity-0');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

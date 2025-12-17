@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Flaviano Portfolio</title>
+    <link rel="icon" type="image/jpg" href="favicon.jpg">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Maven Flaviano - Virtual Assistant Portfolio">
+    <meta property="og:description"
+        content="Professional Virtual Assistant Services. Softwares, Skills, and Portfolio.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://maryvalerie.com">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts: Playfair Display (Serif) & Inter (Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        'primary': '#1a1a1a',
+                        'secondary': '#f4f4f0', // Soft cream
+                        'accent': '#d4d4ce', // Darker cream/grey
+                        'muted': '#888888',
+                    },
+                    animation: {
+                        'marquee': 'marquee 25s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(100%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Utilities for High-End Feel */
+        body {
+            background-color: #f9f9f9;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        /* Hide scrollbar for cleaner look but allow scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* Scroll Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: blur(5px);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        .stagger-delay:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .stagger-delay:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .stagger-delay:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .stagger-delay:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        /* Smooth marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Announcement Bar -->
+    <div class="bg-primary text-white text-xs py-2 fixed top-0 w-full z-50 overflow-hidden">
+        <div class="marquee-container flex items-center">
+            <div class="animate-marquee inline-block">
+                Everything is customizable — you can edit, remove, or change anything. We handle it all.
+                &nbsp;&nbsp;&nbsp; • &nbsp;&nbsp;&nbsp; Everything is customizable — you can edit, remove, or change
+                anything. We handle it all.
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-8 w-full z-40 bg-[#f9f9f9]/90 backdrop-blur-md border-b border-gray-200 transition-all duration-300"
+        id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-serif text-2xl font-bold tracking-tighter">MF.</a>
+
+            <div class="hidden md:flex space-x-8 text-sm font-medium tracking-wide text-gray-600">
+                <a href="#about" class="hover:text-black transition-colors">About</a>
+                <a href="#software" class="hover:text-black transition-colors">Software</a>
+                <a href="#services" class="hover:text-black transition-colors">Services</a>
+                <a href="#portfolio" class="hover:text-black transition-colors">Portfolio</a>
+                <a href="#rates" class="hover:text-black transition-colors">Rates</a>
+            </div>
+
+            <a href="#contact"
+                class="hidden md:inline-block px-6 py-2 bg-primary text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-transform hover:scale-105">
+                Let's Talk
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-primary" onclick="toggleMenu()">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center space-y-8">
+        <button class="absolute top-6 right-6" onclick="toggleMenu()">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <a href="#about" class="text-2xl font-serif" onclick="toggleMenu()">About</a>
+        <a href="#software" class="text-2xl font-serif" onclick="toggleMenu()">Software</a>
+        <a href="#services" class="text-2xl font-serif" onclick="toggleMenu()">Services</a>
+        <a href="#portfolio" class="text-2xl font-serif" onclick="toggleMenu()">Portfolio</a>
+        <a href="#rates" class="text-2xl font-serif" onclick="toggleMenu()">Rates</a>
+        <a href="#contact" class="text-xl px-8 py-3 bg-primary text-white rounded-full" onclick="toggleMenu()">Contact
+            Me</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center pt-20 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-5 pointer-events-none">
+            <!-- Decorative giant text background -->
+            <h1 class="text-[20vw] font-serif text-center leading-none text-gray-900 select-none">MF</h1>
+        </div>
+
+        <div class="z-10 text-center max-w-4xl mx-auto space-y-8 reveal">
+            <p class="text-sm uppercase tracking-[0.2em] text-gray-500">Virtual Assistant & Creative Strategist</p>
+
+            <!-- Big Center Text Logo -->
+            <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl text-primary leading-tight tracking-tight">
+                Mary<br><span class="italic font-light">Maven</span>
+            </h1>
+
+            <p class="text-gray-600 max-w-lg mx-auto text-lg md:text-xl font-light">
+                Elevating your business through organized efficiency and creative excellence.
+            </p>
+
+            <div class="pt-8">
+                <a href="#portfolio"
+                    class="inline-flex items-center space-x-2 border-b border-black pb-1 hover:opacity-70 transition-opacity">
+                    <span>View Selected Works</span>
+                    <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Floating Image (Professional) -->
+        <div class="mt-16 relative w-64 h-80 md:w-80 md:h-96 reveal">
+            <div class="absolute inset-0 border border-gray-300 transform translate-x-4 translate-y-4"></div>
+            <img src="photo.png" alt="Maven Flaviano Professional"
+                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl relative z-10"
+                onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div class="order-2 md:order-1 reveal">
+                <div class="relative overflow-hidden rounded-lg aspect-[4/5]">
+                    <!-- Using the Garden Photo here for a more 'personal' intro vibe -->
+                    <img src="photo.jpg" alt="Maven Flaviano in Garden"
+                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                        onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                </div>
+            </div>
+            <div class="order-1 md:order-2 space-y-6 reveal">
+                <h2 class="font-serif text-4xl md:text-5xl">Efficiency meets <span
+                        class="italic text-gray-500">Empathy.</span></h2>
+                <div class="w-12 h-0.5 bg-primary"></div>
+                <p class="text-gray-600 leading-relaxed">
+                    Hello, I'm Mary. I specialize in helping entrepreneurs reclaim their time. With a background in
+                    administrative support and a passion for digital organization, I seamlessly blend into your workflow
+                    to handle the details so you can focus on the big picture.
+                </p>
+                <p class="text-gray-600 leading-relaxed">
+                    Whether it's managing your chaotic inbox, scheduling high-priority meetings, or designing a slide
+                    deck that converts, I bring a calm, professional, and proactive approach to every task.
+                </p>
+                <div class="pt-4 grid grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-serif text-2xl">5+</h4>
+                        <p class="text-xs text-gray-500 uppercase tracking-wider">Years Experience</p>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-2xl">50+</h4>
+                        <p class="text-xs text-gray-500 uppercase tracking-wider">Happy Clients</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Softwares Section -->
+    <section id="software" class="py-20 bg-[#f4f4f0]">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="font-serif text-3xl mb-12 reveal">Digital Command Center</h2>
+
+            <div class="flex flex-wrap justify-center gap-8 md:gap-12 reveal">
+                <!-- Software Items -->
+                <div class="flex flex-col items-center space-y-2 group stagger-delay">
+                    <div
+                        class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-all group-hover:-translate-y-1">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+                            class="w-8 h-8" alt="Google Workspace">
+                    </div>
+                    <span class="text-xs font-medium text-gray-500">Workspace</span>
+                </div>
+
+                <div class="flex flex-col items-center space-y-2 group stagger-delay">
+                    <div
+                        class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-all group-hover:-translate-y-1">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg"
+                            class="w-8 h-8" alt="Trello">
+                    </div>
+                    <span class="text-xs font-medium text-gray-500">Trello</span>
+                </div>
+
+                <div class="flex flex-col items-center space-y-2 group stagger-delay">
+                    <div
+                        class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-all group-hover:-translate-y-1">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg"
+                            class="w-8 h-8" alt="Slack">
+                    </div>
+                    <span class="text-xs font-medium text-gray-500">Slack</span>
+                </div>
+
+                <div class="flex flex-col items-center space-y-2 group stagger-delay">
+                    <div
+                        class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-all group-hover:-translate-y-1">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Notion_app_logo.png"
+                            class="w-8 h-8" alt="Notion">
+                    </div>
+                    <span class="text-xs font-medium text-gray-500">Notion</span>
+                </div>
+
+                <div class="flex flex-col items-center space-y-2 group stagger-delay">
+                    <div
+                        class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-all group-hover:-translate-y-1">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Canva_icon_2021.svg"
+                            class="w-8 h-8" alt="Canva">
+                    </div>
+                    <span class="text-xs font-medium text-gray-500">Canva</span>
+                </div>
+
+                <div class="flex flex-col items-center space-y-2 group stagger-delay">
+                    <div
+                        class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-all group-hover:-translate-y-1">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+                            class="w-8 h-8" alt="Figma">
+                    </div>
+                    <span class="text-xs font-medium text-gray-500">Figma</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 reveal">
+                <span class="text-xs font-bold uppercase tracking-widest text-gray-400">What I Do</span>
+                <h2 class="text-4xl font-serif mt-2">Curated Services</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div
+                    class="group p-8 border border-gray-100 bg-white hover:border-gray-900 transition-all duration-500 hover:shadow-xl reveal stagger-delay cursor-default">
+                    <div
+                        class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-black group-hover:text-white transition-colors">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-serif text-xl mb-3">Admin Support</h3>
+                    <p class="text-sm text-gray-500 leading-relaxed mb-6">Inbox management, calendar scheduling, data
+                        entry, and travel arrangements handled with precision.</p>
+                    <ul class="text-xs text-gray-400 space-y-2">
+                        <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2"></i> Email Triage</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2"></i> Calendar
+                            Management</li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div
+                    class="group p-8 border border-gray-100 bg-white hover:border-gray-900 transition-all duration-500 hover:shadow-xl reveal stagger-delay cursor-default">
+                    <div
+                        class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-black group-hover:text-white transition-colors">
+                        <i data-lucide="pen-tool" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-serif text-xl mb-3">Creative Design</h3>
+                    <p class="text-sm text-gray-500 leading-relaxed mb-6">Basic graphic design for social media,
+                        presentations, and branding materials using Canva or Figma.</p>
+                    <ul class="text-xs text-gray-400 space-y-2">
+                        <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2"></i> Social Media
+                            Assets</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2"></i> Presentation
+                            Decks</li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div
+                    class="group p-8 border border-gray-100 bg-white hover:border-gray-900 transition-all duration-500 hover:shadow-xl reveal stagger-delay cursor-default">
+                    <div
+                        class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-black group-hover:text-white transition-colors">
+                        <i data-lucide="users" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-serif text-xl mb-3">Customer Care</h3>
+                    <p class="text-sm text-gray-500 leading-relaxed mb-6">Managing client relationships, responding to
+                        inquiries, and ensuring your community feels heard.</p>
+                    <ul class="text-xs text-gray-400 space-y-2">
+                        <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2"></i> Live Chat Support
+                        </li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2"></i> CRM Management
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="py-20 bg-primary text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h2 class="font-serif text-3xl md:text-4xl mb-6">Capabilities &<br>Expertise</h2>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm">
+                        Beyond software, my skill set is built on a foundation of reliability, adaptability, and
+                        continuous learning.
+                    </p>
+                </div>
+                <div class="space-y-6 reveal">
+                    <!-- Skill Bar -->
+                    <div>
+                        <div class="flex justify-between text-xs uppercase tracking-wider mb-2">
+                            <span>Project Management</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="w-full h-px bg-gray-700">
+                            <div class="h-full bg-white w-[95%]"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Bar -->
+                    <div>
+                        <div class="flex justify-between text-xs uppercase tracking-wider mb-2">
+                            <span>Communication</span>
+                            <span>98%</span>
+                        </div>
+                        <div class="w-full h-px bg-gray-700">
+                            <div class="h-full bg-white w-[98%]"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Bar -->
+                    <div>
+                        <div class="flex justify-between text-xs uppercase tracking-wider mb-2">
+                            <span>Research</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="w-full h-px bg-gray-700">
+                            <div class="h-full bg-white w-[90%]"></div>
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="pt-6 flex flex-wrap gap-3">
+                        <span class="px-4 py-1 border border-gray-700 rounded-full text-xs text-gray-300">Time
+                            Management</span>
+                        <span class="px-4 py-1 border border-gray-700 rounded-full text-xs text-gray-300">Problem
+                            Solving</span>
+                        <span class="px-4 py-1 border border-gray-700 rounded-full text-xs text-gray-300">Detail
+                            Oriented</span>
+                        <span
+                            class="px-4 py-1 border border-gray-700 rounded-full text-xs text-gray-300">Adaptability</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-end mb-12 reveal">
+                <h2 class="font-serif text-4xl">Selected Work</h2>
+                <span class="hidden md:inline text-xs uppercase tracking-widest text-gray-400">2023 - 2024</span>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Item 1 -->
+                <div class="group cursor-pointer reveal stagger-delay">
+                    <div class="overflow-hidden bg-gray-100 aspect-[4/3] mb-4 relative">
+                        <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Project 1"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span
+                                class="text-white border border-white px-4 py-2 text-xs uppercase tracking-widest">View
+                                Case</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-lg">Social Media Strategy</h3>
+                    <p class="text-xs text-gray-500 mt-1">Content Calendar & Engagement</p>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="group cursor-pointer reveal stagger-delay">
+                    <div class="overflow-hidden bg-gray-100 aspect-[4/3] mb-4 relative">
+                        <img src="https://images.unsplash.com/photo-1542435503-956c469947f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Project 2"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span
+                                class="text-white border border-white px-4 py-2 text-xs uppercase tracking-widest">View
+                                Case</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-lg">Executive Scheduling</h3>
+                    <p class="text-xs text-gray-500 mt-1">Calendar Audit & Optimization</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rates Section -->
+    <section id="rates" class="py-24 bg-[#f9f9f9]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-serif text-4xl">Investment</h2>
+                <p class="text-gray-500 mt-4">Transparent pricing for your peace of mind.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <!-- Basic -->
+                <div
+                    class="bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 reveal stagger-delay border-t-4 border-gray-200">
+                    <h3 class="font-serif text-xl mb-2">Retainer Lite</h3>
+                    <div class="text-3xl font-bold mb-6">$500<span class="text-sm font-normal text-gray-400">/mo</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-6">Perfect for maintaining established workflows.</p>
+                    <ul class="space-y-3 text-sm text-gray-600 mb-8">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-green-800"></i> 10
+                            Hours / Month</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-green-800"></i>
+                            Email Management</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-green-800"></i>
+                            Weekly Report</li>
+                    </ul>
+                    <a href="#contact"
+                        class="block text-center w-full py-3 border border-black hover:bg-black hover:text-white transition-colors text-xs uppercase tracking-widest">Inquire</a>
+                </div>
+
+                <!-- Pro (Featured) -->
+                <div
+                    class="bg-primary text-white p-8 rounded-lg shadow-2xl transform md:-translate-y-4 reveal stagger-delay border-t-4 border-gray-500">
+                    <div
+                        class="absolute top-0 right-0 bg-white text-black text-[10px] font-bold px-2 py-1 uppercase tracking-widest">
+                        Popular</div>
+                    <h3 class="font-serif text-xl mb-2">Professional</h3>
+                    <div class="text-3xl font-bold mb-6">$1,200<span
+                            class="text-sm font-normal text-gray-400">/mo</span></div>
+                    <p class="text-xs text-gray-400 mb-6">For growing businesses needing daily support.</p>
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2"></i> 25 Hours / Month
+                        </li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2"></i> Daily
+                            Communication</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2"></i> Project
+                            Management</li>
+                    </ul>
+                    <a href="#contact"
+                        class="block text-center w-full py-3 bg-white text-black hover:bg-gray-200 transition-colors text-xs uppercase tracking-widest">Inquire</a>
+                </div>
+
+                <!-- Premium -->
+                <div
+                    class="bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 reveal stagger-delay border-t-4 border-gray-200">
+                    <h3 class="font-serif text-xl mb-2">Executive</h3>
+                    <div class="text-3xl font-bold mb-6">$2,500<span
+                            class="text-sm font-normal text-gray-400">/mo</span></div>
+                    <p class="text-xs text-gray-500 mb-6">Full-scale support as your right hand.</p>
+                    <ul class="space-y-3 text-sm text-gray-600 mb-8">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-green-800"></i> 60
+                            Hours / Month</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-green-800"></i>
+                            Priority Support</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-green-800"></i>
+                            Strategy Sessions</li>
+                    </ul>
+                    <a href="#contact"
+                        class="block text-center w-full py-3 border border-black hover:bg-black hover:text-white transition-colors text-xs uppercase tracking-widest">Inquire</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 bg-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="font-serif text-5xl md:text-6xl mb-6 reveal">Let's work together.</h2>
+            <p class="text-gray-500 mb-12 reveal">Have a project in mind? Let's discuss how I can help you.</p>
+
+            <form class="space-y-6 max-w-md mx-auto reveal text-left">
+                <div>
+                    <label class="text-xs uppercase tracking-widest text-gray-400 block mb-2">Name</label>
+                    <input type="text"
+                        class="w-full border-b border-gray-300 py-2 focus:outline-none focus:border-black bg-transparent transition-colors">
+                </div>
+                <div>
+                    <label class="text-xs uppercase tracking-widest text-gray-400 block mb-2">Email</label>
+                    <input type="email"
+                        class="w-full border-b border-gray-300 py-2 focus:outline-none focus:border-black bg-transparent transition-colors">
+                </div>
+                <div>
+                    <label class="text-xs uppercase tracking-widest text-gray-400 block mb-2">Message</label>
+                    <textarea rows="4"
+                        class="w-full border-b border-gray-300 py-2 focus:outline-none focus:border-black bg-transparent transition-colors"></textarea>
+                </div>
+                <button type="button"
+                    class="w-full bg-black text-white py-4 mt-4 uppercase tracking-widest text-xs hover:bg-gray-800 transition-colors">
+                    Send Message
+                </button>
+            </form>
+
+            <div class="mt-16 flex justify-center space-x-8 text-gray-400 reveal">
+                <a href="#" class="hover:text-black transition-colors"><i data-lucide="instagram"></i></a>
+                <a href="#" class="hover:text-black transition-colors"><i data-lucide="linkedin"></i></a>
+                <a href="#" class="hover:text-black transition-colors"><i data-lucide="twitter"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+            <div class="mb-4 md:mb-0">
+                &copy; 2024 Maven Flaviano Portfolio. All Rights Reserved.
+            </div>
+            <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
+                <a href="#" class="hover:text-white transition-colors">Design by : Blockscom Media</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Smooth Scroll Animation (Locomotive-style feel using Intersection Observer)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const isOpen = !menu.classList.contains('translate-x-full');
+
+            if (isOpen) {
+                menu.classList.add('translate-x-full');
+            } else {
+                menu.classList.remove('translate-x-full');
+            }
+        }
+
+        // Navbar blur effect on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-sm');
+            } else {
+                nav.classList.remove('shadow-sm');
+            }
+        });
+    </script>
+</body>
+
+</html>

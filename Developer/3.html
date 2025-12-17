@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en" class="is-smooth-scroll-compatible-el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramil Flaviano Jr Portfolio</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.jpg" type="image/jpeg">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Ramil Flaviano Jr - AI Developer & Virtual Assistant">
+    <meta property="og:description" content="I leverage AI in many real-world use cases and build custom AI-driven applications.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://ramilflavianojr.com"> <!-- Replace with actual URL -->
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Locomotive Scroll CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'void': '#050505',
+                        'cyber-gray': '#1a1a1a',
+                        'neon-blue': '#00f3ff',
+                        'neon-purple': '#bc13fe',
+                        'glass': 'rgba(255, 255, 255, 0.03)'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --cursor-size: 20px;
+        }
+
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            overflow: hidden; /* For Locomotive Scroll */
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: var(--cursor-size);
+            height: var(--cursor-size);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.2s ease;
+        }
+        
+        .cursor-dot {
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 10000;
+        }
+
+        /* Glitch Effect on Hover for Text */
+        .glitch-hover:hover {
+            animation: glitch-anim 0.3s infinite;
+            color: #00f3ff;
+        }
+
+        @keyframes glitch-anim {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        /* Futuristic Card Hover */
+        .project-card {
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.0) 100%);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .project-card:hover {
+            border-color: rgba(0, 243, 255, 0.5);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .project-card:hover .arrow-icon {
+            transform: translate(5px, -5px);
+            color: #00f3ff;
+        }
+
+        /* Image treatment */
+        .ghost-img {
+            filter: grayscale(100%) contrast(120%);
+            mix-blend-mode: luminosity;
+            transition: opacity 1s ease;
+        }
+
+        /* Navigation Line Animation */
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 1px;
+            background: #00f3ff;
+            transition: width .3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /*! locomotive-scroll v4.1.3 | MIT License | https://github.com/locomotivemtl/locomotive-scroll */
+        html.has-scroll-smooth {
+            overflow: hidden;
+        }
+        html.has-scroll-dragging {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .has-scroll-init {
+            height: 100%;
+        }
+        .has-scroll-smooth body {
+            overflow: hidden;
+        }
+        .c-scrollbar {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 11px;
+            height: 100%;
+            transform-origin: center right;
+            transition: transform 0.3s, opacity 0.3s;
+            opacity: 0;
+        }
+        .c-scrollbar:hover {
+            transform: scaleX(1.45);
+        }
+        .c-scrollbar:hover, .has-scroll-scrolling .c-scrollbar, .has-scroll-dragging .c-scrollbar {
+            opacity: 1;
+        }
+        .c-scrollbar_thumb {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #00f3ff;
+            opacity: 0.5;
+            width: 7px;
+            border-radius: 10px;
+            margin: 2px;
+            cursor: -webkit-grab;
+            cursor: grab;
+        }
+        .has-scroll-dragging .c-scrollbar_thumb {
+            cursor: -webkit-grabbing;
+            cursor: grabbing;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-neon-blue selection:text-black">
+
+    <!-- Custom Cursor Elements -->
+    <div class="cursor hidden md:block"></div>
+    <div class="cursor-dot hidden md:block"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-12 flex justify-between items-center mix-blend-difference">
+        <div class="font-display font-bold text-xl tracking-widest text-white">RF<span class="text-neon-blue">JR</span>.</div>
+        <div class="hidden md:flex space-x-8 font-mono text-sm tracking-widest">
+            <a href="#about" class="nav-link text-gray-300 hover:text-white transition-colors">ABOUT</a>
+            <a href="#work" class="nav-link text-gray-300 hover:text-white transition-colors">WORK</a>
+            <a href="#contact" class="nav-link text-gray-300 hover:text-white transition-colors">CONTACT</a>
+        </div>
+        <!-- Mobile Menu Button (Icon only for visual) -->
+        <button class="md:hidden text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Main Scroll Container -->
+    <div data-scroll-container>
+
+        <!-- Hero Section -->
+        <section class="relative h-screen flex flex-col items-center justify-center overflow-hidden" data-scroll-section>
+            
+            <!-- Background Elements -->
+            <div class="absolute inset-0 z-0">
+                <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-blue rounded-full filter blur-[150px] opacity-10 animate-pulse"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon-purple rounded-full filter blur-[150px] opacity-10 animate-pulse" style="animation-delay: 1s;"></div>
+            </div>
+
+            <!-- Big Text Logo -->
+            <div class="relative z-20 text-center px-4 mix-blend-difference">
+                <h1 class="font-display font-black text-5xl md:text-8xl lg:text-9xl leading-none tracking-tighter mb-4" 
+                    data-scroll 
+                    data-scroll-speed="1" 
+                    data-scroll-position="top">
+                    RAMIL<br>
+                    <span class="text-stroke text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-600">FLAVIANO</span><br>
+                    JR
+                </h1>
+                <p class="font-mono text-xs md:text-sm text-neon-blue tracking-[0.3em] mt-6 uppercase" data-scroll data-scroll-speed="1.5">
+                    Web Developer & Virtual Assistant
+                </p>
+            </div>
+
+            <!-- Image: Half Body Standing (photo.png) -->
+            <!-- Positioned to blend with the text or sit behind it -->
+            <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-10 w-full max-w-2xl opacity-40 pointer-events-none"
+                 data-scroll data-scroll-speed="-2">
+                <!-- Using a mask to fade the bottom -->
+                <div class="relative w-full h-full">
+                    <img src="photo.png" 
+                         alt="Ramil Flaviano Jr Standing" 
+                         class="w-full h-auto object-cover ghost-img mask-image-b"
+                         onerror="this.style.display='none'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-void via-transparent to-transparent"></div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-6 md:left-12 z-20 animate-bounce">
+                <span class="font-mono text-[10px] text-gray-500 tracking-widest vertical-text">SCROLL DOWN</span>
+            </div>
+        </section>
+
+        <!-- About / AI Section -->
+        <section id="about" class="relative py-24 md:py-48 px-6 md:px-12 w-full max-w-7xl mx-auto" data-scroll-section>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                
+                <!-- Text Content -->
+                <div data-scroll data-scroll-speed="1">
+                    <h2 class="font-display text-4xl md:text-6xl font-bold mb-8">
+                        The <span class="text-neon-blue">Future</span><br>Is Automated.
+                    </h2>
+                    <p class="font-sans text-lg md:text-xl text-gray-400 leading-relaxed mb-8 border-l-2 border-neon-purple pl-6">
+                        I leverage AI in many real-world use cases and build custom AI-driven applications. My mission is to bridge the gap between human creativity and machine efficiency.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 font-mono text-sm text-gray-500">
+                        <span class="px-4 py-2 border border-gray-800 rounded-full hover:border-neon-blue hover:text-neon-blue transition-colors cursor-default">#MachineLearning</span>
+                        <span class="px-4 py-2 border border-gray-800 rounded-full hover:border-neon-blue hover:text-neon-blue transition-colors cursor-default">#WebDev</span>
+                        <span class="px-4 py-2 border border-gray-800 rounded-full hover:border-neon-blue hover:text-neon-blue transition-colors cursor-default">#Automation</span>
+                    </div>
+                </div>
+
+                <!-- Image: Half Body Sitting (photo.jpg) -->
+                <div class="relative" data-scroll data-scroll-speed="2">
+                    <div class="relative z-10 overflow-hidden rounded-sm bg-gray-900 aspect-[3/4]">
+                        <img src="photo.jpg" 
+                             alt="Ramil Sitting" 
+                             class="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity duration-700 ghost-img"
+                             onerror="this.src='https://placehold.co/600x800/1a1a1a/FFF?text=Image+Not+Found'">
+                        
+                        <!-- Tech Overlay -->
+                        <div class="absolute top-4 right-4 font-mono text-[10px] text-neon-blue">
+                            SYS.STATUS: ONLINE<br>
+                            LOC: CAFETERIA_NODE
+                        </div>
+                    </div>
+                    <!-- Decorative Frame -->
+                    <div class="absolute -top-4 -right-4 w-full h-full border border-gray-800 -z-10"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="work" class="py-24 px-6 md:px-12 w-full max-w-7xl mx-auto" data-scroll-section>
+            <div class="flex justify-between items-end mb-20" data-scroll>
+                <h2 class="font-display text-5xl md:text-7xl font-bold text-gray-100">SELECTED<br><span class="text-gray-800">WORKS</span></h2>
+                <span class="hidden md:block font-mono text-xs text-neon-blue mb-2">[ 2023 - 2025 ]</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Project 1 -->
+                <article class="project-card group p-8 rounded-sm cursor-pointer relative overflow-hidden" data-scroll data-scroll-speed="1">
+                    <div class="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <svg class="arrow-icon w-6 h-6 text-white transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </div>
+                    <div class="mt-40">
+                        <h3 class="font-display text-2xl font-bold mb-2 text-white">AI Chat Assistant</h3>
+                        <p class="font-sans text-gray-400 text-sm mb-4">React • OpenAI API • Node.js</p>
+                        <p class="font-mono text-xs text-gray-600 uppercase tracking-wider group-hover:text-neon-blue transition-colors">View Case Study</p>
+                    </div>
+                </article>
+
+                <!-- Project 2 (Offset for staggering) -->
+                <article class="project-card group p-8 rounded-sm cursor-pointer relative overflow-hidden md:mt-24" data-scroll data-scroll-speed="2">
+                    <div class="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <svg class="arrow-icon w-6 h-6 text-white transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </div>
+                    <div class="mt-40">
+                        <h3 class="font-display text-2xl font-bold mb-2 text-white">E-Commerce Automation</h3>
+                        <p class="font-sans text-gray-400 text-sm mb-4">Python • Selenium • Shopify</p>
+                        <p class="font-mono text-xs text-gray-600 uppercase tracking-wider group-hover:text-neon-blue transition-colors">View Case Study</p>
+                    </div>
+                </article>
+
+                 <!-- Project 3 -->
+                 <article class="project-card group p-8 rounded-sm cursor-pointer relative overflow-hidden" data-scroll data-scroll-speed="1">
+                    <div class="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <svg class="arrow-icon w-6 h-6 text-white transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </div>
+                    <div class="mt-40">
+                        <h3 class="font-display text-2xl font-bold mb-2 text-white">Data Visualization Dashboard</h3>
+                        <p class="font-sans text-gray-400 text-sm mb-4">D3.js • Vue • Firebase</p>
+                        <p class="font-mono text-xs text-gray-600 uppercase tracking-wider group-hover:text-neon-blue transition-colors">View Case Study</p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Marquee Section -->
+        <section class="py-12 overflow-hidden bg-white text-black" data-scroll-section>
+            <div class="whitespace-nowrap flex overflow-hidden w-full" data-scroll data-scroll-direction="horizontal" data-scroll-speed="12" data-scroll-target="#direction-target">
+                <span class="font-display text-6xl md:text-9xl font-black mx-4">INNOVATE</span>
+                <span class="font-display text-6xl md:text-9xl font-black mx-4 text-transparent stroke-text" style="-webkit-text-stroke: 2px black;">BUILD</span>
+                <span class="font-display text-6xl md:text-9xl font-black mx-4">DEPLOY</span>
+                <span class="font-display text-6xl md:text-9xl font-black mx-4 text-transparent" style="-webkit-text-stroke: 2px black;">SCALE</span>
+                <span class="font-display text-6xl md:text-9xl font-black mx-4">INNOVATE</span>
+                <span class="font-display text-6xl md:text-9xl font-black mx-4 text-transparent" style="-webkit-text-stroke: 2px black;">BUILD</span>
+            </div>
+            <div id="direction-target"></div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact" class="bg-void py-24 px-6 md:px-12 relative overflow-hidden" data-scroll-section>
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <h2 class="font-display text-4xl font-bold mb-6">Let's Build the Future</h2>
+                        <a href="mailto:contact@ramilflaviano.com" class="text-2xl md:text-3xl text-gray-400 hover:text-white hover:text-neon-blue transition-colors border-b border-gray-800 pb-2 inline-block">
+                            hello@ramilflaviano.com
+                        </a>
+                    </div>
+                    <div class="flex flex-col justify-end items-start md:items-end">
+                        <div class="flex space-x-6 mb-8">
+                            <a href="#" class="text-gray-500 hover:text-white transition-colors">LinkedIn</a>
+                            <a href="#" class="text-gray-500 hover:text-white transition-colors">GitHub</a>
+                            <a href="#" class="text-gray-500 hover:text-white transition-colors">Twitter</a>
+                        </div>
+                        <p class="font-mono text-xs text-gray-700">
+                            © 2025 Ramil Flaviano Jr. All rights reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Large Background Footer Logo -->
+            <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/3 opacity-5 pointer-events-none select-none whitespace-nowrap">
+                <h1 class="font-display font-black text-[20vw] leading-none text-white">RFJR</h1>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize Locomotive Scroll
+            const scroll = new LocomotiveScroll({
+                el: document.querySelector('[data-scroll-container]'),
+                smooth: true,
+                multiplier: 1,
+                lerp: 0.05,
+                tablet: { smooth: true },
+                smartphone: { smooth: true }
+            });
+
+            // Update GSAP ScrollTrigger when Locomotive Scroll updates
+            gsap.registerPlugin(ScrollTrigger);
+            scroll.on("scroll", ScrollTrigger.update);
+
+            ScrollTrigger.scrollerProxy("[data-scroll-container]", {
+                scrollTop(value) {
+                    return arguments.length ? scroll.scrollTo(value, 0, 0) : scroll.scroll.instance.scroll.y;
+                },
+                getBoundingClientRect() {
+                    return {top: 0, left: 0, width: window.innerWidth, height: window.innerHeight};
+                },
+                pinType: document.querySelector("[data-scroll-container]").style.transform ? "transform" : "fixed"
+            });
+
+            // Custom Cursor Logic
+            const cursor = document.querySelector('.cursor');
+            const cursorDot = document.querySelector('.cursor-dot');
+            
+            document.addEventListener('mousemove', (e) => {
+                const { clientX, clientY } = e;
+                cursorDot.style.left = clientX + 'px';
+                cursorDot.style.top = clientY + 'px';
+                
+                // Slight delay for the outer circle for "magnetic" feel
+                setTimeout(() => {
+                    cursor.style.left = (clientX - 10) + 'px';
+                    cursor.style.top = (clientY - 10) + 'px';
+                }, 50);
+            });
+
+            // Refresh ScrollTrigger/Locomotive on resize
+            ScrollTrigger.addEventListener("refresh", () => scroll.update());
+            ScrollTrigger.refresh();
+
+            // Reveal Animation on Load
+            const tl = gsap.timeline();
+            tl.from("h1 span, h1", {
+                y: 100,
+                opacity: 0,
+                duration: 1.5,
+                stagger: 0.1,
+                ease: "power4.out"
+            })
+            .from(".nav-link", {
+                y: -20,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.05,
+                ease: "power2.out"
+            }, "-=1");
+
+        });
+    </script>
+</body>
+</html>

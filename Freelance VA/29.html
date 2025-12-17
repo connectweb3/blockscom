@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Flaviano Portfolio</title>
+    <link rel="icon" href="favicon.jpg" type="image/jpeg">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Maven Flaviano Portfolio - Virtual Assistant">
+    <meta property="og:description"
+        content="Professional Virtual Assistant Services. Expert in administrative support, project management, and creative design.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://maryvalerie.com">
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom Config & Styles -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#0a0a0a',
+                        card: '#111111',
+                        accent: '#ffffff',
+                        muted: '#666666'
+                    },
+                    animation: {
+                        'marquee': 'marquee 25s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Utility for reveal animations */
+        .reveal-text {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            transform: translateY(100%);
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-text.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scale-reveal {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s ease-out;
+        }
+
+        .scale-reveal.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Smooth Scrolling mimicking Locomotive */
+        html.lenis {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-white overflow-x-hidden antialiased selection:bg-white selection:text-black">
+
+    <!-- Top Flowing Note -->
+    <div class="fixed top-0 left-0 w-full z-50 bg-white text-black py-2 overflow-hidden border-b border-gray-200">
+        <div class="whitespace-nowrap animate-marquee flex items-center">
+            <span class="mx-4 text-xs font-bold uppercase tracking-widest">Everything is customizable — you can edit,
+                remove, or change anything. We handle it all.</span>
+            <span class="mx-4 text-xs font-bold uppercase tracking-widest">•</span>
+            <span class="mx-4 text-xs font-bold uppercase tracking-widest">Everything is customizable — you can edit,
+                remove, or change anything. We handle it all.</span>
+            <span class="mx-4 text-xs font-bold uppercase tracking-widest">•</span>
+            <span class="mx-4 text-xs font-bold uppercase tracking-widest">Everything is customizable — you can edit,
+                remove, or change anything. We handle it all.</span>
+            <span class="mx-4 text-xs font-bold uppercase tracking-widest">•</span>
+            <span class="mx-4 text-xs font-bold uppercase tracking-widest">Everything is customizable — you can edit,
+                remove, or change anything. We handle it all.</span>
+            <span class="mx-4 text-xs font-bold uppercase tracking-widest">•</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-10 z-40 bg-dark/80 backdrop-blur-md border-b border-white/5 transition-all duration-300"
+        id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-display font-bold tracking-tighter">MF.</a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 text-sm font-medium tracking-wide text-gray-400">
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="#services" class="hover:text-white transition-colors">Services</a>
+                <a href="#portfolio" class="hover:text-white transition-colors">Portfolio</a>
+                <a href="#rates" class="hover:text-white transition-colors">Rates</a>
+                <a href="#contact"
+                    class="px-5 py-2 bg-white text-black rounded-full hover:bg-gray-200 transition-colors">Let's
+                    Talk</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 z-40 bg-black flex flex-col items-center justify-center space-y-8 opacity-0 pointer-events-none transition-opacity duration-300">
+        <button id="close-menu-btn" class="absolute top-14 right-6 text-white text-2xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#about" class="text-3xl font-display font-bold hover:text-gray-400 mobile-link">About</a>
+        <a href="#services" class="text-3xl font-display font-bold hover:text-gray-400 mobile-link">Services</a>
+        <a href="#portfolio" class="text-3xl font-display font-bold hover:text-gray-400 mobile-link">Portfolio</a>
+        <a href="#rates" class="text-3xl font-display font-bold hover:text-gray-400 mobile-link">Rates</a>
+        <a href="#contact" class="text-3xl font-display font-bold hover:text-gray-400 mobile-link">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center relative pt-20 px-4 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-[100px] pointer-events-none"></div>
+        <div
+            class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gray-800/20 rounded-full blur-[80px] pointer-events-none">
+        </div>
+
+        <div class="z-10 text-center max-w-5xl mx-auto">
+            <p class="text-sm md:text-base text-gray-400 tracking-[0.3em] uppercase mb-4 fade-in-up">Virtual Assistant &
+                Creative Specialist</p>
+            <h1 class="text-[12vw] leading-none font-display font-bold tracking-tighter mix-blend-difference fade-in-up"
+                style="transition-delay: 100ms;">
+                MARY<br>Maven
+            </h1>
+            <div class="mt-8 flex flex-col md:flex-row items-center justify-center gap-6 fade-in-up"
+                style="transition-delay: 200ms;">
+                <p class="max-w-md text-gray-400 text-lg leading-relaxed text-center md:text-left">
+                    Crafting efficiency and creativity for entrepreneurs worldwide. I handle the details so you can
+                    focus on the vision.
+                </p>
+                <div class="w-24 h-[1px] bg-white/20 hidden md:block"></div>
+                <div class="flex gap-4">
+                    <a href="#contact"
+                        class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 group">
+                        <i class="fas fa-arrow-down transform group-hover:rotate-0 -rotate-45 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Big Professional Photo Overlay (Artistic) -->
+        <div
+            class="mt-12 relative w-64 h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden scale-reveal border border-white/10 group grayscale hover:grayscale-0 transition-all duration-700">
+            <!-- Placeholder for photo.png (Professional Blazer) -->
+            <img src="photo.png"
+                onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'; this.alt='Professional Fallback';"
+                alt="Maven Flaviano Professional"
+                class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+            <div class="absolute bottom-4 left-4">
+                <p class="text-xs text-white/80 uppercase tracking-widest">Professional</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction / About Section -->
+    <section id="about" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="relative scale-reveal">
+                <!-- Placeholder for photo.jpg (Garden Laptop) -->
+                <div class="aspect-[4/5] rounded-lg overflow-hidden relative">
+                    <img src="photo.jpg"
+                        onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'; this.alt='Garden Fallback';"
+                        alt="Working Remotely"
+                        class="object-cover w-full h-full hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-black/20"></div>
+                </div>
+                <!-- Decorative element -->
+                <div
+                    class="absolute -bottom-6 -right-6 w-32 h-32 bg-dark border border-white/10 p-4 flex items-center justify-center text-center rounded-lg shadow-2xl">
+                    <div>
+                        <span class="block text-3xl font-display font-bold">5+</span>
+                        <span class="text-xs text-gray-400 uppercase">Years Exp.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                <h2 class="text-4xl md:text-5xl font-display font-bold leading-tight reveal-text">
+                    More than just an assistant.<br>
+                    <span class="text-gray-500">I'm your strategic partner.</span>
+                </h2>
+                <div class="space-y-4 text-gray-400 text-lg reveal-text" style="transition-delay: 100ms;">
+                    <p>
+                        My name is Maven Flaviano. I bridge the gap between chaos and clarity. Whether I'm sitting in a
+                        garden with my laptop or in a boardroom, my focus remains the same: delivering excellence.
+                    </p>
+                    <p>
+                        I specialize in streamlining operations, managing creative assets, and ensuring your business
+                        runs like a well-oiled machine while you sleep.
+                    </p>
+                </div>
+
+                <!-- Software Stack -->
+                <div class="pt-8">
+                    <h3 class="text-sm uppercase tracking-widest text-white mb-6">Software Arsenal</h3>
+                    <div class="flex flex-wrap gap-4 fade-in-up">
+                        <span
+                            class="px-4 py-2 border border-white/10 rounded-full text-sm hover:bg-white hover:text-black transition-colors cursor-default">Asana</span>
+                        <span
+                            class="px-4 py-2 border border-white/10 rounded-full text-sm hover:bg-white hover:text-black transition-colors cursor-default">Trello</span>
+                        <span
+                            class="px-4 py-2 border border-white/10 rounded-full text-sm hover:bg-white hover:text-black transition-colors cursor-default">Notion</span>
+                        <span
+                            class="px-4 py-2 border border-white/10 rounded-full text-sm hover:bg-white hover:text-black transition-colors cursor-default">Canva
+                            Pro</span>
+                        <span
+                            class="px-4 py-2 border border-white/10 rounded-full text-sm hover:bg-white hover:text-black transition-colors cursor-default">Slack</span>
+                        <span
+                            class="px-4 py-2 border border-white/10 rounded-full text-sm hover:bg-white hover:text-black transition-colors cursor-default">Google
+                            Workspace</span>
+                        <span
+                            class="px-4 py-2 border border-white/10 rounded-full text-sm hover:bg-white hover:text-black transition-colors cursor-default">WordPress</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-card/30 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mb-4 reveal-text">My Services</h2>
+                    <p class="text-gray-400 max-w-md reveal-text">Tailored solutions designed to give you back your most
+                        valuable asset: Time.</p>
+                </div>
+                <a href="#contact"
+                    class="hidden md:block text-sm border-b border-white pb-1 hover:text-gray-300 transition-colors">View
+                    Custom Packages</a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Service 1 -->
+                <div class="glass-card p-8 rounded-2xl group fade-in-up">
+                    <div
+                        class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-black transition-colors">
+                        <i class="fas fa-calendar-check text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-display">Administrative Support</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Calendar management, email handling, travel arrangements, and customer support to keep your day
+                        organized.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-xs mr-2 text-white"></i> Inbox Zero
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-xs mr-2 text-white"></i> Scheduling
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-card p-8 rounded-2xl group fade-in-up" style="transition-delay: 100ms;">
+                    <div
+                        class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-black transition-colors">
+                        <i class="fas fa-pen-nib text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-display">Content & Creative</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Social media graphics, blog posting, newsletter creation, and basic video editing to maintain
+                        your brand presence.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-xs mr-2 text-white"></i> Canva Design
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-xs mr-2 text-white"></i> Copywriting
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-card p-8 rounded-2xl group fade-in-up" style="transition-delay: 200ms;">
+                    <div
+                        class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-black transition-colors">
+                        <i class="fas fa-tasks text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-display">Project Management</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Overseeing launches, team coordination, and SOP creation to scale your business operations
+                        effectively.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-xs mr-2 text-white"></i> Notion Setup
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-xs mr-2 text-white"></i> Team Sync
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <h2 class="text-center text-sm uppercase tracking-widest text-gray-500 mb-16 fade-in-up">Technical Proficiency
+        </h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <!-- Skill Items -->
+            <div class="fade-in-up group">
+                <div
+                    class="relative w-24 h-24 mx-auto mb-4 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white transition-colors">
+                    <span class="text-2xl font-display font-bold">95%</span>
+                    <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 36 36">
+                        <path class="text-gray-800"
+                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none" stroke="currentColor" stroke-width="1" />
+                        <path class="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" stroke-dasharray="95, 100"
+                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none" stroke="currentColor" stroke-width="1" />
+                    </svg>
+                </div>
+                <h4 class="font-medium">Organization</h4>
+            </div>
+
+            <div class="fade-in-up group" style="transition-delay: 100ms;">
+                <div
+                    class="relative w-24 h-24 mx-auto mb-4 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white transition-colors">
+                    <span class="text-2xl font-display font-bold">90%</span>
+                    <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 36 36">
+                        <path class="text-gray-800"
+                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none" stroke="currentColor" stroke-width="1" />
+                        <path class="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" stroke-dasharray="90, 100"
+                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none" stroke="currentColor" stroke-width="1" />
+                    </svg>
+                </div>
+                <h4 class="font-medium">Communication</h4>
+            </div>
+
+            <div class="fade-in-up group" style="transition-delay: 200ms;">
+                <div
+                    class="relative w-24 h-24 mx-auto mb-4 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white transition-colors">
+                    <span class="text-2xl font-display font-bold">85%</span>
+                    <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 36 36">
+                        <path class="text-gray-800"
+                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none" stroke="currentColor" stroke-width="1" />
+                        <path class="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" stroke-dasharray="85, 100"
+                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none" stroke="currentColor" stroke-width="1" />
+                    </svg>
+                </div>
+                <h4 class="font-medium">Design (Canva/Ps)</h4>
+            </div>
+
+            <div class="fade-in-up group" style="transition-delay: 300ms;">
+                <div
+                    class="relative w-24 h-24 mx-auto mb-4 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white transition-colors">
+                    <span class="text-2xl font-display font-bold">88%</span>
+                    <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 36 36">
+                        <path class="text-gray-800"
+                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none" stroke="currentColor" stroke-width="1" />
+                        <path class="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" stroke-dasharray="88, 100"
+                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none" stroke="currentColor" stroke-width="1" />
+                    </svg>
+                </div>
+                <h4 class="font-medium">Copywriting</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 bg-card/20">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <h2 class="text-4xl md:text-5xl font-display font-bold mb-12 reveal-text">Selected Works</h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="group relative overflow-hidden rounded-xl fade-in-up cursor-pointer">
+                    <div class="aspect-video bg-neutral-800 transition-transform duration-700 group-hover:scale-105">
+                        <!-- Placeholder Image -->
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity"
+                            alt="Project Dashboard">
+                    </div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-8">
+                        <span
+                            class="text-sm text-accent mb-2 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">Social
+                            Media Management</span>
+                        <h3
+                            class="text-2xl font-bold translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">
+                            Brand Revamp for Studio X</h3>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group relative overflow-hidden rounded-xl fade-in-up cursor-pointer"
+                    style="transition-delay: 100ms;">
+                    <div class="aspect-video bg-neutral-800 transition-transform duration-700 group-hover:scale-105">
+                        <img src="https://images.unsplash.com/photo-1554774853-719586f8c277?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity"
+                            alt="Organization">
+                    </div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-8">
+                        <span
+                            class="text-sm text-accent mb-2 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">Executive
+                            Assistance</span>
+                        <h3
+                            class="text-2xl font-bold translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">
+                            Notion System Architecture</h3>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="group relative overflow-hidden rounded-xl fade-in-up cursor-pointer"
+                    style="transition-delay: 200ms;">
+                    <div class="aspect-video bg-neutral-800 transition-transform duration-700 group-hover:scale-105">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity"
+                            alt="Presentation">
+                    </div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-8">
+                        <span
+                            class="text-sm text-accent mb-2 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">Presentation
+                            Design</span>
+                        <h3
+                            class="text-2xl font-bold translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">
+                            Investor Pitch Deck</h3>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="group relative overflow-hidden rounded-xl fade-in-up cursor-pointer"
+                    style="transition-delay: 300ms;">
+                    <div class="aspect-video bg-neutral-800 transition-transform duration-700 group-hover:scale-105">
+                        <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity"
+                            alt="Blog">
+                    </div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-8">
+                        <span
+                            class="text-sm text-accent mb-2 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">Content
+                            Strategy</span>
+                        <h3
+                            class="text-2xl font-bold translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">
+                            Tech Blog Growth</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rates Section -->
+    <section id="rates" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-display font-bold text-center mb-16 reveal-text">Investment</h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Rate 1 -->
+            <div class="border border-white/10 p-8 rounded-2xl hover:bg-white/5 transition-colors fade-in-up">
+                <h3 class="text-xl font-bold mb-2">Hourly</h3>
+                <div class="text-3xl font-display font-bold mb-6">$35<span
+                        class="text-sm text-gray-500 font-sans font-normal">/hour</span></div>
+                <p class="text-gray-400 text-sm mb-8 border-b border-white/10 pb-8">Perfect for ad-hoc tasks and
+                    flexible needs without long-term commitment.</p>
+                <ul class="space-y-4 text-sm text-gray-300 mb-8">
+                    <li class="flex items-center"><i class="fas fa-check text-accent mr-3"></i> Task-based tracking</li>
+                    <li class="flex items-center"><i class="fas fa-check text-accent mr-3"></i> Weekly reports</li>
+                    <li class="flex items-center"><i class="fas fa-check text-accent mr-3"></i> 5 hour minimum</li>
+                </ul>
+                <a href="#contact"
+                    class="block text-center w-full py-3 border border-white rounded-lg hover:bg-white hover:text-black transition-colors">Select
+                    Plan</a>
+            </div>
+
+            <!-- Rate 2 (Featured) -->
+            <div class="relative border border-white p-8 rounded-2xl bg-white/5 transform md:-translate-y-4 fade-in-up"
+                style="transition-delay: 100ms;">
+                <div
+                    class="absolute top-0 right-0 bg-white text-black text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">
+                    POPULAR</div>
+                <h3 class="text-xl font-bold mb-2">Retainer</h3>
+                <div class="text-3xl font-display font-bold mb-6">$1,200<span
+                        class="text-sm text-gray-500 font-sans font-normal">/month</span></div>
+                <p class="text-gray-400 text-sm mb-8 border-b border-white/10 pb-8">40 hours per month dedicated to your
+                    ongoing business operations.</p>
+                <ul class="space-y-4 text-sm text-gray-300 mb-8">
+                    <li class="flex items-center"><i class="fas fa-check text-accent mr-3"></i> Priority support</li>
+                    <li class="flex items-center"><i class="fas fa-check text-accent mr-3"></i> Strategy calls</li>
+                    <li class="flex items-center"><i class="fas fa-check text-accent mr-3"></i> Rollover hours (up to 5)
+                    </li>
+                </ul>
+                <a href="#contact"
+                    class="block text-center w-full py-3 bg-white text-black rounded-lg hover:bg-gray-200 transition-colors">Select
+                    Plan</a>
+            </div>
+
+            <!-- Rate 3 -->
+            <div class="border border-white/10 p-8 rounded-2xl hover:bg-white/5 transition-colors fade-in-up"
+                style="transition-delay: 200ms;">
+                <h3 class="text-xl font-bold mb-2">Project</h3>
+                <div class="text-3xl font-display font-bold mb-6">Custom</div>
+                <p class="text-gray-400 text-sm mb-8 border-b border-white/10 pb-8">Tailored pricing for specific
+                    one-off projects like launches or setup.</p>
+                <ul class="space-y-4 text-sm text-gray-300 mb-8">
+                    <li class="flex items-center"><i class="fas fa-check text-accent mr-3"></i> Fixed Scope</li>
+                    <li class="flex items-center"><i class="fas fa-check text-accent mr-3"></i> Milestone payments</li>
+                    <li class="flex items-center"><i class="fas fa-check text-accent mr-3"></i> Full asset handover</li>
+                </ul>
+                <a href="#contact"
+                    class="block text-center w-full py-3 border border-white rounded-lg hover:bg-white hover:text-black transition-colors">Get
+                    Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 md:px-12 border-t border-white/5">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 reveal-text">Let's Work Together</h2>
+                <p class="text-gray-400 reveal-text">Ready to reclaim your time? Fill out the form below or send me an
+                    email.</p>
+            </div>
+
+            <form class="space-y-6 fade-in-up" onsubmit="event.preventDefault();">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-sm text-gray-500 uppercase tracking-wider">Name</label>
+                        <input type="text"
+                            class="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-colors"
+                            placeholder="Jane Doe">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm text-gray-500 uppercase tracking-wider">Email</label>
+                        <input type="email"
+                            class="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-colors"
+                            placeholder="jane@example.com">
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <label class="text-sm text-gray-500 uppercase tracking-wider">Message</label>
+                    <textarea rows="4"
+                        class="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-colors resize-none"
+                        placeholder="Tell me about your project..."></textarea>
+                </div>
+                <div class="pt-6 text-center">
+                    <button
+                        class="px-12 py-4 bg-white text-black font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors rounded-full">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-20 flex justify-center space-x-8 text-2xl">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
+                <a href="mailto:hello@maryvalerie.com" class="text-gray-400 hover:text-white transition-colors"><i
+                        class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-xs text-gray-600 border-t border-white/5">
+        <p>&copy; 2024 Maven Flaviano Portfolio. All Rights Reserved.</p>
+        <p class="mt-2">Design by : Blockscom Media</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script>
+        // --- 1. Smooth Scrolling with Lenis (The lightweight alternative to Locomotive V5) ---
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // --- 2. Reveal Animations on Scroll (Intersection Observer) ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-text, .fade-in-up, .scale-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // --- 3. Mobile Menu Logic ---
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const links = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            const isOpen = menu.style.opacity === '1';
+            menu.style.opacity = isOpen ? '0' : '1';
+            menu.style.pointerEvents = isOpen ? 'none' : 'auto';
+        }
+
+        btn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+
+        links.forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+
+        // --- 4. Navbar Transparency Logic ---
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-dark/95', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-dark/95', 'shadow-lg');
+            }
+        });
+
+    </script>
+</body>
+
+</html>

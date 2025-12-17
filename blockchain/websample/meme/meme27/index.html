@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$BLOCKS | Blockscom Media</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Pacifico (Calligraphy/Meme style) and VT323 (Tech/Pixel) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Sniglet:wght@400;800&family=VT323&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        meme: {
+                            dark: '#0f0f13',
+                            card: '#1a1a24',
+                            primary: '#ffdd00', /* Bright Yellow */
+                            secondary: '#ff007a', /* Hot Pink */
+                            accent: '#00ff9d', /* Neon Green */
+                            text: '#ffffff'
+                        }
+                    },
+                    fontFamily: {
+                        fancy: ['Pacifico', 'cursive'],
+                        body: ['Sniglet', 'cursive'],
+                        tech: ['VT323', 'monospace'],
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 3s infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f0f13;
+            background-image: radial-gradient(#2a2a35 1px, transparent 1px);
+            background-size: 30px 30px;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0f13; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff007a; 
+            border-radius: 10px;
+            border: 3px solid #0f0f13;
+        }
+
+        .text-outline {
+            text-shadow: 2px 2px 0px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        }
+        
+        .nav-glass {
+            background: rgba(15, 15, 19, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body class="font-body text-meme-text selection:bg-meme-secondary selection:text-white">
+
+    <!-- Background Blobs -->
+    <div class="blob bg-meme-secondary w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="blob bg-meme-primary w-96 h-96 rounded-full bottom-0 right-0 translate-x-1/2 translate-y-1/2"></div>
+
+    <!-- Navigation -->
+    <nav class="nav-glass fixed w-full z-50 top-0 left-0 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <img src="https://blockscom.xyz/images/meme1.png" alt="Logo" class="h-12 w-12 rounded-full border-2 border-meme-accent animate-spin-slow">
+                    <span class="font-fancy text-2xl text-meme-primary tracking-wider">$BLOCKS</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#about" class="hover:text-meme-primary transition-colors duration-300 text-lg">Services</a>
+                        <a href="#tokenomics" class="hover:text-meme-secondary transition-colors duration-300 text-lg">Tokenomics</a>
+                        <a href="#pump" class="hover:text-meme-accent transition-colors duration-300 text-lg">Pump.fun</a>
+                    </div>
+                </div>
+                <div>
+                    <a href="#pump" class="bg-meme-secondary hover:bg-pink-600 text-white font-bold py-2 px-6 rounded-full transform hover:scale-110 transition-all duration-200 shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] border-2 border-white">
+                        BUY NOW
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center">
+            
+            <!-- Text Content -->
+            <div class="w-full lg:w-1/2 text-center lg:text-left z-10" data-aos="fade-right" data-aos-duration="1000">
+                <div class="inline-block bg-meme-accent text-black font-bold px-4 py-1 rounded-full mb-4 transform -rotate-2">
+                    Samples Only! We Build Real Stuff.
+                </div>
+                <h1 class="font-fancy text-5xl lg:text-7xl mb-6 text-outline leading-tight">
+                    <span class="text-meme-primary">Blockscom</span> <span class="text-white">Media</span>
+                </h1>
+                <p class="text-xl lg:text-2xl mb-8 text-gray-300 font-tech">
+                    "Why buy a jpeg when you can buy the WHOLE website?" <br>
+                    <span class="text-meme-secondary">#NFTs #WebDesign #Games</span>
+                </p>
+                
+                <!-- CA Box -->
+                <div class="bg-meme-card border-2 border-meme-primary rounded-xl p-4 mb-8 max-w-md mx-auto lg:mx-0 shadow-[8px_8px_0px_0px_#ffdd00]">
+                    <p class="text-xs text-gray-400 mb-1 uppercase tracking-widest">CA (Pump.fun):</p>
+                    <div class="flex items-center justify-between">
+                        <code id="ca-text" class="text-meme-accent font-tech text-lg break-all">8LoCkS...M3d1a...PuMp...FuN</code>
+                        <button onclick="copyCA()" class="ml-2 text-white hover:text-meme-primary transition">
+                            <i class="fa-regular fa-copy fa-lg"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="#" class="bg-meme-primary hover:bg-yellow-400 text-black font-bold text-xl py-3 px-8 rounded-full shadow-[4px_4px_0px_0px_#fff] border-2 border-white transform hover:-translate-y-1 transition-all">
+                        🚀 Chart
+                    </a>
+                    <a href="#" class="bg-transparent hover:bg-white hover:text-black text-white font-bold text-xl py-3 px-8 rounded-full border-2 border-white transform hover:-translate-y-1 transition-all">
+                        💬 Telegram
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Image -->
+            <div class="w-full lg:w-1/2 flex justify-center mb-10 lg:mb-0 relative" data-aos="zoom-in" data-aos-duration="1200">
+                <div class="relative w-80 h-80 lg:w-[500px] lg:h-[500px]">
+                    <div class="absolute inset-0 bg-meme-secondary rounded-full opacity-20 animate-pulse blur-2xl"></div>
+                    <img src="https://blockscom.xyz/images/meme1.png" alt="Meme Character" class="relative z-10 w-full h-full object-contain animate-wiggle drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+                    
+                    <!-- Floating Elements -->
+                    <div class="absolute top-0 right-0 bg-white text-black p-2 rounded-lg font-fancy transform rotate-12 shadow-lg animate-bounce-slow">
+                        We build games!
+                    </div>
+                    <div class="absolute bottom-10 left-0 bg-meme-primary text-black p-2 rounded-lg font-fancy transform -rotate-6 shadow-lg animate-bounce-slow" style="animation-delay: 1s;">
+                        Nice website bro
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="bg-meme-primary py-3 overflow-hidden transform -rotate-1 border-y-4 border-black">
+        <div class="whitespace-nowrap animate-[marquee_20s_linear_infinite] font-fancy text-2xl text-black font-bold">
+            $BLOCKS • WE BUILD WEBSITES • WE MAKE GAMES • NOT FINANCIAL ADVICE • JUST VIBES • $BLOCKS • YOUR COMMUNITY NEEDS THIS • SAMPLE WEBSITE •
+            $BLOCKS • WE BUILD WEBSITES • WE MAKE GAMES • NOT FINANCIAL ADVICE • JUST VIBES • $BLOCKS • YOUR COMMUNITY NEEDS THIS • SAMPLE WEBSITE •
+        </div>
+    </div>
+
+    <!-- About / Services Section -->
+    <section id="about" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="font-fancy text-5xl text-meme-primary text-outline mb-4">What the Heck is Blockscom?</h2>
+                <p class="text-xl text-gray-400">We don't just meme, we build the dream.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1" data-aos="fade-right">
+                    <img src="https://blockscom.xyz/images/meme2.png" alt="Working Meme" class="w-full max-w-md mx-auto rounded-2xl border-4 border-meme-accent shadow-[10px_10px_0px_0px_#00ff9d] transform hover:rotate-2 transition-transform duration-300">
+                </div>
+                <div class="order-1 md:order-2 space-y-8" data-aos="fade-left">
+                    
+                    <!-- Service Card 1 -->
+                    <div class="bg-meme-card p-6 rounded-xl border-l-8 border-meme-secondary hover:bg-[#252530] transition-colors">
+                        <h3 class="font-fancy text-2xl text-white mb-2">🎨 NFT Creation</h3>
+                        <p class="text-gray-400">"Right click save? Nah fam." We mint legit collections for your community.</p>
+                    </div>
+
+                    <!-- Service Card 2 -->
+                    <div class="bg-meme-card p-6 rounded-xl border-l-8 border-meme-primary hover:bg-[#252530] transition-colors">
+                        <h3 class="font-fancy text-2xl text-white mb-2">💻 Website Wizardry</h3>
+                        <p class="text-gray-400">Like this one, but with your face on it. Clean code, smooth scrolls, pure dopamine.</p>
+                    </div>
+
+                    <!-- Service Card 3 -->
+                    <div class="bg-meme-card p-6 rounded-xl border-l-8 border-meme-accent hover:bg-[#252530] transition-colors">
+                        <h3 class="font-fancy text-2xl text-white mb-2">🎮 Community Games</h3>
+                        <p class="text-gray-400">Keep the chat active while the chart goes sideways. Mini-games for maximum engagement.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics -->
+    <section id="tokenomics" class="py-24 bg-[#14141a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="zoom-in">
+                <h2 class="font-fancy text-5xl text-meme-secondary text-outline mb-4">Tokenomics</h2>
+                <p class="text-xl text-gray-400">Simple math for smooth brains.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-meme-card p-8 rounded-3xl text-center border-2 border-meme-primary transform hover:-translate-y-2 transition-transform duration-300 shadow-[0_0_20px_rgba(255,221,0,0.2)]" data-aos="flip-left" data-aos-delay="100">
+                    <div class="text-6xl mb-4">🔥</div>
+                    <h3 class="font-fancy text-3xl text-white mb-2">LP Burned</h3>
+                    <p class="text-gray-400">Forever and ever. Amen.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-meme-card p-8 rounded-3xl text-center border-2 border-meme-accent transform hover:-translate-y-2 transition-transform duration-300 shadow-[0_0_20px_rgba(0,255,157,0.2)]" data-aos="flip-left" data-aos-delay="200">
+                    <div class="text-6xl mb-4">🦄</div>
+                    <h3 class="font-fancy text-3xl text-white mb-2">1B Supply</h3>
+                    <p class="text-gray-400">Enough for everyone to be a whale.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-meme-card p-8 rounded-3xl text-center border-2 border-meme-secondary transform hover:-translate-y-2 transition-transform duration-300 shadow-[0_0_20px_rgba(255,0,122,0.2)]" data-aos="flip-left" data-aos-delay="300">
+                    <div class="text-6xl mb-4">🚫</div>
+                    <h3 class="font-fancy text-3xl text-white mb-2">0/0 Tax</h3>
+                    <p class="text-gray-400">No taxes. We hate the IRS too.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pump.fun Section -->
+    <section id="pump" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0f0f13] to-[#1a1a24]"></div>
+        <div class="max-w-5xl mx-auto px-4 relative z-10 text-center">
+            
+            <div class="bg-white text-black p-8 md:p-12 rounded-[3rem] border-8 border-meme-accent shadow-[0_0_50px_rgba(0,255,157,0.4)]" data-aos="zoom-out-up">
+                <img src="https://blockscom.xyz/images/meme3.png" alt="Pump Meme" class="w-32 h-32 mx-auto mb-6 animate-bounce">
+                
+                <h2 class="font-fancy text-4xl md:text-6xl mb-6">Born on Pump.fun</h2>
+                <p class="font-body text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
+                    We launched on the fairest launchpad in the universe. No presale, no insiders, just pure chaos and website building magic.
+                </p>
+
+                <div class="bg-black text-white p-6 rounded-xl mb-8 font-tech text-lg md:text-xl border-4 border-dashed border-gray-700">
+                    "I bought $BLOCKS and now my website looks amazing." - Satoshi (probably)
+                </div>
+
+                <button class="bg-meme-secondary hover:bg-pink-600 text-white font-fancy text-2xl py-4 px-12 rounded-full shadow-[6px_6px_0px_0px_#000] border-4 border-black transition-all transform hover:scale-105 hover:rotate-1">
+                    APE IN ON PUMP.FUN 💊
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
+            <div class="flex items-center gap-4 mb-8">
+                <img src="https://blockscom.xyz/images/meme1.png" alt="Logo" class="w-16 h-16 grayscale hover:grayscale-0 transition-all duration-500">
+                <span class="font-fancy text-3xl">$BLOCKS</span>
+            </div>
+            
+            <div class="flex gap-6 mb-8">
+                <a href="#" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-meme-primary hover:text-black transition-all">
+                    <i class="fa-brands fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-meme-secondary hover:text-white transition-all">
+                    <i class="fa-brands fa-telegram text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-meme-accent hover:text-black transition-all">
+                    <i class="fa-solid fa-rocket text-xl"></i>
+                </a>
+            </div>
+
+            <p class="text-center text-gray-500 text-sm max-w-lg mb-4">
+                This website is a sample project for Blockscom Media services. $BLOCKS is a meme coin with no intrinsic value or expectation of financial return. 
+            </p>
+            <p class="font-fancy text-meme-primary">
+                © 2024 Blockscom Media. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Animations
+        AOS.init({
+            once: false, // animation repeats on scroll
+            mirror: true,
+            offset: 100,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+
+        // Copy CA Function
+        function copyCA() {
+            const caText = "8LoCkS...M3d1a...PuMp...FuN"; // Real CA goes here
+            navigator.clipboard.writeText(caText).then(() => {
+                const btn = document.querySelector('button i');
+                btn.className = 'fa-solid fa-check text-meme-accent';
+                setTimeout(() => {
+                    btn.className = 'fa-regular fa-copy fa-lg';
+                }, 2000);
+            });
+        }
+    </script>
+    
+    <!-- Custom CSS to handle Marquee Keyframes since Tailwind arbitrary values can be tricky with animations -->
+    <style>
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</body>
+</html>

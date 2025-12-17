@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Flaviano Portfolio</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Maven Flaviano - Virtual Assistant Portfolio">
+    <meta property="og:description"
+        content="Professional Virtual Assistant Services. Expert in administrative support, software management, and creative solutions.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://maryvalerie.com">
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- GSAP for Animations (High quality, industry standard) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'black-rich': '#0a0a0a',
+                        'black-soft': '#141414',
+                        'gray-accent': '#2a2a2a',
+                        'gold-accent': '#d4af37',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Utility for image aspect ratios */
+        .aspect-3-4 {
+            aspect-ratio: 3/4;
+        }
+
+        /* Glass effect */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Text reveal mask */
+        .reveal-text {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .char {
+            display: inline-block;
+        }
+
+        /* Custom flowing header note */
+        .flowing-note {
+            background: linear-gradient(90deg, #1a1a1a, #000, #1a1a1a);
+            background-size: 200% 200%;
+            animation: gradientMove 5s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Flowing Note Header -->
+    <div
+        class="flowing-note text-center py-2 px-4 text-xs tracking-widest uppercase text-gray-400 border-b border-white/5 relative z-50">
+        Everything is customizable — you can edit, remove, or change anything. We handle it all.
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-8 left-0 w-full z-40 px-6 mix-blend-difference text-white">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-sm font-light tracking-widest">MF.PORTFOLIO</div>
+            <a href="#contact"
+                class="group relative px-6 py-2 overflow-hidden rounded-full bg-white text-black transition-all duration-300 hover:bg-gray-200">
+                <span class="relative z-10 text-xs font-bold uppercase tracking-wider">Hire Me</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Wrapper -->
+    <main class="relative z-10">
+
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center relative overflow-hidden px-4">
+            <!-- Background Elements -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-900/10 rounded-full blur-[120px] animate-pulse">
+            </div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-900/10 rounded-full blur-[120px] animate-pulse"
+                style="animation-delay: 2s;"></div>
+
+            <div class="text-center z-10 space-y-8">
+                <p class="hero-subtitle text-gray-500 uppercase tracking-[0.3em] text-sm opacity-0 translate-y-4">
+                    Virtual Assistant</p>
+                <h1
+                    class="hero-title text-6xl md:text-9xl font-serif italic text-white mix-blend-overlay opacity-0 translate-y-12">
+                    Maven Flaviano
+                </h1>
+                <div
+                    class="hero-image-container mt-12 relative w-full max-w-lg mx-auto aspect-video overflow-hidden rounded-lg opacity-0 scale-95">
+                    <img src="photo.jpg" alt="Maven Flaviano working in garden"
+                        class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out transform hover:scale-105"
+                        onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2671&auto=format&fit=crop'">
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section class="py-24 px-6 md:px-12 bg-black-rich border-t border-white/5">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="relative group reveal-img">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000">
+                    </div>
+                    <div class="relative rounded-lg overflow-hidden aspect-3-4">
+                        <img src="photo.png" alt="Maven Flaviano Professional"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                            onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2576&auto=format&fit=crop'">
+                    </div>
+                </div>
+                <div class="space-y-8">
+                    <h2 class="section-title text-4xl md:text-5xl font-light leading-tight">
+                        Precision. Efficiency. <br> <span class="font-serif italic text-gray-400">Excellence.</span>
+                    </h2>
+                    <p class="text-gray-400 leading-relaxed font-light text-lg">
+                        I am Maven Flaviano, a dedicated Virtual Assistant helping entrepreneurs and businesses reclaim
+                        their time. My approach combines strategic organization with creative problem-solving, ensuring
+                        your operations run seamlessly while you focus on growth.
+                    </p>
+                    <div class="flex gap-4 pt-4">
+                        <div class="flex flex-col">
+                            <span class="text-3xl font-light">5+</span>
+                            <span class="text-xs text-gray-500 uppercase tracking-widest">Years Experience</span>
+                        </div>
+                        <div class="w-px h-12 bg-white/10 mx-4"></div>
+                        <div class="flex flex-col">
+                            <span class="text-3xl font-light">100%</span>
+                            <span class="text-xs text-gray-500 uppercase tracking-widest">Client Satisfaction</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills & Software Section -->
+        <section class="py-24 px-6 md:px-12 bg-black">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-start mb-16">
+                    <h2 class="text-3xl font-light mb-4 md:mb-0">My Toolkit</h2>
+                    <p class="text-gray-500 text-sm max-w-md text-right">The digital tools and platforms I use to
+                        deliver exceptional results.</p>
+                </div>
+
+                <!-- Software Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-24">
+                    <!-- Software Item -->
+                    <div
+                        class="glass-panel p-6 rounded-xl flex flex-col items-center justify-center gap-3 group hover:bg-white/5 transition-colors duration-300">
+                        <i class="ph ph-microsoft-excel-logo text-3xl text-gray-400 group-hover:text-white"></i>
+                        <span class="text-xs text-gray-500 group-hover:text-gray-300">Excel</span>
+                    </div>
+                    <div
+                        class="glass-panel p-6 rounded-xl flex flex-col items-center justify-center gap-3 group hover:bg-white/5 transition-colors duration-300">
+                        <i class="ph ph-google-drive-logo text-3xl text-gray-400 group-hover:text-white"></i>
+                        <span class="text-xs text-gray-500 group-hover:text-gray-300">Drive</span>
+                    </div>
+                    <div
+                        class="glass-panel p-6 rounded-xl flex flex-col items-center justify-center gap-3 group hover:bg-white/5 transition-colors duration-300">
+                        <i class="ph ph-slack-logo text-3xl text-gray-400 group-hover:text-white"></i>
+                        <span class="text-xs text-gray-500 group-hover:text-gray-300">Slack</span>
+                    </div>
+                    <div
+                        class="glass-panel p-6 rounded-xl flex flex-col items-center justify-center gap-3 group hover:bg-white/5 transition-colors duration-300">
+                        <i class="ph ph-notion-logo text-3xl text-gray-400 group-hover:text-white"></i>
+                        <span class="text-xs text-gray-500 group-hover:text-gray-300">Notion</span>
+                    </div>
+                    <div
+                        class="glass-panel p-6 rounded-xl flex flex-col items-center justify-center gap-3 group hover:bg-white/5 transition-colors duration-300">
+                        <i class="ph ph-figma-logo text-3xl text-gray-400 group-hover:text-white"></i>
+                        <span class="text-xs text-gray-500 group-hover:text-gray-300">Figma</span>
+                    </div>
+                    <div
+                        class="glass-panel p-6 rounded-xl flex flex-col items-center justify-center gap-3 group hover:bg-white/5 transition-colors duration-300">
+                        <i class="ph ph-wordpress-logo text-3xl text-gray-400 group-hover:text-white"></i>
+                        <span class="text-xs text-gray-500 group-hover:text-gray-300">WordPress</span>
+                    </div>
+                </div>
+
+                <!-- Skills List -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-serif italic text-gray-300">Core Competencies</h3>
+                        <div class="space-y-4">
+                            <div class="group">
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-gray-400 group-hover:text-white transition-colors">Calendar
+                                        Management</span>
+                                    <span class="text-gray-600">Expert</span>
+                                </div>
+                                <div class="h-px w-full bg-gray-800">
+                                    <div
+                                        class="h-full bg-white w-0 group-hover:w-[95%] transition-all duration-1000 ease-out">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group">
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-gray-400 group-hover:text-white transition-colors">Email
+                                        Marketing</span>
+                                    <span class="text-gray-600">Advanced</span>
+                                </div>
+                                <div class="h-px w-full bg-gray-800">
+                                    <div
+                                        class="h-full bg-white w-0 group-hover:w-[85%] transition-all duration-1000 ease-out delay-100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group">
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-gray-400 group-hover:text-white transition-colors">Data
+                                        Entry</span>
+                                    <span class="text-gray-600">Expert</span>
+                                </div>
+                                <div class="h-px w-full bg-gray-800">
+                                    <div
+                                        class="h-full bg-white w-0 group-hover:w-[98%] transition-all duration-1000 ease-out delay-200">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-serif italic text-gray-300">Soft Skills</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span
+                                class="px-4 py-2 rounded-full border border-white/10 text-sm text-gray-400 hover:bg-white hover:text-black transition-colors duration-300 cursor-default">Adaptability</span>
+                            <span
+                                class="px-4 py-2 rounded-full border border-white/10 text-sm text-gray-400 hover:bg-white hover:text-black transition-colors duration-300 cursor-default">Communication</span>
+                            <span
+                                class="px-4 py-2 rounded-full border border-white/10 text-sm text-gray-400 hover:bg-white hover:text-black transition-colors duration-300 cursor-default">Problem
+                                Solving</span>
+                            <span
+                                class="px-4 py-2 rounded-full border border-white/10 text-sm text-gray-400 hover:bg-white hover:text-black transition-colors duration-300 cursor-default">Time
+                                Management</span>
+                            <span
+                                class="px-4 py-2 rounded-full border border-white/10 text-sm text-gray-400 hover:bg-white hover:text-black transition-colors duration-300 cursor-default">Discretion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="py-24 px-6 md:px-12 bg-black-soft relative overflow-hidden">
+            <div class="max-w-6xl mx-auto relative z-10">
+                <div class="text-center mb-20">
+                    <span class="text-xs font-bold tracking-[0.2em] text-gray-500 uppercase block mb-4">What I Do</span>
+                    <h2 class="text-4xl md:text-5xl font-light">Tailored Services</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Service Card 1 -->
+                    <div
+                        class="service-card group relative p-8 bg-neutral-900 border border-neutral-800 hover:border-neutral-600 transition-all duration-500 overflow-hidden">
+                        <div
+                            class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-[50px] -translate-y-1/2 translate-x-1/2 group-hover:bg-white/10 transition-all">
+                        </div>
+                        <h3 class="text-2xl font-serif italic mb-4 text-white">Administrative Support</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6 group-hover:text-gray-300">
+                            Comprehensive inbox management, scheduling, and travel arrangements. I keep your
+                            professional life organized and efficient.
+                        </p>
+                        <ul class="text-xs text-gray-500 space-y-2 mb-8">
+                            <li class="flex items-center gap-2">
+                                <div class="w-1 h-1 bg-white rounded-full"></div> Calendar Management
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <div class="w-1 h-1 bg-white rounded-full"></div> Email Handling
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <div class="w-1 h-1 bg-white rounded-full"></div> Document Preparation
+                            </li>
+                        </ul>
+                        <div
+                            class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+                            <i class="ph ph-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 2 -->
+                    <div
+                        class="service-card group relative p-8 bg-neutral-900 border border-neutral-800 hover:border-neutral-600 transition-all duration-500 overflow-hidden">
+                        <div
+                            class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-[50px] -translate-y-1/2 translate-x-1/2 group-hover:bg-white/10 transition-all">
+                        </div>
+                        <h3 class="text-2xl font-serif italic mb-4 text-white">Social Media Mgmt</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6 group-hover:text-gray-300">
+                            Engaging content scheduling and community management to maintain your digital presence
+                            without the daily hassle.
+                        </p>
+                        <ul class="text-xs text-gray-500 space-y-2 mb-8">
+                            <li class="flex items-center gap-2">
+                                <div class="w-1 h-1 bg-white rounded-full"></div> Content Scheduling
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <div class="w-1 h-1 bg-white rounded-full"></div> Community Engagement
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <div class="w-1 h-1 bg-white rounded-full"></div> Basic Analytics
+                            </li>
+                        </ul>
+                        <div
+                            class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+                            <i class="ph ph-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 3 -->
+                    <div
+                        class="service-card group relative p-8 bg-neutral-900 border border-neutral-800 hover:border-neutral-600 transition-all duration-500 overflow-hidden">
+                        <div
+                            class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-[50px] -translate-y-1/2 translate-x-1/2 group-hover:bg-white/10 transition-all">
+                        </div>
+                        <h3 class="text-2xl font-serif italic mb-4 text-white">Project Coordination</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6 group-hover:text-gray-300">
+                            Keeping your team on track. I handle timelines, follow-ups, and organization for your
+                            critical business projects.
+                        </p>
+                        <ul class="text-xs text-gray-500 space-y-2 mb-8">
+                            <li class="flex items-center gap-2">
+                                <div class="w-1 h-1 bg-white rounded-full"></div> Timeline Tracking
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <div class="w-1 h-1 bg-white rounded-full"></div> Team Follow-ups
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <div class="w-1 h-1 bg-white rounded-full"></div> Resource Allocation
+                            </li>
+                        </ul>
+                        <div
+                            class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+                            <i class="ph ph-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section class="py-24 px-6 md:px-12 bg-black">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex justify-between items-end mb-16">
+                    <h2 class="text-4xl font-light">Selected Works</h2>
+                    <a href="#"
+                        class="text-sm text-gray-400 hover:text-white transition-colors border-b border-gray-800 pb-1">View
+                        All Projects</a>
+                </div>
+
+                <div class="space-y-24">
+                    <!-- Project 1 -->
+                    <div class="group grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="overflow-hidden rounded-lg aspect-video relative">
+                            <div
+                                class="absolute inset-0 bg-black/40 group-hover:bg-black/0 transition-all z-10 duration-500">
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2672&auto=format&fit=crop"
+                                alt="Project 1"
+                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <div class="space-y-6 md:-ml-12 relative z-20 bg-black p-6 md:p-8 border-l border-white/10">
+                            <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">Case Study 01</span>
+                            <h3 class="text-3xl font-serif italic text-white">TechFlow Systems</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Managed a complete CRM migration for a mid-sized tech firm. Organized over 5,000
+                                contacts, cleaned data, and set up automated email workflows, resulting in a 20%
+                                increase in lead retention.
+                            </p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Data Entry</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">CRM
+                                    Management</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="group grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="order-1 md:order-2 overflow-hidden rounded-lg aspect-video relative">
+                            <div
+                                class="absolute inset-0 bg-black/40 group-hover:bg-black/0 transition-all z-10 duration-500">
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2574&auto=format&fit=crop"
+                                alt="Project 2"
+                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <div
+                            class="order-2 md:order-1 space-y-6 md:-mr-12 relative z-20 bg-black p-6 md:p-8 text-right border-r border-white/10">
+                            <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">Case Study 02</span>
+                            <h3 class="text-3xl font-serif italic text-white">Lumina Creative</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Streamlined social media operations for a boutique design agency. Created a content
+                                calendar system in Notion and handled daily scheduling, freeing up 10 hours per week for
+                                the creative director.
+                            </p>
+                            <div class="flex flex-wrap gap-2 pt-2 justify-end">
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Social
+                                    Media</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Notion</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rates Section -->
+        <section class="py-24 px-6 md:px-12 bg-neutral-900/50">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-light mb-4">Investment</h2>
+                    <p class="text-gray-500">Transparent pricing for your peace of mind.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Basic -->
+                    <div class="p-8 border border-white/5 hover:border-white/20 transition-all bg-black flex flex-col">
+                        <h3 class="text-lg font-medium text-gray-300 mb-2">Hourly</h3>
+                        <div class="text-4xl font-serif italic mb-6">$35<span
+                                class="text-sm font-sans text-gray-500 not-italic">/hr</span></div>
+                        <p class="text-sm text-gray-500 mb-8 flex-grow">Perfect for ad-hoc tasks and short-term projects
+                            that need immediate attention.</p>
+                        <ul class="text-sm text-gray-400 space-y-3 mb-8">
+                            <li class="flex items-center gap-2"><i class="ph ph-check text-white"></i> Flexible
+                                Commitment</li>
+                            <li class="flex items-center gap-2"><i class="ph ph-check text-white"></i> Weekly Reporting
+                            </li>
+                        </ul>
+                        <a href="#contact"
+                            class="block w-full py-3 border border-white/20 text-center text-sm hover:bg-white hover:text-black transition-all">Get
+                            Started</a>
+                    </div>
+
+                    <!-- Retainer -->
+                    <div
+                        class="p-8 border border-white/20 relative bg-neutral-900 transform md:-translate-y-4 shadow-2xl shadow-black">
+                        <div
+                            class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white text-black text-[10px] font-bold uppercase tracking-widest py-1 px-3">
+                            Popular</div>
+                        <h3 class="text-lg font-medium text-white mb-2">Retainer 20</h3>
+                        <div class="text-4xl font-serif italic mb-6">$600<span
+                                class="text-sm font-sans text-gray-500 not-italic">/mo</span></div>
+                        <p class="text-sm text-gray-400 mb-8 flex-grow">20 hours of dedicated support per month. Ideal
+                            for growing businesses.</p>
+                        <ul class="text-sm text-gray-300 space-y-3 mb-8">
+                            <li class="flex items-center gap-2"><i class="ph ph-check text-white"></i> Priority Support
+                            </li>
+                            <li class="flex items-center gap-2"><i class="ph ph-check text-white"></i> Rollover Hours
+                                (up to 5)</li>
+                            <li class="flex items-center gap-2"><i class="ph ph-check text-white"></i> Monthly Strategy
+                                Call</li>
+                        </ul>
+                        <a href="#contact"
+                            class="block w-full py-3 bg-white text-black text-center text-sm font-bold hover:bg-gray-200 transition-all">Choose
+                            Plan</a>
+                    </div>
+
+                    <!-- Pro -->
+                    <div class="p-8 border border-white/5 hover:border-white/20 transition-all bg-black flex flex-col">
+                        <h3 class="text-lg font-medium text-gray-300 mb-2">Retainer 40</h3>
+                        <div class="text-4xl font-serif italic mb-6">$1100<span
+                                class="text-sm font-sans text-gray-500 not-italic">/mo</span></div>
+                        <p class="text-sm text-gray-500 mb-8 flex-grow">Full-service support. It's like having a
+                            part-time employee without the overhead.</p>
+                        <ul class="text-sm text-gray-400 space-y-3 mb-8">
+                            <li class="flex items-center gap-2"><i class="ph ph-check text-white"></i> Top Priority
+                                Status</li>
+                            <li class="flex items-center gap-2"><i class="ph ph-check text-white"></i> Dedicated Slack
+                                Channel</li>
+                            <li class="flex items-center gap-2"><i class="ph ph-check text-white"></i> Quarterly Review
+                            </li>
+                        </ul>
+                        <a href="#contact"
+                            class="block w-full py-3 border border-white/20 text-center text-sm hover:bg-white hover:text-black transition-all">Get
+                            Started</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 px-6 md:px-12 bg-black relative">
+            <div class="max-w-4xl mx-auto text-center">
+                <span class="text-xs font-bold tracking-[0.2em] text-gray-500 uppercase block mb-6">Get In Touch</span>
+                <h2 class="text-5xl md:text-7xl font-serif italic mb-12">Let's work together</h2>
+
+                <div class="glass-panel p-8 md:p-12 rounded-2xl text-left max-w-2xl mx-auto">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-xs uppercase tracking-widest text-gray-500">Name</label>
+                                <input type="text"
+                                    class="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-white transition-colors"
+                                    placeholder="John Doe">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs uppercase tracking-widest text-gray-500">Email</label>
+                                <input type="email"
+                                    class="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-white transition-colors"
+                                    placeholder="john@example.com">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs uppercase tracking-widest text-gray-500">Message</label>
+                            <textarea rows="4"
+                                class="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-white transition-colors resize-none"
+                                placeholder="Tell me about your needs..."></textarea>
+                        </div>
+                        <button type="button"
+                            class="group w-full py-4 bg-white text-black font-bold uppercase tracking-widest text-xs hover:bg-gray-200 transition-all flex items-center justify-center gap-2">
+                            Send Message
+                            <i
+                                class="ph ph-paper-plane-right text-lg group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </form>
+
+                    <div
+                        class="mt-12 flex flex-col md:flex-row justify-between items-center gap-6 pt-12 border-t border-white/5">
+                        <a href="mailto:hello@maryvalerie.com"
+                            class="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                            <i class="ph ph-envelope"></i> hello@maryvalerie.com
+                        </a>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white hover:text-black transition-all"><i
+                                    class="ph ph-linkedin-logo"></i></a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white hover:text-black transition-all"><i
+                                    class="ph ph-instagram-logo"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-black text-center border-t border-white/5">
+        <p class="text-xs text-gray-600 tracking-widest">
+            Design by : <span class="text-gray-400">Blockscom Media</span>
+        </p>
+    </footer>
+
+    <!-- Animations Script -->
+    <script>
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animations
+        const tl = gsap.timeline();
+
+        tl.to(".hero-subtitle", { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.2 })
+            .to(".hero-title", { y: 0, opacity: 1, duration: 1.2, ease: "power3.out" }, "-=0.8")
+            .to(".hero-image-container", { scale: 1, opacity: 1, duration: 1.5, ease: "power2.out" }, "-=1");
+
+        // General Fade Up Animation for sections
+        gsap.utils.toArray("section h2, section p, .service-card, .glass-panel").forEach(element => {
+            gsap.from(element, {
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+
+        // Image Reveal Animation (About Section)
+        gsap.from(".reveal-img", {
+            scrollTrigger: {
+                trigger: ".reveal-img",
+                start: "top 80%"
+            },
+            x: -50,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power3.out"
+        });
+
+        // Skill Bars Animation
+        gsap.utils.toArray(".group .bg-white").forEach(bar => {
+            gsap.from(bar, {
+                scrollTrigger: {
+                    trigger: bar,
+                    start: "top 90%"
+                },
+                width: 0,
+                duration: 1.5,
+                ease: "power2.out"
+            });
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

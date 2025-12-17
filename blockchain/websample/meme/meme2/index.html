@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blocks Media ($BLOCKS) - Build & Meme</title>
+    <!-- Importing Fun Fonts to match the aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-purple: #7b4dfc;
+            --dark-purple: #4a2bb3;
+            --deep-bg: #2d1b69;
+            --accent-yellow: #ffd800;
+            --text-white: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.15);
+            --stroke-color: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(180deg, #9569ff 0%, #6e44ff 100%);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, .nav-logo {
+            font-family: 'Luckiest Guy', cursive;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .bubble-text {
+            color: var(--accent-yellow);
+            -webkit-text-stroke: 2px var(--stroke-color);
+            text-shadow: 4px 4px 0px #000;
+        }
+
+        .white-bubble {
+            color: white;
+            -webkit-text-stroke: 2px var(--stroke-color);
+            text-shadow: 3px 3px 0px #000;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-yellow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-btn {
+            background: var(--accent-yellow);
+            color: black;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            border: 2px solid black;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 0px 20px;
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            line-height: 1;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            color: white;
+            -webkit-text-stroke: 2px black;
+            text-shadow: 4px 4px 0px black;
+            margin-bottom: 10px;
+        }
+
+        .hero-images {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .main-char {
+            width: 400px;
+            z-index: 2;
+            transition: transform 0.3s;
+        }
+
+        .main-char:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        .car-char {
+            width: 450px;
+            position: absolute;
+            right: 0;
+            bottom: 20px;
+            z-index: 1;
+        }
+
+        .desk-char {
+            width: 350px;
+            position: absolute;
+            left: 0;
+            bottom: 20px;
+            z-index: 1;
+        }
+
+        /* --- MARQUEE --- */
+        .marquee-container {
+            background: var(--accent-yellow);
+            padding: 15px 0;
+            border-top: 4px solid black;
+            border-bottom: 4px solid black;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            z-index: 5;
+            transform: rotate(-1deg);
+            margin-top: -30px;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+        }
+
+        .marquee-text {
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 2rem;
+            color: black;
+            margin-right: 40px;
+            -webkit-text-stroke: 1px white; 
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- ABOUT & SWAP SECTION --- */
+        .content-section {
+            background: #8655fa;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 1100px;
+            margin: 0 auto;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .text-col h2 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .text-col p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .service-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .service-list li {
+            background: rgba(0,0,0,0.2);
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-list li i {
+            color: var(--accent-yellow);
+        }
+
+        /* SWAP MOCKUP */
+        .swap-card {
+            background: rgba(60, 20, 120, 0.9);
+            border: 4px solid #b59aff;
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .swap-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .pill {
+            background: #5e3aa8;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .input-group {
+            background: #2a165c;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #5e3aa8;
+        }
+
+        .input-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .token-badge {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #4a2bb3;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: transparent;
+            border: none;
+            color: white;
+            text-align: right;
+            width: 50%;
+        }
+
+        .connect-btn {
+            background: var(--accent-yellow);
+            color: black;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 4px 0 #b39700;
+            transition: transform 0.1s;
+        }
+
+        .connect-btn:hover {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #b39700;
+        }
+
+        .mascot-overlay {
+            position: absolute;
+            bottom: -50px;
+            left: -80px;
+            width: 200px;
+            z-index: 10;
+        }
+
+        /* --- TOKENOMICS & PUMP.FUN --- */
+        .dark-section {
+            background: #0d0620;
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 4px solid black;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            color: var(--accent-yellow);
+            margin-bottom: 50px;
+            -webkit-text-stroke: 2px black;
+        }
+
+        .token-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .token-card {
+            background: #1e1045;
+            padding: 30px;
+            border-radius: 20px;
+            border: 3px solid #7b4dfc;
+            width: 250px;
+            transition: transform 0.3s;
+        }
+
+        .token-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-yellow);
+        }
+
+        .token-card h3 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .token-card p {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent-yellow);
+        }
+
+        .pump-btn {
+            background: #15d18d; /* Pump.fun green-ish */
+            color: black;
+            font-family: 'Luckiest Guy';
+            font-size: 2rem;
+            padding: 20px 50px;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 4px solid black;
+            box-shadow: 6px 6px 0 black;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        .pump-btn:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 4px 4px 0 black;
+        }
+
+        /* --- PARTNERS --- */
+        .partners-section {
+            padding: 60px 20px;
+            background: black;
+            text-align: center;
+        }
+
+        .partners-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 30px auto 0;
+        }
+
+        .partner-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            color: black;
+            border: 2px solid white;
+        }
+
+        /* Partner colors based on image */
+        .p-pink { background: #ff9cbd; }
+        .p-blue { background: #5d9eff; }
+        .p-yellow { background: #ffdd44; }
+        .p-teal { background: #24c2d6; }
+        .p-orange { background: #ff914d; }
+        .p-purple { background: #b388ff; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: black;
+            padding: 40px 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.8rem;
+            border-top: 1px solid #333;
+        }
+
+        .disclaimer {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .hero h2 { font-size: 1.5rem; }
+            .grid-container { grid-template-columns: 1fr; }
+            .hero-images { flex-direction: column; align-items: center; }
+            .car-char, .desk-char { position: relative; width: 80%; margin: 10px 0; }
+            .main-char { width: 80%; }
+            .nav-links { display: none; } /* Simplified mobile nav */
+            .mascot-overlay { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-logo">
+            <img src="https://blockscom.xyz/images/meme1.png" alt="Blocks Logo">
+            <span>$BLOCKS</span>
+        </div>
+        <div class="nav-links">
+            <a href="#about">ABOUT</a>
+            <a href="#services">SERVICES</a>
+            <a href="#tokenomics">TOKENOMICS</a>
+            <a href="#pump">PUMP.FUN</a>
+            <a href="#faqs">FAQS</a>
+        </div>
+        <div class="social-icons">
+            <div class="social-btn"><i class="fab fa-telegram-plane"></i></div>
+            <div class="social-btn"><i class="fab fa-twitter"></i></div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <h2 class="bubble-text">MEET BLOCKS MEDIA</h2>
+        <h1 class="white-bubble">BUILD YOUR<br>COMMUNITY</h1>
+        
+        <div class="hero-images">
+            <!-- Background/Side characters using provided meme images slightly adjusted for layout -->
+            <img src="https://blockscom.xyz/images/meme3.png" alt="Office Work" class="desk-char">
+            <img src="https://blockscom.xyz/images/meme1.png" alt="Blocks Boss" class="main-char">
+            <img src="https://blockscom.xyz/images/meme2.png" alt="Lambo" class="car-char">
+        </div>
+    </header>
+
+    <!-- MARQUEE BAR -->
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span class="marquee-text">BUILD NOW • MINT NOW • PLAY NOW • PAY DEM • $BLOCKS TO THE MOON • WEBSITE CREATION • NFTS • GAMES •</span>
+            <span class="marquee-text">BUILD NOW • MINT NOW • PLAY NOW • PAY DEM • $BLOCKS TO THE MOON • WEBSITE CREATION • NFTS • GAMES •</span>
+        </div>
+    </div>
+
+    <!-- ABOUT / SERVICES / SWAP SECTION -->
+    <section id="about" class="content-section">
+        <div class="grid-container">
+            
+            <!-- Left Text -->
+            <div class="text-col">
+                <h2 class="bubble-text">HEY YOU!</h2>
+                <h3 style="margin-bottom: 20px;">PROJECT LAUNCH IS OVERDUE!</h3>
+                <p>Blocks Media ($BLOCKS) is here to collect... your ideas and turn them into reality. We aren't just a memecoin; we are the infrastructure for your community.</p>
+                
+                <ul class="service-list">
+                    <li><i class="fas fa-layer-group"></i> NFT Collection Generation</li>
+                    <li><i class="fas fa-laptop-code"></i> Professional Website Creation</li>
+                    <li><i class="fas fa-gamepad"></i> Community Games & Utilities</li>
+                </ul>
+            </div>
+
+            <!-- Right Swap UI -->
+            <div style="position: relative;">
+                <div class="swap-card">
+                    <div class="swap-header">
+                        <div class="pill"><i class="fas fa-gas-pump"></i> LOW GAS</div>
+                        <div class="pill"><i class="fas fa-cog"></i> SETTINGS</div>
+                    </div>
+
+                    <!-- Input 1 -->
+                    <div class="input-group">
+                        <div class="input-row">
+                            <span style="color:#aaa; font-size:0.8rem;">You Pay</span>
+                            <span style="color:#aaa; font-size:0.8rem;">Balance: 12.5 SOL</span>
+                        </div>
+                        <div class="input-row">
+                            <div class="token-badge"><i class="fab fa-ethereum"></i> SOL</div>
+                            <input type="text" class="amount" value="5">
+                        </div>
+                    </div>
+
+                    <div style="text-align:center; color:white; margin: -10px 0;">
+                        <i class="fas fa-arrow-down" style="background:#5e3aa8; padding:5px; border-radius:50%;"></i>
+                    </div>
+
+                    <!-- Input 2 -->
+                    <div class="input-group">
+                        <div class="input-row">
+                            <span style="color:#aaa; font-size:0.8rem;">You Receive</span>
+                        </div>
+                        <div class="input-row">
+                            <div class="token-badge">
+                                <img src="https://blockscom.xyz/images/meme1.png" style="width:20px; border-radius:50%;"> 
+                                $BLOCKS
+                            </div>
+                            <input type="text" class="amount" value="84,200">
+                        </div>
+                    </div>
+
+                    <button class="connect-btn" onclick="alert('This is a sample website for Blocks Media services.')">Connect Wallet</button>
+                </div>
+                <!-- Mascot Overlay on Swap -->
+                <img src="https://blockscom.xyz/images/meme1.png" class="mascot-overlay" alt="Mascot">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TOKENOMICS -->
+    <section id="tokenomics" class="dark-section">
+        <h2 class="section-title">TOKENOMICS</h2>
+        <div class="token-grid">
+            <div class="token-card">
+                <h3>SUPPLY</h3>
+                <p>1 BILLION</p>
+            </div>
+            <div class="token-card">
+                <h3>TAX</h3>
+                <p>0/0</p>
+            </div>
+            <div class="token-card">
+                <h3>LIQUIDITY</h3>
+                <p>BURNED</p>
+            </div>
+            <div class="token-card">
+                <h3>MINT</h3>
+                <p>REVOKED</p>
+            </div>
+        </div>
+
+        <!-- PUMP.FUN SECTION -->
+        <div id="pump" style="margin-top: 80px;">
+            <h2 class="section-title" style="color:#15d18d; -webkit-text-stroke: 1px white;">LAUNCHING ON</h2>
+            <img src="https://pump.fun/logo.png" alt="Pump Fun" style="height: 60px; margin-bottom: 20px; display: block; margin: 0 auto 20px auto;">
+            <br>
+            <a href="#" class="pump-btn">BUY ON PUMP.FUN 💊</a>
+            <p style="margin-top: 20px; color: #aaa;">Fair launch. No pre-sale. Pure vibes.</p>
+        </div>
+    </section>
+
+    <!-- PARTNERS / EXCHANGES -->
+    <section class="partners-section">
+        <h2 class="bubble-text" style="font-size: 2rem;">EXCHANGES WE VIBE ON</h2>
+        <div class="partners-grid">
+            <div class="partner-pill p-pink"><i class="fas fa-search-dollar"></i> DEXSCREENER</div>
+            <div class="partner-pill p-blue"><i class="fas fa-chart-line"></i> COINMARKETCAP</div>
+            <div class="partner-pill p-yellow"><i class="fas fa-bolt"></i> RAYDIUM</div>
+            <div class="partner-pill p-teal"><i class="fas fa-globe"></i> JUPITER</div>
+            <div class="partner-pill p-orange"><i class="fab fa-bitcoin"></i> BITCOIN</div>
+            <div class="partner-pill p-purple"><i class="fab fa-ethereum"></i> ETHEREUM</div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="disclaimer">
+            <p style="font-size: 1.2rem; font-weight: bold; color: white; margin-bottom: 15px;">Blocks Media ($BLOCKS)</p>
+            <p>
+                DISCLAIMER: This is a sample website to demonstrate Blockscom Media services. 
+                $BLOCKS is a memecoin for community building, NFT creation, and website development services. 
+                Cryptocurrency may be unregulated in your jurisdiction. The value of cryptocurrencies may go down as well as up. 
+                Profits may be subject to capital gains or other taxes applicable in your jurisdiction.
+            </p>
+            <br>
+            <p>&copy; 2024 Blocks Media. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script to make buttons interactive
+        const buttons = document.querySelectorAll('button, .social-btn, .partner-pill');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                console.log('Interaction clicked');
+            });
+        });
+    </script>
+</body>
+</html>

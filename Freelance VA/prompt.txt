@@ -1,0 +1,36 @@
+Create a Static html Virtual Assistant Website Girly
+
+Big Center Text LOGO of Maven Flaviano name
+
+Make some Unique Styling for Portfolio Website
+
+Name the page Maven Flaviano Portfolio
+
+Make Introduction Section
+Make a Section About Softwares i used
+Make a Section About Services
+Make a Section About Skills
+Make a Section About Portfolio
+Make a Section for my Rates
+How to Contact me Page
+
+USE MY IMAGE 
+file location for jpg file (Photo of me sitting on a garden with a laptop) : photo.jpg
+file location for png file (Photo of me professional looking black blazer) : photo.png
+favicon of the website: favicon.jpg
+
+Add Open Graph meta tags to my website so link previews work on social platforms.
+The tags must NOT be visible on the page.
+Use photo.jpg as the preview image.
+Place everything correctly inside the <head> section.
+
+Make the UI Animation when scrolling
+https://github.com/locomotivemtl/locomotive-scroll/tree/v5-beta
+
+UI the best library for the animated buttons and cards to make the website high quality
+
+website and make sure that the Website is mobile friendly
+
+ADD FLOWING NOTE ON THE TOP OF THE HEADER SAYING “Everything is customizable — you can edit, remove, or change anything. We handle it all.”
+
+Add Footer Design by : Blockscom Media

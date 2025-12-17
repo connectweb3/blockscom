@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramil Flaviano Jr Portfolio</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Ramil Flaviano Jr - AI Developer Portfolio">
+    <meta property="og:description" content="I leverage AI in many real-world use cases and build custom AI-driven applications.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://ramilflavianojr.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Orbitron', 'monospace'],
+                    },
+                    colors: {
+                        black: '#050505',
+                        'neon-blue': '#00f3ff',
+                        'neon-purple': '#bc13fe',
+                        'glass': 'rgba(255, 255, 255, 0.05)',
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px)",
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #e5e5e5;
+            overflow-x: hidden;
+            cursor: default; /* Optional: could be none if using custom cursor */
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Utility for Background Grid */
+        .bg-grid {
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, transparent, black, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%);
+        }
+
+        /* Text Stroke Effect */
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            color: transparent;
+            transition: all 0.5s ease;
+        }
+        .text-stroke:hover {
+            -webkit-text-stroke: 1px #00f3ff;
+            color: rgba(0, 243, 255, 0.1);
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+        }
+
+        /* Image Styling */
+        .img-futuristic {
+            filter: grayscale(100%) brightness(0.8) contrast(1.2);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.8; /* Requested slightly low opacity */
+        }
+        .img-futuristic:hover {
+            filter: grayscale(0%) brightness(1) contrast(1);
+            opacity: 1;
+            transform: scale(1.02);
+        }
+
+        /* Reveal Animations (mimicking Locomotive Scroll) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* Card Hover Glow */
+        .card-hover {
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .card-hover:hover {
+            border-color: #00f3ff;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        /* Glitch Effect on Hover for Logo */
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: #00f3ff;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-neon-blue selection:text-black">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 mix-blend-difference text-white flex justify-between items-center pointer-events-none">
+        <div class="font-mono text-sm tracking-widest pointer-events-auto cursor-pointer hover:text-neon-blue transition-colors">RF JR.</div>
+        <div class="hidden md:flex gap-8 pointer-events-auto">
+            <a href="#about" class="hover:text-neon-blue transition-colors text-xs tracking-widest uppercase">About</a>
+            <a href="#portfolio" class="hover:text-neon-blue transition-colors text-xs tracking-widest uppercase">Work</a>
+            <a href="#contact" class="hover:text-neon-blue transition-colors text-xs tracking-widest uppercase">Contact</a>
+        </div>
+        <div class="md:hidden pointer-events-auto">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden">
+        <!-- Background Grid -->
+        <div class="absolute inset-0 bg-grid-pattern bg-grid opacity-20 pointer-events-none"></div>
+        
+        <!-- Gradient Blob -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-neon-blue rounded-full blur-[120px] opacity-10 animate-pulse-slow pointer-events-none"></div>
+
+        <!-- Main Content -->
+        <div class="relative z-10 text-center px-4">
+            <p class="reveal font-mono text-neon-blue tracking-[0.2em] text-sm mb-4">PORTFOLIO 2025</p>
+            <h1 class="reveal reveal-delay-1 text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-6 font-mono text-white glitch-hover cursor-default">
+                RAMIL<br>FLAVIANO JR
+            </h1>
+            <p class="reveal reveal-delay-2 max-w-2xl mx-auto text-gray-400 text-lg md:text-xl font-light leading-relaxed">
+                I leverage <span class="text-white font-semibold">AI</span> in many real-world use cases and build custom <span class="text-white font-semibold">AI-driven applications</span>.
+            </p>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevrons-down" class="text-white opacity-50 w-6 h-6"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="relative py-24 px-6 md:px-12 lg:px-24 w-full bg-black">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <!-- Image Container -->
+            <div class="reveal relative h-[600px] w-full rounded-sm overflow-hidden group border border-white/10">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-50"></div>
+                <!-- Photo PNG (Standing) -->
+                <img src="photo.png" alt="Ramil Flaviano Jr Standing" class="absolute inset-0 w-full h-full object-cover img-futuristic" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop'">
+                
+                <!-- Floating Badge -->
+                <div class="absolute bottom-8 left-8 z-20 bg-glass backdrop-blur-md px-6 py-4 border border-white/10 rounded-sm">
+                    <p class="font-mono text-xs text-neon-blue mb-1">STATUS</p>
+                    <p class="text-white font-bold tracking-wider">AVAILABLE FOR HIRE</p>
+                </div>
+            </div>
+
+            <!-- Text Content -->
+            <div class="flex flex-col gap-8">
+                <h2 class="reveal reveal-delay-1 text-4xl md:text-5xl font-mono font-bold">
+                    ARCHITECTING <span class="text-stroke">INTELLIGENCE</span>
+                </h2>
+                <p class="reveal reveal-delay-2 text-gray-400 leading-relaxed text-lg">
+                    I don't just write code; I design intelligent systems. My passion lies in the intersection of minimalistic design and complex artificial intelligence. From Natural Language Processing to Computer Vision, I craft solutions that feel magical yet grounded in robust engineering.
+                </p>
+                
+                <div class="reveal reveal-delay-3 grid grid-cols-2 gap-6 mt-4">
+                    <div class="border-l border-neon-blue pl-4">
+                        <h3 class="text-white font-bold font-mono text-xl mb-1">05+</h3>
+                        <p class="text-gray-500 text-sm uppercase tracking-wider">Years Experience</p>
+                    </div>
+                    <div class="border-l border-neon-purple pl-4">
+                        <h3 class="text-white font-bold font-mono text-xl mb-1">50+</h3>
+                        <p class="text-gray-500 text-sm uppercase tracking-wider">AI Projects</p>
+                    </div>
+                </div>
+                
+                <div class="reveal reveal-delay-3 mt-4">
+                   <a href="#contact" class="inline-flex items-center gap-2 px-8 py-3 bg-white text-black font-bold font-mono hover:bg-neon-blue transition-colors rounded-sm">
+                       GET IN TOUCH <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                   </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy / AI Section (Using photo.jpg) -->
+    <section class="relative py-24 w-full bg-zinc-900/30 overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-neon-purple/10 to-transparent pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row-reverse gap-16 items-center">
+             <!-- Image Container -->
+             <div class="reveal w-full md:w-1/2 relative h-[500px] rounded-sm overflow-hidden border border-white/5">
+                <!-- Photo JPG (Sitting) -->
+                <img src="photo.jpg" alt="Ramil Flaviano Jr Sitting" class="w-full h-full object-cover img-futuristic" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop'">
+                <div class="absolute inset-0 bg-black/20 z-10"></div>
+            </div>
+
+            <div class="reveal w-full md:w-1/2">
+                <p class="font-mono text-neon-purple text-sm tracking-widest mb-4">MY PHILOSOPHY</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">"AI is not just a tool, it's a <span class="text-neon-purple">collaborator</span>."</h2>
+                <div class="space-y-4 text-gray-400">
+                    <p>
+                        In a world saturated with data, clarity is power. I focus on creating AI applications that filter the noise and deliver actionable insights.
+                    </p>
+                    <p>
+                        Whether automating complex workflows or generating creative assets, my goal is to make the technology invisible and the results impactful.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-32 px-6 bg-black relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-white/10 pb-8 reveal">
+                <div>
+                    <h2 class="text-4xl md:text-6xl font-mono font-bold mb-2">SELECTED WORKS</h2>
+                    <p class="text-gray-500">AI-Driven Solutions & Web Applications</p>
+                </div>
+                <div class="hidden md:block">
+                    <span class="font-mono text-xs border border-white/20 px-3 py-1 rounded-full text-white/60">SCROLL TO EXPLORE</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <article class="reveal card-hover group bg-zinc-900/20 p-6 rounded-lg cursor-pointer">
+                    <div class="h-48 bg-zinc-800 rounded mb-6 overflow-hidden relative">
+                         <div class="absolute inset-0 bg-gradient-to-tr from-neon-blue/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                         <div class="w-full h-full flex items-center justify-center text-zinc-600 group-hover:text-neon-blue transition-colors">
+                             <i data-lucide="brain-circuit" class="w-16 h-16"></i>
+                         </div>
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-neon-blue transition-colors">Neural Search Engine</h3>
+                        <i data-lucide="arrow-up-right" class="text-gray-500 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4">Semantic search application utilizing vector embeddings to retrieve context-aware results for enterprise data.</p>
+                    <div class="flex gap-2">
+                        <span class="text-xs font-mono bg-white/5 px-2 py-1 text-gray-300">Python</span>
+                        <span class="text-xs font-mono bg-white/5 px-2 py-1 text-gray-300">TensorFlow</span>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="reveal reveal-delay-1 card-hover group bg-zinc-900/20 p-6 rounded-lg cursor-pointer">
+                    <div class="h-48 bg-zinc-800 rounded mb-6 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-neon-purple/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full h-full flex items-center justify-center text-zinc-600 group-hover:text-neon-purple transition-colors">
+                            <i data-lucide="bot" class="w-16 h-16"></i>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-neon-purple transition-colors">Generative Art Tool</h3>
+                        <i data-lucide="arrow-up-right" class="text-gray-500 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4">Web-based tool leveraging Stable Diffusion API to generate custom assets for marketing campaigns instantly.</p>
+                    <div class="flex gap-2">
+                        <span class="text-xs font-mono bg-white/5 px-2 py-1 text-gray-300">React</span>
+                        <span class="text-xs font-mono bg-white/5 px-2 py-1 text-gray-300">Node.js</span>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="reveal reveal-delay-2 card-hover group bg-zinc-900/20 p-6 rounded-lg cursor-pointer">
+                    <div class="h-48 bg-zinc-800 rounded mb-6 overflow-hidden relative">
+                         <div class="absolute inset-0 bg-gradient-to-tr from-neon-blue/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                         <div class="w-full h-full flex items-center justify-center text-zinc-600 group-hover:text-neon-blue transition-colors">
+                             <i data-lucide="message-square-code" class="w-16 h-16"></i>
+                         </div>
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-neon-blue transition-colors">AI Customer Support</h3>
+                        <i data-lucide="arrow-up-right" class="text-gray-500 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4">Custom chatbot trained on company documentation to reduce support ticket volume by 40%.</p>
+                    <div class="flex gap-2">
+                        <span class="text-xs font-mono bg-white/5 px-2 py-1 text-gray-300">OpenAI API</span>
+                        <span class="text-xs font-mono bg-white/5 px-2 py-1 text-gray-300">Next.js</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-24 px-6 bg-grid-pattern bg-black relative">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="reveal text-center font-mono text-neon-blue mb-16 tracking-widest text-sm">CAPABILITIES</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="reveal p-8 border border-white/10 hover:bg-white/5 transition-colors text-center">
+                    <i data-lucide="cpu" class="w-8 h-8 mx-auto mb-4 text-white"></i>
+                    <h3 class="font-bold mb-2">Machine Learning</h3>
+                    <p class="text-xs text-gray-500">Custom model training & deployment</p>
+                </div>
+                <div class="reveal reveal-delay-1 p-8 border border-white/10 hover:bg-white/5 transition-colors text-center">
+                    <i data-lucide="globe" class="w-8 h-8 mx-auto mb-4 text-white"></i>
+                    <h3 class="font-bold mb-2">Web Development</h3>
+                    <p class="text-xs text-gray-500">High-performance React & Vue apps</p>
+                </div>
+                <div class="reveal reveal-delay-2 p-8 border border-white/10 hover:bg-white/5 transition-colors text-center">
+                    <i data-lucide="database" class="w-8 h-8 mx-auto mb-4 text-white"></i>
+                    <h3 class="font-bold mb-2">Data Engineering</h3>
+                    <p class="text-xs text-gray-500">Pipelines, ETL & Big Data</p>
+                </div>
+                <div class="reveal reveal-delay-3 p-8 border border-white/10 hover:bg-white/5 transition-colors text-center">
+                    <i data-lucide="wand-2" class="w-8 h-8 mx-auto mb-4 text-white"></i>
+                    <h3 class="font-bold mb-2">Gen AI Integration</h3>
+                    <p class="text-xs text-gray-500">LLM prompting & API integration</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-6 bg-black text-center relative overflow-hidden">
+        <!-- Glow effect -->
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-neon-blue opacity-5 blur-[100px] pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-3xl mx-auto">
+            <p class="reveal font-mono text-neon-blue mb-4">WHAT'S NEXT?</p>
+            <h2 class="reveal reveal-delay-1 text-5xl md:text-7xl font-bold mb-8">Let's Build the Future.</h2>
+            <p class="reveal reveal-delay-2 text-gray-400 mb-10 text-lg">
+                Currently open for new opportunities and collaborations. If you have an idea that needs the touch of AI, I'm just a message away.
+            </p>
+            <a href="mailto:contact@ramilflavianojr.com" class="reveal reveal-delay-3 inline-block px-10 py-4 border border-white text-white font-mono text-lg hover:bg-white hover:text-black transition-all duration-300">
+                INITIATE_CONTACT()
+            </a>
+
+            <div class="mt-20 flex justify-center gap-8 reveal reveal-delay-3">
+                <a href="#" class="text-gray-500 hover:text-white transition-colors"><i data-lucide="github"></i></a>
+                <a href="#" class="text-gray-500 hover:text-neon-blue transition-colors"><i data-lucide="linkedin"></i></a>
+                <a href="#" class="text-gray-500 hover:text-neon-purple transition-colors"><i data-lucide="twitter"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-white/10 text-center text-gray-600 font-mono text-xs">
+        <p>&copy; 2025 RAMIL FLAVIANO JR. ALL SYSTEMS NOMINAL.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Custom Intersection Observer for Reveal Animations
+        // This mimics the 'Locomotive Scroll' reveal effect without the heavy library weight
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: Unobserve after revealing if you only want it to happen once
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth Scroll handling for anchor links (Standard behavior + Offset)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Dynamic Text Effect for Hero Title on Mouse Move (Parallax tilt)
+        const heroTitle = document.querySelector('h1');
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 50;
+            const y = (window.innerHeight / 2 - e.pageY) / 50;
+            
+            if(heroTitle) {
+                heroTitle.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+            }
+        });
+    </script>
+</body>
+</html>

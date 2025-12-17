@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Flaviano Portfolio</title>
+    <link rel="icon" type="image/jpg" href="favicon.jpg">
+
+    <!-- Open Graph Meta Tags (Hidden, for Link Previews) -->
+    <meta property="og:title" content="Maven Flaviano - Virtual Assistant Portfolio">
+    <meta property="og:description"
+        content="Professional Virtual Assistant Services. specialized in administration, design, and management.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://maryvalerie.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Italiana', 'serif'],
+                        sans: ['Manrope', 'sans-serif'],
+                    },
+                    colors: {
+                        black: '#0a0a0a',
+                        offblack: '#121212',
+                        white: '#f5f5f5',
+                        gold: '#d4af37',
+                    },
+                    animation: {
+                        'marquee': 'marquee 25s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Utilities */
+        body {
+            background-color: #050505;
+            color: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+            color: transparent;
+        }
+
+        .hover-fill:hover {
+            -webkit-text-stroke: 0px;
+            color: #f5f5f5;
+        }
+
+        /* Marquee Animation */
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .animate-marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 20s linear infinite;
+        }
+
+        /* Scroll Reveal Base Styles */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-100 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-200 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-300 {
+            transition-delay: 0.3s;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-white selection:text-black">
+
+    <!-- Flowing Note Header -->
+    <div
+        class="fixed top-0 left-0 w-full bg-white text-black z-50 py-2 overflow-hidden border-b border-gray-200 font-sans text-xs uppercase tracking-widest">
+        <div class="animate-marquee">
+            Everything is customizable — you can edit, remove, or change anything. We handle it all. &nbsp;&nbsp;&nbsp;
+            • &nbsp;&nbsp;&nbsp; Everything is customizable — you can edit, remove, or change anything. We handle it
+            all. &nbsp;&nbsp;&nbsp; • &nbsp;&nbsp;&nbsp; Everything is customizable — you can edit, remove, or change
+            anything. We handle it all.
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-10 w-full z-40 px-6 py-6 mix-blend-difference text-white flex justify-between items-center">
+        <div class="font-serif text-xl tracking-widest">MF.</div>
+        <div class="hidden md:flex gap-8 font-sans text-sm tracking-wide">
+            <a href="#about" class="hover:text-gray-400 transition-colors">About</a>
+            <a href="#services" class="hover:text-gray-400 transition-colors">Services</a>
+            <a href="#portfolio" class="hover:text-gray-400 transition-colors">Portfolio</a>
+            <a href="#contact" class="hover:text-gray-400 transition-colors">Contact</a>
+        </div>
+        <a href="#contact"
+            class="px-5 py-2 border border-white/20 rounded-full text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+            Let's Talk
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex flex-col justify-center items-center px-4 pt-20">
+        <div class="reveal text-center z-10">
+            <p class="font-sans text-sm md:text-base uppercase tracking-[0.3em] text-gray-400 mb-4">Virtual Assistant
+            </p>
+            <h1 class="font-serif text-6xl md:text-9xl lg:text-[11rem] leading-none mb-6">
+                MARY<br>Maven
+            </h1>
+            <p class="max-w-md mx-auto text-gray-400 font-sans font-light leading-relaxed">
+                Elevating businesses through organized, efficient, and creative virtual assistance.
+            </p>
+        </div>
+
+        <!-- Abstract Background Elements -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gray-800/10 rounded-full blur-[80px]"></div>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+            <span class="text-[10px] uppercase tracking-widest">Scroll</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
+        </div>
+    </header>
+
+    <!-- Introduction / About Section -->
+    <section id="about" class="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <!-- Image Side -->
+            <div class="reveal relative group">
+                <div
+                    class="absolute inset-0 border border-white/10 translate-x-4 translate-y-4 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2">
+                </div>
+                <div class="aspect-[3/4] overflow-hidden bg-gray-900 relative">
+                    <!-- USING photo.png as requested (Professional Blazer) -->
+                    <!-- Fallback image provided for preview purposes -->
+                    <img src="photo.png"
+                        onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop'"
+                        alt="Maven Flaviano Professional"
+                        class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out scale-100 hover:scale-105">
+                </div>
+            </div>
+
+            <!-- Text Side -->
+            <div class="reveal reveal-delay-200">
+                <h2 class="font-serif text-4xl md:text-6xl mb-8">Introduction</h2>
+                <div class="space-y-6 font-sans text-gray-400 font-light text-lg">
+                    <p>
+                        Hello, I'm <span class="text-white font-normal">Eliza Flaviano</span>. I specialize in bringing
+                        order to chaos and helping businesses thrive by handling the tasks that slow you down.
+                    </p>
+                    <p>
+                        With a background in administrative support and a passion for digital creativity, I act as the
+                        backbone for entrepreneurs and creatives who need to focus on their bigger picture.
+                    </p>
+                    <p>
+                        My approach is minimalist yet effective. I believe in streamlining processes to create more
+                        time, more freedom, and more growth for my clients.
+                    </p>
+                </div>
+
+                <div class="mt-12 flex flex-wrap gap-4">
+                    <div
+                        class="px-4 py-2 border border-white/10 rounded-full text-sm hover:bg-white hover:text-black transition-colors">
+                        Detailed Oriented</div>
+                    <div
+                        class="px-4 py-2 border border-white/10 rounded-full text-sm hover:bg-white hover:text-black transition-colors">
+                        Proactive</div>
+                    <div
+                        class="px-4 py-2 border border-white/10 rounded-full text-sm hover:bg-white hover:text-black transition-colors">
+                        Reliable</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Softwares Section -->
+    <section class="py-20 bg-offblack border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.2em] text-gray-500">Tech Stack</span>
+                <h2 class="font-serif text-3xl md:text-5xl mt-2">Software Proficiency</h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center">
+                <!-- Software Items -->
+                <div class="reveal group p-6 border border-white/5 hover:border-white/20 transition-all duration-300">
+                    <i data-lucide="figma"
+                        class="w-8 h-8 mx-auto mb-4 text-gray-400 group-hover:text-white transition-colors"></i>
+                    <h3 class="font-sans text-sm">Figma</h3>
+                </div>
+                <div
+                    class="reveal reveal-delay-100 group p-6 border border-white/5 hover:border-white/20 transition-all duration-300">
+                    <i data-lucide="trello"
+                        class="w-8 h-8 mx-auto mb-4 text-gray-400 group-hover:text-white transition-colors"></i>
+                    <h3 class="font-sans text-sm">Trello</h3>
+                </div>
+                <div
+                    class="reveal reveal-delay-200 group p-6 border border-white/5 hover:border-white/20 transition-all duration-300">
+                    <i data-lucide="mail"
+                        class="w-8 h-8 mx-auto mb-4 text-gray-400 group-hover:text-white transition-colors"></i>
+                    <h3 class="font-sans text-sm">Gmail Suite</h3>
+                </div>
+                <div
+                    class="reveal reveal-delay-300 group p-6 border border-white/5 hover:border-white/20 transition-all duration-300">
+                    <i data-lucide="pen-tool"
+                        class="w-8 h-8 mx-auto mb-4 text-gray-400 group-hover:text-white transition-colors"></i>
+                    <h3 class="font-sans text-sm">Canva</h3>
+                </div>
+                <div
+                    class="reveal reveal-delay-100 group p-6 border border-white/5 hover:border-white/20 transition-all duration-300">
+                    <i data-lucide="slack"
+                        class="w-8 h-8 mx-auto mb-4 text-gray-400 group-hover:text-white transition-colors"></i>
+                    <h3 class="font-sans text-sm">Slack</h3>
+                </div>
+                <div
+                    class="reveal reveal-delay-200 group p-6 border border-white/5 hover:border-white/20 transition-all duration-300">
+                    <i data-lucide="sheet"
+                        class="w-8 h-8 mx-auto mb-4 text-gray-400 group-hover:text-white transition-colors"></i>
+                    <h3 class="font-sans text-sm">MS Excel</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-start mb-16 reveal">
+            <h2 class="font-serif text-5xl md:text-7xl mb-6 md:mb-0">Services</h2>
+            <p class="md:max-w-xs text-gray-400 font-sans text-sm leading-relaxed text-right">
+                Tailored solutions designed to meet your specific business needs with precision and care.
+            </p>
+        </div>
+
+        <div class="space-y-4">
+            <!-- Service Item 1 -->
+            <div
+                class="reveal group border-t border-white/10 hover:border-white transition-colors duration-500 py-10 cursor-pointer">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <span class="font-sans text-gray-500 text-sm">01</span>
+                    <h3
+                        class="font-serif text-3xl md:text-4xl group-hover:translate-x-4 transition-transform duration-500">
+                        Administrative Support</h3>
+                    <div class="hidden md:block w-32 h-[1px] bg-white/10 group-hover:bg-white transition-colors"></div>
+                    <p
+                        class="text-gray-500 text-sm max-w-xs text-center md:text-right group-hover:text-gray-300 transition-colors">
+                        Email management, scheduling, data entry, and travel arrangements.</p>
+                </div>
+            </div>
+
+            <!-- Service Item 2 -->
+            <div
+                class="reveal group border-t border-white/10 hover:border-white transition-colors duration-500 py-10 cursor-pointer">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <span class="font-sans text-gray-500 text-sm">02</span>
+                    <h3
+                        class="font-serif text-3xl md:text-4xl group-hover:translate-x-4 transition-transform duration-500">
+                        Social Media Management</h3>
+                    <div class="hidden md:block w-32 h-[1px] bg-white/10 group-hover:bg-white transition-colors"></div>
+                    <p
+                        class="text-gray-500 text-sm max-w-xs text-center md:text-right group-hover:text-gray-300 transition-colors">
+                        Content scheduling, community engagement, and basic analytics.</p>
+                </div>
+            </div>
+
+            <!-- Service Item 3 -->
+            <div
+                class="reveal group border-t border-b border-white/10 hover:border-white transition-colors duration-500 py-10 cursor-pointer">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <span class="font-sans text-gray-500 text-sm">03</span>
+                    <h3
+                        class="font-serif text-3xl md:text-4xl group-hover:translate-x-4 transition-transform duration-500">
+                        Basic Graphic Design</h3>
+                    <div class="hidden md:block w-32 h-[1px] bg-white/10 group-hover:bg-white transition-colors"></div>
+                    <p
+                        class="text-gray-500 text-sm max-w-xs text-center md:text-right group-hover:text-gray-300 transition-colors">
+                        Canva graphics, presentation design, and simple branding assets.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="py-24 bg-zinc-950">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal mb-12">
+                <h2 class="font-serif text-4xl mb-2">Core Skills</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="reveal space-y-8">
+                    <div>
+                        <div class="flex justify-between mb-2 font-sans text-sm uppercase tracking-widest">
+                            <span>Organization</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="w-full h-[1px] bg-gray-800">
+                            <div class="w-[95%] h-full bg-white"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2 font-sans text-sm uppercase tracking-widest">
+                            <span>Communication</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="w-full h-[1px] bg-gray-800">
+                            <div class="w-[90%] h-full bg-white"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2 font-sans text-sm uppercase tracking-widest">
+                            <span>Time Management</span>
+                            <span>98%</span>
+                        </div>
+                        <div class="w-full h-[1px] bg-gray-800">
+                            <div class="w-[98%] h-full bg-white"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal reveal-delay-200">
+                    <p class="text-gray-400 font-sans font-light leading-loose">
+                        My skill set is a blend of hard technical skills and soft interpersonal abilities. Beyond the
+                        software, I bring emotional intelligence, adaptability, and a problem-solving mindset to every
+                        project. I don't just complete tasks; I anticipate needs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-32 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="reveal text-center mb-20">
+            <h2 class="font-serif text-5xl md:text-7xl">Selected Works</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Project 1 -->
+            <div class="reveal group cursor-pointer">
+                <div class="overflow-hidden aspect-video bg-gray-900 mb-4 relative">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop"
+                        alt="Project 1"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100">
+                </div>
+                <div
+                    class="flex justify-between items-baseline border-b border-white/10 pb-2 group-hover:border-white transition-colors">
+                    <h3 class="font-serif text-2xl">Executive Management</h3>
+                    <span class="text-xs uppercase tracking-widest text-gray-500">Admin</span>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="reveal reveal-delay-200 group cursor-pointer md:mt-16">
+                <div class="overflow-hidden aspect-video bg-gray-900 mb-4 relative">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop"
+                        alt="Project 2"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100">
+                </div>
+                <div
+                    class="flex justify-between items-baseline border-b border-white/10 pb-2 group-hover:border-white transition-colors">
+                    <h3 class="font-serif text-2xl">Social Campaign</h3>
+                    <span class="text-xs uppercase tracking-widest text-gray-500">Marketing</span>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="reveal group cursor-pointer">
+                <div class="overflow-hidden aspect-video bg-gray-900 mb-4 relative">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1000&auto=format&fit=crop"
+                        alt="Project 3"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100">
+                </div>
+                <div
+                    class="flex justify-between items-baseline border-b border-white/10 pb-2 group-hover:border-white transition-colors">
+                    <h3 class="font-serif text-2xl">Data Analysis</h3>
+                    <span class="text-xs uppercase tracking-widest text-gray-500">Research</span>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="reveal reveal-delay-200 group cursor-pointer md:mt-16">
+                <div class="overflow-hidden aspect-video bg-gray-900 mb-4 relative">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop"
+                        alt="Project 4"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100">
+                </div>
+                <div
+                    class="flex justify-between items-baseline border-b border-white/10 pb-2 group-hover:border-white transition-colors">
+                    <h3 class="font-serif text-2xl">Brand Identity</h3>
+                    <span class="text-xs uppercase tracking-widest text-gray-500">Design</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rates Section -->
+    <section class="py-24 bg-white text-black px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-6xl">Investment</h2>
+                <p class="text-gray-600 mt-4">Transparent pricing for premium support.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Basic Plan -->
+                <div
+                    class="reveal p-8 border border-black/10 hover:bg-black hover:text-white transition-all duration-500 group">
+                    <h3 class="font-serif text-2xl mb-2">Retainer</h3>
+                    <div class="text-4xl font-bold mb-6">$500<span class="text-sm font-normal opacity-60">/mo</span>
+                    </div>
+                    <ul class="space-y-3 text-sm opacity-80 mb-8">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> 10 Hours of
+                            Support</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Email Management
+                        </li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Weekly Report
+                        </li>
+                    </ul>
+                    <a href="#contact"
+                        class="block w-full py-3 text-center border border-black/20 group-hover:border-white/20 rounded text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-colors">Select</a>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="reveal reveal-delay-100 p-8 bg-black text-white transform md:-translate-y-4 shadow-2xl">
+                    <div class="text-xs uppercase tracking-widest text-gray-400 mb-2">Most Popular</div>
+                    <h3 class="font-serif text-2xl mb-2">Professional</h3>
+                    <div class="text-4xl font-bold mb-6">$900<span class="text-sm font-normal opacity-60">/mo</span>
+                    </div>
+                    <ul class="space-y-3 text-sm opacity-80 mb-8">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> 20 Hours of
+                            Support</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Email & Calendar
+                        </li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Social Media (2
+                            platforms)</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Priority Support
+                        </li>
+                    </ul>
+                    <a href="#contact"
+                        class="block w-full py-3 text-center bg-white text-black rounded text-xs uppercase tracking-widest hover:bg-gray-200 transition-colors">Select</a>
+                </div>
+
+                <!-- Hourly Plan -->
+                <div
+                    class="reveal reveal-delay-200 p-8 border border-black/10 hover:bg-black hover:text-white transition-all duration-500 group">
+                    <h3 class="font-serif text-2xl mb-2">Project Based</h3>
+                    <div class="text-4xl font-bold mb-6">$35<span class="text-sm font-normal opacity-60">/hr</span>
+                    </div>
+                    <ul class="space-y-3 text-sm opacity-80 mb-8">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Specialized
+                            Tasks</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> No Monthly
+                            Commitment</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Custom
+                            Turnaround</li>
+                    </ul>
+                    <a href="#contact"
+                        class="block w-full py-3 text-center border border-black/20 group-hover:border-white/20 rounded text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-colors">Select</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative py-32 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="reveal">
+                <h2 class="font-serif text-5xl md:text-7xl mb-6">Let's Connect</h2>
+                <p class="text-gray-400 font-sans mb-12 max-w-md">
+                    Ready to reclaim your time? Send me a message and let's discuss how I can help streamline your
+                    business.
+                </p>
+
+                <div class="space-y-6">
+                    <a href="mailto:hello@maryvalerie.com"
+                        class="flex items-center gap-4 text-xl hover:text-gray-400 transition-colors">
+                        <i data-lucide="mail" class="w-6 h-6"></i> hello@maryvalerie.com
+                    </a>
+                    <a href="#" class="flex items-center gap-4 text-xl hover:text-gray-400 transition-colors">
+                        <i data-lucide="linkedin" class="w-6 h-6"></i> LinkedIn
+                    </a>
+                    <a href="#" class="flex items-center gap-4 text-xl hover:text-gray-400 transition-colors">
+                        <i data-lucide="instagram" class="w-6 h-6"></i> Instagram
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact Image -->
+            <div class="reveal reveal-delay-200 relative">
+                <!-- USING photo.jpg as requested (Sitting in garden) -->
+                <!-- Fallback image provided for preview purposes -->
+                <div class="aspect-square bg-gray-900 overflow-hidden relative rounded-sm">
+                    <img src="photo.jpg"
+                        onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop'"
+                        alt="Maven Flaviano Working"
+                        class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-700">
+
+                    <!-- Overlay text/graphic -->
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <div class="text-6xl font-serif text-white mix-blend-overlay">MF.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-white/10 text-center text-gray-600 text-xs font-sans uppercase tracking-widest">
+        <div class="mb-4">
+            &copy; 2024 Maven Flaviano Portfolio. All Rights Reserved.
+        </div>
+        <div>
+            Design by : Blockscom Media
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Scroll Animation Observer
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach(el => observer.observe(el));
+        });
+
+        // Smooth Scroll for Anchor Links (Simulating Locomotive feel)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

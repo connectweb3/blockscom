@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Flaviano | Virtual Assistant Portfolio</title>
+    <link rel="icon" type="image/jpg" href="favicon.jpg">
+
+    <!-- Open Graph Meta Tags (Invisible to user, used for link previews) -->
+    <meta property="og:title" content="Maven Flaviano - Virtual Assistant Portfolio">
+    <meta property="og:description"
+        content="Professional Virtual Assistant Services. specialized in admin support, content creation, and more.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://www.maryvalerie.com">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom Tailwind Config for specific colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rose-gold': '#B76E79',
+                        'blush': '#FFE4E6',
+                        'cream': '#FDFBF7',
+                        'charcoal': '#2D2D2D',
+                        'muted-pink': '#EBC7C7',
+                    },
+                    fontFamily: {
+                        'script': ['"Great Vibes"', 'cursive'],
+                        'serif': ['"Cormorant Garamond"', 'serif'],
+                        'sans': ['"Montserrat"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #FFE4E6;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #B76E79;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9d5b65;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Smooth Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Custom Hover Effects */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -10px rgba(183, 110, 121, 0.3);
+        }
+
+        /* Image Masking for Unique Shapes */
+        .blob-mask {
+            border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+            transition: border-radius 0.5s ease;
+        }
+
+        .blob-mask:hover {
+            border-radius: 70% 30% 30% 70% / 55% 55% 45% 45%;
+        }
+    </style>
+</head>
+
+<body class="bg-cream text-charcoal font-sans overflow-x-hidden selection:bg-rose-gold selection:text-white">
+
+    <!-- Top Flowing Note -->
+    <div class="bg-rose-gold text-white py-2 overflow-hidden z-50 relative">
+        <div class="marquee-container">
+            <div class="marquee-content font-medium text-sm tracking-wide">
+                Everything is customizable — you can edit, remove, or change anything. We handle it all. &nbsp; • &nbsp;
+                Everything is customizable — you can edit, remove, or change anything. We handle it all. &nbsp; • &nbsp;
+                Everything is customizable — you can edit, remove, or change anything. We handle it all. &nbsp; • &nbsp;
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 top-8 transition-all duration-300 glass" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button onclick="toggleMenu()" class="text-rose-gold hover:text-charcoal focus:outline-none">
+                        <i data-lucide="menu" class="w-8 h-8"></i>
+                    </button>
+                </div>
+
+                <!-- Logo (Left on Desktop) -->
+                <div class="flex-shrink-0 flex items-center justify-center w-full md:w-auto md:justify-start">
+                    <a href="#"
+                        class="font-script text-4xl text-rose-gold font-bold hover:scale-105 transition-transform">MF</a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#about" class="text-charcoal hover:text-rose-gold font-medium transition-colors">About</a>
+                    <a href="#services"
+                        class="text-charcoal hover:text-rose-gold font-medium transition-colors">Services</a>
+                    <a href="#portfolio"
+                        class="text-charcoal hover:text-rose-gold font-medium transition-colors">Portfolio</a>
+                    <a href="#rates" class="text-charcoal hover:text-rose-gold font-medium transition-colors">Rates</a>
+                    <a href="#contact"
+                        class="px-6 py-2 rounded-full bg-rose-gold text-white hover:bg-opacity-90 transition-all shadow-lg hover:shadow-rose-gold/50 transform hover:-translate-y-0.5">Let's
+                        Talk</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-rose-100 absolute w-full">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+                <a href="#about" onclick="toggleMenu()"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-charcoal hover:text-rose-gold hover:bg-blush">About</a>
+                <a href="#services" onclick="toggleMenu()"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-charcoal hover:text-rose-gold hover:bg-blush">Services</a>
+                <a href="#portfolio" onclick="toggleMenu()"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-charcoal hover:text-rose-gold hover:bg-blush">Portfolio</a>
+                <a href="#rates" onclick="toggleMenu()"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-charcoal hover:text-rose-gold hover:bg-blush">Rates</a>
+                <a href="#contact" onclick="toggleMenu()"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-rose-gold font-bold">Contact Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-16 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background Decor -->
+        <div
+            class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blush rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob">
+        </div>
+        <div
+            class="absolute top-0 left-0 -ml-20 -mt-20 w-72 h-72 bg-rose-200 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center" data-aos="fade-down" data-aos-duration="1000">
+                <h1
+                    class="font-script text-8xl md:text-9xl text-rose-gold mb-4 leading-none select-none drop-shadow-sm">
+                    Maven Flaviano
+                </h1>
+                <p class="font-serif text-2xl md:text-3xl text-gray-600 italic mb-8">
+                    Your Digital Right Hand & Creative Strategist
+                </p>
+            </div>
+
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1" data-aos="fade-right" data-aos-delay="200">
+                    <h2 class="text-4xl font-serif font-bold text-charcoal mb-6">Hello, Lovely! <span
+                            class="text-rose-gold">✨</span></h2>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-8">
+                        I help ambitious entrepreneurs and small business owners reclaim their time. From managing your
+                        inbox to creating stunning social media content, I handle the chaos so you can focus on the
+                        dream.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#portfolio"
+                            class="px-8 py-3 rounded-full border-2 border-rose-gold text-rose-gold font-medium hover:bg-rose-gold hover:text-white transition-all">
+                            View My Work
+                        </a>
+                        <a href="#contact"
+                            class="px-8 py-3 rounded-full bg-charcoal text-white font-medium hover:bg-gray-800 transition-all shadow-lg">
+                            Hire Me
+                        </a>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 flex justify-center" data-aos="fade-left" data-aos-delay="400">
+                    <div class="relative w-80 h-96 md:w-96 md:h-[500px]">
+                        <div
+                            class="absolute inset-0 bg-rose-gold opacity-20 rounded-[2rem] transform rotate-6 translate-x-4 translate-y-4">
+                        </div>
+                        <img src="photo.png" alt="Maven Flaviano Professional"
+                            class="absolute inset-0 w-full h-full object-cover rounded-[2rem] shadow-2xl border-4 border-white object-top"
+                            onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Software / Tools Section -->
+    <section class="py-16 bg-white" id="tools">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <span class="text-rose-gold font-bold tracking-wider uppercase text-sm">My Toolkit</span>
+                <h2 class="text-3xl font-serif font-bold mt-2">Software I Love Using</h2>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-8 md:gap-12 opacity-80" data-aos="fade-up"
+                data-aos-delay="200">
+                <!-- Using Lucide/Text placeholders for logos to ensure loading -->
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div
+                        class="w-16 h-16 bg-blush rounded-2xl flex items-center justify-center text-rose-gold group-hover:scale-110 transition-transform">
+                        <i data-lucide="figma" class="w-8 h-8"></i>
+                    </div>
+                    <span class="mt-2 text-sm font-medium">Figma</span>
+                </div>
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div
+                        class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform">
+                        <i data-lucide="trello" class="w-8 h-8"></i>
+                    </div>
+                    <span class="mt-2 text-sm font-medium">Trello</span>
+                </div>
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div
+                        class="w-16 h-16 bg-yellow-50 rounded-2xl flex items-center justify-center text-yellow-600 group-hover:scale-110 transition-transform">
+                        <i data-lucide="mail" class="w-8 h-8"></i>
+                    </div>
+                    <span class="mt-2 text-sm font-medium">Mailchimp</span>
+                </div>
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div
+                        class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform">
+                        <i data-lucide="sheet" class="w-8 h-8"></i>
+                    </div>
+                    <span class="mt-2 text-sm font-medium">Excel/G-Sheets</span>
+                </div>
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div
+                        class="w-16 h-16 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 group-hover:scale-110 transition-transform">
+                        <i data-lucide="pen-tool" class="w-8 h-8"></i>
+                    </div>
+                    <span class="mt-2 text-sm font-medium">Canva</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction / About Section -->
+    <section id="about" class="py-20 bg-blush/30 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="relative" data-aos="fade-right">
+                    <!-- Photo of sitting on garden -->
+                    <div class="relative z-10">
+                        <img src="photo.jpg" alt="Working in Garden"
+                            class="w-full h-auto rounded-tr-[100px] rounded-bl-[100px] shadow-xl border-8 border-white"
+                            onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                    </div>
+                    <!-- Decorative Elements -->
+                    <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-rose-gold rounded-full opacity-20 -z-0"></div>
+                    <div
+                        class="absolute -top-6 -right-6 w-24 h-24 border-4 border-rose-gold rounded-full opacity-30 -z-0">
+                    </div>
+                </div>
+
+                <div data-aos="fade-left">
+                    <span class="text-rose-gold font-bold tracking-wider uppercase text-sm">About Me</span>
+                    <h2 class="text-4xl font-serif font-bold text-charcoal mt-2 mb-6">More Than Just An Assistant</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        I'm Maven Flaviano, a dedicated virtual assistant with a passion for organization and
+                        creativity.
+                        I don't just check boxes; I look for ways to optimize your workflow and elevate your brand
+                        presence.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        When I'm not organizing calendars or designing graphics, you can find me sitting in my garden
+                        with my laptop (as seen on the left!), enjoying a cup of matcha, or planning my next travel
+                        adventure. I bring this same sense of calm and structure to your business.
+                    </p>
+
+                    <!-- Stats / Mini Skills -->
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div class="p-4 bg-white rounded-xl shadow-sm">
+                            <h3 class="font-bold text-2xl text-rose-gold">3+</h3>
+                            <p class="text-xs text-gray-500 uppercase mt-1">Years Exp.</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl shadow-sm">
+                            <h3 class="font-bold text-2xl text-rose-gold">50+</h3>
+                            <p class="text-xs text-gray-500 uppercase mt-1">Happy Clients</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl shadow-sm">
+                            <h3 class="font-bold text-2xl text-rose-gold">24/7</h3>
+                            <p class="text-xs text-gray-500 uppercase mt-1">Support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-serif font-bold">My Superpowers</h2>
+                <div class="w-24 h-1 bg-rose-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="space-y-8" data-aos="fade-up" data-aos-delay="200">
+                <!-- Skill 1 -->
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="font-bold text-charcoal">Administrative Support</span>
+                        <span class="text-rose-gold font-bold">95%</span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded-full h-3">
+                        <div class="bg-rose-gold h-3 rounded-full" style="width: 95%"></div>
+                    </div>
+                </div>
+
+                <!-- Skill 2 -->
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="font-bold text-charcoal">Social Media Management</span>
+                        <span class="text-rose-gold font-bold">90%</span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded-full h-3">
+                        <div class="bg-rose-gold h-3 rounded-full" style="width: 90%"></div>
+                    </div>
+                </div>
+
+                <!-- Skill 3 -->
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="font-bold text-charcoal">Content Creation (Canva/Copy)</span>
+                        <span class="text-rose-gold font-bold">85%</span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded-full h-3">
+                        <div class="bg-rose-gold h-3 rounded-full" style="width: 85%"></div>
+                    </div>
+                </div>
+
+                <!-- Skill 4 -->
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="font-bold text-charcoal">Email Marketing</span>
+                        <span class="text-rose-gold font-bold">80%</span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded-full h-3">
+                        <div class="bg-rose-gold h-3 rounded-full" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tags -->
+            <div class="mt-12 flex flex-wrap justify-center gap-3" data-aos="fade-up" data-aos-delay="400">
+                <span class="px-4 py-2 bg-blush text-rose-gold rounded-full text-sm font-medium">Calendar
+                    Management</span>
+                <span class="px-4 py-2 bg-blush text-rose-gold rounded-full text-sm font-medium">Data Entry</span>
+                <span class="px-4 py-2 bg-blush text-rose-gold rounded-full text-sm font-medium">Customer Service</span>
+                <span class="px-4 py-2 bg-blush text-rose-gold rounded-full text-sm font-medium">Research</span>
+                <span class="px-4 py-2 bg-blush text-rose-gold rounded-full text-sm font-medium">Travel Booking</span>
+                <span class="px-4 py-2 bg-blush text-rose-gold rounded-full text-sm font-medium">WordPress</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gradient-to-b from-white to-blush/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-rose-gold font-bold tracking-wider uppercase text-sm">What I Do</span>
+                <h2 class="text-4xl font-serif font-bold mt-2">Services Tailored for You</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 card-hover group"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div
+                        class="w-14 h-14 bg-rose-gold rounded-full flex items-center justify-center text-white mb-6 group-hover:bg-charcoal transition-colors">
+                        <i data-lucide="calendar-heart" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-charcoal">General Admin</h3>
+                    <p class="text-gray-500 mb-6">Inbox management, calendar scheduling, file organization, and meeting
+                        minutes. I keep your business running smoothly.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-rose-gold mr-2"></i>
+                            Email Detox</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-rose-gold mr-2"></i>
+                            Appointment Setting</li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 card-hover group relative overflow-hidden"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div
+                        class="absolute top-0 right-0 bg-rose-gold text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                        POPULAR</div>
+                    <div
+                        class="w-14 h-14 bg-rose-gold rounded-full flex items-center justify-center text-white mb-6 group-hover:bg-charcoal transition-colors">
+                        <i data-lucide="instagram" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-charcoal">Social Media</h3>
+                    <p class="text-gray-500 mb-6">Content scheduling, caption writing, engagement, and basic graphic
+                        design to keep your audience hooked.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-rose-gold mr-2"></i>
+                            Content Calendar</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-rose-gold mr-2"></i>
+                            Community Management</li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 card-hover group"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <div
+                        class="w-14 h-14 bg-rose-gold rounded-full flex items-center justify-center text-white mb-6 group-hover:bg-charcoal transition-colors">
+                        <i data-lucide="pen-tool" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-charcoal">Creative & Tech</h3>
+                    <p class="text-gray-500 mb-6">Basic website updates, landing page creation, presentation design, and
+                        newsletter setup.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-rose-gold mr-2"></i>
+                            Newsletter Design</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-rose-gold mr-2"></i>
+                            Slide Decks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-rose-gold font-bold tracking-wider uppercase text-sm">My Work</span>
+                <h2 class="text-4xl font-serif font-bold mt-2">Featured Projects</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="group relative overflow-hidden rounded-xl shadow-lg" data-aos="zoom-in">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Social Media Strategy"
+                        class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div
+                        class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-4 text-center">
+                        <h4 class="font-bold text-xl mb-2">Social Media Strategy</h4>
+                        <p class="text-sm">Instagram Growth for Lifestyle Brand</p>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group relative overflow-hidden rounded-xl shadow-lg" data-aos="zoom-in"
+                    data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Inbox Management"
+                        class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div
+                        class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-4 text-center">
+                        <h4 class="font-bold text-xl mb-2">Inbox Zero</h4>
+                        <p class="text-sm">Email Organization System</p>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="group relative overflow-hidden rounded-xl shadow-lg" data-aos="zoom-in"
+                    data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Presentation Design"
+                        class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div
+                        class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-4 text-center">
+                        <h4 class="font-bold text-xl mb-2">Presentation Design</h4>
+                        <p class="text-sm">Quarterly Report Deck</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#"
+                    class="inline-block text-rose-gold font-bold border-b-2 border-rose-gold pb-1 hover:text-charcoal hover:border-charcoal transition-colors">See
+                    More on Google Drive</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rates Section -->
+    <section id="rates" class="py-20 bg-blush/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-serif font-bold">Investment</h2>
+                <p class="text-gray-500 mt-4">Choose the package that fits your needs</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Basic -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 text-center" data-aos="flip-left">
+                    <h3 class="font-serif text-2xl font-bold text-charcoal mb-2">The Starter</h3>
+                    <div class="text-4xl font-bold text-rose-gold mb-6">$30<span
+                            class="text-base font-normal text-gray-500">/hr</span></div>
+                    <ul class="text-gray-600 space-y-4 mb-8 text-left">
+                        <li class="flex items-start"><i data-lucide="check-circle"
+                                class="w-5 h-5 text-rose-gold mr-2 mt-0.5"></i> 10 Hours Minimum</li>
+                        <li class="flex items-start"><i data-lucide="check-circle"
+                                class="w-5 h-5 text-rose-gold mr-2 mt-0.5"></i> Email & Calendar</li>
+                        <li class="flex items-start"><i data-lucide="check-circle"
+                                class="w-5 h-5 text-rose-gold mr-2 mt-0.5"></i> Weekly Report</li>
+                    </ul>
+                    <a href="#contact"
+                        class="block w-full py-3 rounded-full border border-rose-gold text-rose-gold font-bold hover:bg-rose-gold hover:text-white transition-all">Select</a>
+                </div>
+
+                <!-- Pro -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl border-2 border-rose-gold text-center relative transform md:-translate-y-4"
+                    data-aos="flip-left" data-aos-delay="100">
+                    <div
+                        class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-rose-gold text-white px-4 py-1 rounded-full text-sm font-bold">
+                        BEST VALUE</div>
+                    <h3 class="font-serif text-2xl font-bold text-charcoal mb-2">The Retainer</h3>
+                    <div class="text-4xl font-bold text-rose-gold mb-6">$1,200<span
+                            class="text-base font-normal text-gray-500">/mo</span></div>
+                    <ul class="text-gray-600 space-y-4 mb-8 text-left">
+                        <li class="flex items-start"><i data-lucide="check-circle"
+                                class="w-5 h-5 text-rose-gold mr-2 mt-0.5"></i> 40 Hours Monthly</li>
+                        <li class="flex items-start"><i data-lucide="check-circle"
+                                class="w-5 h-5 text-rose-gold mr-2 mt-0.5"></i> Priority Support</li>
+                        <li class="flex items-start"><i data-lucide="check-circle"
+                                class="w-5 h-5 text-rose-gold mr-2 mt-0.5"></i> Monthly Strategy Call</li>
+                        <li class="flex items-start"><i data-lucide="check-circle"
+                                class="w-5 h-5 text-rose-gold mr-2 mt-0.5"></i> Social Media Basic</li>
+                    </ul>
+                    <a href="#contact"
+                        class="block w-full py-3 rounded-full bg-rose-gold text-white font-bold hover:bg-opacity-90 transition-all shadow-md">Select</a>
+                </div>
+
+                <!-- Custom -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 text-center" data-aos="flip-left"
+                    data-aos-delay="200">
+                    <h3 class="font-serif text-2xl font-bold text-charcoal mb-2">Project Based</h3>
+                    <div class="text-4xl font-bold text-rose-gold mb-6">Custom</div>
+                    <ul class="text-gray-600 space-y-4 mb-8 text-left">
+                        <li class="flex items-start"><i data-lucide="check-circle"
+                                class="w-5 h-5 text-rose-gold mr-2 mt-0.5"></i> Specific One-time Tasks</li>
+                        <li class="flex items-start"><i data-lucide="check-circle"
+                                class="w-5 h-5 text-rose-gold mr-2 mt-0.5"></i> Web Design</li>
+                        <li class="flex items-start"><i data-lucide="check-circle"
+                                class="w-5 h-5 text-rose-gold mr-2 mt-0.5"></i> Brand Kits</li>
+                    </ul>
+                    <a href="#contact"
+                        class="block w-full py-3 rounded-full border border-rose-gold text-rose-gold font-bold hover:bg-rose-gold hover:text-white transition-all">Inquire</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div
+                class="bg-rose-gold rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col md:flex-row gap-12 overflow-hidden">
+                <!-- Decorative Circles -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full -mr-20 -mt-20"></div>
+                <div class="absolute bottom-0 left-0 w-48 h-48 bg-white opacity-10 rounded-full -ml-20 -mb-20"></div>
+
+                <div class="md:w-1/2 text-white">
+                    <h2 class="font-serif text-3xl font-bold mb-4">Let's Create Magic Together</h2>
+                    <p class="mb-8 opacity-90">Ready to get your time back? Fill out the form, and I'll get back to you
+                        within 24 hours.</p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i data-lucide="mail" class="w-5 h-5 mr-3"></i>
+                            <span>hello@maryvalerie.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-lucide="instagram" class="w-5 h-5 mr-3"></i>
+                            <span>@maryvalerie.va</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-lucide="map-pin" class="w-5 h-5 mr-3"></i>
+                            <span>Remote / Worldwide</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:w-1/2 bg-white rounded-2xl p-6 shadow-lg">
+                    <form onsubmit="event.preventDefault(); alert('Message sent! Mary will contact you soon.');">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
+                            <input
+                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-rose-gold bg-gray-50"
+                                id="name" type="text" placeholder="Your Name">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+                            <input
+                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-rose-gold bg-gray-50"
+                                id="email" type="email" placeholder="your@email.com">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="message">Message</label>
+                            <textarea
+                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-rose-gold bg-gray-50"
+                                id="message" rows="3" placeholder="How can I help you?"></textarea>
+                        </div>
+                        <button
+                            class="w-full bg-charcoal text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition-colors">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-charcoal text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center border-b border-gray-700 pb-8 mb-8">
+                <div class="mb-4 md:mb-0">
+                    <span class="font-script text-3xl text-rose-gold">MF</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors"><i
+                            data-lucide="instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors"><i
+                            data-lucide="linkedin"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors"><i
+                            data-lucide="facebook"></i></a>
+                </div>
+            </div>
+            <div class="text-center md:flex md:justify-between md:items-center text-gray-500 text-sm">
+                <p>&copy; 2024 Maven Flaviano. All rights reserved.</p>
+                <p class="mt-2 md:mt-0 flex items-center justify-center gap-1">
+                    Design by : <span class="text-white font-medium">Blockscom Media</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Initialize AOS Animation
+        AOS.init({
+            once: true,
+            offset: 100,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-sm');
+                navbar.classList.add('bg-white/90');
+            } else {
+                navbar.classList.remove('shadow-sm');
+                navbar.classList.remove('bg-white/90');
+            }
+        });
+    </script>
+</body>
+
+</html>

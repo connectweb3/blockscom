@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Flaviano Portfolio</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpg" href="favicon.jpg">
+
+    <!-- Open Graph Meta Tags (Social Previews) -->
+    <meta property="og:title" content="Maven Flaviano - Virtual Assistant Portfolio">
+    <meta property="og:description"
+        content="Professional Virtual Assistant Services. Organization, Design, and Management.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://maryvalerie.com"> <!-- Replace with actual URL -->
+    <meta property="og:type" content="website">
+
+    <!-- Fonts: Playfair Display (Serif) & Inter (Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neutral-50': '#fafafa',
+                        'neutral-900': '#171717',
+                        'accent': '#d4b49a', // Soft beige/gold accent
+                        'accent-dark': '#b08d74',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'marquee': 'marquee 25s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for specific scroll behaviors -->
+    <style>
+        body {
+            background-color: #fafafa;
+            color: #171717;
+            overflow-x: hidden;
+        }
+
+        /* Smooth Scroll Setup */
+        html.lenis {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
+
+        /* Utility Classes */
+        .reveal-text {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .char {
+            transform: translateY(115%);
+            transition: transform 0.5s ease;
+        }
+
+        .image-reveal {
+            clip-path: inset(0 100% 0 0);
+            transition: clip-path 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .image-reveal.active {
+            clip-path: inset(0 0 0 0);
+        }
+
+        /* Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Top Flowing Note -->
+    <div
+        class="fixed top-0 left-0 w-full z-50 bg-neutral-900 text-white text-xs py-2 uppercase tracking-widest overflow-hidden border-b border-white/10">
+        <div class="marquee-container flex">
+            <div class="animate-marquee flex items-center gap-8 px-4">
+                <span>Everything is customizable — you can edit, remove, or change anything. We handle it all.</span>
+                <span class="text-accent">•</span>
+                <span>Welcome to my portfolio</span>
+                <span class="text-accent">•</span>
+                <span>Available for new projects</span>
+                <span class="text-accent">•</span>
+                <span>Everything is customizable — you can edit, remove, or change anything. We handle it all.</span>
+                <span class="text-accent">•</span>
+                <span>Contact me for rates</span>
+                <span class="text-accent">•</span>
+            </div>
+            <div class="animate-marquee flex items-center gap-8 px-4 absolute top-2 left-full">
+                <span>Everything is customizable — you can edit, remove, or change anything. We handle it all.</span>
+                <span class="text-accent">•</span>
+                <span>Welcome to my portfolio</span>
+                <span class="text-accent">•</span>
+                <span>Available for new projects</span>
+                <span class="text-accent">•</span>
+                <span>Everything is customizable — you can edit, remove, or change anything. We handle it all.</span>
+                <span class="text-accent">•</span>
+                <span>Contact me for rates</span>
+                <span class="text-accent">•</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav
+        class="fixed top-10 left-0 w-full z-40 px-6 py-6 flex justify-between items-center mix-blend-difference text-white pointer-events-none">
+        <div class="pointer-events-auto">
+            <span class="font-serif italic text-lg tracking-wider">MF.</span>
+        </div>
+        <div class="pointer-events-auto hidden md:flex gap-8 text-xs uppercase tracking-widest font-medium">
+            <a href="#about" class="hover:text-neutral-400 transition-colors">About</a>
+            <a href="#services" class="hover:text-neutral-400 transition-colors">Services</a>
+            <a href="#portfolio" class="hover:text-neutral-400 transition-colors">Work</a>
+            <a href="#contact" class="hover:text-neutral-400 transition-colors">Contact</a>
+        </div>
+        <div class="pointer-events-auto md:hidden">
+            <i class="fa-solid fa-bars text-xl"></i>
+        </div>
+    </nav>
+
+    <!-- Main Content Wrapper -->
+    <main class="w-full">
+
+        <!-- Hero Section -->
+        <section
+            class="relative min-h-screen w-full flex flex-col justify-center items-center pt-20 px-4 overflow-hidden">
+            <!-- Big Center Text Logo -->
+            <div class="relative z-10 text-center mix-blend-difference text-white/90">
+                <h1
+                    class="gsap-hero-title font-serif text-[15vw] leading-[0.8] tracking-tighter opacity-0 translate-y-20">
+                    Mary
+                </h1>
+                <h1
+                    class="gsap-hero-title font-serif text-[15vw] leading-[0.8] tracking-tighter italic opacity-0 translate-y-20 ml-12 md:ml-32">
+                    Valerie
+                </h1>
+            </div>
+
+            <!-- Hero Image Background -->
+            <div class="absolute inset-0 z-0 w-full h-full">
+                <div class="w-full h-full relative overflow-hidden">
+                    <img src="photo.jpg"
+                        onerror="this.src='https://images.unsplash.com/photo-1490730141103-6cac27aaab94?q=80&w=2070&auto=format&fit=crop'"
+                        alt="Maven Flaviano Working"
+                        class="gsap-hero-img object-cover w-full h-full scale-125 opacity-0 grayscale-[20%]">
+                    <div class="absolute inset-0 bg-black/20"></div>
+                </div>
+            </div>
+
+            <div class="absolute bottom-10 left-6 z-10 text-white mix-blend-difference">
+                <p class="uppercase text-xs tracking-[0.2em] font-medium">Virtual Assistant &<br>Digital Strategist</p>
+            </div>
+
+            <div class="absolute bottom-10 right-6 z-10 text-white animate-bounce">
+                <i class="fa-solid fa-arrow-down text-xl"></i>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="about"
+            class="relative py-24 md:py-32 px-6 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="order-2 md:order-1">
+                <div class="gsap-fade-up relative w-full aspect-[3/4] overflow-hidden bg-neutral-200">
+                    <img src="photo.png"
+                        onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop'"
+                        alt="Professional Portrait"
+                        class="object-cover w-full h-full hover:scale-105 transition-transform duration-700 ease-out">
+                </div>
+            </div>
+            <div class="order-1 md:order-2 flex flex-col justify-center">
+                <span
+                    class="gsap-fade-up text-accent uppercase tracking-widest text-xs font-bold mb-4">Introduction</span>
+                <h2 class="gsap-fade-up font-serif text-4xl md:text-6xl leading-tight mb-8">
+                    Efficiency meets <span class="italic text-neutral-500">elegance.</span>
+                </h2>
+                <p class="gsap-fade-up text-neutral-600 leading-relaxed mb-6 font-light text-lg">
+                    I'm Maven Flaviano, a dedicated Virtual Assistant helping entrepreneurs and creatives reclaim their
+                    time. With a background in administrative support and a flair for minimal design, I handle the chaos
+                    so you can focus on the craft.
+                </p>
+                <div class="gsap-fade-up pt-4">
+                    <a href="#contact"
+                        class="group inline-flex items-center gap-2 text-sm uppercase tracking-widest border-b border-black pb-1 hover:text-accent hover:border-accent transition-all">
+                        Work with me <i
+                            class="fa-solid fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills & Software Section -->
+        <section class="py-20 bg-neutral-900 text-white rounded-t-[3rem] -mt-10 relative z-10">
+            <div class="max-w-7xl mx-auto px-6">
+
+                <!-- Softwares -->
+                <div class="mb-24">
+                    <div
+                        class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-white/10 pb-6">
+                        <h3 class="gsap-fade-up font-serif text-3xl md:text-4xl">Software Arsenal</h3>
+                        <p class="gsap-fade-up text-neutral-400 text-sm mt-4 md:mt-0">Tools I use to build your success
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+                        <!-- Software Item -->
+                        <div
+                            class="gsap-fade-up group flex flex-col items-center gap-4 p-6 border border-white/5 rounded-2xl hover:bg-white/5 transition-colors cursor-default">
+                            <i
+                                class="fa-brands fa-trello text-4xl text-neutral-400 group-hover:text-white transition-colors"></i>
+                            <span class="text-sm tracking-widest uppercase">Trello</span>
+                        </div>
+                        <div
+                            class="gsap-fade-up group flex flex-col items-center gap-4 p-6 border border-white/5 rounded-2xl hover:bg-white/5 transition-colors cursor-default">
+                            <i
+                                class="fa-solid fa-envelope-open-text text-4xl text-neutral-400 group-hover:text-white transition-colors"></i>
+                            <span class="text-sm tracking-widest uppercase">Outlook</span>
+                        </div>
+                        <div
+                            class="gsap-fade-up group flex flex-col items-center gap-4 p-6 border border-white/5 rounded-2xl hover:bg-white/5 transition-colors cursor-default">
+                            <i
+                                class="fa-brands fa-slack text-4xl text-neutral-400 group-hover:text-white transition-colors"></i>
+                            <span class="text-sm tracking-widest uppercase">Slack</span>
+                        </div>
+                        <div
+                            class="gsap-fade-up group flex flex-col items-center gap-4 p-6 border border-white/5 rounded-2xl hover:bg-white/5 transition-colors cursor-default">
+                            <span
+                                class="text-4xl font-bold font-serif text-neutral-400 group-hover:text-white transition-colors">N</span>
+                            <span class="text-sm tracking-widest uppercase">Notion</span>
+                        </div>
+                        <div
+                            class="gsap-fade-up group flex flex-col items-center gap-4 p-6 border border-white/5 rounded-2xl hover:bg-white/5 transition-colors cursor-default">
+                            <span
+                                class="text-4xl font-bold text-neutral-400 group-hover:text-white transition-colors">Canva</span>
+                            <span class="text-sm tracking-widest uppercase">Canva</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div>
+                    <div
+                        class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-white/10 pb-6">
+                        <h3 class="gsap-fade-up font-serif text-3xl md:text-4xl">Core Skills</h3>
+                        <p class="gsap-fade-up text-neutral-400 text-sm mt-4 md:mt-0">The foundation of my service</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="gsap-fade-up p-8 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+                            <div class="text-accent mb-4 text-2xl"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                            <h4 class="text-xl font-serif mb-2">Inbox Zero Management</h4>
+                            <p class="text-neutral-400 text-sm leading-relaxed">Systematic organization of email
+                                communications, ensuring no lead is left unanswered.</p>
+                        </div>
+                        <div class="gsap-fade-up p-8 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+                            <div class="text-accent mb-4 text-2xl"><i class="fa-regular fa-calendar-check"></i></div>
+                            <h4 class="text-xl font-serif mb-2">Calendar Tetris</h4>
+                            <p class="text-neutral-400 text-sm leading-relaxed">Complex scheduling across timezones,
+                                setting appointments, and managing cancellations.</p>
+                        </div>
+                        <div class="gsap-fade-up p-8 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+                            <div class="text-accent mb-4 text-2xl"><i class="fa-solid fa-chart-pie"></i></div>
+                            <h4 class="text-xl font-serif mb-2">Data Entry & Research</h4>
+                            <p class="text-neutral-400 text-sm leading-relaxed">Accurate data compilation, market
+                                research, and lead generation organization.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-24 md:py-32 px-6 max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <span class="gsap-fade-up text-accent uppercase tracking-widest text-xs font-bold">What I Do</span>
+                <h2 class="gsap-fade-up font-serif text-4xl md:text-6xl mt-4">Curated Services</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+                <!-- Service 1 -->
+                <div class="gsap-fade-up group">
+                    <div
+                        class="h-[1px] w-full bg-neutral-200 mb-6 group-hover:bg-accent transition-colors duration-500">
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <span
+                            class="text-4xl font-serif text-neutral-300 group-hover:text-accent transition-colors">01</span>
+                        <div class="max-w-md text-right">
+                            <h3
+                                class="text-2xl font-serif mb-3 group-hover:translate-x-2 transition-transform duration-300">
+                                Executive Assistance</h3>
+                            <p class="text-neutral-500 font-light text-sm">Comprehensive travel planning, calendar
+                                management, and lifestyle coordination for busy executives.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="gsap-fade-up group">
+                    <div
+                        class="h-[1px] w-full bg-neutral-200 mb-6 group-hover:bg-accent transition-colors duration-500">
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <span
+                            class="text-4xl font-serif text-neutral-300 group-hover:text-accent transition-colors">02</span>
+                        <div class="max-w-md text-right">
+                            <h3
+                                class="text-2xl font-serif mb-3 group-hover:translate-x-2 transition-transform duration-300">
+                                Social Media Support</h3>
+                            <p class="text-neutral-500 font-light text-sm">Scheduling posts, community engagement, basic
+                                graphic creation, and analytics tracking.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="gsap-fade-up group">
+                    <div
+                        class="h-[1px] w-full bg-neutral-200 mb-6 group-hover:bg-accent transition-colors duration-500">
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <span
+                            class="text-4xl font-serif text-neutral-300 group-hover:text-accent transition-colors">03</span>
+                        <div class="max-w-md text-right">
+                            <h3
+                                class="text-2xl font-serif mb-3 group-hover:translate-x-2 transition-transform duration-300">
+                                Customer Support</h3>
+                            <p class="text-neutral-500 font-light text-sm">Managing support tickets, live chat
+                                assistance, and ensuring high customer satisfaction scores.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="gsap-fade-up group">
+                    <div
+                        class="h-[1px] w-full bg-neutral-200 mb-6 group-hover:bg-accent transition-colors duration-500">
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <span
+                            class="text-4xl font-serif text-neutral-300 group-hover:text-accent transition-colors">04</span>
+                        <div class="max-w-md text-right">
+                            <h3
+                                class="text-2xl font-serif mb-3 group-hover:translate-x-2 transition-transform duration-300">
+                                Project Management</h3>
+                            <p class="text-neutral-500 font-light text-sm">Setting up Trello/Notion boards, tracking
+                                deadlines, and coordinating team communications.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-20 bg-neutral-100">
+            <div class="max-w-[1920px] mx-auto px-6">
+                <div class="flex justify-between items-end mb-16 max-w-7xl mx-auto">
+                    <h2 class="gsap-fade-up font-serif text-4xl md:text-5xl">Selected Works</h2>
+                    <a href="#"
+                        class="hidden md:inline-block text-sm border-b border-black pb-1 hover:text-accent hover:border-accent transition-colors">View
+                        All Projects</a>
+                </div>
+
+                <!-- Horizontal Scroll Concept (CSS Grid for simplicity in Single File) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- Item 1 -->
+                    <div class="gsap-fade-up group relative aspect-[4/5] overflow-hidden cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop"
+                            alt="Project 1"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                            <span class="text-accent text-xs uppercase tracking-widest mb-2">Social Media</span>
+                            <h3 class="text-white font-serif text-2xl">Lifestyle Brand Curation</h3>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="gsap-fade-up group relative aspect-[4/5] overflow-hidden cursor-pointer mt-0 md:mt-16">
+                        <img src="https://images.unsplash.com/photo-1542435503-956c469947f6?q=80&w=1974&auto=format&fit=crop"
+                            alt="Project 2"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                            <span class="text-accent text-xs uppercase tracking-widest mb-2">Admin Support</span>
+                            <h3 class="text-white font-serif text-2xl">Executive Calendar System</h3>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="gsap-fade-up group relative aspect-[4/5] overflow-hidden cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1554774853-719586f82d77?q=80&w=2070&auto=format&fit=crop"
+                            alt="Project 3"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                            <span class="text-accent text-xs uppercase tracking-widest mb-2">Research</span>
+                            <h3 class="text-white font-serif text-2xl">Market Analysis Report</h3>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Rates Section -->
+        <section id="rates" class="py-24 px-6 max-w-5xl mx-auto">
+            <h2 class="gsap-fade-up text-center font-serif text-4xl mb-16">Investment</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Retainer Card -->
+                <div
+                    class="gsap-fade-up p-10 border border-neutral-200 hover:border-neutral-900 transition-colors duration-300 bg-white shadow-sm hover:shadow-xl">
+                    <h3 class="font-serif text-2xl mb-2">Monthly Retainer</h3>
+                    <p class="text-neutral-500 text-sm mb-6">Perfect for ongoing support</p>
+                    <div class="text-4xl font-serif mb-8">$800<span
+                            class="text-lg text-neutral-400 font-sans">/mo</span></div>
+
+                    <ul class="space-y-4 mb-8 text-sm text-neutral-600">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-accent"></i> 20 Hours of
+                            support</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-accent"></i> Weekly
+                            Check-in Call</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-accent"></i> Priority
+                            Response</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-accent"></i> Rollover hours
+                            (up to 5)</li>
+                    </ul>
+
+                    <a href="#contact"
+                        class="block text-center py-3 bg-neutral-900 text-white text-xs uppercase tracking-widest hover:bg-accent transition-colors">Choose
+                        Plan</a>
+                </div>
+
+                <!-- Hourly Card -->
+                <div
+                    class="gsap-fade-up p-10 border border-neutral-200 hover:border-neutral-900 transition-colors duration-300 bg-white shadow-sm hover:shadow-xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-accent text-white text-[10px] uppercase font-bold px-3 py-1">
+                        Popular</div>
+                    <h3 class="font-serif text-2xl mb-2">Hourly Rate</h3>
+                    <p class="text-neutral-500 text-sm mb-6">Flexible for small projects</p>
+                    <div class="text-4xl font-serif mb-8">$45<span class="text-lg text-neutral-400 font-sans">/hr</span>
+                    </div>
+
+                    <ul class="space-y-4 mb-8 text-sm text-neutral-600">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-accent"></i> Pay as you go
+                        </li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-accent"></i> Detailed Time
+                            Tracking</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-accent"></i> No long-term
+                            commitment</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-accent"></i> Standard
+                            Response Time</li>
+                    </ul>
+
+                    <a href="#contact"
+                        class="block text-center py-3 border border-neutral-900 text-neutral-900 text-xs uppercase tracking-widest hover:bg-neutral-900 hover:text-white transition-colors">Choose
+                        Plan</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 bg-neutral-900 text-white">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <span class="gsap-fade-up text-accent uppercase tracking-widest text-xs font-bold block mb-4">Get in
+                    Touch</span>
+                <h2 class="gsap-fade-up font-serif text-5xl md:text-7xl mb-8">Let's collaborate.</h2>
+                <p class="gsap-fade-up text-neutral-400 max-w-xl mx-auto mb-12 font-light">
+                    Ready to streamline your business? Send me an email and let's discuss how I can help you achieve
+                    your goals.
+                </p>
+
+                <a href="mailto:hello@maryvalerie.com"
+                    class="gsap-fade-up inline-block text-2xl md:text-4xl font-serif border-b border-white/30 pb-2 hover:text-accent hover:border-accent transition-all mb-16">
+                    hello@maryvalerie.com
+                </a>
+
+                <div class="gsap-fade-up flex justify-center gap-8 mb-20">
+                    <a href="#"
+                        class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all"><i
+                            class="fa-brands fa-instagram"></i></a>
+                    <a href="#"
+                        class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all"><i
+                            class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"
+                        class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all"><i
+                            class="fa-brands fa-twitter"></i></a>
+                </div>
+
+                <div
+                    class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-neutral-500 uppercase tracking-wider">
+                    <p>&copy; 2024 Maven Flaviano Portfolio</p>
+                    <p class="mt-2 md:mt-0">Design by : Blockscom Media</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Scripts -->
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Lenis for Smooth Scroll (Modern replacement for Locomotive) -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+        // Initialize Smooth Scroll (Lenis)
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animations
+        const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+        tl.to(".gsap-hero-title", {
+            y: 0,
+            opacity: 1,
+            duration: 1.5,
+            stagger: 0.2,
+            delay: 0.2
+        })
+            .to(".gsap-hero-img", {
+                opacity: 1,
+                scale: 1,
+                duration: 1.8,
+                ease: "expo.out"
+            }, "-=1");
+
+        // General Fade Up Animation for sections
+        const fadeUpElements = document.querySelectorAll(".gsap-fade-up");
+
+        fadeUpElements.forEach((element) => {
+            gsap.fromTo(element,
+                {
+                    y: 50,
+                    opacity: 0
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%", // Animation starts when element hits 85% of viewport height
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // Parallax Effect for Images
+        gsap.utils.toArray('.gsap-parallax').forEach(container => {
+            const img = container.querySelector('img');
+
+            gsap.to(img, {
+                yPercent: 20,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>
