@@ -190,6 +190,7 @@
             const screenshotImg = document.getElementById('screenshotImg');
             const downloadLink = document.getElementById('downloadLink');
             const errorMessage = document.getElementById('errorMessage');
+            const loadingText = loadingState.querySelector('span');
 
             let url = urlInput.value.trim();
             if (!url) {
@@ -209,53 +210,103 @@
             loadingState.classList.add('flex');
             captureBtn.disabled = true;
             captureBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            screenshotImg.src = ""; // Clear previous image
 
-            try {
-                // Use Microlink API
-                const encodedUrl = encodeURIComponent(url);
-                // Parameters:
-                // screenshot=true : take a screenshot
-                // fullPage=true : full page screenshot
-                // meta=false : don't return metadata
-                // embed=screenshot.url : return just the image bytes? No, we probably want JSON to get the URL
-                // Actually if we want to display it, we can just fetch the image, but loading handling is better with fetch.
-                // Microlink returns JSON by default.
-
-                const apiUrl = `https://api.microlink.io/?url=${encodedUrl}&screenshot=true&meta=false&fullPage=true`;
-
-                const response = await fetch(apiUrl);
-                const data = await response.json();
-
-                if (data.status === 'fail' || !data.screenshot) {
-                    throw new Error('Failed to capture screenshot. The site might be blocking bots.');
+            const providers = [
+                {
+                    name: 'Microlink',
+                    getUrl: (targetUrl) => {
+                        const encodedUrl = encodeURIComponent(targetUrl);
+                        return `https://api.microlink.io/?url=${encodedUrl}&screenshot=true&meta=false&fullPage=true`;
+                    },
+                    processResponse: async (response) => {
+                        const data = await response.json();
+                        if (data.status === 'fail' || !data.screenshot) {
+                            throw new Error('Failed to capture.');
+                        }
+                        return data.screenshot.url;
+                    }
+                },
+                {
+                    name: 'Thum.io',
+                    getUrl: (targetUrl) => {
+                        // Thum.io returns an image directly
+                        return `https://image.thum.io/get/width/1200/crop/3000/noanimate/${targetUrl}`;
+                    },
+                    processResponse: async (response) => {
+                        if (!response.ok) throw new Error('Failed to load image');
+                        // For direct image links, we just return the URL we called, 
+                        // but we need to make sure it actually loads successfully as an image.
+                        // Thum.io returns a placeholder if it fails sometimes, or we catch it in img.onerror
+                        return response.url;
+                    }
+                },
+                {
+                    name: 's-shot.ru',
+                    getUrl: (targetUrl) => {
+                        const encodedUrl = encodeURIComponent(targetUrl);
+                        return `https://www.s-shot.ru/1280x0/JPEG/1280/Z100/${encodedUrl}`;
+                    },
+                    processResponse: async (response) => {
+                        if (!response.ok) throw new Error('Failed to load image');
+                        return response.url;
+                    }
                 }
+            ];
 
-                const imageUrl = data.screenshot.url;
+            let lastError = null;
 
-                // Success
-                screenshotImg.src = imageUrl;
-                downloadLink.href = imageUrl;
+            for (const provider of providers) {
+                try {
+                    loadingText.innerText = `TRYING ${provider.name.toUpperCase()}...`;
+                    console.log(`Attempting screenshot with ${provider.name}...`);
 
-                // Wait for image to load before showing
-                screenshotImg.onload = () => {
+                    const requestUrl = provider.getUrl(url);
+
+                    // For APIs that return JSON (Microlink), we fetch.
+                    // For APIs that return Image (Thum.io, s-shot), we can try to fetch to check status,
+                    // or just set the src and let onerror handle it. 
+                    // To be consistent, let's try to fetch check for image APIs if possible, 
+                    // but some might block CORS.
+
+                    let imageUrl;
+
+                    if (provider.name === 'Microlink') {
+                        const response = await fetch(requestUrl);
+                        imageUrl = await provider.processResponse(response);
+                    } else {
+                        // For direct image providers, we just use the URL
+                        imageUrl = requestUrl;
+                        // We will rely on image.onload/onerror to validate
+                    }
+
+                    // Attempt to load the image
+                    await new Promise((resolve, reject) => {
+                        screenshotImg.onload = () => resolve();
+                        screenshotImg.onerror = () => reject(new Error(`Failed to load image from ${provider.name}`));
+                        screenshotImg.src = imageUrl;
+                    });
+
+                    // If we got here, it worked!
+                    downloadLink.href = imageUrl;
                     loadingState.classList.add('hidden');
                     loadingState.classList.remove('flex');
                     resultArea.classList.remove('hidden');
-                };
+                    return; // Exit function on success
 
-                screenshotImg.onerror = () => {
-                    throw new Error("Failed to load the screenshot image.");
+                } catch (err) {
+                    console.warn(`${provider.name} failed:`, err);
+                    lastError = err;
+                    // Continue to next provider
                 }
-
-            } catch (err) {
-                console.error(err);
-                loadingState.classList.add('hidden');
-                loadingState.classList.remove('flex');
-                showError(err.message);
-            } finally {
-                captureBtn.disabled = false;
-                captureBtn.classList.remove('opacity-50', 'cursor-not-allowed');
             }
+
+            // If loop finishes without success
+            loadingState.classList.add('hidden');
+            loadingState.classList.remove('flex');
+            showError(`All attempts failed. Last error: ${lastError ? lastError.message : 'Unknown error'}`);
+            captureBtn.disabled = false;
+            captureBtn.classList.remove('opacity-50', 'cursor-not-allowed');
         }
 
         function showError(msg) {
