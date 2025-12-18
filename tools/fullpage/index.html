@@ -244,6 +244,7 @@
                     name: 's-shot.ru',
                     getUrl: (targetUrl) => {
                         const encodedUrl = encodeURIComponent(targetUrl);
+                        // Changed to 1280x0 which often signifies full height, or scaling to width
                         return `https://www.s-shot.ru/1280x0/JPEG/1280/Z100/${encodedUrl}`;
                     },
                     processResponse: async (response) => {
@@ -285,8 +286,16 @@
                     if (existingLabel) existingLabel.remove();
 
                     const providerLabel = document.createElement('div');
-                    providerLabel.className = 'provider-label text-center mt-2 font-mono text-xs text-brand-dim';
-                    providerLabel.innerHTML = `Source: <span class="text-white">${provider.name}</span>`;
+                    providerLabel.className = 'provider-label text-center mt-2 flex flex-col gap-1 items-center justify-center';
+
+                    let labelHtml = `<span class="font-mono text-xs text-brand-dim">Source: <span class="text-white">${provider.name}</span></span>`;
+
+                    // Add warning for known partial providers
+                    if (provider.name === 'Thum.io') {
+                        labelHtml += `<span class="font-mono text-[10px] text-yellow-500 bg-yellow-900/20 px-2 py-0.5 rounded border border-yellow-700/50">⚠️ Partial Capture (Fallback)</span>`;
+                    }
+
+                    providerLabel.innerHTML = labelHtml;
                     resultArea.querySelector('.glass-panel').appendChild(providerLabel);
 
                     loadingState.classList.add('hidden');
