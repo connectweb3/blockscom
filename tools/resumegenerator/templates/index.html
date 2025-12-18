@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#050505] text-white overflow-hidden antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Generator | Blockscom</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;500;700&family=Lato:wght@300;400;700&family=Montserrat:wght@300;400;500;700&family=Open+Sans:wght@300;400;600&family=Playfair+Display:wght@400;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- PDF Lib (Removed: using native window.print for vector output) -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script> -->
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#050505',
+                            dark: '#0A0A0A',
+                            gray: '#1F1F1F',
+                            accent: '#FFFFFF',
+                            dim: '#888888',
+                            blue: '#3b82f6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f1f1f 1px, transparent 1px), linear-gradient(to bottom, #1f1f1f 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .input-group input,
+        .input-group textarea {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.2s;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            border-color: rgba(255, 255, 255, 0.4);
+            outline: none;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* A4 Paper Ratio */
+        .a4-preview {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            color: black;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            transform-origin: top center;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0A0A0A;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+
+        .loader {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3b82f6;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0;
+                /* Reset browser margins so template padding controls layout */
+            }
+
+            body {
+                /* Removed forced padding to allow full-bleed templates to work. 
+                   Templates must now handle their own 25mm safey margins. */
+                padding: 0;
+                /* Counters for page numbers (best effort support) */
+                counter-reset: page-counter;
+            }
+
+            /* Remove vertical padding from template to avoid double-spacing with @page margins */
+            .a4-preview {
+                /* padding: 0 !important; <-- REMOVED: This was stripping template padding */
+                margin: 0 !important;
+                width: 100% !important;
+                box-shadow: none !important;
+                /* Ensure background graphics print */
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* Custom Footer for Page Numbers - HIDDEN per user request */
+            .print-footer {
+                display: none !important;
+            }
+
+            /* Note: Pure CSS page numbers in body are tricky in browsers. 
+               We will use a fixed footer. Chrome often repeats fixed elements. 
+               We display a simple "Page" text. */
+
+            .page-break {
+                page-break-before: always;
+                margin-top: 40px;
+            }
+
+            /* Hide UI elements */
+            nav,
+            #font-selector-section,
+            h2,
+            button,
+            .input-group,
+            hr,
+            #template-selector {
+                display: none !important;
+            }
+
+            /* Hide everything that isn't the preview container */
+            body>* {
+                display: none !important;
+            }
+
+            /* Show only the main content */
+            body,
+            main,
+            #preview-container,
+            #resume-preview {
+                display: block !important;
+                visibility: visible !important;
+                width: 100% !important;
+                height: auto !important;
+                position: static !important;
+                overflow: visible !important;
+                background: white !important;
+                color: black !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* Ensure the preview container renders */
+            #resume-preview,
+            #resume-preview * {
+                visibility: visible !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* Reset transformations */
+            #preview-container {
+                transform: none !important;
+            }
+
+            /* Specific fix for the split layout */
+            main {
+                display: block !important;
+            }
+
+            /* Hide the left panel specifically by class since layout changed */
+            main>div:first-child {
+                display: none !important;
+            }
+
+            /* Make right panel full width */
+            main>div:last-child {
+                display: block !important;
+                width: 100% !important;
+                background: white !important;
+                position: static !important;
+            }
+
+            /* Hide visual page breaks in print */
+            .page-break-marker {
+                display: none !important;
+            }
+        }
+
+        /* Visual Page Break Markers (Preview Only) - Styled as "Gaps" */
+        #resume-preview {
+            position: relative;
+            /* Ensure markers are absolute relative to this */
+        }
+
+        .page-break-marker {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            /* Thickness of the gap */
+            background: #e5e5e5;
+            /* Gray gap color */
+            border-top: 1px solid #d4d4d4;
+            border-bottom: 1px solid #d4d4d4;
+            z-index: 50;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .page-break-label {
+            background: #999;
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-family: sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body class="h-screen flex flex-col">
+
+    <!-- Header -->
+    <nav
+        class="h-16 border-b border-white/5 bg-[#050505]/80 backdrop-blur-md flex items-center justify-between px-6 z-50">
+        <div class="flex items-center gap-4">
+            <a href="../../" class="text-sm font-mono text-brand-dim hover:text-white transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4 inline mr-1"></i> Tools
+            </a>
+            <div class="h-4 w-[1px] bg-white/10"></div>
+            <span class="font-bold tracking-tight">RESUME<span class="text-brand-dim">GENERATOR</span></span>
+            <span
+                class="text-[10px] font-mono bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/20">AI
+                POWERED</span>
+        </div>
+
+        <button onclick="downloadPDF()"
+            class="bg-white text-black px-4 py-2 rounded-lg text-sm font-bold hover:bg-gray-200 transition-colors flex items-center gap-2">
+            <i data-lucide="printer" class="w-4 h-4"></i> Print / Save PDF
+        </button>
+    </nav>
+
+    <!-- Main Content Split -->
+    <main class="flex-grow flex overflow-hidden">
+
+        <!-- Left: Editor Panel -->
+        <div class="w-1/2 lg:w-[45%] h-full overflow-y-auto border-r border-white/5 bg-[#0A0A0A] p-8">
+            <div class="max-w-xl mx-auto space-y-8 pb-20">
+
+                <!-- Job Description (Reference) -->
+                <section class="space-y-4">
+                    <h2 class="text-lg font-mono text-brand-dim uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="file-text" class="w-4 h-4"></i> Job Description
+                    </h2>
+                    <div class="input-group">
+                        <textarea id="input-job-desc" rows="4"
+                            class="w-full p-3 rounded-lg text-sm leading-relaxed border border-blue-500/20 bg-blue-500/5 text-blue-100 placeholder-blue-300/30"
+                            placeholder="Paste the job description here... This will be used as a reference for AI generation."></textarea>
+                    </div>
+                    <p class="text-[10px] text-brand-dim flex items-center gap-2">
+                        <i data-lucide="info" class="w-3 h-3"></i> This Job Description will be the reference of AI for
+                        your resume.
+                    </p>
+                </section>
+
+                <hr class="border-white/5">
+
+                <!-- Template Selector -->
+                <section class="space-y-4">
+                    <h2 class="text-lg font-mono text-brand-dim uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="layout-template" class="w-4 h-4"></i> Select Template
+                    </h2>
+                    <div id="template-selector" class="grid grid-cols-2 gap-3">
+                        <!-- Templates injected by JS -->
+                    </div>
+                </section>
+
+                <hr class="border-white/5">
+
+                <!-- Personal Info -->
+                <section class="space-y-4">
+                    <h2 class="text-lg font-mono text-brand-dim uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="user" class="w-4 h-4"></i> Personal Details
+                    </h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="input-group col-span-2">
+                            <label class="block text-xs text-brand-dim mb-1">Full Name</label>
+                            <input type="text" id="input-name" class="w-full p-2.5 rounded-lg text-sm"
+                                placeholder="Alex Morgan" oninput="updatePreview()">
+                        </div>
+                        <div class="input-group">
+                            <label class="block text-xs text-brand-dim mb-1">Job Title</label>
+                            <input type="text" id="input-role" class="w-full p-2.5 rounded-lg text-sm"
+                                placeholder="Virtual Assistant" oninput="updatePreview()">
+                        </div>
+                        <div class="input-group">
+                            <label class="block text-xs text-brand-dim mb-1">Email</label>
+                            <input type="email" id="input-email" class="w-full p-2.5 rounded-lg text-sm"
+                                placeholder="alex@example.com" oninput="updatePreview()">
+                        </div>
+                        <div class="input-group">
+                            <label class="block text-xs text-brand-dim mb-1">Phone</label>
+                            <input type="text" id="input-phone" class="w-full p-2.5 rounded-lg text-sm"
+                                placeholder="+1 (555) 000-0000" oninput="updatePreview()">
+                        </div>
+                        <div class="input-group">
+                            <label class="block text-xs text-brand-dim mb-1">Location</label>
+                            <input type="text" id="input-location" class="w-full p-2.5 rounded-lg text-sm"
+                                placeholder="New York, USA" oninput="updatePreview()">
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="border-white/5">
+
+                <!-- Font Selector -->
+                <section class="space-y-4">
+                    <h2 class="text-lg font-mono text-brand-dim uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="type" class="w-4 h-4"></i> Typography
+                    </h2>
+                    <div class="input-group">
+                        <label class="block text-xs text-brand-dim mb-1">Select Font</label>
+                        <select id="font-selector" onchange="changeFont()"
+                            class="w-full p-3 rounded-lg text-sm leading-relaxed border border-white/10 bg-black/30 text-white focus:border-white/30 focus:outline-none">
+                            <option value="Inter">Inter (Modern)</option>
+                            <option value="Space Grotesk">Space Grotesk (Tech)</option>
+                            <option value="Roboto">Roboto (Clean)</option>
+                            <option value="Playfair Display">Playfair Display (Serif)</option>
+                            <option value="Lato">Lato (Balanced)</option>
+                            <option value="Montserrat">Montserrat (Geometric)</option>
+                            <option value="Open Sans">Open Sans (Neutral)</option>
+                        </select>
+                    </div>
+                </section>
+
+                <hr class="border-white/5">
+
+                <!-- Professional Summary (AI) -->
+                <section class="space-y-4">
+                    <div class="flex justify-between items-end">
+                        <h2 class="text-lg font-mono text-brand-dim uppercase tracking-wider flex items-center gap-2">
+                            <i data-lucide="text-quote" class="w-4 h-4"></i> Summary
+                        </h2>
+                        <button onclick="generateAI('summary')"
+                            class="text-xs flex items-center gap-1.5 text-blue-400 hover:text-blue-300 transition-colors px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20">
+                            <i data-lucide="sparkles" class="w-3 h-3"></i> AI Generate
+                        </button>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="input-summary" rows="4" class="w-full p-3 rounded-lg text-sm leading-relaxed"
+                            placeholder="Brief summary..." oninput="updatePreview()"></textarea>
+                    </div>
+                </section>
+
+                <hr class="border-white/5">
+
+                <!-- Skills (AI) -->
+                <section class="space-y-4">
+                    <div class="flex justify-between items-end">
+                        <h2 class="text-lg font-mono text-brand-dim uppercase tracking-wider flex items-center gap-2">
+                            <i data-lucide="cpu" class="w-4 h-4"></i> Skills
+                        </h2>
+                        <button onclick="generateAI('skills')"
+                            class="text-xs flex items-center gap-1.5 text-blue-400 hover:text-blue-300 transition-colors px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20">
+                            <i data-lucide="sparkles" class="w-3 h-3"></i> AI Generate
+                        </button>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="input-skills" rows="3" class="w-full p-3 rounded-lg text-sm leading-relaxed"
+                            placeholder="Skill 1, Skill 2..." oninput="updatePreview()"></textarea>
+                    </div>
+                </section>
+
+                <hr class="border-white/5">
+
+                <!-- Experience (Repeater) -->
+                <section class="space-y-4" id="experience-section">
+                    <h2 class="text-lg font-mono text-brand-dim uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="briefcase" class="w-4 h-4"></i> Experience
+                    </h2>
+
+                    <!-- Exp Item 1 -->
+                    <div class="glass-panel p-4 rounded-xl space-y-3">
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="text"
+                                class="exp-role w-full p-2 bg-transparent border-b border-white/10 text-sm focus:outline-none focus:border-white/30"
+                                placeholder="Role Title" oninput="updatePreview()">
+                            <input type="text"
+                                class="exp-company w-full p-2 bg-transparent border-b border-white/10 text-sm focus:outline-none focus:border-white/30"
+                                placeholder="Company Name" oninput="updatePreview()">
+                        </div>
+                        <input type="text"
+                            class="exp-date w-full p-2 bg-transparent border-b border-white/10 text-xs text-brand-dim focus:outline-none focus:border-white/30"
+                            placeholder="2020 - Present" oninput="updatePreview()">
+                        <div class="relative">
+                            <textarea class="exp-desc w-full bg-black/30 p-2 rounded text-sm text-gray-300" rows="3"
+                                placeholder="Description of responsibilities..." oninput="updatePreview()"></textarea>
+                            <button onclick="generateAI('experience', this)"
+                                class="absolute bottom-2 right-2 p-1.5 rounded bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors"><i
+                                    data-lucide="sparkles" class="w-3 h-3"></i></button>
+                        </div>
+                    </div>
+                </section>
+
+                <button onclick="addExperience()"
+                    class="w-full py-2 rounded-lg border border-dashed border-white/20 text-sm text-brand-dim hover:text-white hover:border-white/40 transition-colors">+
+                    Add Another Role</button>
+
+                <hr class="border-white/5">
+
+                <!-- Education -->
+                <section class="space-y-4">
+                    <h2 class="text-lg font-mono text-brand-dim uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="graduation-cap" class="w-4 h-4"></i> Education
+                    </h2>
+                    <div class="input-group">
+                        <label class="block text-xs text-brand-dim mb-1">School / University</label>
+                        <input type="text" id="input-school" class="w-full p-2.5 rounded-lg text-sm"
+                            placeholder="University of Technology" oninput="updatePreview()">
+                    </div>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="input-group col-span-2">
+                            <label class="block text-xs text-brand-dim mb-1">Degree</label>
+                            <input type="text" id="input-degree" class="w-full p-2.5 rounded-lg text-sm"
+                                placeholder="Bachelor of Science" oninput="updatePreview()">
+                        </div>
+                        <div class="input-group">
+                            <label class="block text-xs text-brand-dim mb-1">Year</label>
+                            <input type="text" id="input-grad-year" class="w-full p-2.5 rounded-lg text-sm"
+                                placeholder="2019" oninput="updatePreview()">
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- Right: Preview Panel -->
+        <div class="w-1/2 lg:w-[55%] h-full bg-[#111111] overflow-auto flex items-start justify-center p-8 relative">
+            <div class="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none"></div>
+
+            <div id="preview-container"
+                class="scale-[0.6] lg:scale-[0.7] xl:scale-[0.8] origin-top transition-transform duration-300">
+                <!-- Default loaded by JS -->
+                <div id="resume-preview" class="a4-preview p-12 flex items-center justify-center text-gray-400">
+                    Loading Templates...
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Custom Print Footer -->
+    <div class="print-footer hidden">
+        RESUME
+    </div>
+
+    <script src="static/js/templates.js"></script>
+    <script src="static/js/script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
