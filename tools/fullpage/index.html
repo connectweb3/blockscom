@@ -217,7 +217,8 @@
                     name: 'Microlink',
                     getUrl: (targetUrl) => {
                         const encodedUrl = encodeURIComponent(targetUrl);
-                        return `https://api.microlink.io/?url=${encodedUrl}&screenshot=true&meta=false&fullPage=true`;
+                        // Added waitFor=5000 (5 seconds)
+                        return `https://api.microlink.io/?url=${encodedUrl}&screenshot=true&meta=false&fullPage=true&waitFor=5000`;
                     },
                     processResponse: async (response) => {
                         const data = await response.json();
@@ -230,14 +231,12 @@
                 {
                     name: 'Thum.io',
                     getUrl: (targetUrl) => {
-                        // Thum.io returns an image directly
-                        return `https://image.thum.io/get/width/1200/crop/3000/noanimate/${targetUrl}`;
+                        // Added wait/5 (5 seconds)
+                        return `https://image.thum.io/get/width/1200/crop/3000/wait/5/noanimate/${targetUrl}`;
                     },
                     processResponse: async (response) => {
                         if (!response.ok) throw new Error('Failed to load image');
-                        // For direct image links, we just return the URL we called, 
-                        // but we need to make sure it actually loads successfully as an image.
-                        // Thum.io returns a placeholder if it fails sometimes, or we catch it in img.onerror
+                        // Thum.io direct image
                         return response.url;
                     }
                 },
@@ -262,22 +261,13 @@
                     console.log(`Attempting screenshot with ${provider.name}...`);
 
                     const requestUrl = provider.getUrl(url);
-
-                    // For APIs that return JSON (Microlink), we fetch.
-                    // For APIs that return Image (Thum.io, s-shot), we can try to fetch to check status,
-                    // or just set the src and let onerror handle it. 
-                    // To be consistent, let's try to fetch check for image APIs if possible, 
-                    // but some might block CORS.
-
                     let imageUrl;
 
                     if (provider.name === 'Microlink') {
                         const response = await fetch(requestUrl);
                         imageUrl = await provider.processResponse(response);
                     } else {
-                        // For direct image providers, we just use the URL
                         imageUrl = requestUrl;
-                        // We will rely on image.onload/onerror to validate
                     }
 
                     // Attempt to load the image
@@ -289,6 +279,16 @@
 
                     // If we got here, it worked!
                     downloadLink.href = imageUrl;
+
+                    // Show which provider worked
+                    const existingLabel = resultArea.querySelector('.provider-label');
+                    if (existingLabel) existingLabel.remove();
+
+                    const providerLabel = document.createElement('div');
+                    providerLabel.className = 'provider-label text-center mt-2 font-mono text-xs text-brand-dim';
+                    providerLabel.innerHTML = `Source: <span class="text-white">${provider.name}</span>`;
+                    resultArea.querySelector('.glass-panel').appendChild(providerLabel);
+
                     loadingState.classList.add('hidden');
                     loadingState.classList.remove('flex');
                     resultArea.classList.remove('hidden');
