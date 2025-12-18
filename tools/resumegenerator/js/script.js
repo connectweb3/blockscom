@@ -155,7 +155,7 @@ function renderPageBreaks() {
 // --- AI Generation (Client-Side) ---
 
 async function generateAI(type, element = null) {
-    const apiKey = "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";
+    const apiKey = "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";
 
     const btn = element ? element : event.target.closest('button');
     const originalIcon = btn.innerHTML;
