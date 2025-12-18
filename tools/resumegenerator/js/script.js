@@ -198,7 +198,7 @@ async function generateAI(type, element = null) {
             headers: {
                 "Authorization": `Bearer ${apiKey}`,
                 "Content-Type": "application/json",
-                "HTTP-Referer": window.location.href, // Site URL
+                "HTTP-Referer": "https://blockscom.xyz", // Site URL (Spoofed for local testing)
                 "X-Title": "Blockscom Resume Generator"
             },
             body: JSON.stringify({
