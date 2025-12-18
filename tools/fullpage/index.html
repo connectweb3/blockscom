@@ -221,13 +221,22 @@
                 // Actually if we want to display it, we can just fetch the image, but loading handling is better with fetch.
                 // Microlink returns JSON by default.
 
-                const apiUrl = `https://api.microlink.io/?url=${encodedUrl}&screenshot=true&meta=false&fullPage=true`;
+                // Add force=true to bypass stale cache
+                const apiUrl = `https://api.microlink.io/?url=${encodedUrl}&screenshot=true&meta=false&fullPage=true&force=true`;
 
                 const response = await fetch(apiUrl);
                 const data = await response.json();
 
-                if (data.status === 'fail' || !data.screenshot) {
-                    throw new Error('Failed to capture screenshot. The site might be blocking bots.');
+                console.log('Microlink response:', data);
+
+                if (data.status === 'fail') {
+                    // Use the actual error message from the API if available
+                    const apiError = data.data?.message || data.message || 'Unknown error from screenshot service';
+                    throw new Error(`Screenshot failed: ${apiError}`);
+                }
+
+                if (!data.screenshot) {
+                    throw new Error('Screenshot data missing from response.');
                 }
 
                 const imageUrl = data.screenshot.url;
