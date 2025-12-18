@@ -235,11 +235,14 @@
                     throw new Error(`Screenshot failed: ${apiError}`);
                 }
 
-                if (!data.screenshot) {
+                // Check for nested data structure (Microlink API standard)
+                const screenshotData = data.data?.screenshot || data.screenshot;
+
+                if (!screenshotData) {
                     throw new Error('Screenshot data missing from response.');
                 }
 
-                const imageUrl = data.screenshot.url;
+                const imageUrl = screenshotData.url;
 
                 // Success
                 screenshotImg.src = imageUrl;
