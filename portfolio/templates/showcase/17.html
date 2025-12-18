@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Maven Portfolio</title>
+    <link rel="icon" type="image/jpg" href="favicon.jpg">
+
+    <!-- Open Graph Meta Tags (Hidden) -->
+    <meta property="og:title" content="Eliza Maven Portfolio">
+    <meta property="og:description" content="Professional Virtual Assistant - Admin, Social Media, Copywriting & Data Entry Services">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://elizamaven.com"> <!-- Replace with actual URL -->
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts: Space Grotesk for that futuristic header feel, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        'future-black': '#050505',
+                        'future-gray': '#111111',
+                        'future-accent': '#ffffff',
+                        'glass': 'rgba(255, 255, 255, 0.05)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+
+        /* Smooth Reveal Animation Utilities */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Futuristic Card Hover Effect */
+        .cyber-card {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .cyber-card:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Marquee Text */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body class="bg-future-black text-gray-300 font-sans antialiased overflow-x-hidden">
+
+    <!-- Top Banner -->
+    <div class="fixed top-0 left-0 w-full bg-white text-black z-50 text-xs font-bold py-1 overflow-hidden">
+        <div class="marquee-container">
+            <div class="marquee-content uppercase tracking-widest">
+                Everything is customizable — you can edit, remove, or change anything. We handle it all. we will remove this once this template is purchase
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-8 w-full z-40 bg-future-black/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-display font-bold text-xl tracking-widest text-white">EM.</a>
+            <div class="hidden md:flex space-x-8 text-sm tracking-widest uppercase">
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="#services" class="hover:text-white transition-colors">Services</a>
+                <a href="#portfolio" class="hover:text-white transition-colors">Portfolio</a>
+                <a href="#rates" class="hover:text-white transition-colors">Rates</a>
+                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+            </div>
+            <!-- Mobile Menu Button (Placeholder functionality) -->
+            <button class="md:hidden text-white">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex flex-col justify-center items-center pt-20 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-[100px] animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gray-800/20 rounded-full blur-[80px]"></div>
+
+        <div class="relative z-10 text-center px-4">
+            <p class="text-sm md:text-base uppercase tracking-[0.3em] text-gray-500 mb-4 reveal-on-scroll">Virtual Assistant & Developer</p>
+            <h1 class="font-display font-bold text-6xl md:text-8xl lg:text-9xl text-white tracking-tighter mb-8 reveal-on-scroll" style="transition-delay: 100ms;">
+                ELIZA<br>MAVEN
+            </h1>
+            <p class="max-w-xl mx-auto text-gray-400 text-lg md:text-xl leading-relaxed mb-12 reveal-on-scroll" style="transition-delay: 200ms;">
+                Elevating brands through precision, creativity, and futuristic digital solutions.
+            </p>
+            
+            <a href="#contact" class="group relative inline-flex items-center justify-center px-8 py-3 overflow-hidden font-medium tracking-tighter text-white bg-transparent border border-gray-600 rounded-full hover:border-white transition-all duration-300 reveal-on-scroll" style="transition-delay: 300ms;">
+                <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+                <span class="relative">Start Collaboration</span>
+            </a>
+        </div>
+
+        <div class="absolute bottom-10 animate-bounce">
+            <i data-lucide="arrow-down" class="text-gray-500 w-6 h-6"></i>
+        </div>
+    </header>
+
+    <!-- Introduction / About Section -->
+    <section id="about" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="order-2 md:order-1 reveal-on-scroll">
+                <div class="relative">
+                    <div class="absolute inset-0 border border-white/20 translate-x-4 translate-y-4 rounded-sm"></div>
+                    <img src="photo.png" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800&h=1000'" alt="Eliza Maven Professional" class="relative w-full h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-700 rounded-sm">
+                </div>
+            </div>
+            <div class="order-1 md:order-2 space-y-8 reveal-on-scroll">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white">Who is Eliza?</h2>
+                <div class="h-1 w-20 bg-white"></div>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    I am a forward-thinking Virtual Assistant and Web Developer tailored for the modern digital landscape. I combine administrative precision with creative flair to help businesses streamline operations and scale their online presence.
+                </p>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    My mission is simple: to handle the chaos so you can focus on the vision. From complex data management to crafting compelling copy, I am your strategic partner in growth.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Software & Tools -->
+    <section class="py-20 bg-future-gray border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <h3 class="text-center font-display text-2xl text-white mb-16 uppercase tracking-widest reveal-on-scroll">Software Proficiency</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center reveal-on-scroll">
+                <!-- Tool Items -->
+                <div class="group flex flex-col items-center gap-3 p-4 hover:bg-white/5 rounded-lg transition-colors">
+                    <i data-lucide="trello" class="w-8 h-8 text-gray-400 group-hover:text-white"></i>
+                    <span class="text-sm font-medium">Trello</span>
+                </div>
+                <div class="group flex flex-col items-center gap-3 p-4 hover:bg-white/5 rounded-lg transition-colors">
+                    <i data-lucide="figma" class="w-8 h-8 text-gray-400 group-hover:text-white"></i>
+                    <span class="text-sm font-medium">Figma</span>
+                </div>
+                <div class="group flex flex-col items-center gap-3 p-4 hover:bg-white/5 rounded-lg transition-colors">
+                    <i data-lucide="sheet" class="w-8 h-8 text-gray-400 group-hover:text-white"></i>
+                    <span class="text-sm font-medium">Google Suite</span>
+                </div>
+                <div class="group flex flex-col items-center gap-3 p-4 hover:bg-white/5 rounded-lg transition-colors">
+                    <i data-lucide="slack" class="w-8 h-8 text-gray-400 group-hover:text-white"></i>
+                    <span class="text-sm font-medium">Slack</span>
+                </div>
+                <div class="group flex flex-col items-center gap-3 p-4 hover:bg-white/5 rounded-lg transition-colors">
+                    <i data-lucide="pen-tool" class="w-8 h-8 text-gray-400 group-hover:text-white"></i>
+                    <span class="text-sm font-medium">Canva</span>
+                </div>
+                <div class="group flex flex-col items-center gap-3 p-4 hover:bg-white/5 rounded-lg transition-colors">
+                    <i data-lucide="mail" class="w-8 h-8 text-gray-400 group-hover:text-white"></i>
+                    <span class="text-sm font-medium">Mailchimp</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal-on-scroll">
+            <div>
+                <span class="text-sm text-gray-500 uppercase tracking-widest">What I Do</span>
+                <h2 class="font-display text-4xl md:text-5xl text-white mt-2">VA Services</h2>
+            </div>
+            <p class="text-gray-400 max-w-md text-right mt-4 md:mt-0">Comprehensive digital support designed to optimize your workflow.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Service 1 -->
+            <div class="cyber-card p-8 rounded-xl reveal-on-scroll group">
+                <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-black transition-colors">
+                    <i data-lucide="briefcase"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3">Administrative</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">Calendar management, email handling, and meeting coordination to keep you organized.</p>
+            </div>
+            
+            <!-- Service 2 -->
+            <div class="cyber-card p-8 rounded-xl reveal-on-scroll group" style="transition-delay: 100ms;">
+                <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-black transition-colors">
+                    <i data-lucide="share-2"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3">Social Media</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">Strategic scheduling, engagement monitoring, and community management across platforms.</p>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="cyber-card p-8 rounded-xl reveal-on-scroll group" style="transition-delay: 200ms;">
+                <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-black transition-colors">
+                    <i data-lucide="pen-line"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3">Copywriting</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">Compelling captions, blog posts, and newsletters that resonate with your audience's voice.</p>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="cyber-card p-8 rounded-xl reveal-on-scroll group" style="transition-delay: 300ms;">
+                <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-black transition-colors">
+                    <i data-lucide="database"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3">Data Entry</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">Accurate data mining, cleaning, and organization ensuring your records are pristine.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Progress -->
+    <section class="py-20 bg-future-gray/30">
+        <div class="max-w-4xl mx-auto px-6">
+            <h3 class="text-center font-display text-2xl text-white mb-12 uppercase tracking-widest reveal-on-scroll">Skillset Proficiency</h3>
+            <div class="space-y-6">
+                <!-- Skill Item -->
+                <div class="reveal-on-scroll">
+                    <div class="flex justify-between text-sm mb-2">
+                        <span>Communication</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="h-1 w-full bg-gray-800 rounded-full overflow-hidden">
+                        <div class="h-full bg-white w-[95%]"></div>
+                    </div>
+                </div>
+                <!-- Skill Item -->
+                <div class="reveal-on-scroll">
+                    <div class="flex justify-between text-sm mb-2">
+                        <span>Time Management</span>
+                        <span>98%</span>
+                    </div>
+                    <div class="h-1 w-full bg-gray-800 rounded-full overflow-hidden">
+                        <div class="h-full bg-white w-[98%]"></div>
+                    </div>
+                </div>
+                <!-- Skill Item -->
+                <div class="reveal-on-scroll">
+                    <div class="flex justify-between text-sm mb-2">
+                        <span>Technical Literacy</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="h-1 w-full bg-gray-800 rounded-full overflow-hidden">
+                        <div class="h-full bg-white w-[90%]"></div>
+                    </div>
+                </div>
+                <!-- Skill Item -->
+                <div class="reveal-on-scroll">
+                    <div class="flex justify-between text-sm mb-2">
+                        <span>Creativity</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="h-1 w-full bg-gray-800 rounded-full overflow-hidden">
+                        <div class="h-full bg-white w-[85%]"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 reveal-on-scroll">
+            <h2 class="font-display text-4xl md:text-5xl text-white mb-4">Selected Works</h2>
+            <p class="text-gray-400">A curation of social media assets and thumbnails.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Social Media - 9:16 Ratio -->
+            <div class="space-y-8">
+                <div class="relative group overflow-hidden rounded-lg reveal-on-scroll">
+                    <img src="images/socialmedia1.jpg" onerror="this.src='https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1000&h=1778'" alt="Social Media 1" class="w-full aspect-[9/16] object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="text-white font-display text-xl">IG Story Campaign</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-lg reveal-on-scroll">
+                    <img src="images/socialmedia2.jpg" onerror="this.src='https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&q=80&w=1000&h=1778'" alt="Social Media 2" class="w-full aspect-[9/16] object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="text-white font-display text-xl">Reels Cover Design</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thumbnails - 16:9 Ratio -->
+            <div class="space-y-8 flex flex-col justify-center">
+                <div class="relative group overflow-hidden rounded-lg reveal-on-scroll">
+                    <img src="images/thumbnail1.jpg" onerror="this.src='https://images.unsplash.com/photo-1626785774573-4b7993143a23?auto=format&fit=crop&q=80&w=1600&h=900'" alt="Thumbnail 1" class="w-full aspect-[16/9] object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="text-white font-display text-xl">YouTube Strategy</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-lg reveal-on-scroll">
+                    <img src="images/thumbnail2.jpg" onerror="this.src='https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1600&h=900'" alt="Thumbnail 2" class="w-full aspect-[16/9] object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="text-white font-display text-xl">Tech Review Thumb</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rates Section -->
+    <section id="rates" class="py-24 bg-future-gray border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-center font-display text-4xl text-white mb-16 reveal-on-scroll">Investment Packages</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Basic -->
+                <div class="cyber-card p-8 rounded-xl flex flex-col relative reveal-on-scroll">
+                    <h3 class="text-lg text-gray-400 mb-2">Starter</h3>
+                    <div class="text-3xl font-bold text-white mb-6">$20<span class="text-sm font-normal text-gray-500">/hr</span></div>
+                    <ul class="space-y-4 mb-8 flex-1 text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Data Entry</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Email Management</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Basic Research</li>
+                    </ul>
+                    <a href="#contact" class="block text-center py-3 border border-gray-600 hover:bg-white hover:text-black hover:border-white transition-all rounded-lg">Select</a>
+                </div>
+
+                <!-- Pro -->
+                <div class="cyber-card p-8 rounded-xl flex flex-col relative border-white/40 reveal-on-scroll" style="transition-delay: 100ms;">
+                    <div class="absolute top-0 right-0 bg-white text-black text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
+                    <h3 class="text-lg text-white mb-2">Professional</h3>
+                    <div class="text-3xl font-bold text-white mb-6">$35<span class="text-sm font-normal text-gray-500">/hr</span></div>
+                    <ul class="space-y-4 mb-8 flex-1 text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> All Starter Features</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Social Media Mgmt</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Content Creation</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Monthly Reports</li>
+                    </ul>
+                    <a href="#contact" class="block text-center py-3 bg-white text-black hover:bg-gray-200 transition-all rounded-lg font-bold">Select</a>
+                </div>
+
+                <!-- Premium -->
+                <div class="cyber-card p-8 rounded-xl flex flex-col relative reveal-on-scroll" style="transition-delay: 200ms;">
+                    <h3 class="text-lg text-gray-400 mb-2">Retainer</h3>
+                    <div class="text-3xl font-bold text-white mb-6">$800<span class="text-sm font-normal text-gray-500">/mo</span></div>
+                    <ul class="space-y-4 mb-8 flex-1 text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> 25 Hours Dedicated</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Priority Support</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Project Management</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Strategic Planning</li>
+                    </ul>
+                    <a href="#contact" class="block text-center py-3 border border-gray-600 hover:bg-white hover:text-black hover:border-white transition-all rounded-lg">Select</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <footer id="contact" class="relative pt-24 pb-8 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-future-black to-future-black -z-10"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 text-center reveal-on-scroll">
+            <h2 class="font-display text-5xl md:text-6xl font-bold text-white mb-8">Let's Create.</h2>
+            <p class="text-xl text-gray-400 mb-12">Ready to elevate your business with professional assistance? Reach out today.</p>
+
+            <div class="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 mb-16 text-left">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
+                                <i data-lucide="mail" class="text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase">Email</p>
+                                <p class="text-white">hello@elizamaven.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
+                                <i data-lucide="instagram" class="text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase">Social</p>
+                                <p class="text-white">@elizamaven</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Casual Image Side -->
+                    <div class="relative h-64 w-full rounded-xl overflow-hidden">
+                        <img src="photo.jpg" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800&h=600'" alt="Eliza Working in Garden" class="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
+                <p>&copy; 2024 Eliza Maven. All Rights Reserved.</p>
+                <p>Design by : Blockscom Media</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Reveal Animation Logic (Intersection Observer)
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

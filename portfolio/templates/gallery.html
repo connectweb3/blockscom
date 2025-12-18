@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#050505] text-white overflow-x-hidden antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockscom Media | Portfolio Gallery</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Blockscom Media | Portfolio Gallery">
+    <meta property="og:description"
+        content="Explore the visual language of the future. Our portfolio of high-impact digital assets.">
+    <meta property="og:image" content="https://blockscom.xyz/images/portfolio.jpg">
+    <meta property="og:url" content="https://blockscom.xyz/gallery">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/logo.jpg" type="image/jpeg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- GSAP & Lenis for Smooth Scroll/Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#050505',
+                            dark: '#0A0A0A',
+                            gray: '#1F1F1F',
+                            accent: '#FFFFFF',
+                            dim: '#888888'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f1f1f 1px, transparent 1px), linear-gradient(to bottom, #1f1f1f 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for Futuristic Feel */
+        body {
+            cursor: none;
+        }
+
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        /* Hover States for Cursor */
+        body.hovering .cursor-outline {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: transparent;
+        }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Noise Texture */
+        .noise-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9000;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Grid Background Animation */
+        .grid-bg {
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+        }
+
+        /* Scroll Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: white;
+            width: 0%;
+            z-index: 10000;
+        }
+    </style>
+</head>
+
+<body class="selection:bg-white selection:text-black">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Noise Overlay -->
+    <div class="noise-bg"></div>
+
+    <!-- Scroll Progress -->
+    <div class="progress-bar"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 mix-blend-difference text-white">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="/" class="text-xl font-bold font-mono tracking-tighter hover-trigger" data-cursor="link">
+                BLOCKSCOM<span class="opacity-50">MEDIA</span>
+            </a>
+
+            <div class="hidden md:flex gap-12 font-mono text-sm uppercase tracking-widest">
+                <a href="/#about" class="hover:text-gray-400 transition-colors hover-trigger"
+                    data-cursor="link">About</a>
+                <a href="/#services" class="hover:text-gray-400 transition-colors hover-trigger"
+                    data-cursor="link">Services</a>
+                <a href="/#tools" class="hover:text-gray-400 transition-colors hover-trigger"
+                    data-cursor="link">Tools</a>
+                <a href="/#contact" class="hover:text-gray-400 transition-colors hover-trigger"
+                    data-cursor="link">Contact</a>
+            </div>
+
+            <button class="md:hidden hover-trigger" id="menu-btn">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 bg-brand-black z-40 transform translate-x-full transition-transform duration-500 flex flex-col justify-center items-center gap-8 text-2xl font-mono">
+        <a href="/#about" class="mobile-link">About</a>
+        <a href="/#services" class="mobile-link">Services</a>
+        <a href="/#tools" class="mobile-link">Tools</a>
+        <a href="/#contact" class="mobile-link">Contact</a>
+        <button id="close-menu" class="absolute top-6 right-6">
+            <i data-lucide="x"></i>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="w-full relative">
+
+        <!-- Page Header -->
+        <section class="min-h-[60vh] flex items-center justify-center relative overflow-hidden pt-32">
+            <div class="absolute inset-0 opacity-[0.03] bg-grid-pattern grid-bg pointer-events-none"></div>
+
+            <div class="z-10 text-center px-6">
+                <h1 class="text-[12vw] font-bold tracking-tighter leading-none mix-blend-exclusion animate-fade-in-up">
+                    GALLERY
+                </h1>
+                <p class="font-mono text-gray-400 mt-6 max-w-lg mx-auto uppercase tracking-widest animate-fade-in-up"
+                    style="animation-delay: 0.2s;">
+                    Selected works & Digital Experiments
+                </p>
+            </div>
+
+            <!-- Decoration -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-30 animate-bounce">
+                <i data-lucide="arrow-down" class="w-6 h-6"></i>
+            </div>
+        </section>
+
+        <!-- Gallery Grid -->
+        <section class="px-6 pb-32">
+            <div class="max-w-[90rem] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                {% for template in templates %}
+                <!-- Dynamic Template Card -->
+                <a href="/view/{{ template.filename }}" target="_blank"
+                    class="group relative aspect-video glass-panel rounded-2xl overflow-hidden cursor-pointer hover-trigger block"
+                    data-cursor="link">
+                    <!-- Placeholder Thumbnails - Cyclical logic for variety if you have multiple images -->
+                    <img src="images/thumbnails.jpg"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-70 group-hover:opacity-100">
+
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <div
+                            class="flex items-center gap-4 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                            <span
+                                class="px-3 py-1 bg-white/10 rounded-full text-[10px] font-mono uppercase tracking-wide border border-white/10">Template</span>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-1">{{ template.name }}</h3>
+                        <p
+                            class="text-gray-400 text-sm font-mono block max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-500">
+                            Click to preview this template.</p>
+                    </div>
+                </a>
+                {% endfor %}
+
+                <!-- Static Fallback / Examples if needed (Optional, can remove or keep) -->
+                {% if not templates %}
+                <div class="col-span-full text-center py-12 text-gray-500 font-mono">
+                    No templates found in /templates/showcase
+                </div>
+                {% endif %}
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact" class="bg-black py-24 px-6 border-t border-white/10">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold font-mono mb-6">BLOCKSCOM<span class="text-gray-600">MEDIA</span></h3>
+                    <p class="text-gray-500 max-w-xs text-sm">
+                        Creating the visual standard for the next generation of digital creators.
+                    </p>
+                </div>
+
+                <div class="flex gap-12 font-mono text-sm">
+                    <div class="flex flex-col gap-4">
+                        <span class="text-white font-bold">Socials</span>
+                        <a href="#" class="text-gray-500 hover:text-white transition-colors hover-trigger"
+                            data-cursor="link">Twitter / X</a>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <span class="text-white font-bold">Contact</span>
+                        <a href="mailto:hello@blockscom.media"
+                            class="text-gray-500 hover:text-white transition-colors hover-trigger"
+                            data-cursor="link">hello@blockscom.xyz</a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 flex justify-between items-center text-xs font-mono text-gray-600">
+                <span>&copy; 2024 Blockscom Media.</span>
+                <span>All Rights Reserved.</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Initialize Lenis for Smooth Scrolling
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        const hoverTriggers = document.querySelectorAll('.hover-trigger');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Dot follows instantly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Outline follows with slight delay using GSAP for smoothness
+            gsap.to(cursorOutline, {
+                x: posX,
+                y: posY,
+                duration: 0.15,
+                ease: "power2.out"
+            });
+        });
+
+        // Hover effects for cursor
+        hoverTriggers.forEach(trigger => {
+            trigger.addEventListener('mouseenter', () => {
+                document.body.classList.add('hovering');
+                const linkType = trigger.getAttribute('data-cursor');
+                if (linkType === 'link') {
+                    cursorOutline.style.borderColor = 'transparent';
+                    cursorOutline.style.backgroundColor = 'rgba(255,255,255,0.2)';
+                }
+            });
+            trigger.addEventListener('mouseleave', () => {
+                document.body.classList.remove('hovering');
+                cursorOutline.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                cursorOutline.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // Simple Fade-In Animation for Gallery
+        gsap.utils.toArray('.glass-panel').forEach((panel, i) => {
+            gsap.from(panel, {
+                scrollTrigger: {
+                    trigger: panel,
+                    start: "top 90%"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power2.out",
+                delay: i * 0.1
+            });
+        });
+
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.querySelector(".progress-bar").style.width = scrolled + "%";
+        });
+
+        // Mobile Menu
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+        });
+    </script>
+</body>
+
+</html>

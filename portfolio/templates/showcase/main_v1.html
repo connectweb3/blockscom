@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#050505] text-white overflow-x-hidden antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockscom Media | Futuristic Creatives</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Blockscom Media | Futuristic Creatives">
+    <meta property="og:description"
+        content="Blockscom Media defines the visual language of the future. We craft high-impact digital assets for creators and brands.">
+    <meta property="og:image" content="https://blockscom.xyz/images/tags.jpg">
+    <meta property="og:url" content="https://blockscom.xyz">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/logo.jpg" type="image/jpeg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- GSAP & Lenis for Smooth Scroll/Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#050505',
+                            dark: '#0A0A0A',
+                            gray: '#1F1F1F',
+                            accent: '#FFFFFF',
+                            dim: '#888888'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f1f1f 1px, transparent 1px), linear-gradient(to bottom, #1f1f1f 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for Futuristic Feel */
+        body {
+            cursor: none;
+            /* Custom cursor implementation */
+        }
+
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        /* Hover States for Cursor */
+        body.hovering .cursor-outline {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: transparent;
+        }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Noise Texture */
+        .noise-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9000;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Text Reveal Animation Base */
+        .reveal-text {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .char {
+            transform: translateY(115%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Button Animations */
+        .magnetic-btn {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Grid Background Animation */
+        .grid-bg {
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+        }
+
+        /* Scroll Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: white;
+            width: 0%;
+            z-index: 10000;
+        }
+    </style>
+</head>
+
+<body class="selection:bg-white selection:text-black">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Noise Overlay -->
+    <div class="noise-bg"></div>
+
+    <!-- Scroll Progress -->
+    <div class="progress-bar"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 mix-blend-difference text-white">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-xl font-bold font-mono tracking-tighter hover-trigger" data-cursor="link">
+                BLOCKSCOM<span class="opacity-50">MEDIA</span>
+            </a>
+
+            <div class="hidden md:flex gap-12 font-mono text-sm uppercase tracking-widest">
+                <a href="#about" class="hover:text-gray-400 transition-colors hover-trigger"
+                    data-cursor="link">About</a>
+                <a href="#services" class="hover:text-gray-400 transition-colors hover-trigger"
+                    data-cursor="link">Services</a>
+                <a href="#tools" class="hover:text-gray-400 transition-colors hover-trigger"
+                    data-cursor="link">Tools</a>
+                <a href="#contact" class="hover:text-gray-400 transition-colors hover-trigger"
+                    data-cursor="link">Contact</a>
+            </div>
+
+            <button class="md:hidden hover-trigger" id="menu-btn">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 bg-brand-black z-40 transform translate-x-full transition-transform duration-500 flex flex-col justify-center items-center gap-8 text-2xl font-mono">
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#services" class="mobile-link">Services</a>
+        <a href="#tools" class="mobile-link">Tools</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+        <button id="close-menu" class="absolute top-6 right-6">
+            <i data-lucide="x"></i>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="w-full relative">
+
+        <!-- Hero Section -->
+        <section class="h-screen w-full flex items-center justify-center relative overflow-hidden">
+            <!-- Background Grid -->
+            <div class="absolute inset-0 opacity-[0.03] bg-grid-pattern grid-bg pointer-events-none"></div>
+
+            <div class="max-w-7xl w-full px-6 z-10">
+                <div class="overflow-hidden">
+                    <h1 class="hero-title text-[12vw] leading-[0.85] font-bold tracking-tighter mix-blend-exclusion">
+                        <div class="overflow-hidden"><span class="block translate-y-full">DIGITAL</span></div>
+                        <div class="overflow-hidden"><span
+                                class="block translate-y-full text-brand-dim">ARCHITECTS</span></div>
+                    </h1>
+                </div>
+
+                <div class="mt-12 flex flex-col md:flex-row justify-between items-end gap-8">
+                    <p
+                        class="hero-subtitle font-mono max-w-md text-sm md:text-base text-gray-400 opacity-0 translate-y-4">
+                        Blockscom Media defines the visual language of the future. We craft high-impact digital assets
+                        for creators and brands.
+                    </p>
+
+                    <a href="#services"
+                        class="magnetic-btn group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold overflow-hidden hover-trigger opacity-0 translate-y-4"
+                        data-cursor="link">
+                        <span class="relative z-10 transition-colors group-hover:text-white">Explore Work</span>
+                        <div
+                            class="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
+                        </div>
+                        <i data-lucide="arrow-down-right"
+                            class="relative z-10 w-5 h-5 transition-colors group-hover:text-white"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+                <i data-lucide="chevrons-down"></i>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-32 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+                <span class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-8 block reveal-trigger">Who We
+                    Are</span>
+                <h2 class="text-4xl md:text-6xl font-light leading-tight max-w-4xl reveal-trigger">
+                    We don't just design; <span class="text-gray-500">we engineer attention.</span>
+                    Specializing in the minimalist aesthetic that dominates modern feeds.
+                </h2>
+
+                <div class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div
+                        class="glass-panel p-8 rounded-2xl hover:bg-white/5 transition-colors duration-500 service-card opacity-0 translate-y-8">
+                        <h3 class="text-5xl font-bold mb-4">01</h3>
+                        <h4 class="text-xl font-bold mb-2">Strategy</h4>
+                        <p class="text-gray-400 text-sm">Data-driven design decisions that maximize engagement metrics.
+                        </p>
+                    </div>
+                    <div class="glass-panel p-8 rounded-2xl hover:bg-white/5 transition-colors duration-500 service-card opacity-0 translate-y-8"
+                        style="transition-delay: 100ms;">
+                        <h3 class="text-5xl font-bold mb-4">02</h3>
+                        <h4 class="text-xl font-bold mb-2">Aesthetic</h4>
+                        <p class="text-gray-400 text-sm">Futuristic, first visuals that stand out in light feeds.</p>
+                    </div>
+                    <div class="glass-panel p-8 rounded-2xl hover:bg-white/5 transition-colors duration-500 service-card opacity-0 translate-y-8"
+                        style="transition-delay: 200ms;">
+                        <h3 class="text-5xl font-bold mb-4">03</h3>
+                        <h4 class="text-xl font-bold mb-2">Speed</h4>
+                        <p class="text-gray-400 text-sm">Rapid turnaround times for the fast-paced creator economy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section: Creatives for Social Media -->
+        <section id="services" class="py-32 px-6 bg-brand-dark relative overflow-hidden">
+            <!-- Background glow -->
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-white opacity-[0.02] blur-[120px] rounded-full pointer-events-none">
+            </div>
+
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="flex flex-col md:flex-row justify-between md:items-end mb-24">
+                    <div>
+                        <span class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-4 block">Our
+                            Expertise</span>
+                        <h2 class="text-5xl md:text-7xl font-bold tracking-tighter">CREATIVES FOR<br>SOCIAL MEDIA</h2>
+                    </div>
+                    <div class="mt-8 md:mt-0">
+                        <p class="text-gray-400 max-w-sm font-mono text-sm">High-fidelity assets designed to convert
+                            viewers into followers.</p>
+                    </div>
+                </div>
+
+                <!-- Horizontal Scroll / Stacked Cards -->
+                <div class="flex flex-col gap-32">
+
+                    <!-- Service 1 -->
+                    <div class="group relative grid grid-cols-1 md:grid-cols-2 gap-12 items-center service-row">
+                        <div class="order-2 md:order-1">
+                            <h3
+                                class="text-3xl md:text-4xl font-bold mb-6 group-hover:translate-x-4 transition-transform duration-500">
+                                Thumbnail Design</h3>
+                            <p class="text-gray-400 mb-8 max-w-md">Click-Through Rate optimized thumbnails. We use
+                                contrast, emotion, and storytelling to stop the scroll.</p>
+                            <ul class="font-mono text-sm text-gray-500 space-y-2 mb-8">
+                                <li class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div>A/B Testing Ready Variants
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div>3D Text & Compositing
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div>Face Enhancement
+                                </li>
+                            </ul>
+                            <button
+                                class="px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white hover:text-black transition-all hover-trigger"
+                                data-cursor="link">View Gallery</button>
+                        </div>
+                        <div
+                            class="order-1 md:order-2 relative aspect-video bg-gray-900 rounded-lg overflow-hidden border border-white/10 group-hover:border-white/30 transition-colors">
+                            <img src="images/thumbnails.jpg" alt="Thumbnail Design"
+                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="group relative grid grid-cols-1 md:grid-cols-2 gap-12 items-center service-row">
+                        <div class="order-2 md:order-1">
+                            <h3
+                                class="text-3xl md:text-4xl font-bold mb-6 group-hover:translate-x-4 transition-transform duration-500">
+                                Social Media Posts</h3>
+                            <p class="text-gray-400 mb-8 max-w-md">Cohesive carousel sets and single posts for
+                                Instagram, Twitter (X), and LinkedIn. Maintain brand consistency.</p>
+                            <ul class="font-mono text-sm text-gray-500 space-y-2 mb-8">
+                                <li class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div>Infographic Carousels
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div>Event Flyers
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div>Story Assets
+                                </li>
+                            </ul>
+                            <button
+                                class="px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white hover:text-black transition-all hover-trigger"
+                                data-cursor="link">View Gallery</button>
+                        </div>
+                        <div
+                            class="order-1 md:order-2 relative aspect-video bg-gray-900 rounded-lg overflow-hidden border border-white/10 group-hover:border-white/30 transition-colors">
+                            <img src="images/socials.png" alt="Social Media Posts"
+                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="group relative grid grid-cols-1 md:grid-cols-2 gap-12 items-center service-row">
+                        <div class="order-2 md:order-1">
+                            <h3
+                                class="text-3xl md:text-4xl font-bold mb-6 group-hover:translate-x-4 transition-transform duration-500">
+                                Portfolio Websites</h3>
+                            <p class="text-gray-400 mb-8 max-w-md">Minimalist, high-performance websites for creatives.
+                                Showcasing work without the clutter.</p>
+                            <ul class="font-mono text-sm text-gray-500 space-y-2 mb-8">
+                                <li class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div>Framer / Webflow / HTML
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div>Interactive Animations
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div>SEO Optimized
+                                </li>
+                            </ul>
+                            <button
+                                class="px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white hover:text-black transition-all hover-trigger"
+                                data-cursor="link">View Gallery</button>
+                        </div>
+                        <div
+                            class="order-1 md:order-2 relative aspect-video bg-gray-900 rounded-lg overflow-hidden border border-white/10 group-hover:border-white/30 transition-colors">
+                            <img src="images/portfolio.jpg" alt="Portfolio Websites"
+                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="group relative grid grid-cols-1 md:grid-cols-2 gap-12 items-center service-row">
+                        <div class="order-2 md:order-1">
+                            <h3
+                                class="text-3xl md:text-4xl font-bold mb-6 group-hover:translate-x-4 transition-transform duration-500">
+                                Blockchain Services</h3>
+                            <p class="text-gray-400 mb-8 max-w-md">Comprehensive web3 solutions. We build the face of
+                                the decentralized future.</p>
+                            <ul class="font-mono text-sm text-gray-500 space-y-2 mb-8">
+                                <li class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div>NFT & Memecoin Websites
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div>NFT Collections
+                                </li>
+                            </ul>
+                            <a href="blockchain"
+                                class="px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white hover:text-black transition-all hover-trigger inline-flex items-center gap-2"
+                                data-cursor="link">
+                                Enter Blockchain Section
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                        <div
+                            class="order-1 md:order-2 relative aspect-video bg-gray-900 rounded-lg overflow-hidden border border-white/10 group-hover:border-white/30 transition-colors">
+                            <img src="images/nft.png" alt="Blockchain Services"
+                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-32 px-6 flex justify-center items-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-white/5 skew-y-3 scale-110"></div>
+
+            <div class="relative z-10 text-center">
+                <p class="font-mono text-sm text-gray-400 mb-6 uppercase tracking-widest">Ready to scale?</p>
+                <h2 class="text-5xl md:text-8xl font-bold mb-12 tracking-tighter">LET'S BUILD<br>THE FUTURE</h2>
+                <a href="#contact" class="hover-trigger relative inline-block group" data-cursor="link">
+                    <span
+                        class="relative z-10 block px-12 py-5 bg-white text-black font-bold text-lg rounded-full overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                        Start Project
+                    </span>
+                    <div
+                        class="absolute inset-0 rounded-full blur-lg bg-white/50 group-hover:bg-white/80 transition-colors duration-300">
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact" class="bg-black py-24 px-6 border-t border-white/10">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold font-mono mb-6">BLOCKSCOM<span class="text-gray-600">MEDIA</span></h3>
+                    <p class="text-gray-500 max-w-xs text-sm">
+                        Creating the visual standard for the next generation of digital creators.
+                    </p>
+                </div>
+
+                <div class="flex gap-12 font-mono text-sm">
+                    <div class="flex flex-col gap-4">
+                        <span class="text-white font-bold">Socials</span>
+                        <a href="#" class="text-gray-500 hover:text-white transition-colors hover-trigger"
+                            data-cursor="link">Twitter / X</a>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <span class="text-white font-bold">Contact</span>
+                        <a href="mailto:hello@blockscom.media"
+                            class="text-gray-500 hover:text-white transition-colors hover-trigger"
+                            data-cursor="link">hello@blockscom.xyz</a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 flex justify-between items-center text-xs font-mono text-gray-600">
+                <span>&copy; 2024 Blockscom Media.</span>
+                <span>All Rights Reserved.</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // Preload Blockchain Assets
+        window.addEventListener('load', () => {
+            const assetsToPreload = [
+                // CSS
+                'blockchain/css/style.css',
+                'blockchain/css/chatbot.css',
+                // JS
+                'blockchain/js/main.js',
+                'blockchain/js/chatbot.js',
+                'blockchain/js/three-bg.js',
+                // Critical Images (Thumbnails + First items of sliders)
+                'blockchain/images/thumbnail.png',
+                'blockchain/nft1/humanime.jpg',
+                'blockchain/nft1/ceat.png',
+                'blockchain/nft1/meme/axolie.png',
+                'blockchain/nft1/meme/bonie.png',
+                'blockchain/images/blockscommafia.jpg',
+                'blockchain/images/galaxy1.jpg'
+            ];
+
+            const preloadedRefs = [];
+
+            assetsToPreload.forEach(src => {
+                const extension = src.split('.').pop();
+                let ref;
+                if (extension === 'css') {
+                    ref = document.createElement('link');
+                    ref.rel = 'prefetch'; // using prefetch for navigation
+                    ref.href = src;
+                    ref.as = 'style';
+                } else if (extension === 'js') {
+                    ref = document.createElement('link');
+                    ref.rel = 'prefetch';
+                    ref.href = src;
+                    ref.as = 'script';
+                } else {
+                    ref = new Image();
+                    ref.src = src;
+                }
+                preloadedRefs.push(ref);
+            });
+            console.log('Blockchain assets preloading initiated.');
+        });
+    </script>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Initialize Lenis for Smooth Scrolling
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        const hoverTriggers = document.querySelectorAll('.hover-trigger');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Dot follows instantly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Outline follows with slight delay using GSAP for smoothness
+            gsap.to(cursorOutline, {
+                x: posX,
+                y: posY,
+                duration: 0.15,
+                ease: "power2.out"
+            });
+        });
+
+        // Hover effects for cursor
+        hoverTriggers.forEach(trigger => {
+            trigger.addEventListener('mouseenter', () => {
+                document.body.classList.add('hovering');
+                const linkType = trigger.getAttribute('data-cursor');
+                if (linkType === 'link') {
+                    cursorOutline.style.borderColor = 'transparent';
+                    cursorOutline.style.backgroundColor = 'rgba(255,255,255,0.2)';
+                }
+            });
+            trigger.addEventListener('mouseleave', () => {
+                document.body.classList.remove('hovering');
+                cursorOutline.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                cursorOutline.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // Hero Animations
+        const tl = gsap.timeline();
+
+        tl.to('.hero-title span', {
+            y: 0,
+            duration: 1.5,
+            ease: "power4.out",
+            stagger: 0.2,
+            delay: 0.2
+        })
+            .to('.hero-subtitle', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out"
+            }, "-=1")
+            .to('.magnetic-btn', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out"
+            }, "-=0.8");
+
+        // Service Cards Stagger Animation
+        gsap.utils.toArray('.service-card').forEach((card, i) => {
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: i * 0.1
+            });
+        });
+
+        // Service Rows Slide-in
+        gsap.utils.toArray('.service-row').forEach((row) => {
+            gsap.from(row, {
+                scrollTrigger: {
+                    trigger: row,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.querySelector(".progress-bar").style.width = scrolled + "%";
+        });
+
+        // Mobile Menu
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+        });
+
+        // Magnetic Button Effect
+        const magnets = document.querySelectorAll('.magnetic-btn');
+        magnets.forEach((magnet) => {
+            magnet.addEventListener('mousemove', (e) => {
+                const rect = magnet.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+
+                gsap.to(magnet, {
+                    x: x * 0.2,
+                    y: y * 0.2,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+
+            magnet.addEventListener('mouseleave', () => {
+                gsap.to(magnet, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.5,
+                    ease: "elastic.out(1, 0.3)"
+                });
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>
