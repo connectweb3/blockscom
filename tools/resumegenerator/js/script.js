@@ -202,7 +202,7 @@ async function generateAI(type, element = null) {
                 "X-Title": "Blockscom Resume Generator"
             },
             body: JSON.stringify({
-                "model": "openai/gpt-oss-safeguard-20b",
+                "model": "google/gemini-2.0-flash-exp:free",
                 "messages": [
                     { "role": "system", "content": systemPrompt },
                     { "role": "user", "content": userPrompt }
