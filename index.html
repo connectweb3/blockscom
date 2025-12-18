@@ -176,10 +176,33 @@
             <div class="hidden md:flex gap-12 font-mono text-sm uppercase tracking-widest">
                 <a href="#about" class="hover:text-gray-400 transition-colors hover-trigger"
                     data-cursor="link">About</a>
-                <a href="#services" class="hover:text-gray-400 transition-colors hover-trigger"
-                    data-cursor="link">Services</a>
-                <a href="#tools" class="hover:text-gray-400 transition-colors hover-trigger"
-                    data-cursor="link">Tools</a>
+                <div class="relative group">
+                    <button class="hover:text-gray-400 transition-colors hover-trigger flex items-center gap-1"
+                        data-cursor="link">
+                        Services
+                        <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-hover:rotate-180"></i>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div
+                        class="absolute left-0 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 min-w-[240px]">
+                        <div
+                            class="bg-brand-black/90 backdrop-blur-xl border border-white/10 rounded-xl p-2 flex flex-col gap-1 shadow-2xl">
+                            <a href="socialcreatives"
+                                class="block px-4 py-3 hover:bg-white/10 rounded-lg transition-colors text-xs font-bold hover:text-white text-gray-400">
+                                SOCIAL CREATIVES
+                            </a>
+                            <a href="portfolio"
+                                class="block px-4 py-3 hover:bg-white/10 rounded-lg transition-colors text-xs font-bold hover:text-white text-gray-400">
+                                PORTFOLIO WEBSITES
+                            </a>
+                            <a href="blockchain"
+                                class="block px-4 py-3 hover:bg-white/10 rounded-lg transition-colors text-xs font-bold hover:text-white text-gray-400">
+                                BLOCKCHAIN SERVICE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <a href="tools" class="hover:text-gray-400 transition-colors hover-trigger" data-cursor="link">Tools</a>
                 <a href="#contact" class="hover:text-gray-400 transition-colors hover-trigger"
                     data-cursor="link">Contact</a>
             </div>
@@ -321,9 +344,9 @@
                                     <div class="w-1.5 h-1.5 bg-white rounded-full"></div>Face Enhancement
                                 </li>
                             </ul>
-                            <button
-                                class="px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white hover:text-black transition-all hover-trigger"
-                                data-cursor="link">View Gallery</button>
+                            <a href="socialcreatives"
+                                class="px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white hover:text-black transition-all hover-trigger inline-block"
+                                data-cursor="link">View Gallery</a>
                         </div>
                         <div
                             class="order-1 md:order-2 relative aspect-video bg-gray-900 rounded-lg overflow-hidden border border-white/10 group-hover:border-white/30 transition-colors">
@@ -351,9 +374,9 @@
                                     <div class="w-1.5 h-1.5 bg-white rounded-full"></div>Story Assets
                                 </li>
                             </ul>
-                            <button
-                                class="px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white hover:text-black transition-all hover-trigger"
-                                data-cursor="link">View Gallery</button>
+                            <a href="socialcreatives"
+                                class="px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white hover:text-black transition-all hover-trigger inline-block"
+                                data-cursor="link">View Gallery</a>
                         </div>
                         <div
                             class="order-1 md:order-2 relative aspect-video bg-gray-900 rounded-lg overflow-hidden border border-white/10 group-hover:border-white/30 transition-colors">
@@ -381,9 +404,9 @@
                                     <div class="w-1.5 h-1.5 bg-white rounded-full"></div>SEO Optimized
                                 </li>
                             </ul>
-                            <button
-                                class="px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white hover:text-black transition-all hover-trigger"
-                                data-cursor="link">View Gallery</button>
+                            <a href="portfolio"
+                                class="px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white hover:text-black transition-all hover-trigger inline-block"
+                                data-cursor="link">View Gallery</a>
                         </div>
                         <div
                             class="order-1 md:order-2 relative aspect-video bg-gray-900 rounded-lg overflow-hidden border border-white/10 group-hover:border-white/30 transition-colors">
