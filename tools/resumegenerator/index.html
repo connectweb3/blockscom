@@ -283,6 +283,10 @@
                 POWERED</span>
         </div>
 
+        <button onclick="toggleSettingsModal()"
+            class="mr-4 text-xs font-mono text-brand-dim hover:text-white transition-colors flex items-center gap-2">
+            <i data-lucide="settings" class="w-4 h-4"></i> Settings
+        </button>
         <button onclick="downloadPDF()"
             class="bg-white text-black px-4 py-2 rounded-lg text-sm font-bold hover:bg-gray-200 transition-colors flex items-center gap-2">
             <i data-lucide="printer" class="w-4 h-4"></i> Print / Save PDF
@@ -505,8 +509,37 @@
         RESUME
     </div>
 
-    <script src="static/js/templates.js"></script>
-    <script src="static/js/script.js"></script>
+    <!-- Settings Modal -->
+    <div id="settings-modal"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center">
+        <div class="bg-[#0A0A0A] border border-white/10 p-8 rounded-2xl max-w-md w-full space-y-6 shadow-2xl">
+            <h3 class="text-xl font-bold flex items-center gap-2">
+                <i data-lucide="settings" class="w-5 h-5"></i> Settings
+            </h3>
+
+            <div class="space-y-2">
+                <label class="block text-xs text-brand-dim uppercase tracking-wider">OpenRouter API Key</label>
+                <input type="password" id="api-key-input"
+                    class="w-full p-3 rounded-lg bg-black/50 border border-white/10 text-white focus:border-blue-500/50 outline-none transition-colors"
+                    placeholder="sk-or-...">
+                <p class="text-[10px] text-gray-500">
+                    Your key is stored locally in your browser. We do not see it.
+                    <a href="https://openrouter.ai/keys" target="_blank" class="text-blue-400 hover:underline">Get a
+                        key</a>
+                </p>
+            </div>
+
+            <div class="flex gap-3 pt-2">
+                <button onclick="saveApiKey()"
+                    class="flex-1 bg-white text-black py-2 rounded-lg font-bold hover:bg-gray-200 transaction-colors">Save</button>
+                <button onclick="toggleSettingsModal()"
+                    class="flex-1 bg-white/5 text-white py-2 rounded-lg font-bold hover:bg-white/10 transaction-colors">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/templates.js"></script>
+    <script src="js/script.js"></script>
     <script>
         lucide.createIcons();
     </script>
