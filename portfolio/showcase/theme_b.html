@@ -1,0 +1,577 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Maven | Virtual Assistant Portfolio</title>
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Eliza Maven | Creative Virtual Assistant">
+    <meta property="og:description" content="Professional Virtual Assistant Services, Portfolio, and Rates.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://elizamaven.com">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.jpg" type="image/jpeg">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Config & Styles -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'art-bg': '#FDFBF7',
+                        'art-accent': '#D4C4B7',
+                        'art-dark': '#2C2C2C',
+                        'art-sage': '#94A396',
+                        'art-gold': '#C5A059'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'marquee': 'marquee 25s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FDFBF7;
+            color: #2C2C2C;
+            overflow-x: hidden;
+        }
+
+        /* Artistic Blobs */
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.6;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FDFBF7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4C4B7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A396;
+        }
+
+        /* Animation Classes for "Reveal" Effect */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased relative">
+
+    <!-- 1. Top Flowing Note -->
+    <div class="bg-art-dark text-art-bg py-2 overflow-hidden relative z-50">
+        <div class="whitespace-nowrap flex animate-marquee">
+            <span class="mx-4 text-sm font-medium tracking-wide">Everything is customizable â€” you can edit, remove, or change anything. We handle it all.</span>
+            <span class="mx-4 text-sm font-medium tracking-wide opacity-50">â€¢</span>
+            <span class="mx-4 text-sm font-medium tracking-wide">Everything is customizable â€” you can edit, remove, or change anything. We handle it all.</span>
+            <span class="mx-4 text-sm font-medium tracking-wide opacity-50">â€¢</span>
+            <span class="mx-4 text-sm font-medium tracking-wide">Everything is customizable â€” you can edit, remove, or change anything. We handle it all.</span>
+            <span class="mx-4 text-sm font-medium tracking-wide opacity-50">â€¢</span>
+            <span class="mx-4 text-sm font-medium tracking-wide">Everything is customizable â€” you can edit, remove, or change anything. We handle it all.</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-10 left-0 w-full z-40 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-serif font-bold tracking-tighter mix-blend-difference z-50">Eliza Maven.</a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 items-center bg-white/80 backdrop-blur-md px-8 py-3 rounded-full shadow-sm border border-white">
+                <a href="#about" class="text-sm uppercase tracking-widest hover:text-art-sage transition-colors">About</a>
+                <a href="#services" class="text-sm uppercase tracking-widest hover:text-art-sage transition-colors">Services</a>
+                <a href="#portfolio" class="text-sm uppercase tracking-widest hover:text-art-sage transition-colors">Portfolio</a>
+                <a href="#rates" class="text-sm uppercase tracking-widest hover:text-art-sage transition-colors">Rates</a>
+                <a href="#contact" class="bg-art-dark text-white px-5 py-2 rounded-full text-sm uppercase tracking-widest hover:bg-art-sage transition-colors duration-300">Let's Talk</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden z-50 p-2">
+                <i data-lucide="menu" class="w-8 h-8 text-art-dark"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-[#FDFBF7] z-40 transform translate-x-full transition-transform duration-500 flex flex-col justify-center items-center space-y-8">
+        <a href="#about" class="text-3xl font-serif hover:italic">About</a>
+        <a href="#services" class="text-3xl font-serif hover:italic">Services</a>
+        <a href="#portfolio" class="text-3xl font-serif hover:italic">Portfolio</a>
+        <a href="#rates" class="text-3xl font-serif hover:italic">Rates</a>
+        <a href="#contact" class="text-3xl font-serif hover:italic">Contact</a>
+    </div>
+
+    <!-- Background Decoration -->
+    <div class="fixed inset-0 w-full h-full overflow-hidden pointer-events-none">
+        <div class="blob bg-art-sage/30 w-96 h-96 rounded-full top-0 left-0 mix-blend-multiply filter blur-xl opacity-70 animate-float"></div>
+        <div class="blob bg-art-accent/30 w-96 h-96 rounded-full bottom-0 right-0 mix-blend-multiply filter blur-xl opacity-70 animate-float" style="animation-delay: 2s"></div>
+    </div>
+
+    <!-- 2. Introduction / Hero Section -->
+    <header class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="order-2 md:order-1 reveal">
+                    <span class="text-art-sage uppercase tracking-[0.2em] text-sm mb-4 block">Virtual Assistant & Creative Strategist</span>
+                    <h1 class="text-6xl md:text-8xl font-serif font-medium leading-tight mb-6">
+                        Effortless <br> <span class="italic text-art-gold">Organization</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 max-w-md leading-relaxed">
+                        I help entrepreneurs reclaim their time through artistic organization and strategic administrative support. Let's build your vision together.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#portfolio" class="group relative px-8 py-3 bg-art-dark text-white rounded-full overflow-hidden inline-block shadow-lg hover:shadow-xl transition-all">
+                            <span class="relative z-10 group-hover:tracking-widest transition-all duration-300">View Work</span>
+                            <div class="absolute inset-0 bg-art-sage transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                        </a>
+                        <a href="#contact" class="px-8 py-3 border border-art-dark rounded-full hover:bg-white transition-colors">Contact Me</a>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="order-1 md:order-2 relative reveal reveal-delay-2">
+                    <div class="relative w-full aspect-[4/5] md:w-[80%] ml-auto">
+                        <!-- Decorative Frame -->
+                        <div class="absolute inset-0 border border-art-dark/20 transform translate-x-4 translate-y-4 rounded-t-[100px]"></div>
+                        <!-- Main Image -->
+                        <div class="absolute inset-0 rounded-t-[100px] overflow-hidden shadow-2xl">
+                            <img src="photo.jpg" alt="Eliza Maven working in a garden" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <!-- Floating Badge -->
+                        <div class="absolute -bottom-6 -left-6 glass-card p-4 rounded-xl shadow-lg animate-float">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-green-100 p-2 rounded-full text-green-600">
+                                    <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 uppercase">Status</p>
+                                    <p class="font-serif font-bold text-art-dark">Available for Hire</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. About & Softwares Section -->
+    <section id="about" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-12">
+                <!-- Profile Image -->
+                <div class="md:col-span-4 reveal">
+                    <div class="relative">
+                        <div class="aspect-[3/4] rounded-full overflow-hidden border-4 border-white shadow-xl">
+                            <img src="photo.png" alt="Eliza Maven Professional" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="md:col-span-8 flex flex-col justify-center reveal reveal-delay-1">
+                    <h2 class="text-4xl font-serif mb-6">Behind the Screen</h2>
+                    <p class="text-gray-600 mb-8 leading-relaxed text-lg">
+                        I'm Eliza, a digital artisan specializing in virtual assistance. I blend systematic efficiency with creative flair. My goal is to handle the chaos so you can focus on the creation. Whether it's managing your inbox or designing your next campaign, I bring a calm, professional presence to your business.
+                    </p>
+
+                    <!-- Softwares Grid -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                        <h3 class="text-xl font-serif mb-6 border-b border-gray-100 pb-2">Software Proficiency</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                            <!-- Tool 1 -->
+                            <div class="flex items-center gap-3 group">
+                                <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform">
+                                    <i data-lucide="trello" class="w-5 h-5"></i>
+                                </div>
+                                <span class="font-medium text-gray-700">Trello/Asana</span>
+                            </div>
+                            <!-- Tool 2 -->
+                            <div class="flex items-center gap-3 group">
+                                <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center text-orange-600 group-hover:scale-110 transition-transform">
+                                    <i data-lucide="figma" class="w-5 h-5"></i>
+                                </div>
+                                <span class="font-medium text-gray-700">Canva/Figma</span>
+                            </div>
+                            <!-- Tool 3 -->
+                            <div class="flex items-center gap-3 group">
+                                <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform">
+                                    <i data-lucide="sheet" class="w-5 h-5"></i>
+                                </div>
+                                <span class="font-medium text-gray-700">Google Suite</span>
+                            </div>
+                            <!-- Tool 4 -->
+                            <div class="flex items-center gap-3 group">
+                                <div class="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center text-purple-600 group-hover:scale-110 transition-transform">
+                                    <i data-lucide="mail" class="w-5 h-5"></i>
+                                </div>
+                                <span class="font-medium text-gray-700">Mailchimp</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Services & Skills -->
+    <section id="services" class="py-24 bg-white/50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-art-sage uppercase tracking-widest text-sm">What I Do</span>
+                <h2 class="text-5xl font-serif mt-2">Curated Services</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="group bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-transparent hover:border-art-accent reveal">
+                    <div class="w-14 h-14 bg-art-bg rounded-full flex items-center justify-center mb-6 group-hover:bg-art-sage group-hover:text-white transition-colors">
+                        <i data-lucide="calendar-check" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif mb-3">Admin Management</h3>
+                    <p class="text-gray-500 mb-4 text-sm leading-relaxed">Inbox detox, calendar scheduling, data entry, and CRM management. I keep the backend of your business flawless.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-art-sage rounded-full"></div> Calendar & Inbox</li>
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-art-sage rounded-full"></div> Travel Planning</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="group bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-transparent hover:border-art-accent reveal reveal-delay-1">
+                    <div class="w-14 h-14 bg-art-bg rounded-full flex items-center justify-center mb-6 group-hover:bg-art-sage group-hover:text-white transition-colors">
+                        <i data-lucide="pen-tool" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif mb-3">Creative Design</h3>
+                    <p class="text-gray-500 mb-4 text-sm leading-relaxed">Social media graphics, presentation decks, and basic video editing to keep your brand looking premium.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-art-sage rounded-full"></div> Canva Graphics</li>
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-art-sage rounded-full"></div> Social Media Kits</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="group bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-transparent hover:border-art-accent reveal reveal-delay-2">
+                    <div class="w-14 h-14 bg-art-bg rounded-full flex items-center justify-center mb-6 group-hover:bg-art-sage group-hover:text-white transition-colors">
+                        <i data-lucide="share-2" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif mb-3">Social Media</h3>
+                    <p class="text-gray-500 mb-4 text-sm leading-relaxed">Engagement, scheduling, and community management. I help you stay consistent across platforms.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-art-sage rounded-full"></div> Post Scheduling</li>
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-art-sage rounded-full"></div> Community Engagement</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Skills Tags -->
+            <div class="mt-16 text-center reveal">
+                <p class="font-serif italic text-xl mb-6 text-gray-500">Key Skills</p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-600 hover:bg-art-dark hover:text-white transition-colors cursor-default">Communication</span>
+                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-600 hover:bg-art-dark hover:text-white transition-colors cursor-default">Time Management</span>
+                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-600 hover:bg-art-dark hover:text-white transition-colors cursor-default">Problem Solving</span>
+                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-600 hover:bg-art-dark hover:text-white transition-colors cursor-default">Adaptability</span>
+                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-600 hover:bg-art-dark hover:text-white transition-colors cursor-default">Attention to Detail</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Portfolio Section -->
+    <section id="portfolio" class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div>
+                    <span class="text-art-sage uppercase tracking-widest text-sm">My Work</span>
+                    <h2 class="text-5xl font-serif mt-2">Selected Projects</h2>
+                </div>
+                <div class="hidden md:block w-32 h-[1px] bg-gray-300 mb-4"></div>
+            </div>
+
+            <!-- Masonry-ish Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Vertical Item (9:16) -->
+                <div class="group relative overflow-hidden rounded-lg cursor-pointer reveal">
+                    <div class="aspect-[9/16] bg-gray-200 w-full relative overflow-hidden">
+                        <img src="images/socialmedia1.jpg" alt="Social Media 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="text-white font-serif text-xl italic">Social Story</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vertical Item (9:16) -->
+                <div class="group relative overflow-hidden rounded-lg cursor-pointer lg:mt-16 reveal reveal-delay-1">
+                    <div class="aspect-[9/16] bg-gray-200 w-full relative overflow-hidden">
+                        <img src="images/socialmedia2.jpg" alt="Social Media 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="text-white font-serif text-xl italic">Reel Cover</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stacked Horizontal Items (16:9) -->
+                <div class="flex flex-col gap-8 reveal reveal-delay-2">
+                    <div class="group relative overflow-hidden rounded-lg cursor-pointer">
+                        <div class="aspect-video bg-gray-200 w-full relative overflow-hidden">
+                            <img src="images/thumbnail1.jpg" alt="Thumbnail 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <span class="text-white font-serif text-xl italic">Youtube Thumb</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden rounded-lg cursor-pointer">
+                        <div class="aspect-video bg-gray-200 w-full relative overflow-hidden">
+                            <img src="images/thumbnail2.jpg" alt="Thumbnail 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <span class="text-white font-serif text-xl italic">Blog Header</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Rates Section -->
+    <section id="rates" class="py-24 bg-art-dark text-white relative overflow-hidden">
+        <!-- Abstract Decoration -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-art-sage/20 rounded-full blur-3xl"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-5xl font-serif mb-4">Investment</h2>
+                <p class="text-gray-400">Choose the level of support that fits your needs.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Package 1 -->
+                <div class="border border-white/20 p-8 rounded-2xl hover:bg-white/5 transition-colors reveal">
+                    <h3 class="text-2xl font-serif mb-2">Starter</h3>
+                    <div class="text-4xl font-bold mb-6 text-art-gold">$30<span class="text-lg font-normal text-gray-400">/hr</span></div>
+                    <p class="text-sm text-gray-400 mb-8 h-12">Perfect for specific, one-off tasks or light administrative maintenance.</p>
+                    <ul class="space-y-4 text-sm text-gray-300 mb-8">
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-art-gold"></i> Email Management</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-art-gold"></i> Data Entry</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-art-gold"></i> Weekly Report</li>
+                    </ul>
+                    <a href="#contact" class="block text-center w-full py-3 border border-white/30 rounded-full hover:bg-white hover:text-art-dark transition-all">Select</a>
+                </div>
+
+                <!-- Package 2 (Featured) -->
+                <div class="bg-art-bg text-art-dark p-8 rounded-2xl transform md:-translate-y-4 shadow-2xl reveal reveal-delay-1 relative">
+                    <div class="absolute top-0 right-0 bg-art-gold text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                    <h3 class="text-2xl font-serif mb-2">Retainer</h3>
+                    <div class="text-4xl font-bold mb-6 text-art-dark">$600<span class="text-lg font-normal text-gray-500">/mo</span></div>
+                    <p class="text-sm text-gray-600 mb-8 h-12">20 hours of dedicated support. Best for growing businesses.</p>
+                    <ul class="space-y-4 text-sm text-gray-700 mb-8">
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-art-gold"></i> Priority Support</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-art-gold"></i> Social Media Mgmt</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-art-gold"></i> Monthly Strategy Call</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-art-gold"></i> Content Creation</li>
+                    </ul>
+                    <a href="#contact" class="block text-center w-full py-3 bg-art-dark text-white rounded-full hover:bg-art-sage transition-all shadow-lg">Get Started</a>
+                </div>
+
+                <!-- Package 3 -->
+                <div class="border border-white/20 p-8 rounded-2xl hover:bg-white/5 transition-colors reveal reveal-delay-2">
+                    <h3 class="text-2xl font-serif mb-2">Project</h3>
+                    <div class="text-4xl font-bold mb-6 text-art-gold">Custom</div>
+                    <p class="text-sm text-gray-400 mb-8 h-12">For website launches, rebrands, or complex system setups.</p>
+                    <ul class="space-y-4 text-sm text-gray-300 mb-8">
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-art-gold"></i> Scope Assessment</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-art-gold"></i> Fixed Timeline</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-art-gold"></i> Deliverable Based</li>
+                    </ul>
+                    <a href="#contact" class="block text-center w-full py-3 border border-white/30 rounded-full hover:bg-white hover:text-art-dark transition-all">Inquire</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Contact Section -->
+    <section id="contact" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto glass-card p-8 md:p-12 rounded-3xl shadow-xl reveal">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-serif mb-4">Let's Create Together</h2>
+                    <p class="text-gray-500">Ready to streamline your workflow? Send me a message.</p>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Message sent! (Demo only)');">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">Name</label>
+                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-art-sage focus:ring-1 focus:ring-art-sage outline-none transition-all bg-white/50" placeholder="Jane Doe">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-art-sage focus:ring-1 focus:ring-art-sage outline-none transition-all bg-white/50" placeholder="jane@example.com">
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-gray-700">Service Interest</label>
+                        <select class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-art-sage focus:ring-1 focus:ring-art-sage outline-none transition-all bg-white/50">
+                            <option>General Inquiry</option>
+                            <option>Admin Support</option>
+                            <option>Social Media</option>
+                            <option>Creative Design</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-gray-700">Message</label>
+                        <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-art-sage focus:ring-1 focus:ring-art-sage outline-none transition-all bg-white/50" placeholder="Tell me about your project..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-art-dark text-white rounded-lg font-medium tracking-wide hover:bg-art-sage transition-all transform hover:-translate-y-1 shadow-lg">Send Message</button>
+                </form>
+
+                <div class="mt-12 flex justify-center gap-6 text-gray-400">
+                    <a href="#" class="hover:text-art-dark transition-colors"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                    <a href="#" class="hover:text-art-dark transition-colors"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                    <a href="#" class="hover:text-art-dark transition-colors"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-art-bg py-8 border-t border-gray-200">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-sm text-gray-500">&copy; 2024 Eliza Maven. All rights reserved.</p>
+            <p class="text-sm font-medium text-art-sage">Design by : Blockscom Media</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        let isMenuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('translate-x-full');
+            } else {
+                mobileMenu.classList.add('translate-x-full');
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                isMenuOpen = false;
+                mobileMenu.classList.add('translate-x-full');
+            });
+        });
+
+        // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar Glass Effect on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2');
+            }
+        });
+    </script>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+        return false;
+    }
+};
+</script>
+</body>
+</html>

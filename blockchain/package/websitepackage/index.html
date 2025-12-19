@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -91,6 +91,14 @@
             gsap.to(follower, { x: e.clientX, y: e.clientY, duration: 0.1 });
         });
     </script>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+        return false;
+    }
+};
+</script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -340,14 +340,14 @@
                 <h2 class="section-title">Power-Up <span class="italic">Add-ons</span></h2>
                 <div class="addons-grid">
                     <div class="addon-item">
-                        <div class="addon-icon">💎</div>
+                        <div class="addon-icon">ðŸ’Ž</div>
                         <h3 class="addon-title">NFT Collection</h3>
                         <p>Launch a companion NFT set for your community.</p>
                         <a href="../nftpackage/index.html" class="nav-link"
                             style="margin-top: 1rem; display: inline-block;">View Details</a>
                     </div>
                     <div class="addon-item">
-                        <div class="addon-icon">🎮</div>
+                        <div class="addon-icon">ðŸŽ®</div>
                         <h3 class="addon-title">Game Development</h3>
                         <p>Engage users with a custom mini-game.</p>
                         <a href="../../games/mafia-survivor/index.html" target="_blank" class="nav-link"
@@ -467,6 +467,14 @@
             window.addEventListener('resize', updateWheel);
         });
     </script>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+        return false;
+    }
+};
+</script>
 </body>
 
 </html>

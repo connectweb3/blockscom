@@ -1,0 +1,533 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Maven Portfolio</title>
+    <link rel="icon" type="image/jpg" href="favicon.jpg">
+
+    <!-- Open Graph Meta Tags (Hidden, for Link Previews) -->
+    <meta property="og:title" content="Eliza Maven - Virtual Assistant Portfolio">
+    <meta property="og:description" content="Professional Virtual Assistant Services, Skills, and Portfolio.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://elizamaven.com">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration for Custom Colors/Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        'brand-dark': '#1a1a1a',
+                        'brand-cream': '#f9f5f0',
+                        'brand-sage': '#8DA399',
+                        'brand-accent': '#D4A373',
+                        'brand-soft-gray': '#e5e5e5'
+                    },
+                    animation: {
+                        'marquee': 'marquee 20s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f9f5f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8DA399;
+            border-radius: 4px;
+        }
+
+        /* Locomotive-style Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: blur(10px);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        /* Staggered delays */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Smooth Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 25s linear infinite;
+        }
+
+        /* Artistic Image Shapes */
+        .artistic-blob {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            overflow: hidden;
+            transition: border-radius 0.5s ease;
+        }
+        .artistic-blob:hover {
+            border-radius: 40% 60% 70% 30% / 40% 70% 30% 60%;
+        }
+
+        /* High Quality Button Hover */
+        .btn-hover-effect {
+            position: relative;
+            overflow: hidden;
+            transition: color 0.4s;
+            z-index: 1;
+        }
+        .btn-hover-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            transition: transform 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+            z-index: -1;
+        }
+        .btn-hover-effect:hover::before {
+            transform: translateX(100%);
+        }
+        .btn-hover-effect:hover {
+            color: #f9f5f0;
+        }
+    </style>
+</head>
+<body class="bg-brand-cream text-brand-dark overflow-x-hidden antialiased selection:bg-brand-sage selection:text-white">
+
+    <!-- Flowing Note Header -->
+    <div class="bg-brand-sage text-white text-xs uppercase tracking-widest py-2 marquee-container sticky top-0 z-50">
+        <div class="marquee-content">
+            Everything is customizable â€” you can edit, remove, or change anything. We handle it all. &nbsp;&nbsp; â€¢ &nbsp;&nbsp; 
+            Everything is customizable â€” you can edit, remove, or change anything. We handle it all. &nbsp;&nbsp; â€¢ &nbsp;&nbsp; 
+            Everything is customizable â€” you can edit, remove, or change anything. We handle it all. &nbsp;&nbsp; â€¢ &nbsp;&nbsp;
+            Everything is customizable â€” you can edit, remove, or change anything. We handle it all. &nbsp;&nbsp; â€¢ &nbsp;&nbsp;
+        </div>
+    </div>
+
+    <!-- Navigation (Minimal) -->
+    <nav class="fixed top-10 w-full z-40 px-6 md:px-12 flex justify-between items-center mix-blend-difference text-brand-cream md:text-brand-dark">
+        <a href="#" class="text-xl font-serif italic font-bold">EM.</a>
+        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-wide">
+            <a href="#about" class="hover:text-brand-sage transition">About</a>
+            <a href="#services" class="hover:text-brand-sage transition">Services</a>
+            <a href="#portfolio" class="hover:text-brand-sage transition">Portfolio</a>
+            <a href="#contact" class="hover:text-brand-sage transition">Contact</a>
+        </div>
+        <a href="#contact" class="px-6 py-2 border border-current rounded-full text-xs uppercase hover:bg-brand-dark hover:text-white transition hidden md:block">Let's Talk</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden">
+        
+        <!-- Decorative Background Elements -->
+        <div class="absolute top-1/4 -left-20 w-72 h-72 bg-brand-sage/20 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-brand-accent/10 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+
+        <!-- Big Center Logo Text -->
+        <div class="relative z-10 reveal">
+            <p class="text-brand-accent uppercase tracking-[0.3em] text-sm mb-4 font-medium">Virtual Assistant Extraordinaire</p>
+            <h1 class="font-serif text-6xl md:text-9xl lg:text-[10rem] leading-none mb-6 text-brand-dark">
+                Eliza<br><span class="italic text-brand-sage">Maven</span>
+            </h1>
+            <p class="max-w-md mx-auto text-gray-600 mb-10 leading-relaxed font-light">
+                Curating digital excellence through organization, creativity, and strategic support.
+            </p>
+        </div>
+
+        <!-- Image: Photo.png (Professional Blazer) -->
+        <div class="relative w-full max-w-lg mt-8 reveal delay-200">
+            <!-- Using object-contain to respect the transparency if it's a cutout -->
+            <img src="photo.png" 
+                 alt="Eliza Maven Professional" 
+                 class="w-full h-auto object-cover md:object-contain drop-shadow-2xl grayscale hover:grayscale-0 transition duration-700 ease-in-out"
+                 onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-brand-dark/50">
+            <i data-lucide="arrow-down" class="w-6 h-6"></i>
+        </div>
+    </header>
+
+    <!-- Introduction Section -->
+    <section id="about" class="py-24 px-6 md:px-20 bg-white">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            
+            <!-- Image: Photo.jpg (Garden/Laptop) -->
+            <div class="relative reveal group">
+                <div class="absolute inset-0 bg-brand-sage/20 translate-x-4 translate-y-4 rounded-xl transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
+                <img src="photo.jpg" 
+                     alt="Eliza working in garden" 
+                     class="relative z-10 w-full rounded-xl shadow-lg object-cover aspect-[4/5]"
+                     onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+            </div>
+
+            <div class="reveal delay-200">
+                <h2 class="font-serif text-4xl md:text-5xl mb-8">Hello, I'm <span class="italic text-brand-sage">Eliza.</span></h2>
+                <div class="space-y-6 text-gray-600 font-light leading-relaxed">
+                    <p>
+                        I am a dedicated Virtual Assistant who bridges the gap between chaos and clarity. With a passion for artistic detail and administrative precision, I help entrepreneurs and creatives reclaim their time.
+                    </p>
+                    <p>
+                        Whether I'm organizing your schedule from a quiet garden corner or managing your launch strategy, I bring a calm, focused energy to every task. My goal isn't just to get things doneâ€”it's to get them done beautifully.
+                    </p>
+                </div>
+                
+                <div class="mt-10 grid grid-cols-3 gap-6 border-t border-gray-100 pt-8">
+                    <div>
+                        <span class="block text-3xl font-serif text-brand-dark">3+</span>
+                        <span class="text-xs uppercase tracking-wider text-gray-500">Years Exp.</span>
+                    </div>
+                    <div>
+                        <span class="block text-3xl font-serif text-brand-dark">50+</span>
+                        <span class="text-xs uppercase tracking-wider text-gray-500">Projects</span>
+                    </div>
+                    <div>
+                        <span class="block text-3xl font-serif text-brand-dark">100%</span>
+                        <span class="text-xs uppercase tracking-wider text-gray-500">Client Joy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Software Section -->
+    <section class="py-24 px-6 bg-brand-cream">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-accent uppercase tracking-widest text-xs font-semibold">My Toolkit</span>
+                <h2 class="font-serif text-4xl mt-3">Softwares & Skills</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                
+                <!-- Softwares -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm reveal delay-100 border border-transparent hover:border-brand-sage/30 transition duration-500">
+                    <h3 class="font-serif text-2xl mb-6 flex items-center gap-3">
+                        <i data-lucide="laptop" class="text-brand-sage"></i> Software Proficiency
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-gray-50 rounded-full text-sm hover:bg-brand-sage hover:text-white transition">Notion</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-full text-sm hover:bg-brand-sage hover:text-white transition">Canva Pro</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-full text-sm hover:bg-brand-sage hover:text-white transition">Asana/Trello</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-full text-sm hover:bg-brand-sage hover:text-white transition">Google Workspace</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-full text-sm hover:bg-brand-sage hover:text-white transition">Slack/Discord</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-full text-sm hover:bg-brand-sage hover:text-white transition">WordPress</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-full text-sm hover:bg-brand-sage hover:text-white transition">Mailchimp</span>
+                        <span class="px-4 py-2 bg-gray-50 rounded-full text-sm hover:bg-brand-sage hover:text-white transition">Zoom</span>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm reveal delay-200 border border-transparent hover:border-brand-sage/30 transition duration-500">
+                    <h3 class="font-serif text-2xl mb-6 flex items-center gap-3">
+                        <i data-lucide="sparkles" class="text-brand-sage"></i> Core Skills
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center justify-between">
+                            <span class="text-gray-700">Email Management</span>
+                            <div class="w-32 h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-brand-sage w-[95%]"></div></div>
+                        </li>
+                        <li class="flex items-center justify-between">
+                            <span class="text-gray-700">Social Media Strategy</span>
+                            <div class="w-32 h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-brand-sage w-[90%]"></div></div>
+                        </li>
+                        <li class="flex items-center justify-between">
+                            <span class="text-gray-700">Data Entry & Research</span>
+                            <div class="w-32 h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-brand-sage w-[98%]"></div></div>
+                        </li>
+                        <li class="flex items-center justify-between">
+                            <span class="text-gray-700">Calendar Management</span>
+                            <div class="w-32 h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-brand-sage w-[100%]"></div></div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 px-6 bg-brand-dark text-brand-cream">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div>
+                    <span class="text-brand-sage uppercase tracking-widest text-xs font-semibold">What I Do</span>
+                    <h2 class="font-serif text-4xl mt-3">Curated Services</h2>
+                </div>
+                <p class="text-gray-400 max-w-sm mt-4 md:mt-0 text-sm font-light">
+                    Tailored solutions designed to streamline your workflow and elevate your brand presence.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="group p-8 border border-white/10 rounded-xl hover:bg-white/5 transition duration-500 reveal">
+                    <div class="w-12 h-12 bg-brand-sage/20 rounded-full flex items-center justify-center mb-6 text-brand-sage group-hover:bg-brand-sage group-hover:text-white transition">
+                        <i data-lucide="mail"></i>
+                    </div>
+                    <h3 class="font-serif text-xl mb-3">Admin Support</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Inbox detox, calendar scheduling, travel arrangements, and file organization to keep your backend running smooth.</p>
+                    <a href="#contact" class="text-xs uppercase tracking-widest border-b border-brand-sage/50 pb-1 hover:text-brand-sage transition">Inquire</a>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="group p-8 border border-white/10 rounded-xl hover:bg-white/5 transition duration-500 reveal delay-100">
+                    <div class="w-12 h-12 bg-brand-sage/20 rounded-full flex items-center justify-center mb-6 text-brand-sage group-hover:bg-brand-sage group-hover:text-white transition">
+                        <i data-lucide="instagram"></i>
+                    </div>
+                    <h3 class="font-serif text-xl mb-3">Social Media</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Content scheduling, caption writing, community engagement, and basic graphic creation for your feeds.</p>
+                    <a href="#contact" class="text-xs uppercase tracking-widest border-b border-brand-sage/50 pb-1 hover:text-brand-sage transition">Inquire</a>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="group p-8 border border-white/10 rounded-xl hover:bg-white/5 transition duration-500 reveal delay-200">
+                    <div class="w-12 h-12 bg-brand-sage/20 rounded-full flex items-center justify-center mb-6 text-brand-sage group-hover:bg-brand-sage group-hover:text-white transition">
+                        <i data-lucide="pen-tool"></i>
+                    </div>
+                    <h3 class="font-serif text-xl mb-3">Creative Assistance</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Basic photo editing, presentation design, blog formatting, and newsletter newsletter creation.</p>
+                    <a href="#contact" class="text-xs uppercase tracking-widest border-b border-brand-sage/50 pb-1 hover:text-brand-sage transition">Inquire</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 px-6 md:px-12 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 reveal">
+                <h2 class="font-serif text-5xl mb-4">Selected Works</h2>
+                <div class="w-24 h-1 bg-brand-sage mx-auto"></div>
+            </div>
+
+            <!-- Artistic Masonry Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 auto-rows-[300px]">
+                
+                <!-- Item 1 (Social Media - 9:16) -->
+                <div class="lg:col-span-4 lg:row-span-2 relative group overflow-hidden rounded-2xl reveal">
+                    <img src="images/socialmedia1.jpg" 
+                         alt="Social Media Reel" 
+                         class="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+                         onerror="this.src='https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <span class="text-white border border-white px-6 py-2 rounded-full backdrop-blur-sm">Instagram Reels</span>
+                    </div>
+                </div>
+
+                <!-- Item 2 (Thumbnail - 16:9) -->
+                <div class="lg:col-span-8 lg:row-span-1 relative group overflow-hidden rounded-2xl reveal delay-100">
+                    <img src="images/thumbnail1.jpg" 
+                         alt="Youtube Thumbnail" 
+                         class="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+                         onerror="this.src='https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <span class="text-white border border-white px-6 py-2 rounded-full backdrop-blur-sm">YouTube Thumbnails</span>
+                    </div>
+                </div>
+
+                <!-- Item 3 (Thumbnail - 16:9) -->
+                <div class="lg:col-span-8 lg:row-span-1 relative group overflow-hidden rounded-2xl reveal delay-200">
+                    <img src="images/thumbnail2.jpg" 
+                         alt="Blog Header" 
+                         class="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+                         onerror="this.src='https://images.unsplash.com/photo-1432821596592-e2c18b78144f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <span class="text-white border border-white px-6 py-2 rounded-full backdrop-blur-sm">Blog Graphics</span>
+                    </div>
+                </div>
+
+                 <!-- Item 4 (Social Media - 9:16) -->
+                 <div class="lg:col-span-4 lg:row-span-2 relative group overflow-hidden rounded-2xl reveal lg:-mt-[324px]">
+                    <img src="images/socialmedia2.jpg" 
+                         alt="Story Design" 
+                         class="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+                         onerror="this.src='https://images.unsplash.com/photo-1611162616475-46b635cb6868?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';">
+                     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <span class="text-white border border-white px-6 py-2 rounded-full backdrop-blur-sm">Story Designs</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Rates Section -->
+    <section class="py-24 px-6 bg-brand-sage/10">
+        <div class="max-w-5xl mx-auto text-center">
+             <div class="mb-16 reveal">
+                <span class="text-brand-sage uppercase tracking-widest text-xs font-semibold">Invest in your time</span>
+                <h2 class="font-serif text-4xl mt-3">Packages & Rates</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Basic -->
+                <div class="bg-white p-10 rounded-xl shadow-lg hover:-translate-y-2 transition duration-300 reveal">
+                    <h3 class="font-serif text-2xl mb-2">The Starter</h3>
+                    <p class="text-3xl font-bold text-brand-sage mb-6">$500<span class="text-sm font-normal text-gray-400">/mo</span></p>
+                    <ul class="text-left space-y-3 mb-8 text-sm text-gray-600">
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-sage"></i> 10 Hours of Support</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-sage"></i> Email Management</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-sage"></i> Weekly Report</li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-3 border border-brand-dark hover:bg-brand-dark hover:text-white transition text-xs uppercase tracking-widest">Select</a>
+                </div>
+
+                <!-- Standard (Featured) -->
+                <div class="bg-brand-dark text-white p-10 rounded-xl shadow-xl hover:-translate-y-2 transition duration-300 relative reveal delay-100">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-accent text-white px-4 py-1 text-xs uppercase rounded-full">Most Popular</div>
+                    <h3 class="font-serif text-2xl mb-2">The Professional</h3>
+                    <p class="text-3xl font-bold text-brand-sage mb-6">$900<span class="text-sm font-normal text-gray-400">/mo</span></p>
+                    <ul class="text-left space-y-3 mb-8 text-sm text-gray-300">
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-sage"></i> 20 Hours of Support</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-sage"></i> Inbox & Calendar</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-sage"></i> Basic Social Media</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-sage"></i> Bi-Weekly Calls</li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-3 bg-brand-sage hover:bg-white hover:text-brand-dark transition text-xs uppercase tracking-widest text-white">Select</a>
+                </div>
+
+                <!-- Premium -->
+                <div class="bg-white p-10 rounded-xl shadow-lg hover:-translate-y-2 transition duration-300 reveal delay-200">
+                    <h3 class="font-serif text-2xl mb-2">The Executive</h3>
+                    <p class="text-3xl font-bold text-brand-sage mb-6">$1800<span class="text-sm font-normal text-gray-400">/mo</span></p>
+                    <ul class="text-left space-y-3 mb-8 text-sm text-gray-600">
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-sage"></i> 40 Hours of Support</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-sage"></i> Full Project Mgmt</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-sage"></i> Content Creation</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-sage"></i> Priority Support</li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-3 border border-brand-dark hover:bg-brand-dark hover:text-white transition text-xs uppercase tracking-widest">Select</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 bg-white relative overflow-hidden">
+        <!-- Abstract Background -->
+        <div class="absolute -top-20 -right-20 w-96 h-96 bg-brand-sage/10 rounded-full blur-3xl"></div>
+
+        <div class="max-w-4xl mx-auto bg-brand-cream rounded-3xl p-8 md:p-16 shadow-2xl reveal">
+            <div class="text-center mb-10">
+                <h2 class="font-serif text-4xl mb-4">Let's Create Together</h2>
+                <p class="text-gray-500 font-light">Ready to reclaim your time? Fill out the form below or drop me an email.</p>
+            </div>
+
+            <form class="space-y-6" onsubmit="event.preventDefault(); alert('Thank you for reaching out! This is a demo form.');">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest mb-2 text-gray-500">Name</label>
+                        <input type="text" class="w-full bg-white border border-gray-200 p-4 rounded-lg focus:outline-none focus:border-brand-sage transition" placeholder="Jane Doe">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest mb-2 text-gray-500">Email</label>
+                        <input type="email" class="w-full bg-white border border-gray-200 p-4 rounded-lg focus:outline-none focus:border-brand-sage transition" placeholder="jane@example.com">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest mb-2 text-gray-500">Message</label>
+                    <textarea rows="4" class="w-full bg-white border border-gray-200 p-4 rounded-lg focus:outline-none focus:border-brand-sage transition" placeholder="Tell me about your project..."></textarea>
+                </div>
+                <button type="submit" class="w-full py-4 bg-brand-dark text-white rounded-lg hover:bg-brand-sage transition duration-300 uppercase tracking-widest text-sm btn-hover-effect">
+                    Send Message
+                </button>
+            </form>
+
+            <div class="mt-12 flex justify-center gap-8">
+                <a href="#" class="text-gray-400 hover:text-brand-sage transition"><i data-lucide="instagram"></i></a>
+                <a href="#" class="text-gray-400 hover:text-brand-sage transition"><i data-lucide="linkedin"></i></a>
+                <a href="#" class="text-gray-400 hover:text-brand-sage transition"><i data-lucide="twitter"></i></a>
+                <a href="#" class="text-gray-400 hover:text-brand-sage transition"><i data-lucide="mail"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-white py-8 text-center border-t border-gray-800">
+        <p class="font-serif italic text-2xl mb-4">Eliza Maven</p>
+        <p class="text-xs text-gray-500 uppercase tracking-widest mb-2">&copy; 2024 All Rights Reserved.</p>
+        <p class="text-[10px] text-gray-600">Design by : Blockscom Media</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Custom Intersection Observer for "Locomotive-like" Reveal
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional: Stop observing once revealed
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+        return false;
+    }
+};
+</script>
+</body>
+</html>

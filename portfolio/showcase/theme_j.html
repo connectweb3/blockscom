@@ -1,0 +1,677 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Maven | Virtual Assistant Portfolio</title>
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Eliza Maven Portfolio">
+    <meta property="og:description" content="Professional Virtual Assistant Services - Administrative, Social Media, and more.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://elizamaven.com">
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        black: '#050505',
+                        'dark-gray': '#0a0a0a',
+                        'neon-blue': '#00f3ff',
+                        'neon-purple': '#bc13fe',
+                        'glass': 'rgba(255, 255, 255, 0.05)',
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        display: ['Syncopate', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f1f1f 1px, transparent 1px), linear-gradient(to bottom, #1f1f1f 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for Futuristic Feel */
+        body {
+            background-color: #050505;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        /* Subtle Grid Background Animation */
+        .bg-grid {
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            animation: moveGrid 20s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); }
+        }
+
+        /* Marquee Animation for Top Bar */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f3ff;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(0, 243, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        /* Text Gradient */
+        .text-gradient {
+            background: linear-gradient(to right, #ffffff, #00f3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Image hover effect */
+        .img-hover-zoom {
+            overflow: hidden;
+        }
+        .img-hover-zoom img {
+            transition: transform 0.5s ease;
+        }
+        .img-hover-zoom:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Navigation Link Hover */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #00f3ff;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="antialiased relative">
+
+    <!-- Background Grid -->
+    <div class="fixed inset-0 z-0 opacity-20 pointer-events-none">
+        <div class="absolute inset-0 bg-grid-pattern bg-grid"></div>
+    </div>
+
+    <!-- Top Flowing Note -->
+    <div class="bg-neon-blue text-black text-xs font-bold py-2 z-50 relative marquee-container">
+        <div class="marquee-content">
+            Everything is customizable â€” you can edit, remove, or change anything. We handle it all. we will remove this once this template is purchase &nbsp;&nbsp; â€¢ &nbsp;&nbsp; Everything is customizable â€” you can edit, remove, or change anything. We handle it all. we will remove this once this template is purchase &nbsp;&nbsp; â€¢ &nbsp;&nbsp; 
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-8 w-full z-40 bg-black/80 backdrop-blur-md border-b border-white/5 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-display text-2xl font-bold text-white tracking-widest">ELIZA<span class="text-neon-blue">.</span></a>
+            
+            <div class="hidden md:flex space-x-8 text-sm uppercase tracking-wider text-gray-400">
+                <a href="#about" class="nav-link hover:text-white transition-colors">About</a>
+                <a href="#services" class="nav-link hover:text-white transition-colors">Services</a>
+                <a href="#skills" class="nav-link hover:text-white transition-colors">Skills</a>
+                <a href="#portfolio" class="nav-link hover:text-white transition-colors">Portfolio</a>
+                <a href="#rates" class="nav-link hover:text-white transition-colors">Rates</a>
+                <a href="#contact" class="px-4 py-2 border border-neon-blue text-neon-blue hover:bg-neon-blue hover:text-black transition-all duration-300">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black border-b border-white/10 absolute w-full">
+            <div class="flex flex-col p-6 space-y-4 text-center">
+                <a href="#about" class="text-gray-400 hover:text-white">About</a>
+                <a href="#services" class="text-gray-400 hover:text-white">Services</a>
+                <a href="#skills" class="text-gray-400 hover:text-white">Skills</a>
+                <a href="#portfolio" class="text-gray-400 hover:text-white">Portfolio</a>
+                <a href="#contact" class="text-neon-blue">Contact Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden" id="home">
+        <!-- Decoration Circles -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-blue rounded-full opacity-5 blur-[120px]"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon-purple rounded-full opacity-5 blur-[120px]"></div>
+
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="order-2 md:order-1 reveal">
+                <h2 class="text-neon-blue text-sm uppercase tracking-[0.2em] mb-4 font-bold">Virtual Assistant & Digital Specialist</h2>
+                <h1 class="font-display text-5xl md:text-7xl font-bold leading-tight mb-6">
+                    Elevating <br>
+                    <span class="text-gradient">Efficiency.</span>
+                </h1>
+                <p class="text-gray-400 text-lg mb-8 max-w-lg leading-relaxed">
+                    I'm Eliza Maven. I bridge the gap between chaos and clarity. Specialized in administrative excellence and creative digital solutions.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#portfolio" class="px-8 py-3 bg-white text-black font-bold uppercase tracking-wider hover:bg-neon-blue transition-colors duration-300">View Work</a>
+                    <a href="#contact" class="px-8 py-3 border border-white/20 text-white font-bold uppercase tracking-wider hover:border-neon-blue hover:text-neon-blue transition-colors duration-300">Hire Me</a>
+                </div>
+            </div>
+            
+            <div class="order-1 md:order-2 flex justify-center reveal delay-200">
+                <div class="relative w-72 h-72 md:w-[28rem] md:h-[32rem]">
+                    <div class="absolute inset-0 border border-neon-blue/30 translate-x-4 translate-y-4 z-0"></div>
+                    <div class="absolute inset-0 bg-gray-800 overflow-hidden z-10 grayscale hover:grayscale-0 transition-all duration-500">
+                        <!-- User Image Placeholder: Professional Blazer -->
+                        <img src="photo.png" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Eliza Maven Professional" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- VA Software Section -->
+    <section class="py-24 relative z-10" id="about">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 reveal">
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">Command Center</h2>
+                <div class="h-1 w-20 bg-neon-blue"></div>
+                <p class="mt-4 text-gray-400">The arsenal of tools I use to drive results.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 reveal delay-100">
+                <!-- Software 1 -->
+                <div class="glass-card p-6 flex flex-col items-center justify-center text-center group">
+                    <div class="w-12 h-12 mb-4 text-gray-300 group-hover:text-neon-blue transition-colors">
+                        <i data-lucide="trello" class="w-full h-full"></i>
+                    </div>
+                    <h3 class="font-bold tracking-wider">Trello</h3>
+                    <p class="text-xs text-gray-500 mt-1">Project Mgmt</p>
+                </div>
+                 <!-- Software 2 -->
+                 <div class="glass-card p-6 flex flex-col items-center justify-center text-center group">
+                    <div class="w-12 h-12 mb-4 text-gray-300 group-hover:text-neon-blue transition-colors">
+                        <i data-lucide="mail" class="w-full h-full"></i>
+                    </div>
+                    <h3 class="font-bold tracking-wider">Mailchimp</h3>
+                    <p class="text-xs text-gray-500 mt-1">Email Marketing</p>
+                </div>
+                 <!-- Software 3 -->
+                 <div class="glass-card p-6 flex flex-col items-center justify-center text-center group">
+                    <div class="w-12 h-12 mb-4 text-gray-300 group-hover:text-neon-blue transition-colors">
+                        <i data-lucide="figma" class="w-full h-full"></i>
+                    </div>
+                    <h3 class="font-bold tracking-wider">Figma</h3>
+                    <p class="text-xs text-gray-500 mt-1">Design</p>
+                </div>
+                 <!-- Software 4 -->
+                 <div class="glass-card p-6 flex flex-col items-center justify-center text-center group">
+                    <div class="w-12 h-12 mb-4 text-gray-300 group-hover:text-neon-blue transition-colors">
+                        <i data-lucide="sheet" class="w-full h-full"></i>
+                    </div>
+                    <h3 class="font-bold tracking-wider">G-Suite</h3>
+                    <p class="text-xs text-gray-500 mt-1">Administration</p>
+                </div>
+            </div>
+            <!-- More software row -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6 reveal delay-200">
+                <div class="glass-card p-6 flex flex-col items-center justify-center text-center group">
+                    <i data-lucide="video" class="w-10 h-10 mb-3 text-gray-400 group-hover:text-neon-blue"></i>
+                    <h3 class="font-bold">Zoom</h3>
+                </div>
+                <div class="glass-card p-6 flex flex-col items-center justify-center text-center group">
+                    <i data-lucide="pen-tool" class="w-10 h-10 mb-3 text-gray-400 group-hover:text-neon-blue"></i>
+                    <h3 class="font-bold">Canva</h3>
+                </div>
+                <div class="glass-card p-6 flex flex-col items-center justify-center text-center group">
+                    <i data-lucide="message-square" class="w-10 h-10 mb-3 text-gray-400 group-hover:text-neon-blue"></i>
+                    <h3 class="font-bold">Slack</h3>
+                </div>
+                <div class="glass-card p-6 flex flex-col items-center justify-center text-center group">
+                    <i data-lucide="database" class="w-10 h-10 mb-3 text-gray-400 group-hover:text-neon-blue"></i>
+                    <h3 class="font-bold">Notion</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-24 bg-black/50 relative" id="services">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold mb-2">VA Services</h2>
+                    <div class="h-1 w-20 bg-neon-blue"></div>
+                </div>
+                <p class="text-gray-400 max-w-md mt-4 md:mt-0 text-right">
+                    Comprehensive digital assistance tailored to streamline your business operations.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Administrative Skills -->
+                <div class="glass-card p-10 group relative overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i data-lucide="briefcase" class="w-32 h-32"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-6 text-neon-blue">
+                            <i data-lucide="briefcase"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Administrative Skills</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">Calendar management, inbox organization, appointment setting, and travel arrangements. I keep your business running like a well-oiled machine.</p>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-neon-blue rounded-full mr-2"></span> Calendar Mgmt</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-neon-blue rounded-full mr-2"></span> Inbox Zero</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Social Media Manager -->
+                <div class="glass-card p-10 group relative overflow-hidden reveal delay-100">
+                    <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i data-lucide="share-2" class="w-32 h-32"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-6 text-neon-blue">
+                            <i data-lucide="instagram"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Social Media Manager</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">Content creation, scheduling, engagement, and analytics. I grow your community while you focus on the big picture.</p>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-neon-blue rounded-full mr-2"></span> Content Scheduling</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-neon-blue rounded-full mr-2"></span> Community Engagement</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Copywriting -->
+                <div class="glass-card p-10 group relative overflow-hidden reveal delay-200">
+                    <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i data-lucide="pen-tool" class="w-32 h-32"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-6 text-neon-blue">
+                            <i data-lucide="edit-3"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Copywriting</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">Compelling newsletters, blog posts, and ad copy that captures your brand voice and converts leads into loyal customers.</p>
+                    </div>
+                </div>
+
+                <!-- Data Entry -->
+                <div class="glass-card p-10 group relative overflow-hidden reveal delay-300">
+                    <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i data-lucide="database" class="w-32 h-32"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-6 text-neon-blue">
+                            <i data-lucide="file-spreadsheet"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Data Entry</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">Accurate and efficient data management. Spreadsheets, CRM updates, and lead generation mining with high attention to detail.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="py-24" id="skills">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-2">Capabilities</h2>
+                <div class="h-1 w-20 bg-neon-blue mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto reveal">
+                <!-- Skill Set 1 -->
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-bold tracking-wider">Communication</span>
+                            <span class="text-neon-blue">95%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 h-1">
+                            <div class="bg-neon-blue h-1 w-[95%] shadow-[0_0_10px_rgba(0,243,255,0.5)]"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-bold tracking-wider">Project Management</span>
+                            <span class="text-neon-blue">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 h-1">
+                            <div class="bg-neon-blue h-1 w-[90%] shadow-[0_0_10px_rgba(0,243,255,0.5)]"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-bold tracking-wider">Organization</span>
+                            <span class="text-neon-blue">100%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 h-1">
+                            <div class="bg-neon-blue h-1 w-[100%] shadow-[0_0_10px_rgba(0,243,255,0.5)]"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skill Set 2 -->
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-bold tracking-wider">Content Creation</span>
+                            <span class="text-neon-blue">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 h-1">
+                            <div class="bg-neon-blue h-1 w-[85%] shadow-[0_0_10px_rgba(0,243,255,0.5)]"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-bold tracking-wider">Technical Proficiency</span>
+                            <span class="text-neon-blue">88%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 h-1">
+                            <div class="bg-neon-blue h-1 w-[88%] shadow-[0_0_10px_rgba(0,243,255,0.5)]"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-bold tracking-wider">Time Management</span>
+                            <span class="text-neon-blue">98%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 h-1">
+                            <div class="bg-neon-blue h-1 w-[98%] shadow-[0_0_10px_rgba(0,243,255,0.5)]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="py-24 bg-black/50" id="portfolio">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 reveal">
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-2">Selected Works</h2>
+                <div class="h-1 w-20 bg-neon-blue"></div>
+            </div>
+
+            <!-- Masonry Grid Style Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+                
+                <!-- 9:16 Social Media 1 -->
+                <div class="glass-card p-2 md:row-span-2 reveal delay-100 img-hover-zoom group relative">
+                    <img src="images/socialmedia1.jpg" onerror="this.src='https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'" alt="Social Media 1" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="text-center">
+                            <h3 class="font-bold text-lg">IG Stories</h3>
+                            <p class="text-neon-blue text-sm">Social Media</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 16:9 Thumbnail 1 -->
+                <div class="glass-card p-2 md:col-span-1 reveal delay-200 img-hover-zoom group relative">
+                    <img src="images/thumbnail1.jpg" onerror="this.src='https://images.unsplash.com/photo-1626785774573-4b799314346d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Thumbnail 1" class="w-full h-full object-cover aspect-video">
+                    <div class="absolute inset-0 bg-black/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="text-center">
+                            <h3 class="font-bold text-lg">YouTube Thumb</h3>
+                            <p class="text-neon-blue text-sm">Graphic Design</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9:16 Social Media 2 -->
+                <div class="glass-card p-2 md:row-span-2 reveal delay-300 img-hover-zoom group relative">
+                    <img src="images/socialmedia2.jpg" onerror="this.src='https://images.unsplash.com/photo-1611162616475-46b635cb6868?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'" alt="Social Media 2" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="text-center">
+                            <h3 class="font-bold text-lg">Reels Cover</h3>
+                            <p class="text-neon-blue text-sm">Social Media</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 16:9 Thumbnail 2 -->
+                <div class="glass-card p-2 md:col-span-1 reveal delay-400 img-hover-zoom group relative">
+                    <img src="images/thumbnail2.jpg" onerror="this.src='https://images.unsplash.com/photo-1542435503-956c469947f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Thumbnail 2" class="w-full h-full object-cover aspect-video">
+                    <div class="absolute inset-0 bg-black/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="text-center">
+                            <h3 class="font-bold text-lg">Blog Header</h3>
+                            <p class="text-neon-blue text-sm">Web Design</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Rates Section -->
+    <section class="py-24 relative overflow-hidden" id="rates">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neon-blue opacity-[0.03] rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-2">Investment</h2>
+                <div class="h-1 w-20 bg-neon-blue mx-auto"></div>
+                <p class="text-gray-400 mt-4">Transparent pricing for your peace of mind.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Basic Plan -->
+                <div class="glass-card p-8 hover:border-neon-blue/50 reveal">
+                    <h3 class="text-xl font-bold mb-2">Starter</h3>
+                    <div class="text-3xl font-display font-bold text-white mb-6">$25<span class="text-sm text-gray-400 font-sans font-normal">/hour</span></div>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-400">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Data Entry Tasks</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Basic Email Mgmt</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Scheduling</li>
+                        <li class="flex items-center opacity-50"><i data-lucide="x" class="w-4 h-4 mr-2"></i> Social Media Mgmt</li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-3 text-center border border-white/20 hover:bg-white hover:text-black transition-all text-xs uppercase tracking-widest font-bold">Select</a>
+                </div>
+
+                <!-- Pro Plan (Featured) -->
+                <div class="glass-card p-8 border-neon-blue/50 relative reveal delay-100 transform md:-translate-y-4 bg-white/5">
+                    <div class="absolute top-0 right-0 bg-neon-blue text-black text-[10px] font-bold px-3 py-1 uppercase">Best Value</div>
+                    <h3 class="text-xl font-bold mb-2 text-neon-blue">Retainer</h3>
+                    <div class="text-3xl font-display font-bold text-white mb-6">$800<span class="text-sm text-gray-400 font-sans font-normal">/month</span></div>
+                    <p class="text-xs text-gray-400 mb-6">Up to 40 hours per month</p>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-300">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Priority Support</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Full Admin Support</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Social Media (2 channels)</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Monthly Reports</li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-3 text-center bg-neon-blue text-black hover:bg-white transition-all text-xs uppercase tracking-widest font-bold">Select</a>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="glass-card p-8 hover:border-neon-blue/50 reveal delay-200">
+                    <h3 class="text-xl font-bold mb-2">Project</h3>
+                    <div class="text-3xl font-display font-bold text-white mb-6">Custom</div>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-400">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Website Launch</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Rebranding</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Specific Campaigns</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Consultation Included</li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-3 text-center border border-white/20 hover:bg-white hover:text-black transition-all text-xs uppercase tracking-widest font-bold">Contact</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-24 bg-black" id="contact">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <h2 class="font-display text-4xl font-bold mb-6">Let's <span class="text-neon-blue">Collaborate</span></h2>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        Ready to reclaim your time? Send me a message and let's discuss how I can help streamline your business and life.
+                    </p>
+                    
+                    <div class="space-y-6 mb-8">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 border border-white/20 flex items-center justify-center text-neon-blue">
+                                <i data-lucide="mail"></i>
+                            </div>
+                            <span class="text-gray-300">hello@elizamaven.com</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 border border-white/20 flex items-center justify-center text-neon-blue">
+                                <i data-lucide="map-pin"></i>
+                            </div>
+                            <span class="text-gray-300">Remote / Worldwide</span>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white/5 hover:bg-neon-blue hover:text-black flex items-center justify-center transition-all"><i data-lucide="instagram"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white/5 hover:bg-neon-blue hover:text-black flex items-center justify-center transition-all"><i data-lucide="linkedin"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white/5 hover:bg-neon-blue hover:text-black flex items-center justify-center transition-all"><i data-lucide="twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="relative reveal delay-200">
+                     <!-- User Image Placeholder: Garden Laptop -->
+                    <div class="aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 relative group">
+                        <div class="absolute inset-0 border-2 border-neon-blue translate-x-3 translate-y-3 z-0 transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
+                        <img src="photo.jpg" onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Eliza working in garden" class="relative z-10 w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-8 bg-black">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 uppercase tracking-widest">
+            <div class="mb-4 md:mb-0">
+                &copy; 2024 Eliza Maven Portfolio.
+            </div>
+            <div>
+                Design by : Blockscom Media
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Reveal Animation on Scroll
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Sticky Navbar Glass Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/90', 'py-3');
+                navbar.classList.remove('bg-transparent', 'py-4');
+            } else {
+                navbar.classList.remove('bg-black/90', 'py-3');
+                navbar.classList.add('bg-transparent', 'py-4');
+            }
+        });
+    </script>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+        return false;
+    }
+};
+</script>
+</body>
+</html>

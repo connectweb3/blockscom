@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -192,7 +192,7 @@
 
                         <h4 style="margin: 1.5rem 0 0.5rem; color: #fff;">Rarity Calculation</h4>
                         <p>The total supply is determined by the Cartesian product of all layer options:</p>
-                        <p><code>Total = Count(Background) × Count(Body) × Count(Outfit) × Count(Beak) × Count(Eyes) × Count(Headwear)</code>
+                        <p><code>Total = Count(Background) Ã— Count(Body) Ã— Count(Outfit) Ã— Count(Beak) Ã— Count(Eyes) Ã— Count(Headwear)</code>
                         </p>
                     </div>
                 </div>
@@ -299,7 +299,7 @@
                 <h2 class="section-title">Essential <span class="italic">Add-ons</span></h2>
                 <div class="addons-grid">
                     <div class="addon-item">
-                        <div class="addon-icon">🌐</div>
+                        <div class="addon-icon">ðŸŒ</div>
                         <h3 class="addon-title">Website</h3>
                         <p>Showcase your collection with a pro site.</p>
                         <p style="color: var(--accent-color); font-weight: 700; margin-top: 0.5rem;">+$50 Setup<br><span
@@ -308,20 +308,20 @@
                             style="margin-top: 1rem; display: inline-block;">View Package</a>
                     </div>
                     <div class="addon-item">
-                        <div class="addon-icon">🎨</div>
+                        <div class="addon-icon">ðŸŽ¨</div>
                         <h3 class="addon-title">10x Visual Posters</h3>
                         <p>High-res promotional art.</p>
                         <p style="color: var(--accent-color); font-weight: 700; margin-top: 0.5rem;">$15</p>
                     </div>
                     <div class="addon-item">
-                        <div class="addon-icon">✨</div>
+                        <div class="addon-icon">âœ¨</div>
                         <h3 class="addon-title">10x Stickers</h3>
                         <p>Community engagement assets.</p>
                         <p style="color: var(--accent-color); font-weight: 700; margin-top: 0.5rem;">$15</p>
                     </div>
                     <div class="addon-item"
                         style="border-color: var(--accent-color); background: rgba(212, 175, 55, 0.05);">
-                        <div class="addon-icon">🔥</div>
+                        <div class="addon-icon">ðŸ”¥</div>
                         <h3 class="addon-title">Visuals Bundle</h3>
                         <p>Get both Posters & Stickers.</p>
                         <p style="color: var(--accent-color); font-weight: 700; margin-top: 0.5rem;">$20 <span
@@ -350,6 +350,14 @@
         });
     </script>
     <script src="generator.js"></script>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+        return false;
+    }
+};
+</script>
 </body>
 
 </html>

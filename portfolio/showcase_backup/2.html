@@ -1,0 +1,684 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Maven | Virtual Assistant Portfolio</title>
+    <link rel="icon" type="image/jpg" href="favicon.jpg">
+
+    <!-- Open Graph Meta Tags (Hidden metadata for social previews) -->
+    <meta property="og:title" content="Eliza Maven | Creative Virtual Assistant">
+    <meta property="og:description" content="Professional Virtual Assistant Portfolio. Services, Skills, and creative work by Eliza Maven.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://elizamaven.com">
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Config & Styles -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#1a1a1a',
+                            light: '#f9f8f4',
+                            accent: '#cfa682',
+                            soft: '#e8e6e1',
+                            muted: '#888888'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Manrope"', 'sans-serif'],
+                    },
+                    aspectRatio: {
+                        '9/16': '9 / 16',
+                        '16/9': '16 / 9',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Smooth Scroll Behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #f9f8f4;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        /* Animation Classes for Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-100 { transition-delay: 0.1s; }
+        .reveal-delay-200 { transition-delay: 0.2s; }
+        .reveal-delay-300 { transition-delay: 0.3s; }
+
+        /* Artistic Text Stroke */
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(26, 26, 26, 0.2);
+            color: transparent;
+        }
+
+        /* Custom Cursor (Optional Artistic Touch) */
+        .custom-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        .custom-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background-color: #1a1a1a;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+        .custom-btn:hover {
+            color: #fff;
+        }
+        .custom-btn:hover::after {
+            height: 100%;
+        }
+
+        /* Image Hover Effects */
+        .portfolio-card img {
+            transition: transform 0.7s ease;
+        }
+        .portfolio-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Soft Gradient Backgrounds */
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-brand-accent selection:text-white">
+
+    <!-- Top Floating Note -->
+    <div class="bg-brand-dark text-white text-xs md:text-sm py-2 px-4 text-center font-medium tracking-wide z-50 relative">
+        Everything is customizable â€” you can edit, remove, or change anything. We handle it all.
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-10 z-40 transition-all duration-300 px-6 py-6" id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="font-serif text-2xl font-bold tracking-tighter">EM.</a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 text-sm font-medium tracking-widest uppercase">
+                <a href="#about" class="hover:text-brand-accent transition-colors">About</a>
+                <a href="#services" class="hover:text-brand-accent transition-colors">Services</a>
+                <a href="#portfolio" class="hover:text-brand-accent transition-colors">Portfolio</a>
+                <a href="#rates" class="hover:text-brand-accent transition-colors">Rates</a>
+                <a href="#contact" class="custom-btn border border-brand-dark px-6 py-2 rounded-full hover:border-transparent">Let's Talk</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-2xl" id="menu-btn">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-brand-light z-50 transform translate-x-full transition-transform duration-500 flex flex-col justify-center items-center">
+        <button id="close-menu" class="absolute top-8 right-8 text-3xl hover:rotate-90 transition-transform">
+            <i class="fa-solid fa-times"></i>
+        </button>
+        <div class="flex flex-col space-y-6 text-center font-serif text-3xl">
+            <a href="#about" class="mobile-link hover:text-brand-accent">About</a>
+            <a href="#services" class="mobile-link hover:text-brand-accent">Services</a>
+            <a href="#portfolio" class="mobile-link hover:text-brand-accent">Portfolio</a>
+            <a href="#rates" class="mobile-link hover:text-brand-accent">Rates</a>
+            <a href="#contact" class="mobile-link hover:text-brand-accent">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex flex-col justify-center items-center pt-20 overflow-hidden">
+        <!-- Background Orbs -->
+        <div class="gradient-orb bg-brand-accent w-96 h-96 top-20 right-[-100px] opacity-20"></div>
+        <div class="gradient-orb bg-gray-300 w-80 h-80 bottom-20 left-[-100px] opacity-30"></div>
+
+        <div class="text-center z-10 px-4 reveal active">
+            <p class="text-sm md:text-base font-bold tracking-[0.2em] uppercase text-brand-muted mb-4">Your Strategic Partner</p>
+            <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl font-light leading-none mb-6">
+                Eliza <span class="italic font-normal text-brand-accent">Maven</span>
+            </h1>
+            <p class="max-w-xl mx-auto text-brand-muted text-lg md:text-xl font-light mb-10">
+                Curating chaos into calm. A virtual assistant for creative entrepreneurs who need artful organization.
+            </p>
+            
+            <div class="flex justify-center gap-4">
+                <a href="#portfolio" class="group flex items-center gap-2 border-b border-brand-dark pb-1 text-sm uppercase tracking-widest hover:text-brand-accent hover:border-brand-accent transition-all">
+                    View My Works <i class="fa-solid fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Hero Image (Artistic Placement) -->
+        <div class="mt-16 w-full max-w-5xl mx-auto px-4 relative reveal reveal-delay-200">
+            <div class="relative w-full aspect-[16/8] md:aspect-[21/9] overflow-hidden rounded-2xl">
+                <!-- Using photo.jpg (Garden) for lifestyle feel -->
+                <img src="photo.jpg" alt="Eliza Maven working in a garden" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 transform scale-105" onerror="this.src='https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2940&auto=format&fit=crop'">
+                
+                <div class="absolute bottom-0 left-0 bg-brand-light p-6 md:p-8 rounded-tr-3xl">
+                    <p class="font-serif text-2xl italic">"Efficiency is an art form."</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Marquee Divider -->
+    <div class="py-12 border-t border-b border-gray-200 bg-white">
+        <div class="marquee-container">
+            <div class="marquee-content font-serif text-4xl md:text-5xl italic text-gray-300">
+                Project Management â€” Social Media â€” Email Marketing â€” Scheduling â€” Content Creation â€” Data Entry â€” Research â€” 
+                Project Management â€” Social Media â€” Email Marketing â€” Scheduling â€” Content Creation â€” Data Entry â€” Research â€”
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <!-- Image Side -->
+            <div class="relative reveal">
+                <div class="absolute -top-4 -left-4 w-full h-full border border-brand-accent rounded-lg z-0"></div>
+                <div class="relative z-10 aspect-[3/4] overflow-hidden rounded-lg">
+                    <!-- Using photo.png (Blazer) for professional look -->
+                    <img src="photo.png" alt="Eliza Maven Professional" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop'">
+                </div>
+            </div>
+
+            <!-- Content Side -->
+            <div class="reveal reveal-delay-200">
+                <h2 class="font-serif text-4xl md:text-5xl mb-6">Hello, I'm <span class="text-brand-accent italic">Eliza</span>.</h2>
+                <h3 class="text-xl font-medium mb-6">Your dedicated Virtual Assistant ready to elevate your business.</h3>
+                <p class="text-brand-muted mb-6 leading-relaxed">
+                    I specialize in helping busy entrepreneurs reclaim their time. With a background in administrative support and a passion for creative digital solutions, I blend structure with style. Whether it's managing your chaotic inbox or designing your next social media campaign, I handle the details so you can focus on the big picture.
+                </p>
+                
+                <!-- Signature/Artistic Element -->
+                <div class="font-serif text-3xl text-brand-accent opacity-80 mb-8 italic">Eliza Maven</div>
+
+                <a href="#contact" class="inline-block custom-btn bg-brand-dark text-white px-8 py-3 rounded-md">
+                    Download CV
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Software & Tools Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-xs font-bold tracking-widest uppercase text-brand-accent">My Toolkit</span>
+                <h2 class="font-serif text-4xl mt-3">Software Proficiency</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center reveal reveal-delay-200">
+                <!-- Tool Items -->
+                <div class="group p-6 border border-gray-100 hover:border-brand-accent transition-colors rounded-xl">
+                    <div class="text-3xl mb-3 text-brand-dark group-hover:scale-110 transition-transform"><i class="fa-brands fa-google"></i></div>
+                    <p class="text-sm font-medium">Google Workspace</p>
+                </div>
+                <div class="group p-6 border border-gray-100 hover:border-brand-accent transition-colors rounded-xl">
+                    <div class="text-3xl mb-3 text-blue-500 group-hover:scale-110 transition-transform"><i class="fa-solid fa-paintbrush"></i></div>
+                    <p class="text-sm font-medium">Canva</p>
+                </div>
+                <div class="group p-6 border border-gray-100 hover:border-brand-accent transition-colors rounded-xl">
+                    <div class="text-3xl mb-3 text-purple-600 group-hover:scale-110 transition-transform"><i class="fa-brands fa-trello"></i></div>
+                    <p class="text-sm font-medium">Trello/Asana</p>
+                </div>
+                <div class="group p-6 border border-gray-100 hover:border-brand-accent transition-colors rounded-xl">
+                    <div class="text-3xl mb-3 text-green-500 group-hover:scale-110 transition-transform"><i class="fa-brands fa-whatsapp"></i></div>
+                    <p class="text-sm font-medium">Communication</p>
+                </div>
+                <div class="group p-6 border border-gray-100 hover:border-brand-accent transition-colors rounded-xl">
+                    <div class="text-3xl mb-3 text-orange-500 group-hover:scale-110 transition-transform"><i class="fa-brands fa-wordpress"></i></div>
+                    <p class="text-sm font-medium">WordPress</p>
+                </div>
+                <div class="group p-6 border border-gray-100 hover:border-brand-accent transition-colors rounded-xl">
+                    <div class="text-3xl mb-3 text-blue-400 group-hover:scale-110 transition-transform"><i class="fa-solid fa-video"></i></div>
+                    <p class="text-sm font-medium">Zoom/Slack</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services & Skills Combined -->
+    <section id="services" class="py-24 px-6 bg-brand-light relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row gap-16">
+                
+                <!-- Services Column -->
+                <div class="md:w-2/3">
+                    <span class="text-xs font-bold tracking-widest uppercase text-brand-accent block mb-4">What I Do</span>
+                    <h2 class="font-serif text-4xl md:text-5xl mb-12">Curated Services</h2>
+
+                    <div class="space-y-6">
+                        <!-- Service Card 1 -->
+                        <div class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 reveal">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <h3 class="font-serif text-2xl mb-2 group-hover:text-brand-accent transition-colors">Administrative Support</h3>
+                                    <p class="text-brand-muted text-sm leading-relaxed max-w-md">Inbox management, calendar scheduling, travel arrangements, and file organization to keep your business running smoothly.</p>
+                                </div>
+                                <span class="text-4xl font-light text-gray-200 group-hover:text-brand-accent transition-colors">01</span>
+                            </div>
+                        </div>
+
+                        <!-- Service Card 2 -->
+                        <div class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 reveal reveal-delay-100">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <h3 class="font-serif text-2xl mb-2 group-hover:text-brand-accent transition-colors">Social Media Management</h3>
+                                    <p class="text-brand-muted text-sm leading-relaxed max-w-md">Content creation, scheduling, community engagement, and analytics reporting for Instagram, LinkedIn, and Facebook.</p>
+                                </div>
+                                <span class="text-4xl font-light text-gray-200 group-hover:text-brand-accent transition-colors">02</span>
+                            </div>
+                        </div>
+
+                        <!-- Service Card 3 -->
+                        <div class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 reveal reveal-delay-200">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <h3 class="font-serif text-2xl mb-2 group-hover:text-brand-accent transition-colors">Creative Design</h3>
+                                    <p class="text-brand-muted text-sm leading-relaxed max-w-md">Basic graphic design using Canva, presentation design, and newsletter layout to maintain your brand aesthetic.</p>
+                                </div>
+                                <span class="text-4xl font-light text-gray-200 group-hover:text-brand-accent transition-colors">03</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Column -->
+                <div class="md:w-1/3 reveal reveal-delay-300">
+                    <div class="bg-brand-dark text-white p-10 rounded-2xl h-full relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-10 opacity-10 text-9xl">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        
+                        <h3 class="font-serif text-3xl mb-8 relative z-10">Core Skills</h3>
+                        
+                        <div class="space-y-6 relative z-10">
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span>Organization</span>
+                                    <span>95%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 h-1 rounded-full">
+                                    <div class="bg-brand-accent h-1 rounded-full" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span>Communication</span>
+                                    <span>98%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 h-1 rounded-full">
+                                    <div class="bg-brand-accent h-1 rounded-full" style="width: 98%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span>Design Eye</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 h-1 rounded-full">
+                                    <div class="bg-brand-accent h-1 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span>Time Management</span>
+                                    <span>100%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 h-1 rounded-full">
+                                    <div class="bg-brand-accent h-1 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-12">
+                            <h4 class="font-serif text-xl mb-4">Soft Skills</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 border border-gray-600 rounded-full text-xs">Adaptable</span>
+                                <span class="px-3 py-1 border border-gray-600 rounded-full text-xs">Proactive</span>
+                                <span class="px-3 py-1 border border-gray-600 rounded-full text-xs">Confidentiality</span>
+                                <span class="px-3 py-1 border border-gray-600 rounded-full text-xs">Reliable</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-end mb-16 reveal">
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-brand-accent">Selected Works</span>
+                    <h2 class="font-serif text-4xl md:text-5xl mt-3">Visual Portfolio</h2>
+                </div>
+                <div class="hidden md:block">
+                    <a href="#" class="text-sm font-bold uppercase tracking-widest border-b border-black pb-1 hover:text-brand-accent hover:border-brand-accent transition-colors">View All Projects</a>
+                </div>
+            </div>
+
+            <!-- Masonry Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
+                
+                <!-- Item 1 (9:16) -->
+                <div class="portfolio-card group relative overflow-hidden rounded-lg aspect-[9/16] reveal">
+                    <img src="images/socialmedia1.jpg" alt="Social Media Design 1" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop'">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div class="text-center text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <p class="font-serif text-xl italic">Social Media Story</p>
+                            <span class="text-xs uppercase tracking-widest">Instagram</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 (16:9) - Spans 2 cols on Large screens if desired, keeping simple grid for now -->
+                <div class="portfolio-card group relative overflow-hidden rounded-lg aspect-[16/9] lg:col-span-2 reveal reveal-delay-100">
+                    <img src="images/thumbnail1.jpg" alt="Thumbnail Design 1" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop'">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <p class="font-serif text-xl italic">YouTube Thumbnail</p>
+                            <span class="text-xs uppercase tracking-widest">Graphic Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 (9:16) -->
+                <div class="portfolio-card group relative overflow-hidden rounded-lg aspect-[9/16] reveal reveal-delay-200">
+                    <img src="images/socialmedia2.jpg" alt="Social Media Design 2" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1611162616475-46b635cb6868?q=80&w=1974&auto=format&fit=crop'">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <p class="font-serif text-xl italic">Reel Cover</p>
+                            <span class="text-xs uppercase tracking-widest">Content Creation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 (16:9) - Spanning 2 cols on Large -->
+                <div class="portfolio-card group relative overflow-hidden rounded-lg aspect-[16/9] lg:col-span-2 lg:col-start-2 reveal reveal-delay-100">
+                    <img src="images/thumbnail2.jpg" alt="Thumbnail Design 2" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2574&auto=format&fit=crop'">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <p class="font-serif text-xl italic">Blog Header</p>
+                            <span class="text-xs uppercase tracking-widest">Web Design</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Rates Section -->
+    <section id="rates" class="py-24 px-6 bg-brand-light">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-serif text-4xl md:text-5xl mb-4">Investment</h2>
+                <p class="text-brand-muted">Simple, transparent pricing for your peace of mind.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Basic Plan -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-transparent hover:border-brand-accent transition-all hover:-translate-y-2 reveal">
+                    <h3 class="font-serif text-2xl mb-2">Starter</h3>
+                    <p class="text-xs uppercase tracking-widest text-brand-muted mb-6">For light assistance</p>
+                    <div class="text-4xl font-serif mb-6">$350<span class="text-base font-sans text-brand-muted">/mo</span></div>
+                    <ul class="space-y-4 mb-8 text-sm text-brand-dark">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> 10 Hours of Support</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Email Management</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Basic Scheduling</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Monthly Report</li>
+                    </ul>
+                    <a href="#contact" class="block text-center py-3 border border-brand-dark rounded-lg hover:bg-brand-dark hover:text-white transition-colors">Choose Starter</a>
+                </div>
+
+                <!-- Pro Plan (Featured) -->
+                <div class="bg-brand-dark text-white p-8 rounded-2xl shadow-xl transform md:-translate-y-4 reveal reveal-delay-100 relative">
+                    <div class="absolute top-0 right-0 bg-brand-accent text-white text-xs px-3 py-1 rounded-bl-lg rounded-tr-lg font-bold">POPULAR</div>
+                    <h3 class="font-serif text-2xl mb-2">Professional</h3>
+                    <p class="text-xs uppercase tracking-widest text-gray-400 mb-6">For growing businesses</p>
+                    <div class="text-4xl font-serif mb-6">$650<span class="text-base font-sans text-gray-400">/mo</span></div>
+                    <ul class="space-y-4 mb-8 text-sm">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> 20 Hours of Support</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Email & Calendar</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Social Media (2 Platforms)</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Weekly Meetings</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Priority Support</li>
+                    </ul>
+                    <a href="#contact" class="block text-center py-3 bg-brand-accent text-white rounded-lg hover:bg-white hover:text-brand-dark transition-colors font-medium">Choose Professional</a>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-transparent hover:border-brand-accent transition-all hover:-translate-y-2 reveal reveal-delay-200">
+                    <h3 class="font-serif text-2xl mb-2">Executive</h3>
+                    <p class="text-xs uppercase tracking-widest text-brand-muted mb-6">Full business support</p>
+                    <div class="text-4xl font-serif mb-6">$1,200<span class="text-base font-sans text-brand-muted">/mo</span></div>
+                    <ul class="space-y-4 mb-8 text-sm text-brand-dark">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> 40 Hours of Support</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Full Admin Suite</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Content Creation</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Project Management</li>
+                    </ul>
+                    <a href="#contact" class="block text-center py-3 border border-brand-dark rounded-lg hover:bg-brand-dark hover:text-white transition-colors">Choose Executive</a>
+                </div>
+            </div>
+            
+            <p class="text-center mt-8 text-sm text-brand-muted">Hourly Rate Available: $40/hr (Min 5 hours)</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 relative bg-white overflow-hidden">
+        <div class="gradient-orb bg-brand-accent w-64 h-64 top-0 right-0 opacity-10"></div>
+        
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div class="reveal">
+                <span class="text-xs font-bold tracking-widest uppercase text-brand-accent">Get in Touch</span>
+                <h2 class="font-serif text-5xl md:text-6xl mt-4 mb-8">Let's work together.</h2>
+                <p class="text-brand-muted text-lg mb-12">Ready to offload your tasks and reclaim your freedom? Send me a message and let's discuss how I can support your vision.</p>
+                
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center text-brand-dark">
+                            <i class="fa-regular fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-widest text-brand-muted">Email</p>
+                            <p class="font-medium">hello@elizamaven.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center text-brand-dark">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-widest text-brand-muted">Social</p>
+                            <p class="font-medium">@eliza.maven</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form class="bg-brand-light p-8 md:p-12 rounded-3xl reveal reveal-delay-200" onsubmit="event.preventDefault(); alert('Thank you for your message! Eliza will get back to you shortly.');">
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-brand-muted mb-2">Name</label>
+                        <input type="text" class="w-full bg-white border-none p-4 rounded-lg focus:ring-2 focus:ring-brand-accent outline-none transition-all" placeholder="Jane Doe">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-brand-muted mb-2">Email</label>
+                        <input type="email" class="w-full bg-white border-none p-4 rounded-lg focus:ring-2 focus:ring-brand-accent outline-none transition-all" placeholder="jane@example.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-brand-muted mb-2">Service Needed</label>
+                        <select class="w-full bg-white border-none p-4 rounded-lg focus:ring-2 focus:ring-brand-accent outline-none transition-all text-gray-500">
+                            <option>General Admin</option>
+                            <option>Social Media</option>
+                            <option>Project Management</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-brand-muted mb-2">Message</label>
+                        <textarea rows="4" class="w-full bg-white border-none p-4 rounded-lg focus:ring-2 focus:ring-brand-accent outline-none transition-all" placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-brand-dark text-white py-4 rounded-lg font-medium hover:bg-brand-accent transition-colors custom-btn">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-white py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <p class="font-serif text-2xl font-bold">Eliza Maven</p>
+                <p class="text-gray-500 text-sm mt-1">Virtual Assistant Services</p>
+            </div>
+            
+            <div class="flex gap-6">
+                <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+
+            <div class="text-center md:text-right">
+                <p class="text-gray-500 text-xs uppercase tracking-wider">Design by : Blockscom Media</p>
+                <p class="text-gray-600 text-xs mt-1">&copy; 2024 All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Smooth Scroll Reveal Animation using Intersection Observer
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach(el => observer.observe(el));
+
+            // Mobile Menu Logic
+            const menuBtn = document.getElementById('menu-btn');
+            const closeMenuBtn = document.getElementById('close-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            function toggleMenu() {
+                const isHidden = mobileMenu.classList.contains('translate-x-full');
+                if (isHidden) {
+                    mobileMenu.classList.remove('translate-x-full');
+                } else {
+                    mobileMenu.classList.add('translate-x-full');
+                }
+            }
+
+            menuBtn.addEventListener('click', toggleMenu);
+            closeMenuBtn.addEventListener('click', toggleMenu);
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+
+            // Navbar Scroll Effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-4');
+                    navbar.classList.remove('py-6');
+                } else {
+                    navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-4');
+                    navbar.classList.add('py-6');
+                }
+            });
+        });
+
+        // Lucide Icons Initialization
+        lucide.createIcons();
+    </script>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+        return false;
+    }
+};
+</script>
+</body>
+</html>

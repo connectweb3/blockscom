@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="bg-[#050505] text-white overflow-x-hidden antialiased">
 
 <head>
@@ -320,6 +320,14 @@
     <script>
         lucide.createIcons();
     </script>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+        return false;
+    }
+};
+</script>
 </body>
 
 </html>

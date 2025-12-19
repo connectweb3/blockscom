@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -188,8 +188,8 @@
                     </div>
                 </div>
                 <div class="slider-controls">
-                    <button id="prevBtn" class="slider-btn">←</button>
-                    <button id="nextBtn" class="slider-btn">→</button>
+                    <button id="prevBtn" class="slider-btn">â†</button>
+                    <button id="nextBtn" class="slider-btn">â†’</button>
                 </div>
             </div>
         </section>
@@ -291,6 +291,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="js/three-bg.js"></script>
     <script src="js/main.js"></script>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+        return false;
+    }
+};
+</script>
 </body>
 
 </html>

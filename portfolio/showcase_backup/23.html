@@ -1,0 +1,680 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Maven Portfolio | Virtual Assistant</title>
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Eliza Maven Portfolio">
+    <meta property="og:description" content="Professional Virtual Assistant Services - Administrative, Social Media, Copywriting & More.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://elizamaven.com">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpg" href="favicon.jpg">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Config for Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-blue': '#00f3ff',
+                        'neon-purple': '#bc13fe',
+                        'deep-black': '#050505',
+                        'dark-gray': '#121212',
+                        'glass': 'rgba(255, 255, 255, 0.05)',
+                    },
+                    fontFamily: {
+                        'futuristic': ['Orbitron', 'sans-serif'],
+                        'tech': ['Rajdhani', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'cyber-grid': "linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px)",
+                    },
+                    animation: {
+                        'glow-pulse': 'glowPulse 3s infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                        'marquee': 'marquee 25s linear infinite',
+                    },
+                    keyframes: {
+                        glowPulse: {
+                            '0%': { filter: 'drop-shadow(0 0 10px rgba(0, 243, 255, 0.3))' },
+                            '100%': { filter: 'drop-shadow(0 0 25px rgba(0, 243, 255, 0.6))' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(100%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f3ff;
+        }
+
+        body {
+            background-color: #050505;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        /* Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .neon-border {
+            position: relative;
+        }
+        .neon-border::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #00f3ff;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px #00f3ff;
+        }
+        .neon-border:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Image Glow specific */
+        .hero-img-container {
+            position: relative;
+            z-index: 10;
+        }
+        .hero-img-container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(0, 243, 255, 0.2) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            animation: pulse-bg 4s infinite alternate;
+        }
+        @keyframes pulse-bg {
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.9); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        /* Rate Card Hover */
+        .rate-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .rate-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px -10px rgba(0, 243, 255, 0.2);
+            border-color: rgba(0, 243, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="font-tech selection:bg-neon-blue selection:text-black">
+
+    <!-- Flowing Note -->
+    <div class="fixed top-0 left-0 w-full bg-neon-blue text-black z-50 overflow-hidden h-8 flex items-center font-bold text-xs tracking-wider uppercase">
+        <div class="whitespace-nowrap animate-marquee w-full">
+            Everything is customizable â€” you can edit, remove, or change anything. We handle it all. we will remove this once this template is purchase &nbsp;&nbsp; â€¢ &nbsp;&nbsp; Everything is customizable â€” you can edit, remove, or change anything. We handle it all. we will remove this once this template is purchase
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-8 z-40 glass-panel border-b-0 border-white/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="font-futuristic text-2xl font-bold text-white tracking-widest">ELIZA<span class="text-neon-blue">MAVEN</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8 font-futuristic text-sm">
+                        <a href="#about" class="text-gray-300 hover:text-neon-blue transition-colors duration-300">ABOUT</a>
+                        <a href="#services" class="text-gray-300 hover:text-neon-blue transition-colors duration-300">SERVICES</a>
+                        <a href="#skills" class="text-gray-300 hover:text-neon-blue transition-colors duration-300">SKILLS</a>
+                        <a href="#portfolio" class="text-gray-300 hover:text-neon-blue transition-colors duration-300">PORTFOLIO</a>
+                        <a href="#rates" class="text-gray-300 hover:text-neon-blue transition-colors duration-300">RATES</a>
+                        <a href="#contact" class="px-5 py-2 border border-neon-blue text-neon-blue hover:bg-neon-blue hover:text-black transition-all duration-300 rounded-none clip-path-polygon">CONTACT</a>
+                    </div>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white hover:text-neon-blue focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black/95 absolute w-full border-b border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 font-futuristic text-center">
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-white hover:text-neon-blue">ABOUT</a>
+                <a href="#services" class="block px-3 py-2 text-base font-medium text-white hover:text-neon-blue">SERVICES</a>
+                <a href="#skills" class="block px-3 py-2 text-base font-medium text-white hover:text-neon-blue">SKILLS</a>
+                <a href="#portfolio" class="block px-3 py-2 text-base font-medium text-white hover:text-neon-blue">PORTFOLIO</a>
+                <a href="#rates" class="block px-3 py-2 text-base font-medium text-white hover:text-neon-blue">RATES</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-neon-blue">CONTACT ME</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-cyber-grid bg-[length:50px_50px]">
+        <!-- Background Elements -->
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-neon-blue/5 to-transparent pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-neon-purple/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+            <!-- Text Content -->
+            <div class="order-2 md:order-1 text-center md:text-left reveal">
+                <h2 class="text-neon-blue font-futuristic text-lg tracking-[0.3em] mb-4">VIRTUAL ASSISTANT</h2>
+                <h1 class="text-5xl md:text-7xl font-bold font-futuristic text-white leading-tight mb-6">
+                    ELIZA <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">MAVEN</span>
+                </h1>
+                <p class="text-gray-400 text-lg md:text-xl max-w-lg mx-auto md:mx-0 mb-8 font-light">
+                    Elevating your business through strategic administrative support and digital excellence. The future of efficiency is here.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#portfolio" class="px-8 py-4 bg-neon-blue text-black font-bold font-futuristic tracking-wider hover:bg-white transition-all duration-300 clip-path-slant">
+                        VIEW WORKS
+                    </a>
+                    <a href="#contact" class="px-8 py-4 border border-gray-600 text-white font-bold font-futuristic tracking-wider hover:border-neon-blue hover:text-neon-blue transition-all duration-300">
+                        HIRE ME
+                    </a>
+                </div>
+            </div>
+
+            <!-- Image Content -->
+            <div class="order-1 md:order-2 flex justify-center items-center reveal delay-200">
+                <div class="hero-img-container relative w-full max-w-md animate-float">
+                    <!-- Futuristic Circle Behind -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] border border-neon-blue/20 rounded-full animate-spin-slow"></div>
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border border-dashed border-white/10 rounded-full"></div>
+                    
+                    <!-- Main Image (PNG) -->
+                    <img src="photo.png" alt="Eliza Maven Professional" class="relative z-10 w-full h-auto object-cover drop-shadow-[0_0_15px_rgba(0,243,255,0.3)] filter contrast-125" onerror="this.src='https://placehold.co/500x700/000000/FFF?text=Eliza+Maven+PNG'">
+                    
+                    <!-- Glitch Effect Overlays (Pure CSS decoration) -->
+                    <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-neon-blue/50 z-20"></div>
+                    <div class="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-neon-purple/50 z-20"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-gray-500 hover:text-white transition-colors">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About & Software Section -->
+    <section id="about" class="py-24 bg-deep-black relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <!-- About Image (JPG) -->
+                <div class="relative reveal">
+                    <div class="absolute inset-0 bg-neon-blue/20 transform translate-x-4 translate-y-4"></div>
+                    <img src="photo.jpg" alt="Eliza Working" class="relative z-10 w-full h-auto grayscale hover:grayscale-0 transition-all duration-500 object-cover" onerror="this.src='https://placehold.co/600x400/111/FFF?text=Workspace+Photo'">
+                    <div class="absolute -bottom-6 -left-6 bg-black border border-gray-800 p-6 z-20 hidden md:block">
+                        <p class="text-neon-blue font-futuristic text-2xl font-bold">5+</p>
+                        <p class="text-gray-400 text-sm">YEARS EXP.</p>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="reveal delay-100">
+                    <h3 class="text-neon-blue font-futuristic tracking-widest mb-2">INTRODUCTION</h3>
+                    <h2 class="text-4xl font-bold text-white mb-6 font-futuristic">WHO IS <span class="text-gray-500">ELIZA?</span></h2>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        I am a dedicated Virtual Assistant specializing in streamlining operations for digital entrepreneurs. With a keen eye for detail and a passion for organization, I transform chaos into structured success. My goal is to handle the noise so you can focus on the signal.
+                    </p>
+                    
+                    <h4 class="text-white font-futuristic mb-4 mt-8 border-b border-gray-800 pb-2 inline-block">SOFTWARE ARSENAL</h4>
+                    <div class="grid grid-cols-4 sm:grid-cols-5 gap-6 text-center">
+                        <!-- Software Icons -->
+                        <div class="group">
+                            <div class="w-12 h-12 mx-auto bg-gray-900 rounded-lg flex items-center justify-center mb-2 group-hover:bg-neon-blue group-hover:text-black transition-colors duration-300">
+                                <i class="fab fa-google text-xl"></i>
+                            </div>
+                            <span class="text-xs text-gray-500">G-Suite</span>
+                        </div>
+                        <div class="group">
+                            <div class="w-12 h-12 mx-auto bg-gray-900 rounded-lg flex items-center justify-center mb-2 group-hover:bg-neon-blue group-hover:text-black transition-colors duration-300">
+                                <i class="fab fa-trello text-xl"></i>
+                            </div>
+                            <span class="text-xs text-gray-500">Trello</span>
+                        </div>
+                        <div class="group">
+                            <div class="w-12 h-12 mx-auto bg-gray-900 rounded-lg flex items-center justify-center mb-2 group-hover:bg-neon-blue group-hover:text-black transition-colors duration-300">
+                                <i class="fab fa-slack text-xl"></i>
+                            </div>
+                            <span class="text-xs text-gray-500">Slack</span>
+                        </div>
+                        <div class="group">
+                            <div class="w-12 h-12 mx-auto bg-gray-900 rounded-lg flex items-center justify-center mb-2 group-hover:bg-neon-blue group-hover:text-black transition-colors duration-300">
+                                <i class="fas fa-file-word text-xl"></i>
+                            </div>
+                            <span class="text-xs text-gray-500">Office</span>
+                        </div>
+                        <div class="group">
+                            <div class="w-12 h-12 mx-auto bg-gray-900 rounded-lg flex items-center justify-center mb-2 group-hover:bg-neon-blue group-hover:text-black transition-colors duration-300">
+                                <i class="fas fa-pen-nib text-xl"></i>
+                            </div>
+                            <span class="text-xs text-gray-500">Canva</span>
+                        </div>
+                        <!-- Add more softwares as needed -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-dark-gray relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute top-0 left-1/4 w-px h-full bg-white/5"></div>
+        <div class="absolute top-0 right-1/4 w-px h-full bg-white/5"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h3 class="text-neon-purple font-futuristic tracking-widest mb-2">WHAT I DO</h3>
+                <h2 class="text-4xl font-bold text-white font-futuristic">VA SERVICES</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service 1 -->
+                <div class="glass-panel p-8 hover:bg-white/5 transition-colors duration-300 group reveal delay-100 border-t-4 border-transparent hover:border-neon-blue">
+                    <div class="text-neon-blue text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="text-xl text-white font-futuristic mb-4">Administrative Skills</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Calendar management, email handling, appointment setting, and general organization to keep your business running smoothly.
+                    </p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-panel p-8 hover:bg-white/5 transition-colors duration-300 group reveal delay-200 border-t-4 border-transparent hover:border-neon-purple">
+                    <div class="text-neon-purple text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <h3 class="text-xl text-white font-futuristic mb-4">Social Media Manager</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Content scheduling, engagement, community management, and analytics reporting across Instagram, LinkedIn, and Facebook.
+                    </p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-panel p-8 hover:bg-white/5 transition-colors duration-300 group reveal delay-300 border-t-4 border-transparent hover:border-neon-blue">
+                    <div class="text-neon-blue text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <h3 class="text-xl text-white font-futuristic mb-4">Copywriting</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Compelling captions, blog posts, newsletters, and ad copy designed to convert your audience into loyal customers.
+                    </p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass-panel p-8 hover:bg-white/5 transition-colors duration-300 group reveal delay-400 border-t-4 border-transparent hover:border-neon-purple">
+                    <div class="text-neon-purple text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="text-xl text-white font-futuristic mb-4">Data Entry</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Accurate data input, spreadsheet management, research, and database maintenance with high attention to detail.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 bg-deep-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <!-- Text -->
+                <div class="reveal">
+                    <h3 class="text-neon-blue font-futuristic tracking-widest mb-2">EXPERTISE</h3>
+                    <h2 class="text-4xl font-bold text-white mb-6 font-futuristic">CORE COMPETENCIES</h2>
+                    <p class="text-gray-400 mb-8">
+                        Beyond the tools, it's the skills that matter. My technical proficiency combined with soft skills ensures seamless integration into your team.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-neon-blue mr-4"></i> Proactive Problem Solving
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-neon-blue mr-4"></i> Excellent Communication
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-neon-blue mr-4"></i> Time Management
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-neon-blue mr-4"></i> Adaptability & Rapid Learning
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Skill Bars -->
+                <div class="space-y-8 reveal delay-200">
+                    <!-- Item -->
+                    <div>
+                        <div class="flex justify-between mb-2 font-futuristic text-sm">
+                            <span class="text-white">Admin Support</span>
+                            <span class="text-neon-blue">95%</span>
+                        </div>
+                        <div class="w-full bg-gray-900 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-neon-blue to-blue-500 h-full rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <!-- Item -->
+                    <div>
+                        <div class="flex justify-between mb-2 font-futuristic text-sm">
+                            <span class="text-white">Social Media Strategy</span>
+                            <span class="text-neon-purple">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-900 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-neon-purple to-pink-500 h-full rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <!-- Item -->
+                    <div>
+                        <div class="flex justify-between mb-2 font-futuristic text-sm">
+                            <span class="text-white">Content Writing</span>
+                            <span class="text-neon-blue">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-900 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-neon-blue to-blue-500 h-full rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <!-- Item -->
+                    <div>
+                        <div class="flex justify-between mb-2 font-futuristic text-sm">
+                            <span class="text-white">Research & Data</span>
+                            <span class="text-neon-purple">88%</span>
+                        </div>
+                        <div class="w-full bg-gray-900 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-neon-purple to-pink-500 h-full rounded-full" style="width: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 bg-dark-gray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h3 class="text-white font-futuristic tracking-widest mb-2">MY WORK</h3>
+                <h2 class="text-4xl font-bold text-white font-futuristic">PORTFOLIO</h2>
+            </div>
+
+            <!-- Masonry-ish Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Social Media 1 (9:16) -->
+                <div class="group relative overflow-hidden rounded-none border border-gray-800 reveal lg:row-span-2">
+                    <img src="images/socialmedia1.jpg" alt="Social Media Content" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/450x800/111/FFF?text=Story+Design+1'">
+                    <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center flex-col">
+                        <h4 class="text-neon-blue font-futuristic text-xl mb-2">Social Media Story</h4>
+                        <p class="text-gray-400 text-sm">Instagram Design</p>
+                    </div>
+                </div>
+
+                <!-- Thumbnail 1 (16:9) -->
+                <div class="group relative overflow-hidden rounded-none border border-gray-800 reveal delay-100">
+                    <img src="images/thumbnail1.jpg" alt="YouTube Thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/640x360/111/FFF?text=Thumbnail+1'">
+                    <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center flex-col">
+                        <h4 class="text-neon-purple font-futuristic text-xl mb-2">Thumbnail Design</h4>
+                        <p class="text-gray-400 text-sm">YouTube</p>
+                    </div>
+                </div>
+
+                <!-- Social Media 2 (9:16) -->
+                <div class="group relative overflow-hidden rounded-none border border-gray-800 reveal delay-200 lg:row-span-2">
+                    <img src="images/socialmedia2.jpg" alt="Social Media Content" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/450x800/111/FFF?text=Story+Design+2'">
+                    <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center flex-col">
+                        <h4 class="text-neon-blue font-futuristic text-xl mb-2">Product Reel</h4>
+                        <p class="text-gray-400 text-sm">Vertical Video</p>
+                    </div>
+                </div>
+
+                <!-- Thumbnail 2 (16:9) -->
+                <div class="group relative overflow-hidden rounded-none border border-gray-800 reveal delay-300">
+                    <img src="images/thumbnail2.jpg" alt="YouTube Thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/640x360/111/FFF?text=Thumbnail+2'">
+                    <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center flex-col">
+                        <h4 class="text-neon-purple font-futuristic text-xl mb-2">Banner Art</h4>
+                        <p class="text-gray-400 text-sm">Channel Branding</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Rates Section -->
+    <section id="rates" class="py-24 bg-deep-black bg-cyber-grid bg-[length:30px_30px]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h3 class="text-neon-blue font-futuristic tracking-widest mb-2">INVESTMENT</h3>
+                <h2 class="text-4xl font-bold text-white font-futuristic">PACKAGES & RATES</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Basic -->
+                <div class="rate-card glass-panel p-8 border border-gray-800 reveal">
+                    <h3 class="text-xl text-white font-futuristic mb-4">STARTER</h3>
+                    <div class="text-4xl font-bold text-neon-blue mb-2">$350<span class="text-sm text-gray-500 font-normal">/mo</span></div>
+                    <p class="text-gray-400 text-sm mb-8">Perfect for light administrative tasks.</p>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-300">
+                        <li class="flex items-center"><i class="fas fa-check text-neon-blue w-5"></i> 10 Hours / Month</li>
+                        <li class="flex items-center"><i class="fas fa-check text-neon-blue w-5"></i> Email Management</li>
+                        <li class="flex items-center"><i class="fas fa-check text-neon-blue w-5"></i> Calendar Scheduling</li>
+                        <li class="flex items-center"><i class="fas fa-check text-neon-blue w-5"></i> Basic Data Entry</li>
+                    </ul>
+                    <a href="#contact" class="block text-center py-3 border border-gray-600 text-white hover:bg-neon-blue hover:text-black hover:border-neon-blue transition-all duration-300 font-futuristic text-sm">SELECT</a>
+                </div>
+
+                <!-- Pro -->
+                <div class="rate-card glass-panel p-8 border border-neon-purple relative transform md:-translate-y-4 reveal delay-100">
+                    <div class="absolute top-0 right-0 bg-neon-purple text-black text-xs font-bold px-3 py-1 font-futuristic">POPULAR</div>
+                    <h3 class="text-xl text-white font-futuristic mb-4">PROFESSIONAL</h3>
+                    <div class="text-4xl font-bold text-neon-purple mb-2">$650<span class="text-sm text-gray-500 font-normal">/mo</span></div>
+                    <p class="text-gray-400 text-sm mb-8">Ideal for growing businesses.</p>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-300">
+                        <li class="flex items-center"><i class="fas fa-check text-neon-purple w-5"></i> 20 Hours / Month</li>
+                        <li class="flex items-center"><i class="fas fa-check text-neon-purple w-5"></i> Social Media (3 posts/wk)</li>
+                        <li class="flex items-center"><i class="fas fa-check text-neon-purple w-5"></i> Customer Support</li>
+                        <li class="flex items-center"><i class="fas fa-check text-neon-purple w-5"></i> Basic Graphic Design</li>
+                    </ul>
+                    <a href="#contact" class="block text-center py-3 bg-neon-purple text-black font-bold hover:bg-white transition-all duration-300 font-futuristic text-sm">SELECT</a>
+                </div>
+
+                <!-- Elite -->
+                <div class="rate-card glass-panel p-8 border border-gray-800 reveal delay-200">
+                    <h3 class="text-xl text-white font-futuristic mb-4">EXECUTIVE</h3>
+                    <div class="text-4xl font-bold text-neon-blue mb-2">$1200<span class="text-sm text-gray-500 font-normal">/mo</span></div>
+                    <p class="text-gray-400 text-sm mb-8">Full-scale operational support.</p>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-300">
+                        <li class="flex items-center"><i class="fas fa-check text-neon-blue w-5"></i> 40 Hours / Month</li>
+                        <li class="flex items-center"><i class="fas fa-check text-neon-blue w-5"></i> Full Social Media Mgmt</li>
+                        <li class="flex items-center"><i class="fas fa-check text-neon-blue w-5"></i> Project Management</li>
+                        <li class="flex items-center"><i class="fas fa-check text-neon-blue w-5"></i> Monthly Reporting</li>
+                    </ul>
+                    <a href="#contact" class="block text-center py-3 border border-gray-600 text-white hover:bg-neon-blue hover:text-black hover:border-neon-blue transition-all duration-300 font-futuristic text-sm">SELECT</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-dark-gray relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="glass-panel p-8 md:p-12 border-t border-neon-blue reveal">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-white font-futuristic mb-2">READY TO START?</h2>
+                    <p class="text-gray-400">Let's discuss how I can help streamline your business.</p>
+                </div>
+
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-neon-blue text-sm font-futuristic mb-2">NAME</label>
+                            <input type="text" class="w-full bg-black/50 border border-gray-700 text-white px-4 py-3 focus:outline-none focus:border-neon-blue transition-colors rounded-none" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="block text-neon-blue text-sm font-futuristic mb-2">EMAIL</label>
+                            <input type="email" class="w-full bg-black/50 border border-gray-700 text-white px-4 py-3 focus:outline-none focus:border-neon-blue transition-colors rounded-none" placeholder="john@example.com">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-neon-blue text-sm font-futuristic mb-2">SUBJECT</label>
+                        <select class="w-full bg-black/50 border border-gray-700 text-gray-400 px-4 py-3 focus:outline-none focus:border-neon-blue transition-colors rounded-none">
+                            <option>General Inquiry</option>
+                            <option>Hire for Services</option>
+                            <option>Collaboration</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-neon-blue text-sm font-futuristic mb-2">MESSAGE</label>
+                        <textarea rows="5" class="w-full bg-black/50 border border-gray-700 text-white px-4 py-3 focus:outline-none focus:border-neon-blue transition-colors rounded-none" placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="button" class="w-full bg-neon-blue text-black font-bold font-futuristic py-4 hover:bg-white transition-colors duration-300 tracking-widest">
+                        SEND TRANSMISSION
+                    </button>
+                </form>
+
+                <div class="mt-12 flex justify-center space-x-8">
+                    <a href="#" class="text-gray-400 hover:text-neon-blue transition-colors text-2xl"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-neon-purple transition-colors text-2xl"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-blue-500 transition-colors text-2xl"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500 transition-colors text-2xl"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-500 font-tech text-sm">
+                &copy; 2024 Eliza Maven Portfolio. All Rights Reserved. <br class="md:hidden">
+                <span class="hidden md:inline"> | </span> Design by : <span class="text-neon-blue">Blockscom Media</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-black/90', 'shadow-lg');
+                nav.classList.remove('border-b-0');
+                nav.classList.add('border-b', 'border-gray-800');
+            } else {
+                nav.classList.remove('bg-black/90', 'shadow-lg', 'border-b', 'border-gray-800');
+                nav.classList.add('border-b-0');
+            }
+        });
+    </script>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+        return false;
+    }
+};
+</script>
+</body>
+</html>

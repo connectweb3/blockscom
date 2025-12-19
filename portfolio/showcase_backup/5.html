@@ -1,0 +1,598 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Maven Portfolio | Virtual Assistant</title>
+    
+    <!-- Open Graph Meta Tags (Invisible, for social sharing) -->
+    <meta property="og:title" content="Eliza Maven Portfolio">
+    <meta property="og:description" content="Professional Virtual Assistant Services, Software Proficiency, and Creative Portfolio.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://elizamaven.com"> <!-- Placeholder URL -->
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Config for Custom Colors/Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sage-50': '#f4f7f5',
+                        'sage-100': '#e3ebe5',
+                        'sage-300': '#a8bfae',
+                        'sage-800': '#2d4033',
+                        'sage-900': '#1f2b24',
+                        'clay': '#d4a373',
+                        'charcoal': '#1a1a1a',
+                        'paper': '#fdfbf7',
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'grain': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 400 400%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for "Artistic" Feel */
+        body {
+            background-color: #fdfbf7;
+            color: #1a1a1a;
+        }
+
+        /* Smooth scrolling wrapper visuals */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-delay-1 { transition-delay: 100ms; }
+        .stagger-delay-2 { transition-delay: 200ms; }
+        .stagger-delay-3 { transition-delay: 300ms; }
+
+        /* Flowing Note Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Artistic Image Shapes */
+        .organic-shape-1 {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            transition: border-radius 0.5s ease;
+        }
+        .organic-shape-1:hover {
+            border-radius: 50%;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Navigation Link Hover */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #2d4033;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fdfbf7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a8bfae;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2d4033;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased relative overflow-x-hidden">
+
+    <!-- Grain Overlay for Texture -->
+    <div class="fixed inset-0 pointer-events-none z-50 opacity-40 bg-grain mix-blend-multiply"></div>
+
+    <!-- Top Flowing Note -->
+    <div class="bg-sage-800 text-sage-50 py-2 overflow-hidden relative z-50">
+        <div class="marquee-container font-medium text-xs tracking-widest uppercase">
+            <div class="marquee-content">
+                <span class="mx-8">Everything is customizable â€” you can edit, remove, or change anything. We handle it all.</span>
+                <span class="mx-8">Everything is customizable â€” you can edit, remove, or change anything. We handle it all.</span>
+                <span class="mx-8">Everything is customizable â€” you can edit, remove, or change anything. We handle it all.</span>
+                <span class="mx-8">Everything is customizable â€” you can edit, remove, or change anything. We handle it all.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-[32px] z-40 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+            <a href="#" class="font-serif text-2xl font-bold tracking-tight text-sage-900 mix-blend-multiply">Eliza.</a>
+            
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-sage-800">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#rates" class="nav-link">Rates</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-sage-900 focus:outline-none" onclick="toggleMenu()">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-paper z-50 flex flex-col justify-center items-center opacity-0 pointer-events-none transition-opacity duration-300">
+            <button class="absolute top-8 right-8 text-sage-900" onclick="toggleMenu()">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+            <div class="flex flex-col space-y-6 text-center font-serif text-2xl text-sage-900">
+                <a href="#about" onclick="toggleMenu()">About</a>
+                <a href="#services" onclick="toggleMenu()">Services</a>
+                <a href="#portfolio" onclick="toggleMenu()">Portfolio</a>
+                <a href="#rates" onclick="toggleMenu()">Rates</a>
+                <a href="#contact" onclick="toggleMenu()">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Introduction Section (Hero) -->
+    <header id="home" class="min-h-screen pt-32 pb-20 flex items-center relative overflow-hidden">
+        <!-- Abstract Background Shapes -->
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-sage-100/50 -z-10 rounded-bl-[100px] reveal-on-scroll"></div>
+        <div class="absolute bottom-20 left-10 w-64 h-64 bg-sage-300/20 rounded-full blur-3xl -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center w-full">
+            <div class="order-2 md:order-1 reveal-on-scroll">
+                <p class="text-sage-800 font-medium tracking-widest uppercase mb-4 text-sm">Virtual Assistant & Creative Strategist</p>
+                <h1 class="font-serif text-5xl md:text-7xl text-sage-900 leading-[1.1] mb-8">
+                    Elevating your <br> <span class="italic text-clay">digital presence</span> <br> effortlessly.
+                </h1>
+                <p class="text-gray-600 mb-8 max-w-md leading-relaxed">
+                    I'm Eliza Maven. I help entrepreneurs reclaim their time by handling the chaos with grace, creativity, and precision.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#contact" class="px-8 py-3 bg-sage-800 text-white rounded-full hover:bg-sage-900 transition-colors duration-300 text-sm tracking-wide uppercase">Let's Talk</a>
+                    <a href="#portfolio" class="px-8 py-3 border border-sage-800 text-sage-800 rounded-full hover:bg-sage-50 transition-colors duration-300 text-sm tracking-wide uppercase">See Work</a>
+                </div>
+            </div>
+            
+            <div class="order-1 md:order-2 flex justify-center relative reveal-on-scroll stagger-delay-2">
+                <div class="relative w-full max-w-md aspect-[4/5]">
+                    <!-- Image Wrapper with Artistic Shape -->
+                    <div class="w-full h-full overflow-hidden organic-shape-1 shadow-xl relative z-10">
+                        <!-- User's Garden Photo -->
+                        <img src="photo.jpg" alt="Eliza Maven working in garden" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80'">
+                    </div>
+                    <!-- Decorative Circle behind -->
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 border border-sage-800 rounded-full z-0 flex items-center justify-center">
+                        <div class="w-2 h-2 bg-sage-800 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About VA Softwares -->
+    <section id="about" class="py-24 bg-sage-50 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-4 reveal-on-scroll">
+                    <h2 class="font-serif text-4xl text-sage-900 mb-6">My Digital <br> <span class="italic text-sage-800">Toolkit</span></h2>
+                    <p class="text-gray-600 text-sm leading-loose">
+                        Proficiency is my baseline. I leverage the best tools in the industry to streamline workflows and create impactful results.
+                    </p>
+                </div>
+                <div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <!-- Software Items -->
+                    <div class="glass-card p-6 rounded-xl flex flex-col items-center justify-center gap-3 hover:shadow-lg transition-all duration-300 reveal-on-scroll stagger-delay-1">
+                        <i data-lucide="figma" class="w-8 h-8 text-sage-800"></i>
+                        <span class="text-sm font-medium">Figma</span>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl flex flex-col items-center justify-center gap-3 hover:shadow-lg transition-all duration-300 reveal-on-scroll stagger-delay-1">
+                        <i data-lucide="trello" class="w-8 h-8 text-sage-800"></i>
+                        <span class="text-sm font-medium">Trello</span>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl flex flex-col items-center justify-center gap-3 hover:shadow-lg transition-all duration-300 reveal-on-scroll stagger-delay-2">
+                        <i data-lucide="mail" class="w-8 h-8 text-sage-800"></i>
+                        <span class="text-sm font-medium">Mailchimp</span>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl flex flex-col items-center justify-center gap-3 hover:shadow-lg transition-all duration-300 reveal-on-scroll stagger-delay-2">
+                        <i data-lucide="pen-tool" class="w-8 h-8 text-sage-800"></i>
+                        <span class="text-sm font-medium">Canva</span>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl flex flex-col items-center justify-center gap-3 hover:shadow-lg transition-all duration-300 reveal-on-scroll stagger-delay-3">
+                        <i data-lucide="sheet" class="w-8 h-8 text-sage-800"></i>
+                        <span class="text-sm font-medium">G-Suite</span>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl flex flex-col items-center justify-center gap-3 hover:shadow-lg transition-all duration-300 reveal-on-scroll stagger-delay-3">
+                        <i data-lucide="message-square" class="w-8 h-8 text-sage-800"></i>
+                        <span class="text-sm font-medium">Slack</span>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl flex flex-col items-center justify-center gap-3 hover:shadow-lg transition-all duration-300 reveal-on-scroll stagger-delay-3">
+                        <i data-lucide="video" class="w-8 h-8 text-sage-800"></i>
+                        <span class="text-sm font-medium">Zoom</span>
+                    </div>
+                     <div class="glass-card p-6 rounded-xl flex flex-col items-center justify-center gap-3 hover:shadow-lg transition-all duration-300 reveal-on-scroll stagger-delay-3">
+                        <i data-lucide="database" class="w-8 h-8 text-sage-800"></i>
+                        <span class="text-sm font-medium">Notion</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VA Skills & Services Combined -->
+    <section id="services" class="py-24 bg-paper">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal-on-scroll">
+                <span class="text-clay text-xs font-bold tracking-widest uppercase block mb-2">Curated Offerings</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-sage-900">Services & Skills</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="group relative bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 reveal-on-scroll">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-sage-300 group-hover:bg-sage-800 transition-colors rounded-t-2xl"></div>
+                    <div class="w-12 h-12 bg-sage-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="calendar-check" class="text-sage-800 w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl text-sage-900 mb-4">Admin Support</h3>
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+                        Calendar management, email handling, and travel arrangements. I keep the backend of your business organized.
+                    </p>
+                    <ul class="text-xs text-gray-500 space-y-2 uppercase tracking-wide">
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-clay rounded-full"></div> Data Entry</li>
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-clay rounded-full"></div> Scheduling</li>
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-clay rounded-full"></div> Invoicing</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="group relative bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 reveal-on-scroll stagger-delay-1">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-sage-300 group-hover:bg-sage-800 transition-colors rounded-t-2xl"></div>
+                    <div class="w-12 h-12 bg-sage-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="instagram" class="text-sage-800 w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl text-sage-900 mb-4">Social Media</h3>
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+                        Content planning, engagement, and basic graphics. I help you stay consistent and visible online without the burnout.
+                    </p>
+                    <ul class="text-xs text-gray-500 space-y-2 uppercase tracking-wide">
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-clay rounded-full"></div> Content Calendar</li>
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-clay rounded-full"></div> Community Management</li>
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-clay rounded-full"></div> Analytics</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="group relative bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 reveal-on-scroll stagger-delay-2">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-sage-300 group-hover:bg-sage-800 transition-colors rounded-t-2xl"></div>
+                    <div class="w-12 h-12 bg-sage-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="pen-tool" class="text-sage-800 w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl text-sage-900 mb-4">Creative Design</h3>
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+                        On-brand visuals for your posts, presentations, and newsletters. Keeping your aesthetic sharp and cohesive.
+                    </p>
+                    <ul class="text-xs text-gray-500 space-y-2 uppercase tracking-wide">
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-clay rounded-full"></div> Basic Video Editing</li>
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-clay rounded-full"></div> Presentation Design</li>
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-clay rounded-full"></div> Newsletters</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 bg-sage-800 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal-on-scroll">
+                <div>
+                    <h2 class="font-serif text-4xl md:text-5xl mb-2">Selected Works</h2>
+                    <p class="text-sage-300 font-light">A glimpse into recent projects and visual storytelling.</p>
+                </div>
+                <div class="hidden md:block w-32 h-[1px] bg-sage-300 mb-4"></div>
+            </div>
+
+            <!-- Masonry Grid for Different Aspect Ratios -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-min">
+                
+                <!-- Social Media 1 (9:16) -->
+                <div class="md:col-span-3 md:row-span-2 group reveal-on-scroll">
+                    <div class="relative w-full aspect-[9/16] overflow-hidden rounded-lg bg-sage-900">
+                        <img src="images/socialmedia1.jpg" alt="Social Media Content 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" onerror="this.src='https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80'">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="border border-white/50 text-white px-4 py-2 text-xs tracking-widest uppercase">View Reel</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thumbnail 1 (16:9) -->
+                <div class="md:col-span-6 md:row-span-1 group reveal-on-scroll stagger-delay-1">
+                    <div class="relative w-full aspect-video overflow-hidden rounded-lg bg-sage-900">
+                        <img src="images/thumbnail1.jpg" alt="YouTube Thumbnail 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" onerror="this.src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="border border-white/50 text-white px-4 py-2 text-xs tracking-widest uppercase">Project Details</span>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Social Media 2 (9:16) -->
+                 <div class="md:col-span-3 md:row-span-2 group reveal-on-scroll stagger-delay-2">
+                    <div class="relative w-full aspect-[9/16] overflow-hidden rounded-lg bg-sage-900">
+                        <img src="images/socialmedia2.jpg" alt="Social Media Content 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" onerror="this.src='https://images.unsplash.com/photo-1611162616475-46b635cb6868?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80'">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="border border-white/50 text-white px-4 py-2 text-xs tracking-widest uppercase">View Reel</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thumbnail 2 (16:9) -->
+                <div class="md:col-span-6 md:row-span-1 group reveal-on-scroll stagger-delay-3">
+                    <div class="relative w-full aspect-video overflow-hidden rounded-lg bg-sage-900">
+                        <img src="images/thumbnail2.jpg" alt="YouTube Thumbnail 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" onerror="this.src='https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'">
+                         <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="border border-white/50 text-white px-4 py-2 text-xs tracking-widest uppercase">Project Details</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Rates Section -->
+    <section id="rates" class="py-24 bg-sage-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal-on-scroll">
+                <h2 class="font-serif text-4xl text-sage-900">Investment</h2>
+                <p class="text-gray-500 mt-2">Flexible packages tailored to your business needs.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Basic Plan -->
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 reveal-on-scroll">
+                    <h3 class="font-serif text-xl text-sage-800">The Starter</h3>
+                    <div class="text-4xl font-bold text-sage-900 my-4">$500<span class="text-base font-normal text-gray-500">/mo</span></div>
+                    <p class="text-sm text-gray-500 mb-6">Perfect for small businesses needing light assistance.</p>
+                    <ul class="space-y-3 text-sm text-gray-600 mb-8">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-sage-800"></i> 10 Hours of Support</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-sage-800"></i> Email Management</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-sage-800"></i> Basic Scheduling</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-sage-800"></i> Weekly Report</li>
+                    </ul>
+                    <a href="#contact" class="block text-center py-3 border border-sage-800 text-sage-800 rounded-lg hover:bg-sage-800 hover:text-white transition-colors duration-300">Choose Plan</a>
+                </div>
+
+                <!-- Pro Plan (Featured) -->
+                <div class="bg-sage-800 p-8 rounded-xl shadow-xl transform md:-translate-y-4 reveal-on-scroll stagger-delay-1 relative">
+                    <div class="absolute top-0 right-0 bg-clay text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                    <h3 class="font-serif text-xl text-white">The Professional</h3>
+                    <div class="text-4xl font-bold text-white my-4">$900<span class="text-base font-normal text-sage-300">/mo</span></div>
+                    <p class="text-sm text-sage-300 mb-6">Comprehensive support for growing entrepreneurs.</p>
+                    <ul class="space-y-3 text-sm text-sage-100 mb-8">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-clay"></i> 20 Hours of Support</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-clay"></i> Inbox & Calendar Mgmt</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-clay"></i> Social Media (3 posts/wk)</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-clay"></i> Monthly Strategy Call</li>
+                    </ul>
+                    <a href="#contact" class="block text-center py-3 bg-clay text-white rounded-lg hover:bg-white hover:text-sage-800 transition-colors duration-300 shadow-md">Choose Plan</a>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 reveal-on-scroll stagger-delay-2">
+                    <h3 class="font-serif text-xl text-sage-800">The Executive</h3>
+                    <div class="text-4xl font-bold text-sage-900 my-4">$1500<span class="text-base font-normal text-gray-500">/mo</span></div>
+                    <p class="text-sm text-gray-500 mb-6">Full-scale management for established brands.</p>
+                    <ul class="space-y-3 text-sm text-gray-600 mb-8">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-sage-800"></i> 40 Hours of Support</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-sage-800"></i> Full Admin & Social Suite</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-sage-800"></i> Project Management</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-sage-800"></i> Priority Access</li>
+                    </ul>
+                    <a href="#contact" class="block text-center py-3 border border-sage-800 text-sage-800 rounded-lg hover:bg-sage-800 hover:text-white transition-colors duration-300">Choose Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            
+            <div class="relative reveal-on-scroll">
+                <!-- Professional Photo with Blazer -->
+                <div class="w-full h-[500px] bg-sage-100 rounded-t-full relative overflow-hidden">
+                     <img src="photo.png" alt="Eliza Maven Professional" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
+                </div>
+                <!-- Decorative Circle -->
+                <div class="absolute bottom-10 -left-10 w-24 h-24 bg-clay/20 rounded-full blur-xl"></div>
+            </div>
+
+            <div class="reveal-on-scroll stagger-delay-1">
+                <h2 class="font-serif text-4xl text-sage-900 mb-6">Let's Create Space <br> <span class="italic text-clay">Together.</span></h2>
+                <p class="text-gray-600 mb-8">Ready to hand off the tasks that drain you? Fill out the form below or email me directly at <a href="mailto:hello@elizamaven.com" class="text-sage-800 font-bold underline decoration-clay decoration-2">hello@elizamaven.com</a></p>
+
+                <form class="space-y-6">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex flex-col">
+                            <label class="text-xs uppercase tracking-wide text-gray-500 mb-2">Name</label>
+                            <input type="text" class="border-b border-gray-300 focus:border-sage-800 outline-none py-2 bg-transparent transition-colors" placeholder="Jane Doe">
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="text-xs uppercase tracking-wide text-gray-500 mb-2">Email</label>
+                            <input type="email" class="border-b border-gray-300 focus:border-sage-800 outline-none py-2 bg-transparent transition-colors" placeholder="jane@example.com">
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-xs uppercase tracking-wide text-gray-500 mb-2">Service of Interest</label>
+                        <select class="border-b border-gray-300 focus:border-sage-800 outline-none py-2 bg-transparent transition-colors">
+                            <option>Admin Support</option>
+                            <option>Social Media</option>
+                            <option>Creative Design</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-xs uppercase tracking-wide text-gray-500 mb-2">Message</label>
+                        <textarea rows="4" class="border-b border-gray-300 focus:border-sage-800 outline-none py-2 bg-transparent transition-colors" placeholder="Tell me about your business..."></textarea>
+                    </div>
+                    <button type="button" class="px-10 py-4 bg-sage-900 text-white font-medium rounded-full hover:bg-clay transition-colors duration-300 shadow-lg mt-4">Send Inquiry</button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-sage-900 text-white py-12 border-t border-sage-800">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <h4 class="font-serif text-2xl mb-2">Eliza Maven.</h4>
+                <p class="text-sage-300 text-xs uppercase tracking-widest">Virtual Assistant Portfolio</p>
+            </div>
+            
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-clay transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                <a href="#" class="hover:text-clay transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                <a href="#" class="hover:text-clay transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+            </div>
+
+            <div class="text-center md:text-right text-xs text-sage-400">
+                <p>&copy; 2024 Eliza Maven. All rights reserved.</p>
+                <p class="mt-1">Design by : Blockscom Media</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const isOpen = menu.style.opacity === '1';
+            
+            if (isOpen) {
+                menu.style.opacity = '0';
+                menu.style.pointerEvents = 'none';
+            } else {
+                menu.style.opacity = '1';
+                menu.style.pointerEvents = 'auto';
+            }
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-sm');
+                nav.classList.remove('py-6');
+                nav.classList.add('py-4');
+            } else {
+                nav.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-sm');
+                nav.classList.remove('py-4');
+                nav.classList.add('py-6');
+            }
+        });
+
+        // Intersection Observer for Animations (Locomotive-style reveal)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Add smooth scroll behavior for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+        return false;
+    }
+};
+</script>
+</body>
+</html>
