@@ -194,8 +194,8 @@
             <div class="absolute inset-0 opacity-[0.03] bg-grid-pattern grid-bg pointer-events-none"></div>
 
             <div class="z-10 text-center px-6">
-                <h1 class="text-[12vw] font-bold tracking-tighter leading-none mix-blend-exclusion animate-fade-in-up">
-                    GALLERY
+                <h1 class="text-[8vw] font-bold tracking-tighter leading-none mix-blend-exclusion animate-fade-in-up">
+                    PORTFOLIO
                 </h1>
                 <p class="font-mono text-gray-400 mt-6 max-w-lg mx-auto uppercase tracking-widest animate-fade-in-up"
                     style="animation-delay: 0.2s;">
@@ -213,6 +213,113 @@
         <section class="px-6 pb-32">
             <div id="gallery-grid" class="max-w-[90rem] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- JS will populate this -->
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="py-32 px-6 relative overflow-hidden">
+            <div class="max-w-4xl mx-auto relative z-10 text-center">
+
+                <!-- Pricing Card -->
+                <div
+                    class="glass-panel p-1 border border-white/10 rounded-3xl relative overflow-hidden transform hover:scale-[1.01] transition-transform duration-500 mb-16">
+                    <div
+                        class="absolute top-0 right-0 bg-red-600 text-white text-xs font-bold px-6 py-2 rounded-bl-xl z-20">
+                        CHRISTMAS PROMO</div>
+                    <div class="bg-brand-black/40 p-8 md:p-12 rounded-[22px] backdrop-blur-xl">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-2">Portfolio Resume</h2>
+                        <p class="text-brand-dim font-mono text-sm uppercase tracking-widest mb-8">The Portfolio Resume
+                            that will get you hired</p>
+
+                        <div class="flex flex-col items-center gap-2 mb-8">
+                            <span class="text-gray-500 line-through text-xl">$80 / P5000</span>
+                            <span class="text-5xl md:text-7xl font-bold text-white tracking-tight">$50 <span
+                                    class="text-2xl text-gray-400 font-normal">/ P3000</span></span>
+                        </div>
+
+                        <div class="bg-white/5 rounded-xl p-6 text-left mb-8 space-y-4">
+                            <div class="flex gap-4 items-start">
+                                <div class="bg-green-500/10 p-1 rounded-full text-green-500 shrink-0">
+                                    <i data-lucide="check" class="w-4 h-4"></i>
+                                </div>
+                                <div>
+                                    <span class="font-bold text-white block">1 Month Access to <a
+                                            href="../tools/ainterview"
+                                            class="underline decoration-white/30 hover:text-white transition-colors hover-trigger"
+                                            data-cursor="link">AINTERVIEWER</a></span>
+                                    <span class="text-sm text-gray-400">AI-powered mock interviews to build
+                                        confidence.</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div class="bg-green-500/10 p-1 rounded-full text-green-500 shrink-0">
+                                    <i data-lucide="check" class="w-4 h-4"></i>
+                                </div>
+                                <span class="text-gray-300">Hosted on our server for 6 months</span>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div class="bg-green-500/10 p-1 rounded-full text-green-500 shrink-0">
+                                    <i data-lucide="check" class="w-4 h-4"></i>
+                                </div>
+                                <span class="text-gray-300">Free <strong>.xyz</strong> Domain (Yourname.xyz)</span>
+                            </div>
+                            <div class="flex gap-4 pt-4 border-t border-white/10 items-start">
+                                <div class="bg-white/10 p-1 rounded-full text-gray-400 shrink-0">
+                                    <i data-lucide="plus" class="w-4 h-4"></i>
+                                </div>
+                                <span class="text-gray-400">Upgrade to <strong>.com</strong> domain for +$15 /
+                                    P1000</span>
+                            </div>
+                        </div>
+
+                        <a href="#contact-resume"
+                            class="block w-full py-4 bg-white text-black font-bold text-lg rounded-xl hover:bg-gray-200 transition-colors hover-trigger"
+                            data-cursor="link">Get Started</a>
+                    </div>
+                </div>
+
+                <!-- Agency CTA -->
+                <div class="glass-panel p-8 rounded-2xl">
+                    <h3 class="text-xl font-bold mb-2">Agencies: Need aesthetic portfolios?</h3>
+                    <p class="text-gray-400 mb-6">We build them for your team. Hire us.</p>
+                    <a href="#contact-resume"
+                        class="inline-block px-8 py-3 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform hover-trigger"
+                        data-cursor="link">Agency Inquiry</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact-resume" class="py-24 px-6 border-t border-white/5 relative">
+
+            <div class="max-w-xl mx-auto relative z-10">
+                <h2 class="text-3xl font-bold mb-8 text-center">Secure Your Spot</h2>
+                <form action="https://formspree.io/f/mblennpp" method="POST" class="space-y-4">
+                    <input type="text" name="name" placeholder="Name"
+                        class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:border-white focus:outline-none transition-colors text-white placeholder:text-gray-500"
+                        required>
+                    <input type="email" name="email" placeholder="Email"
+                        class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:border-white focus:outline-none transition-colors text-white placeholder:text-gray-500"
+                        required>
+                    <textarea name="message" rows="4" placeholder="Message (Tell us about your portfolio needs)"
+                        class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:border-white focus:outline-none transition-colors text-white placeholder:text-gray-500"
+                        required></textarea>
+                    <button type="submit"
+                        class="w-full py-4 bg-brand-gray hover:bg-white hover:text-black transition-colors rounded-lg font-bold border border-white/10 hover-trigger"
+                        data-cursor="link">Send Message</button>
+                </form>
+
+                <!-- Messenger -->
+                <div class="mt-12 text-center">
+                    <p class="text-gray-500 mb-4 text-sm">Or chat with us directly</p>
+                    <a href="https://www.messenger.com/t/814144478459547/?messaging_source=source%3Apages%3Amessage_shortlink&source_id=1441792&recurring_notification=0"
+                        target="_blank"
+                        class="inline-flex items-center gap-3 px-8 py-3 bg-[#0084FF] text-white rounded-full hover:opacity-90 transition-opacity hover-trigger"
+                        data-cursor="link">
+                        <i data-lucide="message-circle" class="w-5 h-5 fill-current"></i>
+                        <span class="font-bold">Chat on Messenger</span>
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -394,14 +501,14 @@
             });
         });
     </script>
-<script>
-document.addEventListener('contextmenu', event => event.preventDefault());
-document.onkeydown = function(e) {
-    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
-        return false;
-    }
-};
-</script>
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.onkeydown = function (e) {
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+                return false;
+            }
+        };
+    </script>
 </body>
 
 </html>
