@@ -410,8 +410,8 @@
                         </div>
                         <div
                             class="order-1 md:order-2 relative aspect-video bg-gray-900 rounded-lg overflow-hidden border border-white/10 group-hover:border-white/30 transition-colors">
-                            <img src="images/portfolio.jpg" alt="Portfolio Websites"
-                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <img src="images/portfolio.jpg" alt="Portfolio Websites" id="portfolio-slider-img"
+                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
                         </div>
                     </div>
 
@@ -718,6 +718,42 @@
                 });
             });
         });
+
+        // Portfolio Image Slider
+        const portfolioImages = [
+            'portfolio/images/portfolioxx1.jpg',
+            'portfolio/images/portfolioxx2.jpg',
+            'portfolio/images/portfolioxx3.jpg',
+            'portfolio/images/portfolioxx4.jpg',
+            'portfolio/images/portfolioxx5.jpg',
+            'portfolio/images/portfolioxx6.jpg',
+            'portfolio/images/portfolioxx7.jpg'
+        ];
+
+        const sliderImg = document.getElementById('portfolio-slider-img');
+
+        if (sliderImg) {
+            setInterval(() => {
+                // Fade out
+                sliderImg.style.opacity = '0';
+
+                setTimeout(() => {
+                    // Change source to random image
+                    const randomIndex = Math.floor(Math.random() * portfolioImages.length);
+                    sliderImg.src = portfolioImages[randomIndex];
+
+                    // Fade in after source change
+                    sliderImg.onload = () => {
+                        sliderImg.style.opacity = '1';
+                    };
+                    // Fallback in case onload doesn't fire (cached)
+                    setTimeout(() => {
+                        sliderImg.style.opacity = '1';
+                    }, 50);
+                }, 500); // Wait for fade out
+
+            }, 3000); // Change every 3 seconds
+        }
 
 
     </script>
