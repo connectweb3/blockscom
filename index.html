@@ -350,8 +350,8 @@
                         </div>
                         <div
                             class="order-1 md:order-2 relative aspect-video bg-gray-900 rounded-lg overflow-hidden border border-white/10 group-hover:border-white/30 transition-colors">
-                            <img src="images/thumbnails.jpg" alt="Thumbnail Design"
-                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <img src="portfolio/images/thumbnails.jpg" alt="Thumbnail Design" id="thumbnail-slider-img"
+                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
                         </div>
                     </div>
 
@@ -753,6 +753,39 @@
                 }, 500); // Wait for fade out
 
             }, 3000); // Change every 3 seconds
+        }
+
+        // Thumbnail Image Slider
+        const thumbnailImages = [
+            'portfolio/images/thumbnails.jpg',
+            'portfolio/images/portfolio3.jpg',
+            'portfolio/images/portfolio4.jpg'
+        ];
+
+        const thumbnailSliderImg = document.getElementById('thumbnail-slider-img');
+
+        if (thumbnailSliderImg) {
+            setInterval(() => {
+                // Fade out
+                thumbnailSliderImg.style.opacity = '0';
+
+                setTimeout(() => {
+                    // Change source to random image
+                    const randomIndex = Math.floor(Math.random() * thumbnailImages.length);
+                    thumbnailSliderImg.src = thumbnailImages[randomIndex];
+
+                    // Fade in after source change
+                    thumbnailSliderImg.onload = () => {
+                        thumbnailSliderImg.style.opacity = '1';
+                    };
+
+                    // Fallback in case onload doesn't fire
+                    setTimeout(() => {
+                        thumbnailSliderImg.style.opacity = '1';
+                    }, 50);
+                }, 500);
+
+            }, 3000);
         }
 
 
