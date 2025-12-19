@@ -3,50 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eliza Maven Portfolio</title>
+    <title>Eliza Maven | Virtual Assistant</title>
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Eliza Maven Portfolio">
+    <meta property="og:description" content="Professional Virtual Assistant Portfolio - Administrative, Social Media, and Creative Services.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://elizamaven.com">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/jpg" href="favicon.jpg">
 
-    <!-- Open Graph Meta Tags (Hidden) -->
-    <meta property="og:title" content="Eliza Maven Portfolio">
-    <meta property="og:description" content="Professional Virtual Assistant - Admin, Social Media, Copywriting & Data Entry Services">
-    <meta property="og:image" content="photo.jpg">
-    <meta property="og:url" content="https://elizamaven.com"> <!-- Replace with actual URL -->
-    <meta property="og:type" content="website">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Fonts: Space Grotesk for that futuristic header feel, Inter for body -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;700&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- Tailwind Config for Custom Colors/Fonts -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Space Grotesk', 'sans-serif'],
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
                     },
                     colors: {
-                        'future-black': '#050505',
-                        'future-gray': '#111111',
-                        'future-accent': '#ffffff',
-                        'glass': 'rgba(255, 255, 255, 0.05)',
+                        void: '#030303',
+                        panel: '#0a0a0a',
+                        surface: '#121212',
+                        neon: '#e0e0e0', // Soft white neon
+                        accent: '#3b82f6' // Subtle blue accent
                     },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        }
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px)",
                     }
                 }
             }
@@ -59,41 +56,17 @@
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #050505; 
+            background: #000;
         }
         ::-webkit-scrollbar-thumb {
-            background: #333; 
+            background: #333;
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #555; 
+            background: #555;
         }
 
-        /* Smooth Reveal Animation Utilities */
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-        .reveal-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Futuristic Card Hover Effect */
-        .cyber-card {
-            background: rgba(20, 20, 20, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-        .cyber-card:hover {
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px rgba(255, 255, 255, 0.1);
-        }
-
-        /* Marquee Text */
+        /* Marquee Animation */
         .marquee-container {
             overflow: hidden;
             white-space: nowrap;
@@ -103,360 +76,502 @@
             animation: marquee 20s linear infinite;
         }
         @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
+
+        /* Futuristic Grid Background */
+        .bg-grid {
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+        }
+
+        /* Reveal Animations (Locomotive-style feel) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered delays */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Glitch Text Effect Hover */
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: #fff;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        /* Image Aspects */
+        .aspect-9-16 { aspect-ratio: 9/16; }
+        .aspect-16-9 { aspect-ratio: 16/9; }
     </style>
 </head>
-<body class="bg-future-black text-gray-300 font-sans antialiased overflow-x-hidden">
+<body class="bg-void text-gray-300 overflow-x-hidden selection:bg-white selection:text-black">
 
-    <!-- Top Banner -->
-    <div class="fixed top-0 left-0 w-full bg-white text-black z-50 text-xs font-bold py-1 overflow-hidden">
-        <div class="marquee-container">
-            <div class="marquee-content uppercase tracking-widest">
-                Everything is customizable — you can edit, remove, or change anything. We handle it all. we will remove this once this template is purchase
+    <!-- Flowing Note Header -->
+    <div id="top-note" class="fixed top-0 left-0 w-full z-50 bg-indigo-600 text-white text-xs font-mono py-1 overflow-hidden transition-transform duration-500">
+        <div class="marquee-container flex">
+            <div class="marquee-content px-4">
+                Everything is customizable — you can edit, remove, or change anything. We handle it all. we will remove this once this template is purchase &nbsp;&nbsp;///&nbsp;&nbsp; Everything is customizable — you can edit, remove, or change anything. We handle it all. we will remove this once this template is purchase &nbsp;&nbsp;///&nbsp;&nbsp; 
+            </div>
+            <div class="marquee-content px-4">
+                Everything is customizable — you can edit, remove, or change anything. We handle it all. we will remove this once this template is purchase &nbsp;&nbsp;///&nbsp;&nbsp; Everything is customizable — you can edit, remove, or change anything. We handle it all. we will remove this once this template is purchase &nbsp;&nbsp;///&nbsp;&nbsp; 
             </div>
         </div>
+        <button onclick="document.getElementById('top-note').style.transform='translateY(-100%)'" class="absolute right-2 top-0 h-full px-2 bg-indigo-700 hover:bg-indigo-800 transition">✕</button>
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-8 w-full z-40 bg-future-black/80 backdrop-blur-md border-b border-white/5">
+    <nav class="fixed top-8 w-full z-40 backdrop-blur-md border-b border-white/5 bg-void/80 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="font-display font-bold text-xl tracking-widest text-white">EM.</a>
-            <div class="hidden md:flex space-x-8 text-sm tracking-widest uppercase">
-                <a href="#about" class="hover:text-white transition-colors">About</a>
-                <a href="#services" class="hover:text-white transition-colors">Services</a>
-                <a href="#portfolio" class="hover:text-white transition-colors">Portfolio</a>
-                <a href="#rates" class="hover:text-white transition-colors">Rates</a>
-                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+            <a href="#" class="text-xl font-bold tracking-widest text-white font-mono uppercase">
+                Eliza<span class="text-gray-500">Maven</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#about" class="hover:text-white transition-colors relative group">About<span class="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all group-hover:w-full"></span></a>
+                <a href="#services" class="hover:text-white transition-colors relative group">Services<span class="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all group-hover:w-full"></span></a>
+                <a href="#portfolio" class="hover:text-white transition-colors relative group">Portfolio<span class="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all group-hover:w-full"></span></a>
+                <a href="#rates" class="hover:text-white transition-colors relative group">Rates<span class="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all group-hover:w-full"></span></a>
             </div>
-            <!-- Mobile Menu Button (Placeholder functionality) -->
-            <button class="md:hidden text-white">
+
+            <a href="#contact" class="hidden md:block px-5 py-2 border border-white/20 text-xs uppercase tracking-wider hover:bg-white hover:text-black transition duration-300">
+                Contact Me
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
                 <i data-lucide="menu"></i>
             </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="relative min-h-screen flex flex-col justify-center items-center pt-20 overflow-hidden">
-        <!-- Background Elements -->
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-[100px] animate-pulse-slow"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gray-800/20 rounded-full blur-[80px]"></div>
-
-        <div class="relative z-10 text-center px-4">
-            <p class="text-sm md:text-base uppercase tracking-[0.3em] text-gray-500 mb-4 reveal-on-scroll">Virtual Assistant & Developer</p>
-            <h1 class="font-display font-bold text-6xl md:text-8xl lg:text-9xl text-white tracking-tighter mb-8 reveal-on-scroll" style="transition-delay: 100ms;">
-                ELIZA<br>MAVEN
-            </h1>
-            <p class="max-w-xl mx-auto text-gray-400 text-lg md:text-xl leading-relaxed mb-12 reveal-on-scroll" style="transition-delay: 200ms;">
-                Elevating brands through precision, creativity, and futuristic digital solutions.
-            </p>
-            
-            <a href="#contact" class="group relative inline-flex items-center justify-center px-8 py-3 overflow-hidden font-medium tracking-tighter text-white bg-transparent border border-gray-600 rounded-full hover:border-white transition-all duration-300 reveal-on-scroll" style="transition-delay: 300ms;">
-                <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
-                <span class="relative">Start Collaboration</span>
-            </a>
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-void pt-24 px-6">
+        <div class="flex flex-col space-y-6 text-2xl font-light">
+            <a href="#about" class="block border-b border-white/10 pb-2" onclick="document.getElementById('mobile-menu').classList.add('hidden')">About</a>
+            <a href="#services" class="block border-b border-white/10 pb-2" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Services</a>
+            <a href="#portfolio" class="block border-b border-white/10 pb-2" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Portfolio</a>
+            <a href="#contact" class="block border-b border-white/10 pb-2" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contact</a>
+            <button class="absolute top-8 right-6" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
         </div>
+    </div>
 
-        <div class="absolute bottom-10 animate-bounce">
-            <i data-lucide="arrow-down" class="text-gray-500 w-6 h-6"></i>
+    <!-- Hero Section -->
+    <header id="about" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Grid -->
+        <div class="absolute inset-0 bg-grid-pattern bg-grid opacity-20 pointer-events-none"></div>
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-900/10 rounded-full blur-[128px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-900/10 rounded-full blur-[128px] pointer-events-none"></div>
+
+        <div class="max-w-7xl w-full mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="order-2 md:order-1 reveal">
+                <div class="inline-block px-3 py-1 mb-4 border border-white/10 rounded-full text-xs font-mono text-gray-400">
+                    ● Available for Work
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
+                    Digital <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Architect</span>
+                </h1>
+                <p class="text-lg text-gray-400 mb-8 max-w-md font-light leading-relaxed">
+                    I am Eliza Maven. A high-level Virtual Assistant blending administrative precision with creative strategy. I build systems that scale your business.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#portfolio" class="px-8 py-3 bg-white text-black font-medium hover:bg-gray-200 transition-colors">
+                        View Works
+                    </a>
+                    <a href="#contact" class="px-8 py-3 border border-white/20 hover:border-white transition-colors">
+                        Let's Talk
+                    </a>
+                </div>
+            </div>
+            
+            <div class="order-1 md:order-2 flex justify-center reveal delay-200 relative">
+                <!-- Decorative Elements -->
+                <div class="absolute inset-0 border border-white/5 rotate-3 scale-105 z-0"></div>
+                <div class="absolute inset-0 border border-white/5 -rotate-3 scale-105 z-0"></div>
+                
+                <!-- Image Container -->
+                <div class="relative w-full max-w-md aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 group bg-panel">
+                    <img src="photo.png" 
+                         onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop'; this.onerror=null;" 
+                         alt="Eliza Maven Professional" 
+                         class="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="text-xs font-mono text-white">Eliza Maven // Pro</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Introduction / About Section -->
-    <section id="about" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div class="order-2 md:order-1 reveal-on-scroll">
-                <div class="relative">
-                    <div class="absolute inset-0 border border-white/20 translate-x-4 translate-y-4 rounded-sm"></div>
-                    <img src="photo.png" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800&h=1000'" alt="Eliza Maven Professional" class="relative w-full h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-700 rounded-sm">
-                </div>
-            </div>
-            <div class="order-1 md:order-2 space-y-8 reveal-on-scroll">
-                <h2 class="font-display text-4xl md:text-5xl font-bold text-white">Who is Eliza?</h2>
-                <div class="h-1 w-20 bg-white"></div>
-                <p class="text-lg text-gray-400 leading-relaxed">
-                    I am a forward-thinking Virtual Assistant and Web Developer tailored for the modern digital landscape. I combine administrative precision with creative flair to help businesses streamline operations and scale their online presence.
-                </p>
-                <p class="text-lg text-gray-400 leading-relaxed">
-                    My mission is simple: to handle the chaos so you can focus on the vision. From complex data management to crafting compelling copy, I am your strategic partner in growth.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Software & Tools -->
-    <section class="py-20 bg-future-gray border-y border-white/5">
+    <!-- Softwares Section -->
+    <section class="py-12 border-y border-white/5 bg-panel/30">
         <div class="max-w-7xl mx-auto px-6">
-            <h3 class="text-center font-display text-2xl text-white mb-16 uppercase tracking-widest reveal-on-scroll">Software Proficiency</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center reveal-on-scroll">
-                <!-- Tool Items -->
-                <div class="group flex flex-col items-center gap-3 p-4 hover:bg-white/5 rounded-lg transition-colors">
-                    <i data-lucide="trello" class="w-8 h-8 text-gray-400 group-hover:text-white"></i>
-                    <span class="text-sm font-medium">Trello</span>
+            <p class="text-center text-xs font-mono uppercase tracking-widest mb-8 text-gray-500">Powerhouse Stack</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Icons (Using Text/Lucide for resilience, replace with svg logos if needed) -->
+                <div class="flex items-center gap-2 group cursor-default">
+                    <i data-lucide="trello" class="w-6 h-6 group-hover:text-blue-500 transition"></i>
+                    <span class="font-mono text-sm">Trello</span>
                 </div>
-                <div class="group flex flex-col items-center gap-3 p-4 hover:bg-white/5 rounded-lg transition-colors">
-                    <i data-lucide="figma" class="w-8 h-8 text-gray-400 group-hover:text-white"></i>
-                    <span class="text-sm font-medium">Figma</span>
+                <div class="flex items-center gap-2 group cursor-default">
+                    <i data-lucide="slack" class="w-6 h-6 group-hover:text-purple-500 transition"></i>
+                    <span class="font-mono text-sm">Slack</span>
                 </div>
-                <div class="group flex flex-col items-center gap-3 p-4 hover:bg-white/5 rounded-lg transition-colors">
-                    <i data-lucide="sheet" class="w-8 h-8 text-gray-400 group-hover:text-white"></i>
-                    <span class="text-sm font-medium">Google Suite</span>
+                <div class="flex items-center gap-2 group cursor-default">
+                    <i data-lucide="figma" class="w-6 h-6 group-hover:text-pink-500 transition"></i>
+                    <span class="font-mono text-sm">Figma</span>
                 </div>
-                <div class="group flex flex-col items-center gap-3 p-4 hover:bg-white/5 rounded-lg transition-colors">
-                    <i data-lucide="slack" class="w-8 h-8 text-gray-400 group-hover:text-white"></i>
-                    <span class="text-sm font-medium">Slack</span>
+                <div class="flex items-center gap-2 group cursor-default">
+                    <i data-lucide="mail" class="w-6 h-6 group-hover:text-yellow-500 transition"></i>
+                    <span class="font-mono text-sm">Mailchimp</span>
                 </div>
-                <div class="group flex flex-col items-center gap-3 p-4 hover:bg-white/5 rounded-lg transition-colors">
-                    <i data-lucide="pen-tool" class="w-8 h-8 text-gray-400 group-hover:text-white"></i>
-                    <span class="text-sm font-medium">Canva</span>
+                <div class="flex items-center gap-2 group cursor-default">
+                    <i data-lucide="sheet" class="w-6 h-6 group-hover:text-green-500 transition"></i>
+                    <span class="font-mono text-sm">Excel</span>
                 </div>
-                <div class="group flex flex-col items-center gap-3 p-4 hover:bg-white/5 rounded-lg transition-colors">
-                    <i data-lucide="mail" class="w-8 h-8 text-gray-400 group-hover:text-white"></i>
-                    <span class="text-sm font-medium">Mailchimp</span>
+                <div class="flex items-center gap-2 group cursor-default">
+                    <i data-lucide="pen-tool" class="w-6 h-6 group-hover:text-orange-500 transition"></i>
+                    <span class="font-mono text-sm">Canva</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services -->
-    <section id="services" class="py-24 max-w-7xl mx-auto px-6">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal-on-scroll">
-            <div>
-                <span class="text-sm text-gray-500 uppercase tracking-widest">What I Do</span>
-                <h2 class="font-display text-4xl md:text-5xl text-white mt-2">VA Services</h2>
-            </div>
-            <p class="text-gray-400 max-w-md text-right mt-4 md:mt-0">Comprehensive digital support designed to optimize your workflow.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Service 1 -->
-            <div class="cyber-card p-8 rounded-xl reveal-on-scroll group">
-                <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-black transition-colors">
-                    <i data-lucide="briefcase"></i>
+    <!-- Services Section -->
+    <section id="services" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div>
+                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-2">My Services</h2>
+                    <div class="h-1 w-20 bg-white"></div>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3">Administrative</h3>
-                <p class="text-sm text-gray-400 leading-relaxed">Calendar management, email handling, and meeting coordination to keep you organized.</p>
-            </div>
-            
-            <!-- Service 2 -->
-            <div class="cyber-card p-8 rounded-xl reveal-on-scroll group" style="transition-delay: 100ms;">
-                <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-black transition-colors">
-                    <i data-lucide="share-2"></i>
-                </div>
-                <h3 class="text-xl font-bold text-white mb-3">Social Media</h3>
-                <p class="text-sm text-gray-400 leading-relaxed">Strategic scheduling, engagement monitoring, and community management across platforms.</p>
+                <p class="text-gray-400 max-w-sm mt-4 md:mt-0 font-light text-right">
+                    Comprehensive virtual assistance tailored to streamline your operations.
+                </p>
             </div>
 
-            <!-- Service 3 -->
-            <div class="cyber-card p-8 rounded-xl reveal-on-scroll group" style="transition-delay: 200ms;">
-                <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-black transition-colors">
-                    <i data-lucide="pen-line"></i>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service 1 -->
+                <div class="group p-6 bg-panel border border-white/5 hover:border-white/30 transition-all duration-300 hover:-translate-y-2 reveal delay-100">
+                    <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-white/10 transition">
+                        <i data-lucide="briefcase" class="text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-3">Admin Support</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Calendar management, email handling, and operational organization to keep your business running smoothly.
+                    </p>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3">Copywriting</h3>
-                <p class="text-sm text-gray-400 leading-relaxed">Compelling captions, blog posts, and newsletters that resonate with your audience's voice.</p>
-            </div>
 
-            <!-- Service 4 -->
-            <div class="cyber-card p-8 rounded-xl reveal-on-scroll group" style="transition-delay: 300ms;">
-                <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-black transition-colors">
-                    <i data-lucide="database"></i>
+                <!-- Service 2 -->
+                <div class="group p-6 bg-panel border border-white/5 hover:border-white/30 transition-all duration-300 hover:-translate-y-2 reveal delay-200">
+                    <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-white/10 transition">
+                        <i data-lucide="instagram" class="text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-3">Social Media</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Strategic content scheduling, community engagement, and analytics tracking for growth.
+                    </p>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3">Data Entry</h3>
-                <p class="text-sm text-gray-400 leading-relaxed">Accurate data mining, cleaning, and organization ensuring your records are pristine.</p>
+
+                <!-- Service 3 -->
+                <div class="group p-6 bg-panel border border-white/5 hover:border-white/30 transition-all duration-300 hover:-translate-y-2 reveal delay-300">
+                    <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-white/10 transition">
+                        <i data-lucide="pen-line" class="text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-3">Copywriting</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Compelling newsletters, blog posts, and ad copy that captures your brand voice perfectly.
+                    </p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="group p-6 bg-panel border border-white/5 hover:border-white/30 transition-all duration-300 hover:-translate-y-2 reveal delay-100">
+                    <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-white/10 transition">
+                        <i data-lucide="database" class="text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-3">Data Entry</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Accurate data management, CRM updates, and research organization with high attention to detail.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Progress -->
-    <section class="py-20 bg-future-gray/30">
-        <div class="max-w-4xl mx-auto px-6">
-            <h3 class="text-center font-display text-2xl text-white mb-12 uppercase tracking-widest reveal-on-scroll">Skillset Proficiency</h3>
-            <div class="space-y-6">
-                <!-- Skill Item -->
-                <div class="reveal-on-scroll">
-                    <div class="flex justify-between text-sm mb-2">
-                        <span>Communication</span>
-                        <span>95%</span>
+    <!-- Skills Section -->
+    <section class="py-24 bg-panel border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div class="reveal">
+                <div class="relative w-full aspect-square max-w-md mx-auto overflow-hidden rounded-sm grayscale hover:grayscale-0 transition-all duration-700">
+                     <!-- Second Image: Sitting in garden -->
+                    <img src="photo.jpg" 
+                         onerror="this.src='https://images.unsplash.com/photo-1596526131083-e8c633c948d2?q=80&w=800&auto=format&fit=crop'; this.onerror=null;"
+                         alt="Eliza Working" 
+                         class="object-cover w-full h-full">
+                    
+                     <!-- Minimal Overlay -->
+                     <div class="absolute inset-0 border-[10px] border-void/50 pointer-events-none"></div>
+                </div>
+            </div>
+
+            <div class="reveal delay-100">
+                <h2 class="text-3xl font-bold text-white mb-8">Technical & Soft Skills</h2>
+                
+                <div class="space-y-8">
+                    <!-- Skill Item -->
+                    <div>
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-white font-mono">Administrative Management</span>
+                            <span class="text-gray-500">95%</span>
+                        </div>
+                        <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                            <div class="h-full bg-white w-[95%]"></div>
+                        </div>
                     </div>
-                    <div class="h-1 w-full bg-gray-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-white w-[95%]"></div>
+
+                    <!-- Skill Item -->
+                    <div>
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-white font-mono">Communication (Written/Verbal)</span>
+                            <span class="text-gray-500">100%</span>
+                        </div>
+                        <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                            <div class="h-full bg-white w-[100%]"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Item -->
+                    <div>
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-white font-mono">Project Coordination</span>
+                            <span class="text-gray-500">85%</span>
+                        </div>
+                        <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                            <div class="h-full bg-white w-[85%]"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Item -->
+                    <div>
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-white font-mono">Research & Analysis</span>
+                            <span class="text-gray-500">90%</span>
+                        </div>
+                        <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                            <div class="h-full bg-white w-[90%]"></div>
+                        </div>
                     </div>
                 </div>
-                <!-- Skill Item -->
-                <div class="reveal-on-scroll">
-                    <div class="flex justify-between text-sm mb-2">
-                        <span>Time Management</span>
-                        <span>98%</span>
-                    </div>
-                    <div class="h-1 w-full bg-gray-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-white w-[98%]"></div>
-                    </div>
-                </div>
-                <!-- Skill Item -->
-                <div class="reveal-on-scroll">
-                    <div class="flex justify-between text-sm mb-2">
-                        <span>Technical Literacy</span>
-                        <span>90%</span>
-                    </div>
-                    <div class="h-1 w-full bg-gray-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-white w-[90%]"></div>
-                    </div>
-                </div>
-                <!-- Skill Item -->
-                <div class="reveal-on-scroll">
-                    <div class="flex justify-between text-sm mb-2">
-                        <span>Creativity</span>
-                        <span>85%</span>
-                    </div>
-                    <div class="h-1 w-full bg-gray-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-white w-[85%]"></div>
-                    </div>
+
+                <div class="mt-10 pt-10 border-t border-white/10 flex flex-wrap gap-3">
+                    <span class="px-3 py-1 bg-void border border-white/20 text-xs rounded-full">Proactive</span>
+                    <span class="px-3 py-1 bg-void border border-white/20 text-xs rounded-full">Resourceful</span>
+                    <span class="px-3 py-1 bg-void border border-white/20 text-xs rounded-full">Tech-Savvy</span>
+                    <span class="px-3 py-1 bg-void border border-white/20 text-xs rounded-full">Reliable</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-24 max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16 reveal-on-scroll">
-            <h2 class="font-display text-4xl md:text-5xl text-white mb-4">Selected Works</h2>
-            <p class="text-gray-400">A curation of social media assets and thumbnails.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Social Media - 9:16 Ratio -->
-            <div class="space-y-8">
-                <div class="relative group overflow-hidden rounded-lg reveal-on-scroll">
-                    <img src="images/socialmedia1.jpg" onerror="this.src='https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1000&h=1778'" alt="Social Media 1" class="w-full aspect-[9/16] object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="text-white font-display text-xl">IG Story Campaign</span>
-                    </div>
-                </div>
-                <div class="relative group overflow-hidden rounded-lg reveal-on-scroll">
-                    <img src="images/socialmedia2.jpg" onerror="this.src='https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&q=80&w=1000&h=1778'" alt="Social Media 2" class="w-full aspect-[9/16] object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="text-white font-display text-xl">Reels Cover Design</span>
-                    </div>
-                </div>
+    <section id="portfolio" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 text-center reveal">
+                <span class="text-xs font-mono border border-white/20 px-2 py-1 rounded-full text-gray-400">Selected Works</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mt-4">Featured Projects</h2>
             </div>
 
-            <!-- Thumbnails - 16:9 Ratio -->
-            <div class="space-y-8 flex flex-col justify-center">
-                <div class="relative group overflow-hidden rounded-lg reveal-on-scroll">
-                    <img src="images/thumbnail1.jpg" onerror="this.src='https://images.unsplash.com/photo-1626785774573-4b7993143a23?auto=format&fit=crop&q=80&w=1600&h=900'" alt="Thumbnail 1" class="w-full aspect-[16/9] object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="text-white font-display text-xl">YouTube Strategy</span>
+            <!-- Masonry Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[200px]">
+                
+                <!-- Item 1: 9:16 Tall -->
+                <div class="row-span-2 group relative overflow-hidden bg-white/5 reveal delay-100">
+                    <img src="images/socialmedia1.jpg" 
+                         onerror="this.src='https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop'; this.onerror=null;"
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" alt="Social Media 1">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-mono text-accent mb-1">Instagram</span>
+                        <h4 class="text-white font-bold">Brand Growth</h4>
                     </div>
                 </div>
-                <div class="relative group overflow-hidden rounded-lg reveal-on-scroll">
-                    <img src="images/thumbnail2.jpg" onerror="this.src='https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1600&h=900'" alt="Thumbnail 2" class="w-full aspect-[16/9] object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="text-white font-display text-xl">Tech Review Thumb</span>
+
+                <!-- Item 2: 16:9 Wide -->
+                <div class="col-span-1 md:col-span-2 row-span-1 group relative overflow-hidden bg-white/5 reveal delay-200">
+                    <img src="images/thumbnail1.jpg" 
+                         onerror="this.src='https://images.unsplash.com/photo-1542435503-956c469947f6?q=80&w=1200&auto=format&fit=crop'; this.onerror=null;"
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" alt="Thumbnail 1">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-mono text-accent mb-1">YouTube</span>
+                        <h4 class="text-white font-bold">Viral Thumbnail Design</h4>
                     </div>
                 </div>
+
+                 <!-- Item 3: 16:9 Wide -->
+                 <div class="col-span-1 md:col-span-2 row-span-1 group relative overflow-hidden bg-white/5 reveal delay-300">
+                    <img src="images/thumbnail2.jpg" 
+                         onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop'; this.onerror=null;"
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" alt="Thumbnail 2">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-mono text-accent mb-1">Case Study</span>
+                        <h4 class="text-white font-bold">Analytics Report</h4>
+                    </div>
+                </div>
+
+                <!-- Item 4: 9:16 Tall -->
+                <div class="row-span-2 lg:col-start-4 lg:row-start-1 group relative overflow-hidden bg-white/5 reveal delay-100">
+                    <img src="images/socialmedia2.jpg" 
+                         onerror="this.src='https://images.unsplash.com/photo-1611162616475-46b635cb6868?q=80&w=800&auto=format&fit=crop'; this.onerror=null;"
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" alt="Social Media 2">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-mono text-accent mb-1">Tiktok</span>
+                        <h4 class="text-white font-bold">Content Strategy</h4>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
     <!-- Rates Section -->
-    <section id="rates" class="py-24 bg-future-gray border-y border-white/5">
+    <section id="rates" class="py-24 bg-panel border-y border-white/5">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-center font-display text-4xl text-white mb-16 reveal-on-scroll">Investment Packages</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Basic -->
-                <div class="cyber-card p-8 rounded-xl flex flex-col relative reveal-on-scroll">
-                    <h3 class="text-lg text-gray-400 mb-2">Starter</h3>
-                    <div class="text-3xl font-bold text-white mb-6">$20<span class="text-sm font-normal text-gray-500">/hr</span></div>
-                    <ul class="space-y-4 mb-8 flex-1 text-sm text-gray-300">
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Data Entry</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Email Management</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Basic Research</li>
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">Investment Plans</h2>
+                <p class="text-gray-400 mt-2">Choose the tier that fits your business needs.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Rate 1 -->
+                <div class="p-8 border border-white/10 bg-void hover:border-white/30 transition-colors duration-300 relative group reveal delay-100">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gray-700 group-hover:bg-white transition-all"></div>
+                    <h3 class="text-xl font-bold text-white mb-2">Starter</h3>
+                    <p class="text-3xl font-mono text-white mb-6">$20<span class="text-sm text-gray-500">/hour</span></p>
+                    <ul class="space-y-4 text-sm text-gray-400 mb-8">
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> General Admin Tasks</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Email Management</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Data Entry</li>
                     </ul>
-                    <a href="#contact" class="block text-center py-3 border border-gray-600 hover:bg-white hover:text-black hover:border-white transition-all rounded-lg">Select</a>
+                    <a href="#contact" class="block w-full py-3 text-center border border-white/20 text-white hover:bg-white hover:text-black transition uppercase text-xs tracking-wider">Select Plan</a>
                 </div>
 
-                <!-- Pro -->
-                <div class="cyber-card p-8 rounded-xl flex flex-col relative border-white/40 reveal-on-scroll" style="transition-delay: 100ms;">
-                    <div class="absolute top-0 right-0 bg-white text-black text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
-                    <h3 class="text-lg text-white mb-2">Professional</h3>
-                    <div class="text-3xl font-bold text-white mb-6">$35<span class="text-sm font-normal text-gray-500">/hr</span></div>
-                    <ul class="space-y-4 mb-8 flex-1 text-sm text-gray-300">
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> All Starter Features</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Social Media Mgmt</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Content Creation</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Monthly Reports</li>
+                <!-- Rate 2 -->
+                <div class="p-8 border border-white/20 bg-white/5 transform md:-translate-y-4 shadow-2xl shadow-purple-900/20 relative reveal delay-200">
+                    <div class="absolute top-0 right-0 bg-white text-black text-[10px] font-bold px-2 py-1 uppercase tracking-wider">Popular</div>
+                    <h3 class="text-xl font-bold text-white mb-2">Professional</h3>
+                    <p class="text-3xl font-mono text-white mb-6">$35<span class="text-sm text-gray-500">/hour</span></p>
+                    <ul class="space-y-4 text-sm text-gray-300 mb-8">
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Social Media Management</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Content Creation</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Basic Graphic Design</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Monthly Reporting</li>
                     </ul>
-                    <a href="#contact" class="block text-center py-3 bg-white text-black hover:bg-gray-200 transition-all rounded-lg font-bold">Select</a>
+                    <a href="#contact" class="block w-full py-3 text-center bg-white text-black hover:bg-gray-200 transition uppercase text-xs tracking-wider font-bold">Select Plan</a>
                 </div>
 
-                <!-- Premium -->
-                <div class="cyber-card p-8 rounded-xl flex flex-col relative reveal-on-scroll" style="transition-delay: 200ms;">
-                    <h3 class="text-lg text-gray-400 mb-2">Retainer</h3>
-                    <div class="text-3xl font-bold text-white mb-6">$800<span class="text-sm font-normal text-gray-500">/mo</span></div>
-                    <ul class="space-y-4 mb-8 flex-1 text-sm text-gray-300">
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> 25 Hours Dedicated</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Priority Support</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Project Management</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i> Strategic Planning</li>
+                <!-- Rate 3 -->
+                <div class="p-8 border border-white/10 bg-void hover:border-white/30 transition-colors duration-300 relative group reveal delay-300">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gray-700 group-hover:bg-white transition-all"></div>
+                    <h3 class="text-xl font-bold text-white mb-2">Executive</h3>
+                    <p class="text-3xl font-mono text-white mb-6">$50<span class="text-sm text-gray-500">/hour</span></p>
+                    <ul class="space-y-4 text-sm text-gray-400 mb-8">
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Project Management</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Strategy Consultation</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Full Team Coordination</li>
                     </ul>
-                    <a href="#contact" class="block text-center py-3 border border-gray-600 hover:bg-white hover:text-black hover:border-white transition-all rounded-lg">Select</a>
+                    <a href="#contact" class="block w-full py-3 text-center border border-white/20 text-white hover:bg-white hover:text-black transition uppercase text-xs tracking-wider">Select Plan</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact & Footer -->
-    <footer id="contact" class="relative pt-24 pb-8 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-future-black to-future-black -z-10"></div>
-        
-        <div class="max-w-4xl mx-auto px-6 text-center reveal-on-scroll">
-            <h2 class="font-display text-5xl md:text-6xl font-bold text-white mb-8">Let's Create.</h2>
-            <p class="text-xl text-gray-400 mb-12">Ready to elevate your business with professional assistance? Reach out today.</p>
-
-            <div class="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 mb-16 text-left">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div class="space-y-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
-                                <i data-lucide="mail" class="text-white"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500 uppercase">Email</p>
-                                <p class="text-white">hello@elizamaven.com</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
-                                <i data-lucide="instagram" class="text-white"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500 uppercase">Social</p>
-                                <p class="text-white">@elizamaven</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Casual Image Side -->
-                    <div class="relative h-64 w-full rounded-xl overflow-hidden">
-                        <img src="photo.jpg" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800&h=600'" alt="Eliza Working in Garden" class="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700">
-                    </div>
-                </div>
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative overflow-hidden">
+        <div class="max-w-3xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-4xl font-bold text-white mb-4">Let's Work Together</h2>
+                <p class="text-gray-400">Ready to optimize your workflow? Send me a message.</p>
             </div>
 
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
-                <p>&copy; 2024 Eliza Maven. All Rights Reserved.</p>
+            <form class="space-y-6 reveal delay-100">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="relative">
+                        <input type="text" placeholder="Name" class="w-full bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-white transition-colors placeholder-gray-600">
+                    </div>
+                    <div class="relative">
+                        <input type="email" placeholder="Email" class="w-full bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-white transition-colors placeholder-gray-600">
+                    </div>
+                </div>
+                <div class="relative">
+                    <select class="w-full bg-transparent border-b border-white/20 py-4 text-gray-400 focus:outline-none focus:border-white transition-colors appearance-none">
+                        <option>Select Service Interest</option>
+                        <option>Admin Support</option>
+                        <option>Social Media</option>
+                        <option>Copywriting</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="relative">
+                    <textarea rows="4" placeholder="Project Details" class="w-full bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-white transition-colors placeholder-gray-600"></textarea>
+                </div>
+                <div class="pt-6 text-center">
+                    <button type="submit" class="px-12 py-4 bg-white text-black font-bold uppercase tracking-widest hover:bg-gray-200 transition-transform transform hover:scale-105 duration-300">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-black pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                <div class="mb-8 md:mb-0 text-center md:text-left">
+                    <a href="#" class="text-2xl font-bold tracking-widest text-white font-mono uppercase">
+                        Eliza<span class="text-gray-500">Maven</span>
+                    </a>
+                    <p class="text-gray-500 text-sm mt-2">Virtual Assistant & Digital Strategist</p>
+                </div>
+                <div class="flex gap-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i data-lucide="instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i data-lucide="linkedin"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i data-lucide="twitter"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 font-mono">
+                <p>&copy; 2024 Eliza Maven. All rights reserved.</p>
                 <p>Design by : Blockscom Media</p>
             </div>
         </div>
     </footer>
 
+    <!-- Initialize Icons -->
     <script>
-        // Initialize Icons
         lucide.createIcons();
+    </script>
 
-        // Reveal Animation Logic (Intersection Observer)
+    <!-- Animation Script (Intersection Observer mimicking Locomotive reveal) -->
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = {
                 threshold: 0.1,
@@ -466,12 +581,12 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
+                        entry.target.classList.add('active');
                     }
                 });
             }, observerOptions);
 
-            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            const revealElements = document.querySelectorAll('.reveal');
             revealElements.forEach(el => observer.observe(el));
         });
     </script>

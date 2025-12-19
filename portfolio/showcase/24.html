@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Maven | Web Developer & VA</title>
+    
+    <link rel="icon" type="image/jpg" href="favicon.jpg">
+
+    <meta property="og:title" content="Eliza Maven Portfolio">
+    <meta property="og:description" content="Web Developer & Virtual Assistant. Administrative, Social Media, and Creative Services.">
+    <meta property="og:image" content="photo.jpg"> <meta property="og:url" content="https://www.elizamaven.com">
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    <style>
+        :root {
+            --bg-color: #050505;
+            --card-bg: #0f0f0f;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent: #ffffff; /* Minimalist white accent */
+            --glow: rgba(255, 255, 255, 0.15);
+            --border: #222222;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- FLOWING NOTE --- */
+        .marquee-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            color: #000;
+            z-index: 9999;
+            padding: 8px 0;
+            overflow: hidden;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll 20s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- LAYOUT UTILS --- */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 100px; /* Space for marquee */
+            position: relative;
+        }
+
+        .hero-text {
+            width: 50%;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            opacity: 0; /* Animated in via JS */
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 400px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--text-main);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .cta-btn:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(255,255,255,0.4);
+        }
+
+        /* THE BRAND IMAGE GLOW */
+        .hero-image-wrapper {
+            width: 45%;
+            height: 80vh;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .hero-img {
+            max-height: 100%;
+            object-fit: contain;
+            /* The Futuristic Glow Effect */
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.15)) drop-shadow(0 0 60px rgba(100, 100, 255, 0.1));
+            animation: pulseGlow 4s infinite alternate;
+            transform: scale(1.05); /* Slight overlap */
+        }
+
+        @keyframes pulseGlow {
+            0% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1)); }
+            100% { filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.3)) drop-shadow(0 0 80px rgba(100, 140, 255, 0.2)); }
+        }
+
+        /* --- ABOUT & SKILLS --- */
+        .section-header {
+            margin-bottom: 4rem;
+        }
+        .section-title {
+            font-size: 3rem;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            transition: 0.3s;
+        }
+        
+        .skill-tag:hover {
+            border-color: var(--text-main);
+            color: var(--text-main);
+            background: #1a1a1a;
+        }
+
+        /* --- SOFTWARE --- */
+        .software-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 2rem;
+        }
+        .software-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        /* --- SERVICES --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, #0f0f0f, #0a0a0a);
+            padding: 3rem;
+            border: 1px solid var(--border);
+            transition: transform 0.4s ease, border-color 0.4s ease;
+            border-radius: 4px;
+        }
+
+        .service-card:hover {
+            border-color: #555;
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #ccc;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card ul {
+            padding-left: 1rem;
+        }
+        .service-card li {
+            list-style: disc;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        /* --- PORTFOLIO --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+        
+        /* 9:16 Aspect Ratio Images */
+        .item-vertical {
+            grid-column: span 3;
+            aspect-ratio: 9/16;
+        }
+        /* 16:9 Aspect Ratio Images */
+        .item-horizontal {
+            grid-column: span 6;
+            aspect-ratio: 16/9;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* --- RATES --- */
+        .rates-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .rate-card {
+            border: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+            background: var(--card-bg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .rate-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+        }
+
+        .price {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .rate-period {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* --- CONTACT --- */
+        .contact {
+            text-align: center;
+            padding: 8rem 0;
+        }
+
+        .email-link {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 5vw, 5rem);
+            color: var(--text-main);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            transition: opacity 0.3s;
+        }
+        
+        .email-link:hover {
+            opacity: 0.7;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .hero { flex-direction: column-reverse; justify-content: center; text-align: center; padding-top: 150px; }
+            .hero-text { width: 100%; margin-top: 2rem; }
+            .hero-subtitle { margin: 0 auto 2rem auto; }
+            .hero-image-wrapper { width: 80%; height: 50vh; }
+            
+            .item-vertical, .item-horizontal { grid-column: span 12; }
+            .item-vertical { aspect-ratio: auto; max-height: 500px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            Everything is customizable — you can edit, remove, or change anything. We handle it all. we will remove this once this template is purchase  &nbsp; • &nbsp; Everything is customizable — you can edit, remove, or change anything. We handle it all. we will remove this once this template is purchase &nbsp; • &nbsp;
+        </div>
+    </div>
+
+    <main data-scroll-container>
+
+        <section class="hero container" data-scroll-section>
+            <div class="hero-text" data-scroll data-scroll-speed="1">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: #666;">Hello, I'm</h2>
+                <h1 class="hero-title">ELIZA<br>MAVEN</h1>
+                <p class="hero-subtitle">Creating minimalist, futuristic web experiences and providing elite virtual assistance services.</p>
+                <a href="#contact" class="cta-btn" data-scroll-to>Book Consultation</a>
+            </div>
+
+            <div class="hero-image-wrapper" data-scroll data-scroll-speed="2">
+                <img src="photo.png" alt="Eliza Maven Professional" class="hero-img">
+            </div>
+        </section>
+
+        <section class="container" id="softwares" data-scroll-section>
+            <div class="section-header">
+                <h2>Software Arsenal</h2>
+            </div>
+            <div class="software-grid">
+                <div class="software-item">VsCode</div>
+                <div class="software-item">Figma</div>
+                <div class="software-item">Canva Pro</div>
+                <div class="software-item">Notion</div>
+                <div class="software-item">Trello</div>
+                <div class="software-item">Google Suite</div>
+                <div class="software-item">WordPress</div>
+                <div class="software-item">Zapier</div>
+            </div>
+        </section>
+
+        <section class="container" id="services" data-scroll-section>
+            <div class="section-header">
+                <h2>VA Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">✦</div>
+                    <h3>Administrative</h3>
+                    <ul>
+                        <li>Email Management</li>
+                        <li>Calendar Scheduling</li>
+                        <li>File Organization</li>
+                        <li>Travel Arrangements</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">●</div>
+                    <h3>Social Media Manager</h3>
+                    <ul>
+                        <li>Content Planning</li>
+                        <li>Engagement & Reply</li>
+                        <li>Analytics Reporting</li>
+                        <li>Basic Graphic Design</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">✎</div>
+                    <h3>Copywriting</h3>
+                    <ul>
+                        <li>Blog Posts</li>
+                        <li>Newsletter Writing</li>
+                        <li>Product Descriptions</li>
+                        <li>Caption Writing</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">▦</div>
+                    <h3>Data Entry</h3>
+                    <ul>
+                        <li>Spreadsheet Management</li>
+                        <li>CRM Updates</li>
+                        <li>Data Mining</li>
+                        <li>Transcription</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="container" id="skills" data-scroll-section>
+            <div class="section-header">
+                <h2>Skill Set</h2>
+            </div>
+            <div class="skills-grid">
+                <span class="skill-tag">HTML5 / CSS3</span>
+                <span class="skill-tag">Static Sites</span>
+                <span class="skill-tag">Project Management</span>
+                <span class="skill-tag">SEO Basics</span>
+                <span class="skill-tag">Time Management</span>
+                <span class="skill-tag">Communication</span>
+                <span class="skill-tag">Research</span>
+                <span class="skill-tag">Detail Oriented</span>
+                <span class="skill-tag">Problem Solving</span>
+            </div>
+        </section>
+
+        <section class="container" id="portfolio" data-scroll-section>
+            <div class="section-header">
+                <h2>Selected Works</h2>
+            </div>
+            <div class="portfolio-grid">
+                <div class="gallery-item item-vertical" data-scroll data-scroll-speed="1">
+                    <img src="images/socialmedia1.jpg" alt="Social Media Work 1">
+                </div>
+
+                <div class="gallery-item item-horizontal" data-scroll data-scroll-speed="0.5">
+                    <img src="images/thumbnail1.jpg" alt="YouTube Thumbnail 1">
+                </div>
+                
+                 <div class="gallery-item item-vertical" data-scroll data-scroll-speed="1.2">
+                    <img src="images/socialmedia2.jpg" alt="Social Media Work 2">
+                </div>
+
+                 <div class="gallery-item item-horizontal" style="grid-column: span 12;" data-scroll data-scroll-speed="0.5">
+                    <img src="images/thumbnail2.jpg" alt="YouTube Thumbnail 2">
+                </div>
+            </div>
+        </section>
+
+        <section class="container" id="rates" data-scroll-section>
+            <div class="section-header">
+                <h2>Rates</h2>
+            </div>
+            <div class="rates-container">
+                <div class="rate-card">
+                    <h3>Hourly</h3>
+                    <div class="price">$25</div>
+                    <p class="rate-period">Per Hour</p>
+                    <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">Perfect for ad-hoc tasks and short-term projects.</p>
+                </div>
+                <div class="rate-card" style="background: #111; border-color: #fff;">
+                    <h3>Retainer</h3>
+                    <div class="price">$450</div>
+                    <p class="rate-period">20 Hours / Month</p>
+                    <p style="margin-top: 1rem; color: #888; font-size: 0.9rem;">Dedicated support for ongoing business needs.</p>
+                </div>
+                <div class="rate-card">
+                    <h3>Project Base</h3>
+                    <div class="price">Custom</div>
+                    <p class="rate-period">Per Project</p>
+                    <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">Web development or specific design packages.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container contact" id="contact" data-scroll-section>
+            <h2 style="margin-bottom: 2rem;">Ready to collaborate?</h2>
+            <a href="mailto:hello@elizamaven.com" class="email-link">hello@elizamaven.com</a>
+            
+            <footer style="margin-top: 5rem; color: #444; font-size: 0.8rem;">
+                © 2026 Eliza Maven Portfolio. All Rights Reserved.
+            </footer>
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <script>
+        // 1. Initialize Locomotive Scroll
+        const scroll = new LocomotiveScroll({
+            el: document.querySelector('[data-scroll-container]'),
+            smooth: true,
+            tablet: { smooth: true },
+            smartphone: { smooth: true }
+        });
+
+        // 2. GSAP Entrance Animations
+        // Wait for window load to ensure images are ready
+        window.addEventListener('load', () => {
+            const tl = gsap.timeline();
+
+            tl.to('.hero-title', {
+                opacity: 1,
+                y: 0,
+                duration: 1.5,
+                ease: 'power4.out'
+            })
+            .from('.hero-subtitle', {
+                opacity: 0,
+                y: 20,
+                duration: 1,
+                delay: -1
+            })
+            .from('.hero-img', {
+                scale: 0.9,
+                opacity: 0,
+                duration: 1.5,
+                ease: 'power2.out',
+                delay: -1
+            });
+        });
+
+        // Refresh scroll on window resize to keep calculations correct
+        window.addEventListener('resize', () => {
+            scroll.update();
+        });
+    </script>
+</body>
+</html>

@@ -1,49 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mary Valerie Portfolio</title>
-    
-    <!-- Open Graph Meta Tags (Hidden, for Social Previews) -->
-    <meta property="og:title" content="Mary Valerie - Virtual Assistant Portfolio">
-    <meta property="og:description" content="Professional Virtual Assistant Services by Mary Valerie. Organized, Creative, and Efficient.">
-    <meta property="og:image" content="photo.jpg">
-    <meta property="og:url" content=""> <!-- Add your actual website URL here when live -->
-    <meta property="og:type" content="website">
-
-    <!-- Favicon -->
+    <title>Eliza Maven | Virtual Assistant Portfolio</title>
     <link rel="icon" type="image/jpg" href="favicon.jpg">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Eliza Maven Portfolio">
+    <meta property="og:description" content="Professional Virtual Assistant Services - Admin, Social Media, Copywriting & Data Entry.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://elizamaven.com">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        'soft-pink': '#fff0f5',
-                        'dusty-rose': '#d4a5a5',
-                        'deep-blush': '#9e5e5e',
-                        'creamy-white': '#fdfbf7',
-                        'slate-text': '#4a4a4a',
-                    },
                     fontFamily: {
-                        'logo': ['"Great Vibes"', 'cursive'],
-                        'heading': ['"Playfair Display"', 'serif'],
-                        'body': ['"Poppins"', 'sans-serif'],
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        display: ['Syncopate', 'sans-serif'],
+                    },
+                    colors: {
+                        black: '#050505',
+                        'off-black': '#0a0a0a',
+                        'neon-white': '#f0f0f0',
+                        'glass': 'rgba(255, 255, 255, 0.03)',
+                        'glass-border': 'rgba(255, 255, 255, 0.08)',
+                        'accent': '#ffffff', 
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px)",
                     }
                 }
             }
@@ -51,393 +48,515 @@
     </script>
 
     <style>
+        /* Custom Utilities */
+        body {
+            background-color: #050505;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        /* Subtle Grid Background */
+        .bg-grid {
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, transparent, 10%, black, 90%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, 5%, black 40%, black 70%, transparent);
+            opacity: 0.2;
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Smooth Scroll Reveal Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Card Hover Glow */
+        .glow-card {
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .glow-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: 0.5s;
+        }
+        .glow-card:hover::before {
+            left: 100%;
+        }
+        .glow-card:hover {
+            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(255,255,255,0.1);
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #fff0f5; 
+            background: #050505;
         }
         ::-webkit-scrollbar-thumb {
-            background: #d4a5a5; 
+            background: #333;
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #9e5e5e; 
+            background: #555;
         }
 
-        /* Soft Image Opacity Class */
-        .soft-img {
-            opacity: 0.85;
-            transition: opacity 0.3s ease, transform 0.5s ease;
+        /* Image Aspect Ratios */
+        .aspect-9-16 {
+            aspect-ratio: 9 / 16;
         }
-        .soft-img:hover {
-            opacity: 1;
-            transform: scale(1.02);
+        .aspect-16-9 {
+            aspect-ratio: 16 / 9;
         }
-
-        /* Glassmorphism Card */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+        
+        .text-outline {
+            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+            color: transparent;
         }
 
-        /* Button Hover Animation */
-        .btn-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Glitch Effect on Hover for Names */
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: white;
         }
-        .btn-hover:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(212, 165, 165, 0.4);
-        }
-
-        /* Decorative blobs */
-        .blob {
-            position: absolute;
-            filter: blur(40px);
-            z-index: -1;
-            opacity: 0.5;
-            animation: float 10s infinite ease-in-out;
-        }
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(20px, -20px) scale(1.1); }
-            100% { transform: translate(0, 0) scale(1); }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
         }
     </style>
 </head>
-<body class="bg-soft-pink text-slate-text font-body selection:bg-dusty-rose selection:text-white overflow-x-hidden">
+<body class="antialiased selection:bg-white selection:text-black">
 
-    <!-- Background Blobs -->
-    <div class="blob bg-pink-200 w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2"></div>
-    <div class="blob bg-purple-100 w-80 h-80 rounded-full bottom-0 right-0 translate-x-1/3 translate-y-1/3"></div>
+    <!-- Background Grid -->
+    <div class="bg-grid bg-grid-pattern"></div>
+
+    <!-- Top Flowing Note -->
+    <div class="fixed top-0 left-0 right-0 z-50 bg-white text-black text-xs font-bold uppercase py-1 border-b border-gray-200 overflow-hidden marquee-container">
+        <div class="marquee-content">
+            Everything is customizable — you can edit, remove, or change anything. We handle it all. we will remove this once this template is purchase — Everything is customizable — you can edit, remove, or change anything. We handle it all. we will remove this once this template is purchase — 
+        </div>
+    </div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-card px-6 py-4 shadow-sm">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <div class="text-3xl font-logo text-deep-blush">MV</div>
-            <div class="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
-                <a href="#about" class="hover:text-deep-blush transition-colors">About</a>
-                <a href="#services" class="hover:text-deep-blush transition-colors">Services</a>
-                <a href="#portfolio" class="hover:text-deep-blush transition-colors">Portfolio</a>
-                <a href="#contact" class="px-5 py-2 bg-deep-blush text-white rounded-full hover:bg-opacity-90 transition-all shadow-md btn-hover">Contact Me</a>
+    <nav class="fixed top-8 w-full z-40 backdrop-blur-md border-b border-glass-border bg-black/50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-display font-bold text-xl tracking-widest text-white">ELIZA<span class="text-gray-500">MAVEN</span></a>
+            
+            <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest">
+                <a href="#about" class="hover:text-white transition-colors text-gray-400">About</a>
+                <a href="#services" class="hover:text-white transition-colors text-gray-400">Services</a>
+                <a href="#portfolio" class="hover:text-white transition-colors text-gray-400">Portfolio</a>
+                <a href="#rates" class="hover:text-white transition-colors text-gray-400">Rates</a>
+                <a href="#contact" class="px-4 py-2 border border-white text-white hover:bg-white hover:text-black transition-all">Contact</a>
             </div>
-            <!-- Mobile Menu Icon -->
-            <button class="md:hidden text-deep-blush text-xl">
-                <i class="fa-solid fa-bars"></i>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i data-lucide="menu"></i>
             </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-black border-b border-glass-border p-6 flex flex-col space-y-4">
+            <a href="#about" class="text-gray-400 hover:text-white">About</a>
+            <a href="#services" class="text-gray-400 hover:text-white">Services</a>
+            <a href="#portfolio" class="text-gray-400 hover:text-white">Portfolio</a>
+            <a href="#rates" class="text-gray-400 hover:text-white">Rates</a>
+            <a href="#contact" class="text-gray-400 hover:text-white">Contact</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20 relative">
-        <div data-aos="zoom-in" data-aos-duration="1500">
-            <h1 class="text-7xl md:text-9xl font-logo text-deep-blush mb-4 drop-shadow-sm">Mary Valerie</h1>
-            <p class="text-lg md:text-xl font-heading italic text-gray-500 mb-8 tracking-widest">Minimalist &middot; Creative &middot; Virtual Assistant</p>
-        </div>
+    <header class="relative min-h-screen flex items-center pt-20 overflow-hidden" id="home">
+        <!-- Decoration Circles -->
+        <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-white opacity-[0.03] blur-[100px] rounded-full pointer-events-none"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-gray-500 opacity-[0.05] blur-[80px] rounded-full pointer-events-none"></div>
 
-        <div class="relative w-64 h-64 md:w-80 md:h-80 mt-8 mb-12" data-aos="fade-up" data-aos-delay="300">
-            <div class="absolute inset-0 border-2 border-dusty-rose rounded-full transform rotate-6 translate-x-2 translate-y-2"></div>
-            <!-- Main Photo (jpg) -->
-            <img 
-                src="photo.jpg" 
-                onerror="this.src='https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" 
-                alt="Mary Valerie" 
-                class="w-full h-full object-cover rounded-full shadow-xl soft-img relative z-10 border-4 border-white"
-            >
-        </div>
-
-        <div data-aos="fade-up" data-aos-delay="500">
-            <a href="#about" class="animate-bounce inline-block text-deep-blush text-2xl">
-                <i class="fa-solid fa-chevron-down"></i>
-            </a>
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center w-full">
+            <div class="order-2 md:order-1 reveal">
+                <div class="inline-block px-3 py-1 border border-glass-border rounded-full text-xs uppercase tracking-widest text-gray-400 mb-6 bg-glass">
+                    Virtual Assistant & Creative Strategist
+                </div>
+                <h1 class="font-display text-5xl md:text-7xl font-bold leading-tight text-white mb-6">
+                    Elevating <br>
+                    <span class="text-outline">Digital</span> <br>
+                    Presence
+                </h1>
+                <p class="text-gray-400 text-lg mb-8 max-w-md leading-relaxed">
+                    I am Eliza Maven. I bridge the gap between chaos and clarity. Specialized in administrative excellence and digital growth.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#portfolio" class="group relative px-8 py-3 bg-white text-black font-bold uppercase tracking-wider overflow-hidden">
+                        <span class="relative z-10 group-hover:text-white transition-colors duration-300">View Work</span>
+                        <div class="absolute inset-0 bg-black transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-out"></div>
+                    </a>
+                    <a href="#contact" class="px-8 py-3 border border-white/20 text-white font-bold uppercase tracking-wider hover:bg-white/5 transition-colors">
+                        Hire Me
+                    </a>
+                </div>
+            </div>
+            
+            <div class="order-1 md:order-2 relative reveal delay-200">
+                <div class="relative w-full max-w-md mx-auto aspect-[4/5] border border-glass-border p-2 bg-glass backdrop-blur-sm">
+                    <!-- Photo Fallback Logic -->
+                    <img src="photo.png" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop'" alt="Eliza Maven Professional" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                    
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 border border-white/20 flex items-center justify-center bg-black">
+                        <div class="animate-spin-slow">
+                            <i data-lucide="asterisk" class="w-12 h-12 text-white"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Introduction / About Section -->
-    <section id="about" class="py-20 px-6">
-        <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
-            <span class="text-dusty-rose uppercase tracking-widest text-xs font-bold">Introduction</span>
-            <h2 class="text-4xl font-heading text-slate-text mt-2 mb-8">Hello, darling!</h2>
-            <div class="glass-card p-8 md:p-12 rounded-3xl shadow-sm border-none relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-pink-200 via-dusty-rose to-pink-200"></div>
-                <p class="text-lg leading-relaxed text-gray-600">
-                    I'm <strong class="text-deep-blush">Mary Valerie</strong>, your go-to digital organizer and creative partner. 
-                    I specialize in turning chaotic schedules into calm workflows and messy inboxes into organized havens. 
-                    With a touch of creativity and a lot of dedication, I help entrepreneurs focus on what they love while I handle the rest.
-                </p>
-                <div class="mt-8 flex justify-center gap-4">
-                    <!-- Second Photo (png) could be a signature or another pose -->
-                    <img 
-                        src="photo.png" 
-                        onerror="this.style.display='none'" 
-                        alt="Signature style photo" 
-                        class="h-24 object-contain soft-img"
-                    >
-                </div>
+    <!-- Software Section (Ticker) -->
+    <section class="py-12 border-y border-glass-border bg-black/50 overflow-hidden">
+        <p class="text-center text-xs uppercase tracking-[0.3em] text-gray-500 mb-8">Powering My Workflow</p>
+        <div class="marquee-container">
+            <div class="marquee-content flex gap-16 items-center opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Logos (Using Text for simplicity/reliability, can be replaced with SVGs) -->
+                <span class="text-2xl font-bold text-white font-display">Notion</span>
+                <span class="text-2xl font-bold text-white font-display">Canva</span>
+                <span class="text-2xl font-bold text-white font-display">Trello</span>
+                <span class="text-2xl font-bold text-white font-display">Slack</span>
+                <span class="text-2xl font-bold text-white font-display">Google Workspace</span>
+                <span class="text-2xl font-bold text-white font-display">Zoom</span>
+                <span class="text-2xl font-bold text-white font-display">Asana</span>
+                <span class="text-2xl font-bold text-white font-display">ChatGPT</span>
+                <!-- Duplicate for seamless loop -->
+                <span class="text-2xl font-bold text-white font-display ml-16">Notion</span>
+                <span class="text-2xl font-bold text-white font-display">Canva</span>
+                <span class="text-2xl font-bold text-white font-display">Trello</span>
+                <span class="text-2xl font-bold text-white font-display">Slack</span>
+                <span class="text-2xl font-bold text-white font-display">Google Workspace</span>
+                <span class="text-2xl font-bold text-white font-display">Zoom</span>
+                <span class="text-2xl font-bold text-white font-display">Asana</span>
+                <span class="text-2xl font-bold text-white font-display">ChatGPT</span>
             </div>
         </div>
     </section>
 
-    <!-- Softwares Section -->
-    <section class="py-16 bg-white/50">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <h3 class="text-2xl font-heading mb-10 text-slate-text" data-aos="fade-up">Softwares I Love</h3>
-            <div class="flex flex-wrap justify-center gap-8 md:gap-12" data-aos="fade-up" data-aos-delay="200">
-                <!-- Using FontAwesome for software icons or text if icon unavailable -->
-                <div class="flex flex-col items-center group">
-                    <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-3xl text-blue-400 mb-3 group-hover:scale-110 transition-transform">
-                        <i class="fa-brands fa-trello"></i>
+    <!-- About & Services -->
+    <section id="services" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-12">
+                <!-- Intro Column -->
+                <div class="md:col-span-1 reveal">
+                    <h2 class="font-display text-4xl font-bold mb-6 text-white">What I Do</h2>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        Beyond basic assistance, I provide strategic operational support. I handle the noise so you can focus on the signal.
+                    </p>
+                    <div class="h-px w-24 bg-white mb-8"></div>
+                    
+                    <!-- Skills Mini Section -->
+                    <div class="space-y-4">
+                        <h3 class="text-sm uppercase tracking-widest text-white mb-4">Core Competencies</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-xs uppercase text-gray-400 mb-1">
+                                    <span>Organization</span>
+                                    <span>98%</span>
+                                </div>
+                                <div class="w-full bg-gray-900 h-1">
+                                    <div class="bg-white h-1 w-[98%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs uppercase text-gray-400 mb-1">
+                                    <span>Communication</span>
+                                    <span>100%</span>
+                                </div>
+                                <div class="w-full bg-gray-900 h-1">
+                                    <div class="bg-white h-1 w-full"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs uppercase text-gray-400 mb-1">
+                                    <span>Creativity</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="w-full bg-gray-900 h-1">
+                                    <div class="bg-white h-1 w-[90%]"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <span class="text-xs font-medium uppercase tracking-wider">Trello</span>
-                </div>
-                <div class="flex flex-col items-center group">
-                    <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-3xl text-black mb-3 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-n"></i>
-                    </div>
-                    <span class="text-xs font-medium uppercase tracking-wider">Notion</span>
-                </div>
-                <div class="flex flex-col items-center group">
-                    <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-3xl text-purple-500 mb-3 group-hover:scale-110 transition-transform">
-                        <i class="fa-brands fa-slack"></i>
-                    </div>
-                    <span class="text-xs font-medium uppercase tracking-wider">Slack</span>
-                </div>
-                <div class="flex flex-col items-center group">
-                    <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-3xl text-cyan-400 mb-3 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-pen-nib"></i>
-                    </div>
-                    <span class="text-xs font-medium uppercase tracking-wider">Canva</span>
-                </div>
-                <div class="flex flex-col items-center group">
-                    <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-3xl text-red-500 mb-3 group-hover:scale-110 transition-transform">
-                        <i class="fa-brands fa-google"></i>
-                    </div>
-                    <span class="text-xs font-medium uppercase tracking-wider">G-Suite</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-20 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-dusty-rose uppercase tracking-widest text-xs font-bold">What I Do</span>
-                <h2 class="text-4xl font-heading text-slate-text mt-2">My Services</h2>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="glass-card p-8 rounded-3xl hover:shadow-lg transition-shadow duration-300" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center text-deep-blush text-xl mb-6">
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                    <h3 class="text-xl font-heading font-bold mb-3">Email Management</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Inbox zero is my happy place. I filter, organize, and respond to emails so you never miss an important opportunity.</p>
                 </div>
 
-                <!-- Service 2 -->
-                <div class="glass-card p-8 rounded-3xl hover:shadow-lg transition-shadow duration-300" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center text-deep-blush text-xl mb-6">
-                        <i class="fa-regular fa-calendar-check"></i>
+                <!-- Services Grid -->
+                <div class="md:col-span-2 grid sm:grid-cols-2 gap-4">
+                    <!-- Service 1 -->
+                    <div class="bg-glass border border-glass-border p-8 glow-card group reveal delay-100">
+                        <i data-lucide="briefcase" class="text-white w-8 h-8 mb-4 group-hover:scale-110 transition-transform"></i>
+                        <h3 class="text-xl font-bold text-white mb-2">Administrative Skills</h3>
+                        <p class="text-sm text-gray-400">Calendar management, email handling, travel planning, and meeting coordination to keep your business streamlined.</p>
                     </div>
-                    <h3 class="text-xl font-heading font-bold mb-3">Calendar & Scheduling</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">I handle all your appointments, buffer times, and reminders. No more double bookings or missed calls.</p>
-                </div>
 
-                <!-- Service 3 -->
-                <div class="glass-card p-8 rounded-3xl hover:shadow-lg transition-shadow duration-300" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center text-deep-blush text-xl mb-6">
-                        <i class="fa-brands fa-instagram"></i>
+                    <!-- Service 2 -->
+                    <div class="bg-glass border border-glass-border p-8 glow-card group reveal delay-200">
+                        <i data-lucide="instagram" class="text-white w-8 h-8 mb-4 group-hover:scale-110 transition-transform"></i>
+                        <h3 class="text-xl font-bold text-white mb-2">Social Media Manager</h3>
+                        <p class="text-sm text-gray-400">Content scheduling, community engagement, and analytics reporting across Instagram, LinkedIn, and X.</p>
                     </div>
-                    <h3 class="text-xl font-heading font-bold mb-3">Social Media Support</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Basic graphics creation, scheduling posts, and engaging with your community to keep your brand alive.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Skills Section -->
-    <section class="py-16 bg-white">
-        <div class="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
-            <div class="md:w-1/2" data-aos="fade-right">
-                <h3 class="text-3xl font-heading mb-6">My Skillset</h3>
-                <p class="text-gray-500 mb-6">I pride myself on a diverse set of soft and technical skills that ensure your business runs smoothly.</p>
-                <div class="space-y-4">
-                    <div>
-                        <div class="flex justify-between text-xs font-bold uppercase tracking-wider mb-1">
-                            <span>Communication</span>
-                            <span>100%</span>
-                        </div>
-                        <div class="w-full bg-pink-100 rounded-full h-2">
-                            <div class="bg-dusty-rose h-2 rounded-full" style="width: 100%"></div>
-                        </div>
+                    <!-- Service 3 -->
+                    <div class="bg-glass border border-glass-border p-8 glow-card group reveal delay-300">
+                        <i data-lucide="pen-tool" class="text-white w-8 h-8 mb-4 group-hover:scale-110 transition-transform"></i>
+                        <h3 class="text-xl font-bold text-white mb-2">Copywriting</h3>
+                        <p class="text-sm text-gray-400">Compelling newsletters, blog posts, and captions that convert readers into loyal clients.</p>
                     </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-bold uppercase tracking-wider mb-1">
-                            <span>Organization</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="w-full bg-pink-100 rounded-full h-2">
-                            <div class="bg-dusty-rose h-2 rounded-full" style="width: 95%"></div>
-                        </div>
+
+                    <!-- Service 4 -->
+                    <div class="bg-glass border border-glass-border p-8 glow-card group reveal delay-400">
+                        <i data-lucide="database" class="text-white w-8 h-8 mb-4 group-hover:scale-110 transition-transform"></i>
+                        <h3 class="text-xl font-bold text-white mb-2">Data Entry</h3>
+                        <p class="text-sm text-gray-400">Accurate CRM updates, spreadsheet management, and digital filing systems.</p>
                     </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-bold uppercase tracking-wider mb-1">
-                            <span>Creativity</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="w-full bg-pink-100 rounded-full h-2">
-                            <div class="bg-dusty-rose h-2 rounded-full" style="width: 90%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="md:w-1/2 grid grid-cols-2 gap-4" data-aos="fade-left">
-                <div class="bg-soft-pink p-4 rounded-xl text-center">
-                    <span class="block text-2xl font-bold text-deep-blush">3+</span>
-                    <span class="text-xs uppercase text-gray-500">Years Experience</span>
-                </div>
-                <div class="bg-soft-pink p-4 rounded-xl text-center">
-                    <span class="block text-2xl font-bold text-deep-blush">50+</span>
-                    <span class="text-xs uppercase text-gray-500">Projects Done</span>
-                </div>
-                <div class="bg-soft-pink p-4 rounded-xl text-center col-span-2">
-                    <span class="block text-2xl font-bold text-deep-blush">100%</span>
-                    <span class="text-xs uppercase text-gray-500">Client Satisfaction</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-dusty-rose uppercase tracking-widest text-xs font-bold">My Work</span>
-                <h2 class="text-4xl font-heading text-slate-text mt-2">Portfolio</h2>
+    <section id="portfolio" class="py-32 bg-off-black relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-16 reveal">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-gray-500 block mb-2">Selected Works</span>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-white">Visual <br> Showcase</h2>
+                </div>
+                <div class="hidden md:block">
+                    <p class="text-gray-400 text-sm max-w-xs text-right">
+                        A curation of social media assets, thumbnails, and creative projects.
+                    </p>
+                </div>
             </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Portfolio Item 1 -->
-                <div class="group relative overflow-hidden rounded-3xl shadow-md cursor-pointer" data-aos="zoom-in">
-                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Social Media Feed" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-deep-blush bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white p-6 text-center">
-                        <h4 class="font-heading text-xl mb-2">Social Media Feed</h4>
-                        <p class="text-xs font-light">Instagram Curation & Design</p>
+
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 auto-rows-fr">
+                
+                <!-- Tall Item 1 (9:16) -->
+                <div class="lg:col-span-3 reveal delay-100">
+                    <div class="group relative w-full aspect-9-16 overflow-hidden border border-glass-border bg-gray-900">
+                        <img src="images/socialmedia1.jpg" onerror="this.src='https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&auto=format&fit=crop&q=60'" alt="Social Media 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <span class="text-white font-bold tracking-widest uppercase text-sm">IG Story</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Portfolio Item 2 -->
-                <div class="group relative overflow-hidden rounded-3xl shadow-md cursor-pointer" data-aos="zoom-in" data-aos-delay="100">
-                    <img src="https://images.unsplash.com/photo-1554415707-6e8cfc93850c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Inbox Organization" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-deep-blush bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white p-6 text-center">
-                        <h4 class="font-heading text-xl mb-2">Inbox Cleanup</h4>
-                        <p class="text-xs font-light">Email Management System</p>
+                <!-- Wide Item 1 (16:9) -->
+                <div class="lg:col-span-6 flex flex-col justify-center reveal delay-200">
+                    <div class="group relative w-full aspect-16-9 overflow-hidden border border-glass-border bg-gray-900">
+                        <img src="images/thumbnail1.jpg" onerror="this.src='https://images.unsplash.com/photo-1626785774573-4b799314346d?w=800&auto=format&fit=crop&q=60'" alt="Thumbnail 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <span class="text-white font-bold tracking-widest uppercase text-sm">Youtube Thumbnail</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Portfolio Item 3 -->
-                <div class="group relative overflow-hidden rounded-3xl shadow-md cursor-pointer" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Travel Itinerary" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-deep-blush bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white p-6 text-center">
-                        <h4 class="font-heading text-xl mb-2">Travel Itinerary</h4>
-                        <p class="text-xs font-light">Business Trip Planning</p>
+                 <!-- Tall Item 2 (9:16) -->
+                 <div class="lg:col-span-3 reveal delay-300">
+                    <div class="group relative w-full aspect-9-16 overflow-hidden border border-glass-border bg-gray-900">
+                        <img src="images/socialmedia2.jpg" onerror="this.src='https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=600&auto=format&fit=crop&q=60'" alt="Social Media 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <span class="text-white font-bold tracking-widest uppercase text-sm">Reel Cover</span>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Wide Item 2 (16:9) -->
+                <div class="lg:col-span-6 lg:col-start-4 reveal delay-400">
+                     <div class="group relative w-full aspect-16-9 overflow-hidden border border-glass-border bg-gray-900">
+                        <img src="images/thumbnail2.jpg" onerror="this.src='https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=800&auto=format&fit=crop&q=60'" alt="Thumbnail 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <span class="text-white font-bold tracking-widest uppercase text-sm">Blog Graphic</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
     <!-- Rates Section -->
-    <section class="py-20 bg-white/60">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-dusty-rose uppercase tracking-widest text-xs font-bold">Investment</span>
-                <h2 class="text-4xl font-heading text-slate-text mt-2">Packages & Rates</h2>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Rate Card 1 -->
-                <div class="glass-card p-8 rounded-3xl border-2 border-transparent hover:border-pink-200 transition-colors" data-aos="fade-right">
-                    <h3 class="font-heading text-2xl mb-4">Hourly Rate</h3>
-                    <div class="text-4xl font-bold text-deep-blush mb-6">$35<span class="text-base font-normal text-gray-500">/hr</span></div>
-                    <ul class="text-sm text-gray-600 space-y-3 mb-8">
-                        <li class="flex items-center"><i class="fa-solid fa-heart text-pink-300 mr-2"></i> Flexible hours</li>
-                        <li class="flex items-center"><i class="fa-solid fa-heart text-pink-300 mr-2"></i> Weekly time tracking</li>
-                        <li class="flex items-center"><i class="fa-solid fa-heart text-pink-300 mr-2"></i> Month-to-month</li>
-                    </ul>
-                    <a href="#contact" class="block text-center py-3 rounded-full border border-deep-blush text-deep-blush hover:bg-deep-blush hover:text-white transition-colors">Select Hourly</a>
-                </div>
-
-                <!-- Rate Card 2 -->
-                <div class="bg-white p-8 rounded-3xl shadow-xl transform md:-translate-y-4 border border-pink-100" data-aos="fade-left">
-                    <div class="inline-block bg-pink-100 text-deep-blush text-xs font-bold px-3 py-1 rounded-full mb-4">MOST POPULAR</div>
-                    <h3 class="font-heading text-2xl mb-4">Retainer Package</h3>
-                    <div class="text-4xl font-bold text-deep-blush mb-6">$600<span class="text-base font-normal text-gray-500">/mo</span></div>
-                    <ul class="text-sm text-gray-600 space-y-3 mb-8">
-                        <li class="flex items-center"><i class="fa-solid fa-star text-yellow-400 mr-2"></i> 20 hours per month</li>
-                        <li class="flex items-center"><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Priority Support</li>
-                        <li class="flex items-center"><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Monthly Strategy Call</li>
-                    </ul>
-                    <a href="#contact" class="block text-center py-3 rounded-full bg-deep-blush text-white hover:bg-opacity-90 shadow-lg btn-hover">Choose Retainer</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 px-6">
-        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-8 md:p-16 relative overflow-hidden" data-aos="zoom-in-up">
-            <!-- Decorative circle -->
-            <div class="absolute -top-20 -right-20 w-64 h-64 bg-pink-200 rounded-full opacity-50 blur-3xl"></div>
+    <section id="rates" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="font-display text-4xl font-bold mb-16 text-center text-white reveal">Investment Plans</h2>
             
-            <div class="relative z-10 text-center">
-                <h2 class="text-4xl font-heading mb-6">Let's Work Together</h2>
-                <p class="text-gray-600 mb-10 max-w-lg mx-auto">Ready to reclaim your time? Fill out the form below or shoot me an email, and let's get organized!</p>
-                
-                <form class="space-y-6 max-w-lg mx-auto text-left">
-                    <div>
-                        <label class="block text-xs uppercase font-bold text-gray-500 mb-2">Name</label>
-                        <input type="text" class="w-full bg-white bg-opacity-80 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-pink-300 outline-none transition-shadow" placeholder="Your pretty name">
-                    </div>
-                    <div>
-                        <label class="block text-xs uppercase font-bold text-gray-500 mb-2">Email</label>
-                        <input type="email" class="w-full bg-white bg-opacity-80 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-pink-300 outline-none transition-shadow" placeholder="you@example.com">
-                    </div>
-                    <div>
-                        <label class="block text-xs uppercase font-bold text-gray-500 mb-2">Message</label>
-                        <textarea rows="4" class="w-full bg-white bg-opacity-80 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-pink-300 outline-none transition-shadow" placeholder="Tell me about your needs..."></textarea>
-                    </div>
-                    <button type="button" class="w-full py-4 bg-deep-blush text-white font-bold rounded-xl shadow-lg btn-hover hover:bg-opacity-90">Send Message</button>
-                </form>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Basic Plan -->
+                <div class="bg-glass border border-glass-border p-8 flex flex-col reveal">
+                    <h3 class="text-lg font-bold text-gray-400 uppercase tracking-widest mb-4">Starter</h3>
+                    <div class="text-4xl font-display font-bold text-white mb-6">$25<span class="text-sm text-gray-500 font-sans font-normal">/hour</span></div>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-300 flex-grow">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> 10 Hours / Month</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Email Management</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Data Entry</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Basic Scheduling</li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-3 border border-gray-600 text-center text-white uppercase text-xs font-bold tracking-widest hover:border-white hover:bg-white hover:text-black transition-all">Select Plan</a>
+                </div>
 
-                <div class="mt-12 flex justify-center space-x-6">
-                    <a href="#" class="text-2xl text-gray-400 hover:text-deep-blush transition-colors"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="text-2xl text-gray-400 hover:text-deep-blush transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="#" class="text-2xl text-gray-400 hover:text-deep-blush transition-colors"><i class="fa-regular fa-envelope"></i></a>
+                 <!-- Pro Plan (Highlighted) -->
+                 <div class="bg-black border border-white p-8 flex flex-col transform md:-translate-y-4 reveal delay-100 relative">
+                    <div class="absolute top-0 right-0 bg-white text-black text-[10px] font-bold uppercase px-2 py-1">Popular</div>
+                    <h3 class="text-lg font-bold text-white uppercase tracking-widest mb-4">Professional</h3>
+                    <div class="text-4xl font-display font-bold text-white mb-6">$400<span class="text-sm text-gray-500 font-sans font-normal">/month</span></div>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-300 flex-grow">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> 20 Hours / Month</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Social Media Mgmt</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Copywriting</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Monthly Reporting</li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-3 bg-white text-center text-black uppercase text-xs font-bold tracking-widest hover:bg-gray-200 transition-all">Select Plan</a>
+                </div>
+
+                 <!-- Premium Plan -->
+                 <div class="bg-glass border border-glass-border p-8 flex flex-col reveal delay-200">
+                    <h3 class="text-lg font-bold text-gray-400 uppercase tracking-widest mb-4">Enterprise</h3>
+                    <div class="text-4xl font-display font-bold text-white mb-6">$800<span class="text-sm text-gray-500 font-sans font-normal">/month</span></div>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-300 flex-grow">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> 40 Hours / Month</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Priority Support</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Full Project Mgmt</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-white"></i> Strategy Calls</li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-3 border border-gray-600 text-center text-white uppercase text-xs font-bold tracking-widest hover:border-white hover:bg-white hover:text-black transition-all">Select Plan</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-8 text-center text-xs text-gray-400">
-        <p>&copy; 2024 Mary Valerie. Designed with <i class="fa-solid fa-heart text-pink-300"></i></p>
-    </footer>
+    <!-- Contact & Footer Section -->
+    <section id="contact" class="relative pt-32 pb-12 px-6 border-t border-glass-border">
+        <div class="max-w-4xl mx-auto">
+            
+            <div class="grid md:grid-cols-2 gap-12 mb-24">
+                <div class="reveal">
+                    <h2 class="font-display text-4xl font-bold text-white mb-6">Let's <br>Connect</h2>
+                    <p class="text-gray-400 mb-8">Ready to streamline your business? Send me a message and let's discuss how I can help you reclaim your time.</p>
+                    
+                    <div class="space-y-4">
+                        <a href="mailto:hello@elizamaven.com" class="flex items-center gap-4 text-white hover:text-gray-300 transition-colors">
+                            <div class="w-10 h-10 border border-glass-border flex items-center justify-center rounded-full">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                            </div>
+                            <span>hello@elizamaven.com</span>
+                        </a>
+                         <div class="flex items-center gap-4 text-white">
+                            <div class="w-10 h-10 border border-glass-border flex items-center justify-center rounded-full">
+                                <i data-lucide="map-pin" class="w-4 h-4"></i>
+                            </div>
+                            <span>Remote / Worldwide</span>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+                <form class="space-y-4 reveal delay-100" onsubmit="event.preventDefault(); alert('Message Sent!');">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" placeholder="Name" class="w-full bg-glass border border-glass-border p-4 text-white focus:outline-none focus:border-white transition-colors placeholder-gray-600">
+                        <input type="email" placeholder="Email" class="w-full bg-glass border border-glass-border p-4 text-white focus:outline-none focus:border-white transition-colors placeholder-gray-600">
+                    </div>
+                    <input type="text" placeholder="Subject" class="w-full bg-glass border border-glass-border p-4 text-white focus:outline-none focus:border-white transition-colors placeholder-gray-600">
+                    <textarea rows="4" placeholder="Message" class="w-full bg-glass border border-glass-border p-4 text-white focus:outline-none focus:border-white transition-colors placeholder-gray-600"></textarea>
+                    <button type="submit" class="px-8 py-4 bg-white text-black font-bold uppercase tracking-widest w-full hover:bg-gray-200 transition-colors">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+
+            <!-- Bottom Footer Area -->
+            <div class="grid md:grid-cols-2 gap-8 items-center border-t border-glass-border pt-8">
+                <div class="flex gap-4">
+                    <a href="#" class="w-8 h-8 border border-glass-border flex items-center justify-center text-gray-400 hover:text-white hover:border-white transition-all rounded-full"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                    <a href="#" class="w-8 h-8 border border-glass-border flex items-center justify-center text-gray-400 hover:text-white hover:border-white transition-all rounded-full"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                    <a href="#" class="w-8 h-8 border border-glass-border flex items-center justify-center text-gray-400 hover:text-white hover:border-white transition-all rounded-full"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                </div>
+                
+                <div class="text-right text-xs text-gray-600 uppercase tracking-widest">
+                    <p>&copy; 2024 Eliza Maven Portfolio.</p>
+                    <p class="mt-2">Design by : <span class="text-gray-400">Blockscom Media</span></p>
+                </div>
+            </div>
+            
+            <!-- Second Image / Casual Photo Integration (Bottom Decoration) -->
+            <div class="absolute bottom-0 left-0 opacity-10 pointer-events-none w-64 h-64 overflow-hidden mix-blend-overlay">
+                <img src="photo.jpg" alt="" class="w-full h-full object-cover grayscale">
+            </div>
+
+        </div>
+    </section>
+
     <script>
-        // Initialize Animate On Scroll
-        AOS.init({
-            once: true, // Animation happens only once while scrolling down
-            offset: 100, // Offset (in px) from the original trigger point
-            duration: 800, // Duration of animation
-            easing: 'ease-out-cubic',
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Custom Scroll Reveal Animation (Simulating Locomotive/GSAP feel)
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 100;
+
+                reveals.forEach((reveal) => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll(); // Trigger once on load
+            
+            // Navbar blur effect on scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('py-2');
+                    navbar.classList.remove('py-4');
+                } else {
+                    navbar.classList.add('py-4');
+                    navbar.classList.remove('py-2');
+                }
+            });
         });
     </script>
 </body>

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliza Maven Portfolio</title>
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Eliza Maven Portfolio">
+    <meta property="og:description" content="Virtual Assistant Services - Administrative, Social Media, Copywriting & Data Entry">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://elizamaven.com">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Locomotive Scroll (Lightweight alternative logic implemented via CSS/JS for stability in iframe) -->
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Rajdhani', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        neon: {
+                            blue: '#00f3ff',
+                            purple: '#bc13fe',
+                            green: '#0aff0a',
+                        },
+                        glass: 'rgba(255, 255, 255, 0.05)',
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f1f1f 1px, transparent 1px), linear-gradient(to bottom, #1f1f1f 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f3ff; 
+        }
+
+        /* Futuristic Utilities */
+        .text-glow {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.3);
+        }
+        
+        .box-glow {
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+        .box-glow:hover {
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.3), inset 0 0 10px rgba(0, 243, 255, 0.1);
+            border-color: #00f3ff;
+        }
+
+        .glass-panel {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Grid Background */
+        .bg-grid {
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, transparent, black, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 90%);
+        }
+
+        /* Glitch Effect on Hover for Titles */
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: #00f3ff;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        /* Custom Marquee for Note */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-300 overflow-x-hidden antialiased selection:bg-neon-blue selection:text-black">
+
+    <!-- Flowing Notification Note -->
+    <div class="fixed top-0 w-full z-50 bg-neon-blue text-black font-bold text-xs uppercase py-1 tracking-wider">
+        <div class="marquee-container">
+            <div class="marquee-content">
+                Everything is customizable — you can edit, remove, or change anything. We handle it all. we will remove this once this template is purchase
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-8 w-full z-40 transition-all duration-300 bg-black/80 backdrop-blur-md border-b border-white/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <span class="font-display font-bold text-2xl text-white tracking-widest uppercase cursor-pointer hover:text-neon-blue transition-colors">
+                        ELIZA<span class="text-neon-blue">.</span>MAVEN
+                    </span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+                        <a href="#about" class="hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+                        <a href="#services" class="hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">Services</a>
+                        <a href="#portfolio" class="hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">Portfolio</a>
+                        <a href="#contact" class="px-4 py-2 border border-neon-blue text-neon-blue rounded hover:bg-neon-blue hover:text-black transition-all text-sm font-bold shadow-[0_0_10px_rgba(0,243,255,0.2)]">Contact Me</a>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-black border-b border-white/10" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="text-gray-300 hover:text-neon-blue block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#about" class="text-gray-300 hover:text-neon-blue block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#services" class="text-gray-300 hover:text-neon-blue block px-3 py-2 rounded-md text-base font-medium">Services</a>
+                <a href="#portfolio" class="text-gray-300 hover:text-neon-blue block px-3 py-2 rounded-md text-base font-medium">Portfolio</a>
+                <a href="#contact" class="text-neon-blue block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Wrapper -->
+    <main class="relative pt-16">
+        
+        <!-- Background Grid Decoration -->
+        <div class="fixed inset-0 z-0 pointer-events-none bg-grid-pattern opacity-[0.03]"></div>
+
+        <!-- HERO SECTION -->
+        <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-10">
+            <!-- Ambient Glow -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-blue/10 rounded-full blur-[100px] pointer-events-none animate-pulse"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon-purple/10 rounded-full blur-[100px] pointer-events-none animate-pulse" style="animation-delay: 1s;"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 reveal active">
+                    <div class="inline-block px-3 py-1 border border-neon-blue/30 rounded-full bg-neon-blue/5 backdrop-blur-sm">
+                        <span class="text-neon-blue text-xs font-bold tracking-[0.2em] uppercase">Future Ready VA</span>
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-display font-black text-white leading-tight">
+                        ELEVATE YOUR <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 glitch-hover cursor-default">BUSINESS</span>
+                    </h1>
+                    <p class="text-lg text-gray-400 max-w-lg leading-relaxed">
+                        I am <span class="text-white font-bold">Eliza Maven</span>. A strategic Virtual Assistant specializing in digital optimization, administrative precision, and creative execution.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="#rates" class="group relative px-8 py-3 bg-white text-black font-bold uppercase tracking-wider overflow-hidden">
+                            <span class="relative z-10 group-hover:text-white transition-colors">View Rates</span>
+                            <div class="absolute inset-0 bg-neon-blue transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                        </a>
+                        <a href="#portfolio" class="group px-8 py-3 border border-white/20 text-white font-bold uppercase tracking-wider hover:border-neon-blue hover:text-neon-blue transition-colors box-glow">
+                            My Work
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="relative reveal delay-200 flex justify-center md:justify-end">
+                    <!-- Image Frame -->
+                    <div class="relative w-72 h-72 md:w-[450px] md:h-[550px] border border-white/10 p-2">
+                        <!-- Corner Accents -->
+                        <div class="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-neon-blue"></div>
+                        <div class="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-neon-blue"></div>
+                        <div class="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-neon-blue"></div>
+                        <div class="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-neon-blue"></div>
+                        
+                        <!-- Main Image -->
+                        <div class="w-full h-full bg-gray-900 relative overflow-hidden group">
+                            <!-- Placeholder fallback logic included in styling -->
+                            <img src="photo.png" alt="Eliza Maven Professional" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 opacity-90 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce opacity-50">
+                <span class="text-[10px] uppercase tracking-widest text-white/60">Scroll</span>
+                <i data-lucide="chevron-down" class="text-neon-blue w-4 h-4"></i>
+            </div>
+        </section>
+
+        <!-- ABOUT & SOFTWARES -->
+        <section id="about" class="py-24 relative bg-black">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-12 gap-12">
+                    
+                    <!-- Bio Image -->
+                    <div class="md:col-span-5 reveal">
+                        <div class="relative group">
+                            <div class="absolute inset-0 bg-neon-purple/20 transform translate-x-2 translate-y-2 group-hover:translate-x-4 group-hover:translate-y-4 transition-transform duration-300"></div>
+                            <img src="photo.jpg" alt="Eliza working in garden" class="relative w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-all duration-500 border border-white/10" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
+                        </div>
+                    </div>
+
+                    <!-- Bio Text -->
+                    <div class="md:col-span-7 flex flex-col justify-center reveal delay-100">
+                        <h2 class="text-4xl font-display font-bold text-white mb-6">BEYOND <span class="text-neon-purple">ASSISTANCE</span></h2>
+                        <p class="text-gray-400 mb-8 leading-relaxed">
+                            I provide high-level virtual assistance that goes beyond simple task execution. I integrate into your workflow, optimizing processes and handling the complexities of digital management so you can focus on scaling your vision. Whether it's administrative precision or creative direction, I am your strategic partner.
+                        </p>
+
+                        <!-- Softwares Marquee/Grid -->
+                        <h3 class="text-sm font-bold uppercase tracking-widest text-white mb-4 border-l-2 border-neon-blue pl-3">Software Proficiency</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                            <!-- Software Item -->
+                            <div class="glass-panel p-3 flex items-center gap-3 hover:bg-white/5 transition-colors cursor-default">
+                                <i data-lucide="trello" class="w-5 h-5 text-blue-400"></i>
+                                <span class="text-sm">Trello</span>
+                            </div>
+                            <div class="glass-panel p-3 flex items-center gap-3 hover:bg-white/5 transition-colors cursor-default">
+                                <i data-lucide="slack" class="w-5 h-5 text-purple-400"></i>
+                                <span class="text-sm">Slack</span>
+                            </div>
+                            <div class="glass-panel p-3 flex items-center gap-3 hover:bg-white/5 transition-colors cursor-default">
+                                <i data-lucide="figma" class="w-5 h-5 text-red-400"></i>
+                                <span class="text-sm">Figma</span>
+                            </div>
+                            <div class="glass-panel p-3 flex items-center gap-3 hover:bg-white/5 transition-colors cursor-default">
+                                <i data-lucide="mail" class="w-5 h-5 text-yellow-400"></i>
+                                <span class="text-sm">Mailchimp</span>
+                            </div>
+                            <div class="glass-panel p-3 flex items-center gap-3 hover:bg-white/5 transition-colors cursor-default">
+                                <i data-lucide="sheet" class="w-5 h-5 text-green-400"></i>
+                                <span class="text-sm">Excel/G-Suite</span>
+                            </div>
+                            <div class="glass-panel p-3 flex items-center gap-3 hover:bg-white/5 transition-colors cursor-default">
+                                <i data-lucide="pen-tool" class="w-5 h-5 text-pink-400"></i>
+                                <span class="text-sm">Canva Pro</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" class="py-24 bg-neutral-900/30 relative">
+             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl font-display font-bold text-white mb-2">CORE <span class="text-neon-blue">SERVICES</span></h2>
+                    <div class="h-1 w-20 bg-neon-blue mx-auto"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Service 1 -->
+                    <div class="glass-panel p-8 box-glow group relative overflow-hidden reveal">
+                        <div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity">
+                            <i data-lucide="briefcase" class="w-12 h-12 text-neon-blue"></i>
+                        </div>
+                        <h3 class="text-xl font-display font-bold text-white mb-4 group-hover:text-neon-blue transition-colors">Admin Support</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Calendar management, email handling, and travel arrangements executed with military precision.
+                        </p>
+                        <ul class="text-xs text-gray-500 space-y-2">
+                            <li class="flex items-center"><span class="w-1 h-1 bg-neon-blue rounded-full mr-2"></span>Inbox Management</li>
+                            <li class="flex items-center"><span class="w-1 h-1 bg-neon-blue rounded-full mr-2"></span>Scheduling</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="glass-panel p-8 box-glow group relative overflow-hidden reveal delay-100">
+                        <div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity">
+                            <i data-lucide="share-2" class="w-12 h-12 text-neon-purple"></i>
+                        </div>
+                        <h3 class="text-xl font-display font-bold text-white mb-4 group-hover:text-neon-purple transition-colors">Social Media</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            End-to-end management of your social presence. Engagement, posting, and analytics.
+                        </p>
+                        <ul class="text-xs text-gray-500 space-y-2">
+                            <li class="flex items-center"><span class="w-1 h-1 bg-neon-purple rounded-full mr-2"></span>Content Planning</li>
+                            <li class="flex items-center"><span class="w-1 h-1 bg-neon-purple rounded-full mr-2"></span>Community Engagement</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="glass-panel p-8 box-glow group relative overflow-hidden reveal delay-200">
+                        <div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity">
+                            <i data-lucide="pen-line" class="w-12 h-12 text-neon-green"></i>
+                        </div>
+                        <h3 class="text-xl font-display font-bold text-white mb-4 group-hover:text-neon-green transition-colors">Copywriting</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Compelling copy for newsletters, captions, and blogs that captures your brand voice.
+                        </p>
+                        <ul class="text-xs text-gray-500 space-y-2">
+                            <li class="flex items-center"><span class="w-1 h-1 bg-neon-green rounded-full mr-2"></span>Blog Posts</li>
+                            <li class="flex items-center"><span class="w-1 h-1 bg-neon-green rounded-full mr-2"></span>Ad Copy</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="glass-panel p-8 box-glow group relative overflow-hidden reveal delay-300">
+                        <div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity">
+                            <i data-lucide="database" class="w-12 h-12 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-display font-bold text-white mb-4 group-hover:text-gray-300 transition-colors">Data Entry</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Accurate and efficient data handling, CRM updates, and lead generation organization.
+                        </p>
+                        <ul class="text-xs text-gray-500 space-y-2">
+                            <li class="flex items-center"><span class="w-1 h-1 bg-white rounded-full mr-2"></span>CRM Management</li>
+                            <li class="flex items-center"><span class="w-1 h-1 bg-white rounded-full mr-2"></span>Research</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section class="py-24 bg-black relative border-y border-white/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal">
+                    <div>
+                        <h2 class="text-3xl font-display font-bold text-white uppercase">Technical <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple">Arsenal</span></h2>
+                    </div>
+                 </div>
+
+                 <div class="space-y-8 reveal">
+                     <!-- Skill 1 -->
+                     <div>
+                         <div class="flex justify-between mb-2">
+                             <span class="text-sm font-bold text-white tracking-widest">PROJECT MANAGEMENT</span>
+                             <span class="text-sm text-neon-blue">95%</span>
+                         </div>
+                         <div class="w-full bg-gray-900 h-1 rounded-full overflow-hidden">
+                             <div class="bg-neon-blue h-full rounded-full w-[95%] shadow-[0_0_10px_#00f3ff]"></div>
+                         </div>
+                     </div>
+                     <!-- Skill 2 -->
+                     <div>
+                         <div class="flex justify-between mb-2">
+                             <span class="text-sm font-bold text-white tracking-widest">CONTENT CREATION</span>
+                             <span class="text-sm text-neon-purple">88%</span>
+                         </div>
+                         <div class="w-full bg-gray-900 h-1 rounded-full overflow-hidden">
+                             <div class="bg-neon-purple h-full rounded-full w-[88%] shadow-[0_0_10px_#bc13fe]"></div>
+                         </div>
+                     </div>
+                     <!-- Skill 3 -->
+                     <div>
+                         <div class="flex justify-between mb-2">
+                             <span class="text-sm font-bold text-white tracking-widest">COMMUNICATION</span>
+                             <span class="text-sm text-neon-green">98%</span>
+                         </div>
+                         <div class="w-full bg-gray-900 h-1 rounded-full overflow-hidden">
+                             <div class="bg-neon-green h-full rounded-full w-[98%] shadow-[0_0_10px_#0aff0a]"></div>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO -->
+        <section id="portfolio" class="py-24 relative">
+             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-16 reveal">
+                    <h2 class="text-4xl font-display font-bold text-white">SELECTED <span class="text-gray-600">WORKS</span></h2>
+                </div>
+
+                <!-- Masonry Grid Layout -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[200px]">
+                    
+                    <!-- Item 1: Social Media Vertical (Spans 2 rows) -->
+                    <div class="row-span-2 group relative overflow-hidden border border-white/10 reveal">
+                        <img src="images/socialmedia1.jpg" onerror="this.src='https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'" alt="Social Media 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h4 class="text-neon-blue font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Social Campaign</h4>
+                            <p class="text-gray-400 text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Instagram Reels Strategy</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Thumbnail Horizontal -->
+                    <div class="group relative overflow-hidden border border-white/10 reveal delay-100">
+                         <img src="images/thumbnail1.jpg" onerror="this.src='https://images.unsplash.com/photo-1611162616475-46b635cb6868?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Thumbnail 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                         <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h4 class="text-neon-purple font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-300">YouTube Thumbnail</h4>
+                            <p class="text-gray-400 text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Click-Through Optimization</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: Social Media Vertical (Spans 2 rows) -->
+                    <div class="row-span-2 group relative overflow-hidden border border-white/10 reveal delay-200">
+                         <img src="images/socialmedia2.jpg" onerror="this.src='https://images.unsplash.com/photo-1599658880436-c61792e70672?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'" alt="Social Media 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                         <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h4 class="text-neon-green font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Story Design</h4>
+                            <p class="text-gray-400 text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Brand Aesthetics</p>
+                        </div>
+                    </div>
+
+                     <!-- Item 4: Thumbnail Horizontal -->
+                     <div class="group relative overflow-hidden border border-white/10 reveal delay-300">
+                        <img src="images/thumbnail2.jpg" onerror="this.src='https://images.unsplash.com/photo-1542435503-956c469947f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Thumbnail 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                           <h4 class="text-white font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Blog Header</h4>
+                           <p class="text-gray-400 text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Visual Storytelling</p>
+                       </div>
+                   </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- RATES / PRICING -->
+        <section id="rates" class="py-24 bg-neutral-900/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl font-display font-bold text-white">INVESTMENT <span class="text-neon-blue">PLANS</span></h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Basic -->
+                    <div class="glass-panel p-8 border-t-4 border-gray-500 hover:border-neon-blue transition-colors reveal">
+                        <h3 class="text-xl font-bold text-white mb-2">STARTER</h3>
+                        <div class="text-3xl font-display font-bold text-white mb-6">$500<span class="text-sm text-gray-500 font-sans font-normal">/mo</span></div>
+                        <ul class="space-y-4 mb-8 text-sm text-gray-400">
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> 10 Hours of Support</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Email Management</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Basic Data Entry</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Weekly Reports</li>
+                        </ul>
+                        <a href="#contact" class="block w-full py-3 border border-white/20 text-center text-white text-sm font-bold uppercase hover:bg-white hover:text-black transition-all">Select Plan</a>
+                    </div>
+
+                    <!-- Pro -->
+                    <div class="glass-panel p-8 border-t-4 border-neon-blue relative transform scale-105 shadow-[0_0_30px_rgba(0,0,0,0.5)] reveal delay-100">
+                        <div class="absolute top-0 right-0 bg-neon-blue text-black text-xs font-bold px-3 py-1 uppercase">Popular</div>
+                        <h3 class="text-xl font-bold text-white mb-2">PROFESSIONAL</h3>
+                        <div class="text-3xl font-display font-bold text-white mb-6">$900<span class="text-sm text-gray-500 font-sans font-normal">/mo</span></div>
+                        <ul class="space-y-4 mb-8 text-sm text-gray-400">
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> 20 Hours of Support</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Social Media Management</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Calendar & Travel</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-blue mr-2"></i> Monthly Strategy Call</li>
+                        </ul>
+                        <a href="#contact" class="block w-full py-3 bg-neon-blue text-center text-black text-sm font-bold uppercase hover:bg-white transition-all shadow-[0_0_15px_rgba(0,243,255,0.4)]">Select Plan</a>
+                    </div>
+
+                    <!-- Elite -->
+                    <div class="glass-panel p-8 border-t-4 border-neon-purple hover:border-neon-purple transition-colors reveal delay-200">
+                        <h3 class="text-xl font-bold text-white mb-2">ELITE</h3>
+                        <div class="text-3xl font-display font-bold text-white mb-6">$1800<span class="text-sm text-gray-500 font-sans font-normal">/mo</span></div>
+                        <ul class="space-y-4 mb-8 text-sm text-gray-400">
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-purple mr-2"></i> 40 Hours of Support</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-purple mr-2"></i> Full Admin & Social Suite</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-purple mr-2"></i> Copywriting Services</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-neon-purple mr-2"></i> Priority Response</li>
+                        </ul>
+                        <a href="#contact" class="block w-full py-3 border border-white/20 text-center text-white text-sm font-bold uppercase hover:bg-white hover:text-black transition-all">Select Plan</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="py-24 relative overflow-hidden">
+             <!-- Background Glow -->
+             <div class="absolute bottom-0 right-0 w-96 h-96 bg-neon-blue/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="glass-panel p-8 md:p-12 reveal border border-white/10">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-display font-bold text-white mb-4">INITIATE <span class="text-neon-blue">PROTOCOL</span></h2>
+                        <p class="text-gray-400">Ready to optimize your workflow? Send me a transmission.</p>
+                    </div>
+
+                    <form class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold text-neon-blue uppercase mb-2 tracking-wider">Name</label>
+                                <input type="text" class="w-full bg-black/50 border border-white/10 p-3 text-white focus:outline-none focus:border-neon-blue transition-colors" placeholder="Enter your name">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-neon-blue uppercase mb-2 tracking-wider">Email</label>
+                                <input type="email" class="w-full bg-black/50 border border-white/10 p-3 text-white focus:outline-none focus:border-neon-blue transition-colors" placeholder="Enter your email">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-neon-blue uppercase mb-2 tracking-wider">Subject</label>
+                            <select class="w-full bg-black/50 border border-white/10 p-3 text-white focus:outline-none focus:border-neon-blue transition-colors appearance-none">
+                                <option>General Inquiry</option>
+                                <option>Service Proposal</option>
+                                <option>Collaboration</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-neon-blue uppercase mb-2 tracking-wider">Message</label>
+                            <textarea rows="4" class="w-full bg-black/50 border border-white/10 p-3 text-white focus:outline-none focus:border-neon-blue transition-colors" placeholder="How can I help you?"></textarea>
+                        </div>
+                        <button type="button" class="w-full py-4 bg-white text-black font-bold uppercase tracking-widest hover:bg-neon-blue transition-colors shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_20px_rgba(0,243,255,0.4)]">
+                            Send Transmission
+                        </button>
+                    </form>
+
+                    <div class="mt-12 flex justify-center space-x-8">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="mail" class="w-6 h-6"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-black border-t border-white/10 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-500 text-xs uppercase tracking-wider">© 2024 Eliza Maven Portfolio. All Systems Operational.</p>
+            <p class="text-gray-600 text-xs">Design by : <span class="text-white font-bold">Blockscom Media</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Custom Scroll Reveal Animation (Simulates Locomotive feel roughly)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: Unobserve after revealing if you want it to only happen once
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/90');
+                navbar.classList.add('backdrop-blur-xl');
+            } else {
+                navbar.classList.remove('bg-black/90');
+                navbar.classList.remove('backdrop-blur-xl');
+            }
+        });
+    </script>
+</body>
+</html>
