@@ -18,6 +18,7 @@ const resumeTemplates = [
                         <p>${data.email || 'email@example.com'}</p>
                         <p>${data.phone || '+1 234 567 890'}</p>
                         <p>${data.location || 'Location, City'}</p>
+                        ${data.website ? `<p>${data.website}</p>` : ''}
                     </div>
                 </div>
 
@@ -81,6 +82,7 @@ const resumeTemplates = [
                         <span>${data.phone || 'Phone'}</span>
                         <span>|</span>
                         <span>${data.location || 'Location'}</span>
+                        ${data.website ? `<span>|</span><span>${data.website}</span>` : ''}
                     </div>
                 </div>
 
@@ -156,6 +158,7 @@ const resumeTemplates = [
                             <p>${data.email || 'email'}</p>
                             <p>${data.phone || 'phone'}</p>
                             <p>${data.location || 'location'}</p>
+                            ${data.website ? `<p>${data.website}</p>` : ''}
                         </div>
                     </div>
                 </div>
@@ -228,6 +231,7 @@ const resumeTemplates = [
                         <span>${data.email}</span>
                         <span>${data.phone}</span>
                         <span>${data.location}</span>
+                        ${data.website ? `<span>${data.website}</span>` : ''}
                     </div>
                 </div>
 
@@ -302,6 +306,7 @@ const resumeTemplates = [
                             <p>${data.email}</p>
                             <p>${data.phone}</p>
                             <p>${data.location}</p>
+                            ${data.website ? `<p>${data.website}</p>` : ''}
                          </div>
                     </div>
                     
@@ -377,6 +382,7 @@ const resumeTemplates = [
                         <p>ssh: ${data.email || 'email'}</p>
                         <p>bg: ${data.phone || 'phone'}</p>
                         <p>loc: ${data.location || 'loc'}</p>
+                        ${data.website ? `<p>web: ${data.website}</p>` : ''}
                     </div>
                 </div>
 

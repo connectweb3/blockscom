@@ -85,6 +85,7 @@ function getFormData() {
         email: document.getElementById('input-email').value,
         phone: document.getElementById('input-phone').value,
         location: document.getElementById('input-location').value,
+        website: document.getElementById('input-website').value,
         summary: document.getElementById('input-summary').value,
         skills: document.getElementById('input-skills').value,
         experience: expItems.length > 0 ? expItems : [{ role: 'Senior VA', company: 'Tech Corp', date: '2020-Present', desc: 'Managed calendar and events.' }],
