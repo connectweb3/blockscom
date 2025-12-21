@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#050505] text-white overflow-x-hidden antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramil Flaviano | AI & Virtual Assistant</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Ramil Flaviano | AI & Virtual Assistant">
+    <meta property="og:description"
+        content="Virtual Assistant specializing in AI integration, Web Development, and Administrative Services.">
+    <meta property="og:image" content="photo.jpg">
+    <meta property="og:url" content="https://blockscom.xyz/ramil">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- GSAP & Lenis for Smooth Scroll/Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#050505',
+                            dark: '#0A0A0A',
+                            gray: '#1F1F1F',
+                            accent: '#FFFFFF',
+                            dim: '#888888'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="selection:bg-white selection:text-black">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Noise Overlay -->
+    <div class="noise-bg"></div>
+
+    <!-- Scroll Progress -->
+    <div class="progress-bar"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 mix-blend-difference text-white">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-xl font-bold font-mono tracking-tighter hover-trigger" data-cursor="link">
+                RAMIL<span class="opacity-50">FLAVIANO</span>
+            </a>
+
+            <div class="hidden md:flex gap-12 font-mono text-sm uppercase tracking-widest">
+                <a href="#about" class="hover:text-gray-400 transition-colors hover-trigger"
+                    data-cursor="link">About</a>
+                <a href="#tools" class="hover:text-gray-400 transition-colors hover-trigger" data-cursor="link">AI
+                    Tools</a>
+                <a href="#services" class="hover:text-gray-400 transition-colors hover-trigger"
+                    data-cursor="link">Services</a>
+                <a href="#portfolio" class="hover:text-gray-400 transition-colors hover-trigger"
+                    data-cursor="link">Portfolio</a>
+                <a href="#contact" class="hover:text-gray-400 transition-colors hover-trigger"
+                    data-cursor="link">Contact</a>
+            </div>
+
+            <button class="md:hidden hover-trigger" id="menu-btn">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 bg-brand-black z-40 transform translate-x-full transition-transform duration-500 flex flex-col justify-center items-center gap-8 text-2xl font-mono">
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#tools" class="mobile-link">Tools</a>
+        <a href="#services" class="mobile-link">Services</a>
+        <a href="#portfolio" class="mobile-link">Portfolio</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+        <button id="close-menu" class="absolute top-6 right-6">
+            <i data-lucide="x"></i>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="w-full relative">
+
+        <!-- Hero Section -->
+        <section class="min-h-screen w-full flex items-center justify-center relative overflow-hidden pt-20 md:pt-0">
+            <!-- Background Grid -->
+            <div class="absolute inset-0 opacity-[0.03] grid-bg pointer-events-none"></div>
+
+            <div class="max-w-7xl w-full px-6 z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="order-2 md:order-1">
+                    <div class="overflow-hidden mb-2">
+                        <h2
+                            class="font-mono text-brand-dim tracking-widest text-sm uppercase hero-subtitle opacity-0 translate-y-4">
+                            Virtual Assistant & AI Builder
+                        </h2>
+                    </div>
+                    <div class="overflow-hidden">
+                        <h1
+                            class="hero-title text-6xl md:text-8xl font-bold tracking-tighter mix-blend-exclusion mb-6 leading-none">
+                            <div class="overflow-hidden"><span class="block translate-y-full">FUTURISTIC</span></div>
+                            <div class="overflow-hidden"><span
+                                    class="block translate-y-full text-gray-500">SOLUTIONS</span></div>
+                        </h1>
+                    </div>
+
+                    <p class="hero-subtitle text-gray-400 max-w-lg mb-8 opacity-0 translate-y-4">
+                        Seamlessly integrating Artificial Intelligence with administrative excellence. I build the
+                        systems that power the future of work.
+                    </p>
+
+                    <a href="#portfolio"
+                        class="magnetic-btn hero-btn group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold overflow-hidden hover-trigger opacity-0 translate-y-4"
+                        data-cursor="link">
+                        <span class="relative z-10 transition-colors group-hover:text-white">View My Work</span>
+                        <div
+                            class="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
+                        </div>
+                        <i data-lucide="arrow-down-right"
+                            class="relative z-10 w-5 h-5 transition-colors group-hover:text-white"></i>
+                    </a>
+                </div>
+
+                <!-- Hero Image (Professional) -->
+                <div
+                    class="order-1 md:order-2 flex justify-center items-center relative hero-image-container opacity-0 scale-95">
+                    <div class="relative w-full max-w-md aspect-square">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent rounded-full blur-3xl opacity-30 animate-pulse">
+                        </div>
+                        <!-- Using photo.png (Professional Transparent) -->
+                        <img src="photo.png" alt="Ramil Flaviano"
+                            class="relative z-10 w-full h-full object-contain drop-shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50 hidden md:block">
+                <i data-lucide="chevrons-down"></i>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-32 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+                <span class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-8 block fade-in-up">About
+                    Me</span>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                    <div class="relative fade-in-up">
+                        <!-- Using photo.jpg (Cozy Cafeteria) -->
+                        <div class="relative rounded-2xl overflow-hidden aspect-[4/5] group">
+                            <img src="photo.jpg" alt="Ramil at Cafeteria"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div
+                                class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500">
+                            </div>
+
+                            <!-- Futuristic Overlay Text -->
+                            <div class="absolute bottom-6 left-6 z-10">
+                                <h3 class="text-3xl font-bold">Ramil Flaviano</h3>
+                                <p class="font-mono text-sm text-gray-300">The Human Behind The AI</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fade-in-up">
+                        <h2 class="text-4xl md:text-6xl font-light leading-tight mb-8">
+                            I JUST LOVE <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-600 font-bold">AI.</span>
+                        </h2>
+                        <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+                            I am not just a Virtual Assistant; I am a digital architect. I leverage cutting-edge AI
+                            tools to automate workflows, generate stunning visuals, and build robust web solutions.
+                        </p>
+                        <p class="text-gray-400 text-lg mb-12 leading-relaxed">
+                            From sitting cozy in a cafeteria brainstorming the next big automation, to executing complex
+                            data integration tasks, I bring a blend of human creativity and machine efficiency.
+                        </p>
+
+                        <div class="flex flex-wrap gap-4 font-mono text-sm text-gray-500">
+                            <div class="px-4 py-2 border border-white/10 rounded-full">#Innovation</div>
+                            <div class="px-4 py-2 border border-white/10 rounded-full">#Automation</div>
+                            <div class="px-4 py-2 border border-white/10 rounded-full">#Creativity</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VA Softwares & AI Tools Section -->
+        <section id="tools" class="py-32 px-6 bg-brand-dark relative overflow-hidden">
+            <!-- Background Glow -->
+            <div
+                class="absolute top-0 right-0 w-[40vw] h-[40vw] bg-white opacity-[0.02] blur-[120px] rounded-full pointer-events-none">
+            </div>
+
+            <div class="max-w-7xl mx-auto relative z-10">
+                <span class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-8 block fade-in-up">My
+                    Arsenal</span>
+                <h2 class="text-5xl md:text-7xl font-bold tracking-tighter mb-16 fade-in-up">AI & SOFTWARE<br>MASTERY
+                </h2>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <!-- Tool Cards -->
+                    <div
+                        class="glass-panel p-6 rounded-xl text-center hover:bg-white/5 transition-all duration-300 fade-in-up">
+                        <div
+                            class="w-12 h-12 mx-auto bg-white/10 rounded-full flex items-center justify-center mb-4 text-2xl">
+                            ⚡</div>
+                        <h3 class="font-bold">Make.com</h3>
+                        <p class="text-xs text-gray-500 mt-2">Automation</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl text-center hover:bg-white/5 transition-all duration-300 fade-in-up"
+                        style="transition-delay: 100ms;">
+                        <div
+                            class="w-12 h-12 mx-auto bg-white/10 rounded-full flex items-center justify-center mb-4 text-2xl">
+                            🔗</div>
+                        <h3 class="font-bold">n8n</h3>
+                        <p class="text-xs text-gray-500 mt-2">Workflow</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl text-center hover:bg-white/5 transition-all duration-300 fade-in-up"
+                        style="transition-delay: 200ms;">
+                        <div
+                            class="w-12 h-12 mx-auto bg-white/10 rounded-full flex items-center justify-center mb-4 text-2xl">
+                            ❤️</div>
+                        <h3 class="font-bold">Lovable</h3>
+                        <p class="text-xs text-gray-500 mt-2">No-Code</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl text-center hover:bg-white/5 transition-all duration-300 fade-in-up"
+                        style="transition-delay: 300ms;">
+                        <div
+                            class="w-12 h-12 mx-auto bg-white/10 rounded-full flex items-center justify-center mb-4 text-2xl">
+                            🎨</div>
+                        <h3 class="font-bold">Midjourney</h3>
+                        <p class="text-xs text-gray-500 mt-2">Image Gen</p>
+                    </div>
+                    <div
+                        class="glass-panel p-6 rounded-xl text-center hover:bg-white/5 transition-all duration-300 fade-in-up">
+                        <div
+                            class="w-12 h-12 mx-auto bg-white/10 rounded-full flex items-center justify-center mb-4 text-2xl">
+                            🍌</div>
+                        <h3 class="font-bold">Nano Banana</h3>
+                        <p class="text-xs text-gray-500 mt-2">Creativity</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl text-center hover:bg-white/5 transition-all duration-300 fade-in-up"
+                        style="transition-delay: 100ms;">
+                        <div
+                            class="w-12 h-12 mx-auto bg-white/10 rounded-full flex items-center justify-center mb-4 text-2xl">
+                            💻</div>
+                        <h3 class="font-bold">Cline</h3>
+                        <p class="text-xs text-gray-500 mt-2">Coding AI</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-32 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-4xl md:text-6xl font-light leading-tight mb-16 text-right fade-in-up">
+                    <span class="text-gray-500">Premium</span> Services
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Service 1 -->
+                    <div
+                        class="glass-panel p-10 rounded-2xl hover:border-white/20 transition-all duration-300 transform hover:-translate-y-2 fade-in-up">
+                        <i data-lucide="monitor" class="w-10 h-10 mb-6 text-white"></i>
+                        <h3 class="text-2xl font-bold mb-4">Web Developer</h3>
+                        <p class="text-gray-400 text-sm">Full-stack web development using modern frameworks. Fast,
+                            responsive, and SEO-optimized sites.</p>
+                    </div>
+                    <!-- Service 2 -->
+                    <div class="glass-panel p-10 rounded-2xl hover:border-white/20 transition-all duration-300 transform hover:-translate-y-2 fade-in-up"
+                        style="transition-delay: 100ms;">
+                        <i data-lucide="bot" class="w-10 h-10 mb-6 text-white"></i>
+                        <h3 class="text-2xl font-bold mb-4">AI Integration</h3>
+                        <p class="text-gray-400 text-sm">Building custom AI agents and integrating LLMs into your
+                            business workflows for maximum efficiency.</p>
+                    </div>
+                    <!-- Service 3 -->
+                    <div class="glass-panel p-10 rounded-2xl hover:border-white/20 transition-all duration-300 transform hover:-translate-y-2 fade-in-up"
+                        style="transition-delay: 200ms;">
+                        <i data-lucide="briefcase" class="w-10 h-10 mb-6 text-white"></i>
+                        <h3 class="text-2xl font-bold mb-4">Administrative Skills</h3>
+                        <p class="text-gray-400 text-sm">Calendar management, email handling, and operational support to
+                            keep your business running smoothly.</p>
+                    </div>
+                    <!-- Service 4 -->
+                    <div class="glass-panel p-10 rounded-2xl hover:border-white/20 transition-all duration-300 transform hover:-translate-y-2 fade-in-up"
+                        style="transition-delay: 300ms;">
+                        <i data-lucide="image" class="w-10 h-10 mb-6 text-white"></i>
+                        <h3 class="text-2xl font-bold mb-4">Image Generation</h3>
+                        <p class="text-gray-400 text-sm">Creating hyper-realistic or stylized AI art for marketing,
+                            social media, and branding using Midjourney.</p>
+                    </div>
+                    <!-- Service 5 -->
+                    <div
+                        class="glass-panel p-10 rounded-2xl hover:border-white/20 transition-all duration-300 transform hover:-translate-y-2 fade-in-up">
+                        <i data-lucide="share-2" class="w-10 h-10 mb-6 text-white"></i>
+                        <h3 class="text-2xl font-bold mb-4">Social Media Manager</h3>
+                        <p class="text-gray-400 text-sm">Strategic content planning and engagement to grow your online
+                            presence.</p>
+                    </div>
+                    <!-- Service 6 -->
+                    <div class="glass-panel p-10 rounded-2xl hover:border-white/20 transition-all duration-300 transform hover:-translate-y-2 fade-in-up"
+                        style="transition-delay: 100ms;">
+                        <i data-lucide="edit-3" class="w-10 h-10 mb-6 text-white"></i>
+                        <h3 class="text-2xl font-bold mb-4">Copywriting & Data Entry</h3>
+                        <p class="text-gray-400 text-sm">Persuasive copy that converts, and meticulous data management
+                            for accurate records.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Grid Section -->
+        <section class="py-20 px-6 border-y border-white/5">
+            <div class="max-w-7xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-12 tracking-wide fade-in-up">SKILLSET MASTERY</h2>
+                <div class="flex flex-wrap justify-center gap-4 fade-in-up">
+                    <span
+                        class="px-6 py-3 bg-white/5 rounded-full text-sm font-mono border border-white/10">HTML/CSS/JS</span>
+                    <span
+                        class="px-6 py-3 bg-white/5 rounded-full text-sm font-mono border border-white/10">Python</span>
+                    <span class="px-6 py-3 bg-white/5 rounded-full text-sm font-mono border border-white/10">Workflow
+                        Automation</span>
+                    <span class="px-6 py-3 bg-white/5 rounded-full text-sm font-mono border border-white/10">Prompt
+                        Engineering</span>
+                    <span class="px-6 py-3 bg-white/5 rounded-full text-sm font-mono border border-white/10">Stable
+                        Diffusion</span>
+                    <span
+                        class="px-6 py-3 bg-white/5 rounded-full text-sm font-mono border border-white/10">Excel/Sheets</span>
+                    <span class="px-6 py-3 bg-white/5 rounded-full text-sm font-mono border border-white/10">CRM
+                        Management</span>
+                    <span class="px-6 py-3 bg-white/5 rounded-full text-sm font-mono border border-white/10">SEO</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-32 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-end mb-16">
+                    <h2 class="text-5xl md:text-7xl font-bold tracking-tighter fade-in-up">FEATURED<br>PROJECTS</h2>
+                    <p class="hidden md:block text-gray-400 font-mono text-sm max-w-xs fade-in-up">A collection of tools
+                        and websites I've built using the modern tech stack and AI.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Tool 1: AI Interview -->
+                    <a href="../tools/ainterview"
+                        class="group relative aspect-square bg-gray-900 rounded-xl overflow-hidden border border-white/10 cursor-pointer fade-in-up">
+                        <div class="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition-colors"></div>
+                        <div class="absolute bottom-0 left-0 p-8 w-full z-10">
+                            <h3
+                                class="text-2xl font-bold mb-2 translate-y-4 group-hover:translate-y-0 transition-transform">
+                                AI Interviewer</h3>
+                            <p class="text-sm text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">Mock
+                                Interview Tool</p>
+                        </div>
+                        <i data-lucide="arrow-up-right"
+                            class="absolute top-6 right-6 w-6 h-6 text-white/50 group-hover:text-white transition-colors"></i>
+                    </a>
+
+                    <!-- Tool 2: Resume Generator -->
+                    <a href="../tools/resumegenerator"
+                        class="group relative aspect-square bg-gray-900 rounded-xl overflow-hidden border border-white/10 cursor-pointer fade-in-up"
+                        style="transition-delay: 100ms;">
+                        <div class="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition-colors"></div>
+                        <div class="absolute bottom-0 left-0 p-8 w-full z-10">
+                            <h3
+                                class="text-2xl font-bold mb-2 translate-y-4 group-hover:translate-y-0 transition-transform">
+                                Resume Generator</h3>
+                            <p class="text-sm text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">AI
+                                Resume Builder</p>
+                        </div>
+                        <i data-lucide="arrow-up-right"
+                            class="absolute top-6 right-6 w-6 h-6 text-white/50 group-hover:text-white transition-colors"></i>
+                    </a>
+
+                    <!-- Tool 3: Signature Generator -->
+                    <a href="../tools/signaturegenerator"
+                        class="group relative aspect-square bg-gray-900 rounded-xl overflow-hidden border border-white/10 cursor-pointer fade-in-up"
+                        style="transition-delay: 200ms;">
+                        <div class="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition-colors"></div>
+                        <div class="absolute bottom-0 left-0 p-8 w-full z-10">
+                            <h3
+                                class="text-2xl font-bold mb-2 translate-y-4 group-hover:translate-y-0 transition-transform">
+                                Signature Gen</h3>
+                            <p class="text-sm text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                                Digital Signatures</p>
+                        </div>
+                        <i data-lucide="arrow-up-right"
+                            class="absolute top-6 right-6 w-6 h-6 text-white/50 group-hover:text-white transition-colors"></i>
+                    </a>
+
+                    <!-- Tool 4: Full Page -->
+                    <a href="../tools/fullpage"
+                        class="group relative aspect-square bg-gray-900 rounded-xl overflow-hidden border border-white/10 cursor-pointer fade-in-up">
+                        <div class="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition-colors"></div>
+                        <div class="absolute bottom-0 left-0 p-8 w-full z-10">
+                            <h3
+                                class="text-2xl font-bold mb-2 translate-y-4 group-hover:translate-y-0 transition-transform">
+                                Full Page Demo</h3>
+                            <p class="text-sm text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                                Landing Page Example</p>
+                        </div>
+                        <i data-lucide="arrow-up-right"
+                            class="absolute top-6 right-6 w-6 h-6 text-white/50 group-hover:text-white transition-colors"></i>
+                    </a>
+
+                    <!-- Tool 5: Reference -->
+                    <a href="../tools/reference"
+                        class="group relative aspect-square bg-gray-900 rounded-xl overflow-hidden border border-white/10 cursor-pointer fade-in-up"
+                        style="transition-delay: 100ms;">
+                        <div class="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition-colors"></div>
+                        <div class="absolute bottom-0 left-0 p-8 w-full z-10">
+                            <h3
+                                class="text-2xl font-bold mb-2 translate-y-4 group-hover:translate-y-0 transition-transform">
+                                Reference</h3>
+                            <p class="text-sm text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">Design
+                                References</p>
+                        </div>
+                        <i data-lucide="arrow-up-right"
+                            class="absolute top-6 right-6 w-6 h-6 text-white/50 group-hover:text-white transition-colors"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Footer Section -->
+        <footer id="contact" class="bg-black py-24 px-6 border-t border-white/10 relative overflow-hidden">
+            <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12 relative z-10">
+                <div>
+                    <h3 class="text-3xl font-bold font-mono mb-6">RAMIL FLAVIANO</h3>
+                    <p class="text-gray-500 max-w-sm text-sm mb-8">
+                        Ready to revolutionize your workflow? Let's build something extraordinary together using the
+                        power of AI.
+                    </p>
+
+                    <a href="mailto:contact@ramilflaviano.com"
+                        class="text-2xl md:text-4xl font-bold hover:text-gray-400 transition-colors hover-trigger"
+                        data-cursor="link">
+                        contact@ramil.com
+                    </a>
+                </div>
+
+                <div class="flex gap-12 font-mono text-sm">
+                    <div class="flex flex-col gap-4">
+                        <span class="text-white font-bold uppercase tracking-widest">Connect</span>
+                        <a href="#" class="text-gray-500 hover:text-white transition-colors hover-trigger"
+                            data-cursor="link">LinkedIn</a>
+                        <a href="#" class="text-gray-500 hover:text-white transition-colors hover-trigger"
+                            data-cursor="link">Twitter / X</a>
+                        <a href="#" class="text-gray-500 hover:text-white transition-colors hover-trigger"
+                            data-cursor="link">Instagram</a>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-gray-600">
+                <span>&copy; 2024 Ramil Flaviano. All Rights Reserved.</span>
+                <span class="mt-2 md:mt-0">Designed & Built with Intelligence.</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Main Script -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
