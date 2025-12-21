@@ -1,42 +1,4 @@
-﻿<!DOCTYPE html>
-<html lang="en" class="bg-[#050505] text-white overflow-x-hidden antialiased">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AInterviewer | Auto AI Reply Generator</title>
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="AInterviewer | Auto AI Reply Generator">
-    <meta property="og:description"
-        content="Live AI Interview Assistant with Voice Support, Teleprompter, and Smart Response.">
-    <meta property="og:image" content="https://blockscom.xyz/images/logo.jpg">
-    <meta property="og:url" content="https://blockscom.xyz/tools/ainterview">
-    <meta property="og:type" content="website">
-
-    <!-- Favicon -->
-    <link rel="icon" href="../../images/logo.jpg" type="image/jpeg">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- GSAP & Lenis for Smooth Scroll/Animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
-
-    <script>
-        tailwind.config = {
+﻿<!doctype html> <html lang="en" class="bg-[#050505] text-white overflow-x-hidden antialiased"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <title>AInterviewer | Auto AI Reply Generator</title> <meta property="og:title" content="AInterviewer | Auto AI Reply Generator"> <meta property="og:description" content="Live AI Interview Assistant with Voice Support, Teleprompter, and Smart Response."> <meta property="og:image" content="https://blockscom.xyz/images/logo.jpg"> <meta property="og:url" content="https://blockscom.xyz/tools/ainterview"> <meta property="og:type" content="website"> <link rel="icon" href="../../images/logo.jpg" type="image/jpeg"> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet"> <script src="https://cdn.tailwindcss.com"></script> <script src="https://unpkg.com/lucide@latest"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script> <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script> <script> tailwind.config = {
             theme: {
                 extend: {
                     colors: {
@@ -57,11 +19,7 @@
                     }
                 }
             }
-        }
-    </script>
-
-    <style>
-        /* Custom Styles for Futuristic Feel */
+        } </script> <style> /* Custom Styles for Futuristic Feel */
         body {
             cursor: none;
         }
@@ -130,229 +88,7 @@
 
         .magnetic-btn {
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-    </style>
-</head>
-
-<body class="selection:bg-white selection:text-black">
-
-    <!-- Custom Cursor -->
-    <div class="cursor-dot hidden md:block"></div>
-    <div class="cursor-outline hidden md:block"></div>
-
-    <!-- Noise Overlay -->
-    <div class="noise-bg"></div>
-
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 px-6 py-6 mix-blend-difference text-white">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="../../" class="text-xl font-bold font-mono tracking-tighter hover-trigger" data-cursor="link">
-                BLOCKSCOM<span class="opacity-50">TOOLS</span>
-            </a>
-
-            <div class="flex gap-8 font-mono text-sm uppercase tracking-widest">
-                <a href="../../" class="hover:text-gray-400 transition-colors hover-trigger" data-cursor="link">
-                    <i data-lucide="arrow-left" class="inline w-4 h-4 mr-1"></i> Back to Home
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="w-full relative">
-
-        <!-- Hero Section -->
-        <section class="min-h-screen w-full flex items-center justify-center relative overflow-hidden pt-32 pb-20">
-            <!-- Background Grid -->
-            <div class="absolute inset-0 opacity-[0.03] bg-grid-pattern grid-bg pointer-events-none"></div>
-
-            <div class="max-w-7xl w-full px-6 z-10">
-                <div class="flex flex-col items-center text-center">
-                    <span
-                        class="font-mono text-xs uppercase tracking-widest text-brand-dim mb-6 reveal-trigger">Next-Gen
-                        Interview Assistant</span>
-                    <h1 class="hero-title text-6xl md:text-8xl font-bold tracking-tighter mix-blend-exclusion mb-8">
-                        <span class="block">AINTERVIEWER</span>
-                        <span class="block text-brand-dim text-4xl md:text-6xl mt-2">Interview AI Assistant</span>
-                    </h1>
-
-                    <p
-                        class="hero-subtitle font-mono max-w-2xl text-base md:text-lg text-gray-400 mb-12 leading-relaxed">
-                        The ultimate real-time AI reply generator for interviews.
-                        Featuring voice support, smart responses, and a stealthy teleprompter HUD.
-                        Ace your interview without breaking a sweat.
-                    </p>
-
-                    <div class="flex flex-col md:flex-row gap-6">
-                        <a href="https://drive.google.com/file/d/1xjSMUaCzEfTGkPCu9Ne2jAxoPtExTy-i/view?usp=drive_link"
-                            class="magnetic-btn group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold overflow-hidden hover-trigger"
-                            data-cursor="link">
-                            <span class="relative z-10 transition-colors group-hover:text-white">Download Now</span>
-                            <div
-                                class="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
-                            </div>
-                            <i data-lucide="download"
-                                class="relative z-10 w-5 h-5 transition-colors group-hover:text-white"></i>
-                        </a>
-                        <a href="#features"
-                            class="magnetic-btn group relative inline-flex items-center gap-3 px-8 py-4 border border-white/20 text-white rounded-full font-bold overflow-hidden hover-trigger"
-                            data-cursor="link">
-                            <span class="relative z-10 transition-colors group-hover:text-black">Learn More</span>
-                            <div
-                                class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
-                            </div>
-                            <i data-lucide="arrow-down"
-                                class="relative z-10 w-5 h-5 transition-colors group-hover:text-black"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Hero Visual (Abstract) -->
-            <div
-                class="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-white opacity-[0.05] blur-[150px] rounded-full pointer-events-none">
-            </div>
-        </section>
-
-
-
-        <!-- Video Tutorial Section -->
-        <section class="py-20 px-6 relative">
-            <div class="max-w-5xl mx-auto">
-                <div class="text-center mb-12">
-                    <span
-                        class="font-mono text-xs uppercase tracking-widest text-brand-dim mb-4 block reveal-trigger">Watch
-                        the Demo</span>
-                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight">SEE IT IN ACTION</h2>
-                </div>
-                <div class="glass-panel p-2 md:p-4 rounded-3xl relative overflow-hidden group">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none z-10">
-                    </div>
-                    <!-- Glow Effect -->
-                    <div
-                        class="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000">
-                    </div>
-
-                    <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl z-20">
-                        <video class="w-full h-full object-cover" controls playsinline poster="../../images/logo.jpg">
-                            <source src="./22rial.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section id="features" class="py-32 px-6 relative bg-brand-dark/50">
-            <div class="max-w-7xl mx-auto">
-                <div class="mb-16">
-                    <span class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-4 block">Key
-                        Features</span>
-                    <h2 class="text-4xl md:text-5xl font-bold">POWERFUL CAPABILITIES</h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Feature 1 -->
-                    <div class="glass-panel p-8 rounded-2xl hover:bg-white/5 service-card">
-                        <div class="bg-white/10 w-12 h-12 rounded-full flex items-center justify-center mb-6">
-                            <i data-lucide="mic" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Voice Support</h3>
-                        <p class="text-gray-400 text-sm font-mono">Hands-free operation. Speak naturally and let the AI
-                            capture and process your inputs instantly.</p>
-                    </div>
-
-                    <!-- Feature 2 -->
-                    <div class="glass-panel p-8 rounded-2xl hover:bg-white/5 service-card">
-                        <div class="bg-white/10 w-12 h-12 rounded-full flex items-center justify-center mb-6">
-                            <i data-lucide="monitor" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Teleprompter HUD</h3>
-                        <p class="text-gray-400 text-sm font-mono">Designed to reduce eye movement. Read answers
-                            naturally while maintaining eye contact with the camera.</p>
-                    </div>
-
-                    <!-- Feature 3 -->
-                    <div class="glass-panel p-8 rounded-2xl hover:bg-white/5 service-card">
-                        <div class="bg-white/10 w-12 h-12 rounded-full flex items-center justify-center mb-6">
-                            <i data-lucide="minimize-2" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Tray Minimize</h3>
-                        <p class="text-gray-400 text-sm font-mono">Keep the app discreetly hidden in your system tray
-                            when not in active use.</p>
-                    </div>
-
-                    <!-- Feature 4 -->
-                    <div class="glass-panel p-8 rounded-2xl hover:bg-white/5 service-card">
-                        <div class="bg-white/10 w-12 h-12 rounded-full flex items-center justify-center mb-6">
-                            <i data-lucide="zap" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Smart & Fast AI</h3>
-                        <p class="text-gray-400 text-sm font-mono">Real-time live responses tailored to the interview
-                            context. Minimal latency for fluid conversation.</p>
-                    </div>
-
-                    <!-- Feature 5 -->
-                    <div class="glass-panel p-8 rounded-2xl hover:bg-white/5 service-card">
-                        <div class="bg-white/10 w-12 h-12 rounded-full flex items-center justify-center mb-6">
-                            <i data-lucide="volume-2" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Audio I/O Control</h3>
-                        <p class="text-gray-400 text-sm font-mono">Full control over sound input and output sources for
-                            seamless integration with your meeting software.</p>
-                    </div>
-
-                    <!-- Feature 6 -->
-                    <div class="glass-panel p-8 rounded-2xl hover:bg-white/5 service-card">
-                        <div class="bg-white/10 w-12 h-12 rounded-full flex items-center justify-center mb-6">
-                            <i data-lucide="history" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">History Logs</h3>
-                        <p class="text-gray-400 text-sm font-mono">Review past answers and performance. Analyze what
-                            went wrong to improve for next time.</p>
-                    </div>
-                </div>
-
-                <div class="mt-16 p-12 glass-panel rounded-3xl text-center relative overflow-hidden">
-                    <div class="absolute inset-0 bg-white/5 skew-y-3 scale-110 pointer-events-none"></div>
-                    <div class="relative z-10">
-                        <h3 class="text-3xl font-bold mb-6">"Interview AI Assistant"</h3>
-                        <p class="text-gray-400 font-mono mb-8 max-w-2xl mx-auto">
-                            Our proprietary feature designed to give you that extra edge of confidence.
-                            The generator assesses interviewer questions and comments live for better interview results.
-                        </p>
-                        <a href="https://drive.google.com/file/d/1xjSMUaCzEfTGkPCu9Ne2jAxoPtExTy-i/view?usp=drive_link"
-                            class="magnetic-btn inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-bold hover-trigger"
-                            data-cursor="link">
-                            Download Beta v1.0 <i data-lucide="download" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="bg-black py-12 px-6 border-t border-white/10">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12 items-center">
-                <div class="text-center md:text-left">
-                    <h3 class="text-xl font-bold font-mono text-white">BLOCKSCOM<span class="text-gray-600">TOOLS</span>
-                    </h3>
-                    <p class="text-gray-500 text-xs mt-2">Empowering your digital journey.</p>
-                </div>
-
-                <div class="text-xs font-mono text-gray-600">
-                    &copy; 2024 Blockscom Media. All Rights Reserved.
-                </div>
-            </div>
-        </footer>
-
-    </main>
-
-    <script>
-        // Initialize Lucide Icons
+        } </style> </head> <body class="selection:bg-white selection:text-black"> <div class="cursor-dot hidden md:block"></div> <div class="cursor-outline hidden md:block"></div> <div class="noise-bg"></div> <nav class="fixed top-0 w-full z-50 px-6 py-6 mix-blend-difference text-white"> <div class="max-w-7xl mx-auto flex justify-between items-center"> <a href="../../" class="text-xl font-bold font-mono tracking-tighter hover-trigger" data-cursor="link"> BLOCKSCOM<span class="opacity-50">TOOLS</span> </a> <div class="flex gap-8 font-mono text-sm uppercase tracking-widest"> <a href="../../" class="hover:text-gray-400 transition-colors hover-trigger" data-cursor="link"> <i data-lucide="arrow-left" class="inline w-4 h-4 mr-1"></i> Back to Home </a> </div> </div> </nav> <main class="w-full relative"> <section class="min-h-screen w-full flex items-center justify-center relative overflow-hidden pt-32 pb-20"> <div class="absolute inset-0 opacity-[0.03] bg-grid-pattern grid-bg pointer-events-none"></div> <div class="max-w-7xl w-full px-6 z-10"> <div class="flex flex-col items-center text-center"> <span class="font-mono text-xs uppercase tracking-widest text-brand-dim mb-6 reveal-trigger">Next-Gen Interview Assistant</span> <h1 class="hero-title text-6xl md:text-8xl font-bold tracking-tighter mix-blend-exclusion mb-8"> <span class="block">AINTERVIEWER</span> <span class="block text-brand-dim text-4xl md:text-6xl mt-2">Interview AI Assistant</span> </h1> <p class="hero-subtitle font-mono max-w-2xl text-base md:text-lg text-gray-400 mb-12 leading-relaxed"> The ultimate real-time AI reply generator for interviews. Featuring voice support, smart responses, and a stealthy teleprompter HUD. Ace your interview without breaking a sweat. </p> <div class="flex flex-col md:flex-row gap-6"> <a href="https://drive.google.com/file/d/1xjSMUaCzEfTGkPCu9Ne2jAxoPtExTy-i/view?usp=drive_link" class="magnetic-btn group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold overflow-hidden hover-trigger" data-cursor="link"> <span class="relative z-10 transition-colors group-hover:text-white">Download Now</span> <div class="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"> </div> <i data-lucide="download" class="relative z-10 w-5 h-5 transition-colors group-hover:text-white"></i> </a> <a href="#features" class="magnetic-btn group relative inline-flex items-center gap-3 px-8 py-4 border border-white/20 text-white rounded-full font-bold overflow-hidden hover-trigger" data-cursor="link"> <span class="relative z-10 transition-colors group-hover:text-black">Learn More</span> <div class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"> </div> <i data-lucide="arrow-down" class="relative z-10 w-5 h-5 transition-colors group-hover:text-black"></i> </a> </div> </div> </div> <div class="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-white opacity-[0.05] blur-[150px] rounded-full pointer-events-none"> </div> </section> <section class="py-20 px-6 relative"> <div class="max-w-5xl mx-auto"> <div class="text-center mb-12"> <span class="font-mono text-xs uppercase tracking-widest text-brand-dim mb-4 block reveal-trigger">Watch the Demo</span> <h2 class="text-3xl md:text-5xl font-bold tracking-tight">SEE IT IN ACTION</h2> </div> <div class="glass-panel p-2 md:p-4 rounded-3xl relative overflow-hidden group"> <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none z-10"> </div> <div class="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"> </div> <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl z-20"> <video class="w-full h-full object-cover" controls playsinline poster="../../images/logo.jpg"> <source src="./22rial.mp4" type="video/mp4"> Your browser does not support the video tag. </video> </div> </div> </div> </section> <section id="features" class="py-32 px-6 relative bg-brand-dark/50"> <div class="max-w-7xl mx-auto"> <div class="mb-16"> <span class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-4 block">Key Features</span> <h2 class="text-4xl md:text-5xl font-bold">POWERFUL CAPABILITIES</h2> </div> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"> <div class="glass-panel p-8 rounded-2xl hover:bg-white/5 service-card"> <div class="bg-white/10 w-12 h-12 rounded-full flex items-center justify-center mb-6"> <i data-lucide="mic" class="w-6 h-6"></i> </div> <h3 class="text-xl font-bold mb-3">Voice Support</h3> <p class="text-gray-400 text-sm font-mono">Hands-free operation. Speak naturally and let the AI capture and process your inputs instantly.</p> </div> <div class="glass-panel p-8 rounded-2xl hover:bg-white/5 service-card"> <div class="bg-white/10 w-12 h-12 rounded-full flex items-center justify-center mb-6"> <i data-lucide="monitor" class="w-6 h-6"></i> </div> <h3 class="text-xl font-bold mb-3">Teleprompter HUD</h3> <p class="text-gray-400 text-sm font-mono">Designed to reduce eye movement. Read answers naturally while maintaining eye contact with the camera.</p> </div> <div class="glass-panel p-8 rounded-2xl hover:bg-white/5 service-card"> <div class="bg-white/10 w-12 h-12 rounded-full flex items-center justify-center mb-6"> <i data-lucide="minimize-2" class="w-6 h-6"></i> </div> <h3 class="text-xl font-bold mb-3">Tray Minimize</h3> <p class="text-gray-400 text-sm font-mono">Keep the app discreetly hidden in your system tray when not in active use.</p> </div> <div class="glass-panel p-8 rounded-2xl hover:bg-white/5 service-card"> <div class="bg-white/10 w-12 h-12 rounded-full flex items-center justify-center mb-6"> <i data-lucide="zap" class="w-6 h-6"></i> </div> <h3 class="text-xl font-bold mb-3">Smart & Fast AI</h3> <p class="text-gray-400 text-sm font-mono">Real-time live responses tailored to the interview context. Minimal latency for fluid conversation.</p> </div> <div class="glass-panel p-8 rounded-2xl hover:bg-white/5 service-card"> <div class="bg-white/10 w-12 h-12 rounded-full flex items-center justify-center mb-6"> <i data-lucide="volume-2" class="w-6 h-6"></i> </div> <h3 class="text-xl font-bold mb-3">Audio I/O Control</h3> <p class="text-gray-400 text-sm font-mono">Full control over sound input and output sources for seamless integration with your meeting software.</p> </div> <div class="glass-panel p-8 rounded-2xl hover:bg-white/5 service-card"> <div class="bg-white/10 w-12 h-12 rounded-full flex items-center justify-center mb-6"> <i data-lucide="history" class="w-6 h-6"></i> </div> <h3 class="text-xl font-bold mb-3">History Logs</h3> <p class="text-gray-400 text-sm font-mono">Review past answers and performance. Analyze what went wrong to improve for next time.</p> </div> </div> <div class="mt-16 p-12 glass-panel rounded-3xl text-center relative overflow-hidden"> <div class="absolute inset-0 bg-white/5 skew-y-3 scale-110 pointer-events-none"></div> <div class="relative z-10"> <h3 class="text-3xl font-bold mb-6">"Interview AI Assistant"</h3> <p class="text-gray-400 font-mono mb-8 max-w-2xl mx-auto"> Our proprietary feature designed to give you that extra edge of confidence. The generator assesses interviewer questions and comments live for better interview results. </p> <a href="https://drive.google.com/file/d/1xjSMUaCzEfTGkPCu9Ne2jAxoPtExTy-i/view?usp=drive_link" class="magnetic-btn inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-bold hover-trigger" data-cursor="link"> Download Beta v1.0 <i data-lucide="download" class="w-4 h-4"></i> </a> </div> </div> </div> </section> <footer class="bg-black py-12 px-6 border-t border-white/10"> <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12 items-center"> <div class="text-center md:text-left"> <h3 class="text-xl font-bold font-mono text-white">BLOCKSCOM<span class="text-gray-600">TOOLS</span> </h3> <p class="text-gray-500 text-xs mt-2">Empowering your digital journey.</p> </div> <div class="text-xs font-mono text-gray-600"> &copy; 2024 Blockscom Media. All Rights Reserved. </div> </div> </footer> </main> <script> // Initialize Lucide Icons
         lucide.createIcons();
 
         // Initialize Lenis for Smooth Scrolling
@@ -474,16 +210,9 @@
                     ease: "elastic.out(1, 0.3)"
                 });
             });
-        });
-    </script>
-    <script>
-        document.addEventListener('contextmenu', event => event.preventDefault());
+        }); </script> <script> document.addEventListener('contextmenu', event => event.preventDefault());
         document.onkeydown = function (e) {
             if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
                 return false;
             }
-        };
-    </script>
-</body>
-
-</html>
+        }; </script> </body> </html>

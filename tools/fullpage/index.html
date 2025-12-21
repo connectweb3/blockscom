@@ -1,36 +1,4 @@
-﻿<!DOCTYPE html>
-<html lang="en" class="bg-[#050505] text-white overflow-x-hidden antialiased">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fullpage Screenshot | Blockscom Tools</title>
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Fullpage Screenshot | Blockscom Tools">
-    <meta property="og:description" content="Generate high-resolution full-page screenshots of any website instantly.">
-    <meta property="og:image" content="https://blockscom.xyz/images/logo.jpg">
-    <meta property="og:url" content="https://blockscom.xyz/tools/fullpage">
-    <meta property="og:type" content="website">
-
-    <!-- Favicon -->
-    <link rel="icon" href="../../images/logo.jpg" type="image/jpeg">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <script>
-        tailwind.config = {
+﻿<!doctype html> <html lang="en" class="bg-[#050505] text-white overflow-x-hidden antialiased"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <title>Fullpage Screenshot | Blockscom Tools</title> <meta property="og:title" content="Fullpage Screenshot | Blockscom Tools"> <meta property="og:description" content="Generate high-resolution full-page screenshots of any website instantly."> <meta property="og:image" content="https://blockscom.xyz/images/logo.jpg"> <meta property="og:url" content="https://blockscom.xyz/tools/fullpage"> <meta property="og:type" content="website"> <link rel="icon" href="../../images/logo.jpg" type="image/jpeg"> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet"> <script src="https://cdn.tailwindcss.com"></script> <script src="https://unpkg.com/lucide@latest"></script> <script> tailwind.config = {
             theme: {
                 extend: {
                     colors: {
@@ -51,11 +19,7 @@
                     }
                 }
             }
-        }
-    </script>
-
-    <style>
-        /* body removed - empty */
+        } </script> <style> /* body removed - empty */
 
         .glass-panel {
             background: rgba(255, 255, 255, 0.03);
@@ -98,96 +62,7 @@
             100% {
                 transform: rotate(360deg);
             }
-        }
-    </style>
-</head>
-
-<body class="selection:bg-white selection:text-black min-h-screen flex flex-col">
-
-    <!-- Noise Overlay -->
-    <div class="noise-bg"></div>
-
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 px-6 py-6 mix-blend-difference text-white">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="/" class="text-xl font-bold font-mono tracking-tighter hover:opacity-70 transition-opacity">
-                BLOCKSCOM<span class="opacity-50">TOOLS</span>
-            </a>
-
-            <a href="../../" class="text-sm font-mono hover:text-gray-400 transition-colors">
-                Back to Home <i data-lucide="arrow-up-right" class="inline w-4 h-4 ml-1"></i>
-            </a>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="w-full flex-grow flex items-center justify-center relative overflow-hidden pt-24 pb-12 px-4">
-        <!-- Background Grid -->
-        <div class="absolute inset-0 opacity-[0.03] bg-grid-pattern grid-bg pointer-events-none"></div>
-
-        <div class="max-w-4xl w-full z-10 flex flex-col items-center gap-12 text-center">
-
-            <div class="space-y-4">
-                <span class="font-mono text-xs uppercase tracking-widest text-brand-dim">Web Utility</span>
-                <h1 class="text-5xl md:text-7xl font-bold tracking-tighter mix-blend-exclusion">
-                    FULLPAGE<br><span class="text-brand-dim">CAPTURE</span>
-                </h1>
-                <p class="font-mono text-gray-400 max-w-lg mx-auto">
-                    Generate high-resolution full-page screenshots of any website instantly.
-                </p>
-            </div>
-
-            <!-- Input Area -->
-            <div class="glass-panel p-2 rounded-full w-full max-w-xl flex items-center gap-2 relative">
-                <div class="pl-6 text-brand-dim">
-                    <i data-lucide="link" class="w-5 h-5"></i>
-                </div>
-                <input type="text" id="urlInput" placeholder="Enter website URL (e.g. blockscom.xyz)"
-                    class="bg-transparent border-none outline-none text-white w-full h-12 font-mono placeholder-gray-600">
-                <button id="captureBtn" onclick="captureScreenshot()"
-                    class="bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-gray-200 transition-colors flex items-center gap-2 whitespace-nowrap">
-                    <span>Capture</span>
-                    <i data-lucide="aperture" class="w-4 h-4"></i>
-                </button>
-            </div>
-
-            <!-- Loading State -->
-            <div id="loadingState" class="hidden flex-col items-center gap-4">
-                <div class="loader"></div>
-                <span class="font-mono text-xs text-brand-dim animate-pulse">RENDERING PIXELS...</span>
-            </div>
-
-            <!-- Error Message -->
-            <div id="errorMessage"
-                class="hidden text-red-400 font-mono text-sm bg-red-900/10 border border-red-500/20 px-6 py-3 rounded-lg">
-            </div>
-
-            <!-- Result Area -->
-            <div id="resultArea" class="hidden w-full max-w-5xl animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <div class="glass-panel p-4 rounded-xl border-white/10">
-                    <div class="flex justify-between items-center mb-4 px-2">
-                        <span class="font-mono text-xs text-brand-dim">RESULT PREVIEW</span>
-                        <a id="downloadLink" href="#" download="screenshot.png" target="_blank"
-                            class="text-xs font-mono border border-white/20 px-4 py-2 rounded-full hover:bg-white hover:text-black transition-colors flex items-center gap-2">
-                            Download High-Res <i data-lucide="download" class="w-3 h-3"></i>
-                        </a>
-                    </div>
-                    <div
-                        class="rounded-lg overflow-hidden bg-black/50 border border-white/5 relative group max-h-[60vh] overflow-y-auto custom-scrollbar">
-                        <img id="screenshotImg" src="" alt="Screenshot" class="w-full h-auto block">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <footer class="py-6 text-center font-mono text-xs text-brand-dim relative z-10">
-        &copy; 2024 Blockscom Tools.
-    </footer>
-
-    <script>
-        lucide.createIcons();
+        } </style> </head> <body class="selection:bg-white selection:text-black min-h-screen flex flex-col"> <div class="noise-bg"></div> <nav class="fixed top-0 w-full z-50 px-6 py-6 mix-blend-difference text-white"> <div class="max-w-7xl mx-auto flex justify-between items-center"> <a href="/" class="text-xl font-bold font-mono tracking-tighter hover:opacity-70 transition-opacity"> BLOCKSCOM<span class="opacity-50">TOOLS</span> </a> <a href="../../" class="text-sm font-mono hover:text-gray-400 transition-colors"> Back to Home <i data-lucide="arrow-up-right" class="inline w-4 h-4 ml-1"></i> </a> </div> </nav> <main class="w-full flex-grow flex items-center justify-center relative overflow-hidden pt-24 pb-12 px-4"> <div class="absolute inset-0 opacity-[0.03] bg-grid-pattern grid-bg pointer-events-none"></div> <div class="max-w-4xl w-full z-10 flex flex-col items-center gap-12 text-center"> <div class="space-y-4"> <span class="font-mono text-xs uppercase tracking-widest text-brand-dim">Web Utility</span> <h1 class="text-5xl md:text-7xl font-bold tracking-tighter mix-blend-exclusion"> FULLPAGE<br><span class="text-brand-dim">CAPTURE</span> </h1> <p class="font-mono text-gray-400 max-w-lg mx-auto"> Generate high-resolution full-page screenshots of any website instantly. </p> </div> <div class="glass-panel p-2 rounded-full w-full max-w-xl flex items-center gap-2 relative"> <div class="pl-6 text-brand-dim"> <i data-lucide="link" class="w-5 h-5"></i> </div> <input id="urlInput" placeholder="Enter website URL (e.g. blockscom.xyz)" class="bg-transparent border-none outline-none text-white w-full h-12 font-mono placeholder-gray-600"> <button id="captureBtn" onclick="captureScreenshot()" class="bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-gray-200 transition-colors flex items-center gap-2 whitespace-nowrap"> <span>Capture</span> <i data-lucide="aperture" class="w-4 h-4"></i> </button> </div> <div id="loadingState" class="hidden flex-col items-center gap-4"> <div class="loader"></div> <span class="font-mono text-xs text-brand-dim animate-pulse">RENDERING PIXELS...</span> </div> <div id="errorMessage" class="hidden text-red-400 font-mono text-sm bg-red-900/10 border border-red-500/20 px-6 py-3 rounded-lg"> </div> <div id="resultArea" class="hidden w-full max-w-5xl animate-in fade-in slide-in-from-bottom-4 duration-700"> <div class="glass-panel p-4 rounded-xl border-white/10"> <div class="flex justify-between items-center mb-4 px-2"> <span class="font-mono text-xs text-brand-dim">RESULT PREVIEW</span> <a id="downloadLink" href="#" download="screenshot.png" target="_blank" class="text-xs font-mono border border-white/20 px-4 py-2 rounded-full hover:bg-white hover:text-black transition-colors flex items-center gap-2"> Download High-Res <i data-lucide="download" class="w-3 h-3"></i> </a> </div> <div class="rounded-lg overflow-hidden bg-black/50 border border-white/5 relative group max-h-[60vh] overflow-y-auto custom-scrollbar"> <img id="screenshotImg" src="" alt="Screenshot" class="w-full h-auto block"> </div> </div> </div> </div> </main> <footer class="py-6 text-center font-mono text-xs text-brand-dim relative z-10"> &copy; 2024 Blockscom Tools. </footer> <script> lucide.createIcons();
 
         async function captureScreenshot() {
             const urlInput = document.getElementById('urlInput');
@@ -292,16 +167,9 @@
             if (e.key === 'Enter') {
                 captureScreenshot();
             }
-        });
-    </script>
-<script>
-document.addEventListener('contextmenu', event => event.preventDefault());
+        }); </script> <script> document.addEventListener('contextmenu', event => event.preventDefault());
 document.onkeydown = function(e) {
     if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
         return false;
     }
-};
-</script>
-</body>
-
-</html>
+}; </script> </body> </html> 
