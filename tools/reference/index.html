@@ -1,4 +1,28 @@
-<!doctype html> <html lang="en" class="bg-[#050505] text-white overflow-x-hidden antialiased"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <title>Reference Prompt Generator | Blockscom Tools</title> <meta property="og:title" content="Reference Prompt Generator | Blockscom Tools"> <meta property="og:description" content="Upload an image. Extract details. Generate the perfect prompt. Capture style, lighting, and elements seamlessly."> <meta property="og:type" content="website"> <meta property="og:url" content="https://blockscom.com/tools/reference"> <meta property="og:image" content="https://blockscom.com/assets/og-reference.jpg"> <meta name="twitter:card" content="summary_large_image"> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet"> <script src="https://cdn.tailwindcss.com"></script> <script src="https://unpkg.com/lucide@latest"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script> <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script> <script> tailwind.config = {
+<!doctype html>
+<html lang="en" class="bg-[#050505] text-white overflow-x-hidden antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Reference Prompt Generator | Blockscom Tools</title>
+    <meta property="og:title" content="Reference Prompt Generator | Blockscom Tools">
+    <meta property="og:description"
+        content="Upload an image. Extract details. Generate the perfect prompt. Capture style, lighting, and elements seamlessly.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://blockscom.com/tools/reference">
+    <meta property="og:image" content="https://blockscom.xyz/images/logo.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script> tailwind.config = {
             theme: {
                 extend: {
                     colors: {
@@ -19,7 +43,9 @@
                     }
                 }
             }
-        } </script> <style> /* Shared Styles from Main Page */
+        } </script>
+    <style>
+        /* Shared Styles from Main Page */
         body {
             cursor: none;
         }
@@ -135,7 +161,130 @@
 
         textarea::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.2);
-        } </style> </head> <body class="selection:bg-white selection:text-black min-h-screen flex flex-col"> <div class="cursor-dot hidden md:block"></div> <div class="cursor-outline hidden md:block"></div> <div class="noise-bg"></div> <div class="fixed inset-0 opacity-[0.03] bg-grid-pattern grid-bg pointer-events-none -z-10"></div> <nav class="fixed top-0 w-full z-50 px-6 py-6 mix-blend-difference text-white"> <div class="max-w-7xl mx-auto flex justify-between items-center"> <a href="../../index.html" class="text-xl font-bold font-mono tracking-tighter hover-trigger" data-cursor="link"> BLOCKSCOM<span class="opacity-50">TOOLS</span> </a> <a href="../../index.html" class="group flex items-center gap-2 font-mono text-xs uppercase tracking-widest hover:text-gray-400 transition-colors hover-trigger" data-cursor="link"> <i data-lucide="arrow-left" class="w-4 h-4 transition-transform group-hover:-translate-x-1"></i> Back to Home </a> </div> </nav> <main class="w-full flex-grow pt-32 pb-12 px-6"> <div class="max-w-7xl mx-auto"> <header class="text-center mb-16"> <span class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-4 block">AI Utility</span> <h1 class="text-4xl md:text-6xl font-bold tracking-tighter mb-4">REFERENCE PROMPT<br>GENERATOR</h1> <p class="text-gray-400 font-mono text-sm max-w-md mx-auto">Upload an image. Extract details. Generate the perfect prompt.</p> </header> <div class="grid grid-cols-1 lg:grid-cols-2 gap-8"> <div class="glass-panel p-6 md:p-8 rounded-2xl flex flex-col gap-6"> <div class="flex items-center justify-between mb-2"> <h2 class="font-mono text-sm uppercase text-gray-400 tracking-wider">1. Input Reference</h2> </div> <div id="dropZone" class="relative group border border-dashed border-white/20 rounded-xl bg-white/5 min-h-[300px] flex flex-col items-center justify-center transition-all duration-300 hover:border-white/50 hover:bg-white/10 cursor-pointer overflow-hidden"> <button onclick="clearImage()" class="absolute top-4 right-4 p-2 bg-black/50 hover:bg-white hover:text-black rounded-full transition-colors z-20 backdrop-blur-md"> <i data-lucide="x" class="w-4 h-4"></i> </button> <div id="dropContent" class="text-center pointer-events-none p-6"> <div class="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"> <i data-lucide="image-plus" class="w-8 h-8 text-gray-400 group-hover:text-white transition-colors"></i> </div> <h3 class="font-bold text-lg mb-1">Drop Image Here</h3> <p class="text-gray-500 text-sm font-mono">or click to browse</p> </div> <img id="imagePreview" alt="Preview" class="absolute inset-0 w-full h-full object-contain bg-black/50 hidden backdrop-blur-sm p-4"> <input type="file" id="fileInput" accept="image/*" class="hidden"> </div> <div class="space-y-6"> <div> <label class="block font-mono text-xs text-gray-500 mb-3 uppercase">Aspect Ratio</label> <div class="grid grid-cols-3 gap-3"> <button class="ratio-btn active px-4 py-2 rounded-lg border border-white font-bold text-black bg-white text-sm hover-trigger" data-cursor="link" data-ratio="1:1">1:1</button> <button class="ratio-btn px-4 py-2 rounded-lg border border-white/20 text-gray-400 text-sm hover:border-white hover:text-white transition-all hover-trigger" data-cursor="link" data-ratio="9:16">9:16</button> <button class="ratio-btn px-4 py-2 rounded-lg border border-white/20 text-gray-400 text-sm hover:border-white hover:text-white transition-all hover-trigger" data-cursor="link" data-ratio="16:9">16:9</button> </div> </div> <div class="grid grid-cols-2 gap-4"> <div> <label class="block font-mono text-xs text-gray-500 mb-3 uppercase">Style</label> <div class="relative"> <select id="styleSelect" class="w-full bg-black/20 border border-white/20 rounded-lg px-4 py-3 text-sm text-gray-300 focus:outline-none focus:border-white transition-colors cursor-pointer hover:bg-white/5 hover-trigger" data-cursor="link"> <option value="" class="bg-gray-900">Auto / No Specific Style</option> <option value="Photoshoot" class="bg-gray-900">Photoshoot</option> <option value="Commercial" class="bg-gray-900">Commercial</option> <option value="Cinematic" class="bg-gray-900">Cinematic</option> <option value="Cyberpunk" class="bg-gray-900">Cyberpunk</option> <option value="Anime" class="bg-gray-900">Anime</option> <option value="Digital Art" class="bg-gray-900">Digital Art</option> <option value="Minimalist" class="bg-gray-900">Minimalist</option> <option value="Fantasy" class="bg-gray-900">Fantasy</option> </select> </div> </div> <div> <label class="block font-mono text-xs text-gray-500 mb-3 uppercase">Filter</label> <div class="relative"> <select id="filterSelect" class="w-full bg-black/20 border border-white/20 rounded-lg px-4 py-3 text-sm text-gray-300 focus:outline-none focus:border-white transition-colors cursor-pointer hover:bg-white/5 hover-trigger" data-cursor="link"> <option value="" class="bg-gray-900">No Filter</option> <option value="Polaroid" class="bg-gray-900">Polaroid</option> <option value="Kodak Portra 400" class="bg-gray-900">Kodak Portra 400</option> <option value="Fujifilm Superia" class="bg-gray-900">Fujifilm Superia</option> <option value="Film Noir" class="bg-gray-900">Film Noir</option> <option value="Vaporwave" class="bg-gray-900">Vaporwave</option> </select> </div> </div> </div> <button id="generateBtn" disabled="disabled" class="group w-full relative py-4 bg-white text-black font-bold rounded-lg overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed hover-trigger" data-cursor="link"> <span class="relative z-10 flex items-center justify-center gap-2"> Generate Prompt <i data-lucide="sparkles" class="w-4 h-4"></i> </span> <div class="absolute inset-0 bg-gray-200 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out group-disabled:hidden"> </div> </button> </div> </div> <div class="flex flex-col gap-6"> <div class="glass-panel p-6 md:p-8 rounded-2xl flex-grow flex flex-col"> <div class="flex justify-between items-center mb-6"> <h2 class="font-mono text-sm uppercase text-gray-400 tracking-wider">2. Generated Output </h2> <span id="statusTag" class="text-xs font-mono px-2 py-1 rounded bg-white/10 text-gray-400">Ready</span> </div> <div class="relative flex-grow mb-6"> <div id="outputArea" class="w-full h-full min-h-[300px] bg-black/30 rounded-xl p-4 font-mono text-sm text-gray-300 overflow-y-auto whitespace-pre-wrap border border-white/10"> Select an image to start...</div> <button id="copyBtn" class="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white hover:text-black rounded-lg transition-colors backdrop-blur-md hover-trigger" data-cursor="link"> <i data-lucide="copy" class="w-4 h-4"></i> </button> </div> </div> <div id="secondarySlotsArea" class="glass-panel p-6 rounded-2xl hidden"> <h3 class="font-mono text-xs uppercase text-gray-500 mb-4 tracking-widest">Detected Elements for Refinement</h3> <div id="secondarySlotsContainer" class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6"> </div> <button id="regenerateBtn" class="w-full py-3 border border-white/20 rounded-lg text-sm font-mono hover:bg-white hover:text-black transition-all disabled:opacity-50 hover-trigger" disabled="disabled" data-cursor="link"> Regenerate with Details </button> </div> </div> </div> </div> </main> <footer class="border-t border-white/10 py-8 text-center text-xs font-mono text-gray-600"> &copy; 2025 Blockscom Tools. All rights reserved. </footer> <script> // Init Icons & Smooth Scroll
+        }
+    </style>
+</head>
+
+<body class="selection:bg-white selection:text-black min-h-screen flex flex-col">
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+    <div class="noise-bg"></div>
+    <div class="fixed inset-0 opacity-[0.03] bg-grid-pattern grid-bg pointer-events-none -z-10"></div>
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 mix-blend-difference text-white">
+        <div class="max-w-7xl mx-auto flex justify-between items-center"> <a href="../../index.html"
+                class="text-xl font-bold font-mono tracking-tighter hover-trigger" data-cursor="link"> BLOCKSCOM<span
+                    class="opacity-50">TOOLS</span> </a> <a href="../../index.html"
+                class="group flex items-center gap-2 font-mono text-xs uppercase tracking-widest hover:text-gray-400 transition-colors hover-trigger"
+                data-cursor="link"> <i data-lucide="arrow-left"
+                    class="w-4 h-4 transition-transform group-hover:-translate-x-1"></i> Back to Home </a> </div>
+    </nav>
+    <main class="w-full flex-grow pt-32 pb-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <header class="text-center mb-16"> <span
+                    class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-4 block">AI Utility</span>
+                <h1 class="text-4xl md:text-6xl font-bold tracking-tighter mb-4">REFERENCE PROMPT<br>GENERATOR</h1>
+                <p class="text-gray-400 font-mono text-sm max-w-md mx-auto">Upload an image. Extract details. Generate
+                    the perfect prompt.</p>
+            </header>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="glass-panel p-6 md:p-8 rounded-2xl flex flex-col gap-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <h2 class="font-mono text-sm uppercase text-gray-400 tracking-wider">1. Input Reference</h2>
+                    </div>
+                    <div id="dropZone"
+                        class="relative group border border-dashed border-white/20 rounded-xl bg-white/5 min-h-[300px] flex flex-col items-center justify-center transition-all duration-300 hover:border-white/50 hover:bg-white/10 cursor-pointer overflow-hidden">
+                        <button onclick="clearImage()"
+                            class="absolute top-4 right-4 p-2 bg-black/50 hover:bg-white hover:text-black rounded-full transition-colors z-20 backdrop-blur-md">
+                            <i data-lucide="x" class="w-4 h-4"></i> </button>
+                        <div id="dropContent" class="text-center pointer-events-none p-6">
+                            <div
+                                class="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="image-plus"
+                                    class="w-8 h-8 text-gray-400 group-hover:text-white transition-colors"></i> </div>
+                            <h3 class="font-bold text-lg mb-1">Drop Image Here</h3>
+                            <p class="text-gray-500 text-sm font-mono">or click to browse</p>
+                        </div> <img id="imagePreview" alt="Preview"
+                            class="absolute inset-0 w-full h-full object-contain bg-black/50 hidden backdrop-blur-sm p-4">
+                        <input type="file" id="fileInput" accept="image/*" class="hidden">
+                    </div>
+                    <div class="space-y-6">
+                        <div> <label class="block font-mono text-xs text-gray-500 mb-3 uppercase">Aspect Ratio</label>
+                            <div class="grid grid-cols-3 gap-3"> <button
+                                    class="ratio-btn active px-4 py-2 rounded-lg border border-white font-bold text-black bg-white text-sm hover-trigger"
+                                    data-cursor="link" data-ratio="1:1">1:1</button> <button
+                                    class="ratio-btn px-4 py-2 rounded-lg border border-white/20 text-gray-400 text-sm hover:border-white hover:text-white transition-all hover-trigger"
+                                    data-cursor="link" data-ratio="9:16">9:16</button> <button
+                                    class="ratio-btn px-4 py-2 rounded-lg border border-white/20 text-gray-400 text-sm hover:border-white hover:text-white transition-all hover-trigger"
+                                    data-cursor="link" data-ratio="16:9">16:9</button> </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div> <label class="block font-mono text-xs text-gray-500 mb-3 uppercase">Style</label>
+                                <div class="relative"> <select id="styleSelect"
+                                        class="w-full bg-black/20 border border-white/20 rounded-lg px-4 py-3 text-sm text-gray-300 focus:outline-none focus:border-white transition-colors cursor-pointer hover:bg-white/5 hover-trigger"
+                                        data-cursor="link">
+                                        <option value="" class="bg-gray-900">Auto / No Specific Style</option>
+                                        <option value="Photoshoot" class="bg-gray-900">Photoshoot</option>
+                                        <option value="Commercial" class="bg-gray-900">Commercial</option>
+                                        <option value="Cinematic" class="bg-gray-900">Cinematic</option>
+                                        <option value="Cyberpunk" class="bg-gray-900">Cyberpunk</option>
+                                        <option value="Anime" class="bg-gray-900">Anime</option>
+                                        <option value="Digital Art" class="bg-gray-900">Digital Art</option>
+                                        <option value="Minimalist" class="bg-gray-900">Minimalist</option>
+                                        <option value="Fantasy" class="bg-gray-900">Fantasy</option>
+                                    </select> </div>
+                            </div>
+                            <div> <label class="block font-mono text-xs text-gray-500 mb-3 uppercase">Filter</label>
+                                <div class="relative"> <select id="filterSelect"
+                                        class="w-full bg-black/20 border border-white/20 rounded-lg px-4 py-3 text-sm text-gray-300 focus:outline-none focus:border-white transition-colors cursor-pointer hover:bg-white/5 hover-trigger"
+                                        data-cursor="link">
+                                        <option value="" class="bg-gray-900">No Filter</option>
+                                        <option value="Polaroid" class="bg-gray-900">Polaroid</option>
+                                        <option value="Kodak Portra 400" class="bg-gray-900">Kodak Portra 400</option>
+                                        <option value="Fujifilm Superia" class="bg-gray-900">Fujifilm Superia</option>
+                                        <option value="Film Noir" class="bg-gray-900">Film Noir</option>
+                                        <option value="Vaporwave" class="bg-gray-900">Vaporwave</option>
+                                    </select> </div>
+                            </div>
+                        </div> <button id="generateBtn" disabled="disabled"
+                            class="group w-full relative py-4 bg-white text-black font-bold rounded-lg overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed hover-trigger"
+                            data-cursor="link"> <span class="relative z-10 flex items-center justify-center gap-2">
+                                Generate Prompt <i data-lucide="sparkles" class="w-4 h-4"></i> </span>
+                            <div
+                                class="absolute inset-0 bg-gray-200 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out group-disabled:hidden">
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-6">
+                    <div class="glass-panel p-6 md:p-8 rounded-2xl flex-grow flex flex-col">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="font-mono text-sm uppercase text-gray-400 tracking-wider">2. Generated Output
+                            </h2> <span id="statusTag"
+                                class="text-xs font-mono px-2 py-1 rounded bg-white/10 text-gray-400">Ready</span>
+                        </div>
+                        <div class="relative flex-grow mb-6">
+                            <div id="outputArea"
+                                class="w-full h-full min-h-[300px] bg-black/30 rounded-xl p-4 font-mono text-sm text-gray-300 overflow-y-auto whitespace-pre-wrap border border-white/10">
+                                Select an image to start...</div> <button id="copyBtn"
+                                class="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white hover:text-black rounded-lg transition-colors backdrop-blur-md hover-trigger"
+                                data-cursor="link"> <i data-lucide="copy" class="w-4 h-4"></i> </button>
+                        </div>
+                    </div>
+                    <div id="secondarySlotsArea" class="glass-panel p-6 rounded-2xl hidden">
+                        <h3 class="font-mono text-xs uppercase text-gray-500 mb-4 tracking-widest">Detected Elements for
+                            Refinement</h3>
+                        <div id="secondarySlotsContainer" class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6"> </div>
+                        <button id="regenerateBtn"
+                            class="w-full py-3 border border-white/20 rounded-lg text-sm font-mono hover:bg-white hover:text-black transition-all disabled:opacity-50 hover-trigger"
+                            disabled="disabled" data-cursor="link"> Regenerate with Details </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="border-t border-white/10 py-8 text-center text-xs font-mono text-gray-600"> &copy; 2025 Blockscom
+        Tools. All rights reserved. </footer>
+    <script> // Init Icons & Smooth Scroll
         lucide.createIcons();
         const lenis = new Lenis({ duration: 1.2, smooth: true });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
@@ -595,4 +744,7 @@
                 icon.setAttribute('data-lucide', 'copy');
                 lucide.createIcons();
             }, 2000);
-        }); </script> </body> </html>
+        }); </script>
+</body>
+
+</html>
