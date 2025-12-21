@@ -46,7 +46,7 @@ attachHoverEffects();
 // ORIGINAL LOGIC ADAPTED
 // ----------------------------------------------------
 const API_KEY = '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';
-const MODEL = 'x-ai/grok-4.1-fast'; // Using fast model for demo
+const MODEL = 'openai/gpt-5.2'; // Using fast model for demo
 
 const dropZone = document.getElementById('dropZone');
 const fileInput = document.getElementById('fileInput');
