@@ -12,6 +12,10 @@
 */
 
 /* --- Preview Items (Reference Images) --- */
+.preview-grid {
+  display: grid;
+}
+
 .preview-item {
   position: relative;
   border-radius: 12px;

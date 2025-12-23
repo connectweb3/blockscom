@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#050505] text-white overflow-x-hidden antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Gallery | Ramil Flaviano</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AI Gallery | Ramil Flaviano">
+    <meta property="og:description"
+        content="A showcase of AI-generated imagery, including marketing assets, character designs, and creative concepts.">
+    <meta property="og:image" content="../photo.jpg">
+    <meta property="og:url" content="https://blockscom.xyz/ramil/aigallery">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <!-- Custom Styles (Inherited + Local) -->
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Portfolio Specific Overrides */
+        .brand-glow {
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.1), 0 0 80px rgba(255, 255, 255, 0.05);
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+            }
+
+            100% {
+                box-shadow: 0 0 60px rgba(255, 255, 255, 0.2), 0 0 100px rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* Tab Styles */
+        .tab-btn.active {
+            background-color: white;
+            color: black;
+            border-color: white;
+        }
+
+        /* Image Hover Zoom */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+
+        .img-zoom-container img {
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .img-zoom-container:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Transformation Compare Slider */
+        .transform-compare {
+            --compare-pos: 50%;
+            cursor: ew-resize;
+            user-select: none;
+            touch-action: pan-y;
+        }
+
+        .transform-compare.dragging {
+            cursor: grabbing;
+        }
+
+        .transform-compare .compare-overlay {
+            position: absolute;
+            inset: 0;
+            clip-path: inset(0 calc(100% - var(--compare-pos)) 0 0);
+            transition: clip-path 0.15s ease;
+        }
+
+        .transform-compare.dragging .compare-overlay {
+            transition: none;
+        }
+
+        .transform-compare .compare-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: var(--compare-pos);
+            transform: translateX(-50%);
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        .transform-compare .compare-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+            transform: translateX(-50%);
+        }
+
+        .transform-compare .compare-knob {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 56px;
+            height: 56px;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(0, 0, 0, 0.65);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translate(-50%, -50%);
+            backdrop-filter: blur(6px);
+        }
+
+        .transform-compare .compare-knob-text {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 10px;
+            letter-spacing: 0.32em;
+            padding-left: 0.32em;
+            color: rgba(255, 255, 255, 0.85);
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#050505',
+                            dark: '#0A0A0A',
+                            gray: '#1F1F1F',
+                            dim: '#888888'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="selection:bg-white selection:text-black">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Noise Overlay -->
+    <div class="noise-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 mix-blend-difference text-white">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="../index.html"
+                class="text-xl font-bold font-mono tracking-tighter hover-trigger flex items-center gap-2 group">
+                <i data-lucide="arrow-left" class="w-5 h-5 transition-transform group-hover:-translate-x-1"></i>
+                RAMIL<span class="opacity-50">GALLERY</span>
+            </a>
+
+            <a href="mailto:contact@ramilflaviano.com"
+                class="font-mono text-sm uppercase tracking-widest hover:text-gray-300 transition-colors">
+                Contact
+            </a>
+        </div>
+    </nav>
+
+    <main class="w-full relative">
+
+        <!-- Hero Section -->
+        <section class="min-h-[80vh] w-full flex items-center justify-center relative overflow-hidden pt-32 pb-20">
+            <div class="absolute inset-0 opacity-[0.03] grid-bg pointer-events-none"></div>
+
+            <div class="max-w-7xl w-full px-6 z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <!-- Content -->
+                <div class="order-2 md:order-1">
+                    <span
+                        class="font-mono text-brand-dim tracking-widest text-sm uppercase block mb-6 fade-in-up">Portfolio
+                        Integration</span>
+                    <h1
+                        class="text-6xl md:text-8xl font-bold tracking-tighter leading-none mb-8 mix-blend-exclusion fade-in-up delay-100">
+                        IMAGINED<br>
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-600">REALITY</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg max-w-lg mb-12 fade-in-up delay-200">
+                        A curated collection of AI-generated visuals. From hyper-realistic portraits to marketing assets
+                        and consistent character concepts.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 fade-in-up delay-300">
+                        <div
+                            class="px-5 py-2 border border-white/10 rounded-full text-xs font-mono uppercase tracking-wider text-gray-400">
+                            Midjourney v6</div>
+                        <div
+                            class="px-5 py-2 border border-white/10 rounded-full text-xs font-mono uppercase tracking-wider text-gray-400">
+                            Stable Diffusion</div>
+                        <div
+                            class="px-5 py-2 border border-white/10 rounded-full text-xs font-mono uppercase tracking-wider text-gray-400">
+                            Nano Banana</div>
+                        <div
+                            class="px-5 py-2 border border-white/10 rounded-full text-xs font-mono uppercase tracking-wider text-gray-400">
+                            ComfyUI</div>
+                    </div>
+                </div>
+
+                <!-- Brand Photo -->
+                <div class="order-1 md:order-2 flex justify-center fade-in-up delay-100">
+                    <div class="relative w-64 md:w-80 aspect-square rounded-2xl overflow-visible">
+                        <!-- Glow Effects -->
+                        <div class="absolute inset-0 bg-white/20 blur-[80px] rounded-full opacity-40 animate-pulse">
+                        </div>
+
+                        <!-- Brand Image Container -->
+                        <div
+                            class="relative w-full h-full rounded-2xl brand-glow overflow-hidden bg-brand-dark border border-white/10 group">
+                            <!-- Using photo.png from parent as requested -->
+                            <img src="../photo.png" alt="Ramil AI Creator"
+                                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+
+                            <div class="absolute bottom-4 left-4 z-10">
+                                <div
+                                    class="px-3 py-1 bg-black/50 backdrop-blur-md rounded border border-white/10 text-[10px] font-mono uppercase">
+                                    Prompt Engineer
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Container -->
+        <div id="gallery-container" class="space-y-32 pb-32">
+
+            <!-- SECTION 1: Graphics Cover (Tabs) -->
+            <section id="graphics" class="px-6">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                        <h2 class="text-4xl md:text-6xl font-bold tracking-tighter fade-in-up">GRAPHICS & COVERS</h2>
+
+                        <!-- Tabs Navigation -->
+                        <div class="flex gap-2 mt-6 md:mt-0 fade-in-up">
+                            <button onclick="switchTab('storybook')"
+                                class="tab-btn px-6 py-2 rounded-full border border-white/10 text-sm font-mono uppercase hover:bg-white/5 transition-all active"
+                                data-tab="storybook">Storybook</button>
+                            <button onclick="switchTab('bookcover')"
+                                class="tab-btn px-6 py-2 rounded-full border border-white/10 text-sm font-mono uppercase hover:bg-white/5 transition-all"
+                                data-tab="bookcover">Book Covers</button>
+                            <button onclick="switchTab('audiobook')"
+                                class="tab-btn px-6 py-2 rounded-full border border-white/10 text-sm font-mono uppercase hover:bg-white/5 transition-all"
+                                data-tab="audiobook">Audio Book Covers</button>
+                            <button onclick="switchTab('poster')"
+                                class="tab-btn px-6 py-2 rounded-full border border-white/10 text-sm font-mono uppercase hover:bg-white/5 transition-all"
+                                data-tab="poster">Posters</button>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content -->
+                    <div class="relative fade-in-up delay-100">
+                        <!-- Storybook Grid -->
+                        <div id="storybook"
+                            class="tab-content grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div
+                                class="group relative overflow-hidden rounded-xl aspect-[3/4] bg-gray-900 border border-white/10 img-zoom-container">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                                <img src="images/story1.jpg" alt="Storybook Illustration 1"
+                                    class="w-full h-full object-cover">
+                                <div class="absolute bottom-6 left-6 z-20">
+                                    <h3 class="text-xl font-bold">Storybook Scene</h3>
+                                    <p class="text-xs text-gray-400 font-mono mt-1">Illustration</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Book Cover Grid -->
+                        <div id="bookcover"
+                            class="tab-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div
+                                class="group relative overflow-hidden rounded-xl aspect-[2/3] bg-gray-900 border border-white/10 img-zoom-container">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                                <img src="images/hallow.jpg" alt="Halloween Theme" class="w-full h-full object-cover">
+                                <div class="absolute bottom-6 left-6 z-20">
+                                    <h3 class="text-xl font-bold">Halloween Night</h3>
+                                    <p class="text-xs text-gray-400 font-mono mt-1">Spooky Style</p>
+                                </div>
+                            </div>
+                            <div
+                                class="group relative overflow-hidden rounded-xl aspect-[2/3] bg-gray-900 border border-white/10 img-zoom-container">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                                <img src="images/joy.jpg" alt="Joyful Character" class="w-full h-full object-cover">
+                                <div class="absolute bottom-6 left-6 z-20">
+                                    <h3 class="text-xl font-bold">Pure Joy</h3>
+                                    <p class="text-xs text-gray-400 font-mono mt-1">Character Expression</p>
+                                </div>
+                            </div>
+                            <div
+                                class="group relative overflow-hidden rounded-xl aspect-[2/3] bg-gray-900 border border-white/10 img-zoom-container">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                                <img src="images/xmas.jpg" alt="Christmas Theme" class="w-full h-full object-cover">
+                                <div class="absolute bottom-6 left-6 z-20">
+                                    <h3 class="text-xl font-bold">Christmas Spirit</h3>
+                                    <p class="text-xs text-gray-400 font-mono mt-1">Holiday Special</p>
+                                </div>
+                            </div>
+                            <div
+                                class="group relative overflow-hidden rounded-xl aspect-[2/3] bg-gray-900 border border-white/10 img-zoom-container">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                                <img src="images/book4.png" alt="Adult Book Cover" class="w-full h-full object-cover">
+                                <div class="absolute bottom-6 left-6 z-20">
+                                    <h3 class="text-xl font-bold">Adult Book Cover</h3>
+                                    <p class="text-xs text-gray-400 font-mono mt-1">Book Cover</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Audio Book Cover Grid -->
+                        <div id="audiobook"
+                            class="tab-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div class="md:col-span-2 lg:col-span-4">
+                                <p class="text-sm text-gray-400 font-mono">It's a gold standard for ACX Audio Cover.</p>
+                            </div>
+                            <div
+                                class="group relative overflow-hidden rounded-xl aspect-[1/1] bg-gray-900 border border-white/10 img-zoom-container">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                                <img src="images/audio1.png" alt="Audio Book Cover 1"
+                                    class="w-full h-full object-cover">
+                                <div class="absolute bottom-6 left-6 z-20">
+                                    <h3 class="text-xl font-bold">Audio Cover 1</h3>
+                                    <p class="text-xs text-gray-400 font-mono mt-1">ACX Standard</p>
+                                </div>
+                            </div>
+                            <div
+                                class="group relative overflow-hidden rounded-xl aspect-[1/1] bg-gray-900 border border-white/10 img-zoom-container">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                                <img src="images/audio2.png" alt="Audio Book Cover 2"
+                                    class="w-full h-full object-cover">
+                                <div class="absolute bottom-6 left-6 z-20">
+                                    <h3 class="text-xl font-bold">Audio Cover 2</h3>
+                                    <p class="text-xs text-gray-400 font-mono mt-1">ACX Standard</p>
+                                </div>
+                            </div>
+                            <div
+                                class="group relative overflow-hidden rounded-xl aspect-[1/1] bg-gray-900 border border-white/10 img-zoom-container">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                                <img src="images/audio3.png" alt="Audio Book Cover 3"
+                                    class="w-full h-full object-cover">
+                                <div class="absolute bottom-6 left-6 z-20">
+                                    <h3 class="text-xl font-bold">Audio Cover 3</h3>
+                                    <p class="text-xs text-gray-400 font-mono mt-1">ACX Standard</p>
+                                </div>
+                            </div>
+                            <div
+                                class="group relative overflow-hidden rounded-xl aspect-[1/1] bg-gray-900 border border-white/10 img-zoom-container">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                                <img src="images/audio4.png" alt="Audio Adult Book Cover"
+                                    class="w-full h-full object-cover">
+                                <div class="absolute bottom-6 left-6 z-20">
+                                    <h3 class="text-xl font-bold">Audio Cover 4</h3>
+                                    <p class="text-xs text-gray-400 font-mono mt-1">ACX Standard</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Poster Grid -->
+                        <div id="poster"
+                            class="tab-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div
+                                class="group relative overflow-hidden rounded-xl aspect-[3/4] bg-gray-900 border border-white/10 img-zoom-container">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                                <img src="images/poster1.png" alt="Poster 1" class="w-full h-full object-contain">
+                                <div class="absolute bottom-6 left-6 z-20">
+                                    <h3 class="text-2xl font-bold">No pain</h3>
+                                    <p class="text-xs text-gray-400 font-mono mt-1">Event Promo</p>
+                                </div>
+                            </div>
+                            <div
+                                class="group relative overflow-hidden rounded-xl aspect-[3/4] bg-gray-900 border border-white/10 img-zoom-container">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                                <img src="images/poster2.png" alt="Poster 2" class="w-full h-full object-contain">
+                                <div class="absolute bottom-6 left-6 z-20">
+                                    <h3 class="text-2xl font-bold">One Love</h3>
+                                    <p class="text-xs text-gray-400 font-mono mt-1">Festival</p>
+                                </div>
+                            </div>
+                            <div
+                                class="group relative overflow-hidden rounded-xl aspect-[3/4] bg-gray-900 border border-white/10 img-zoom-container">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                                <img src="images/poster3.png" alt="Poster 3" class="w-full h-full object-contain">
+                                <div class="absolute bottom-6 left-6 z-20">
+                                    <h3 class="text-2xl font-bold">WON</h3>
+                                    <p class="text-xs text-gray-400 font-mono mt-1">Night Event</p>
+                                </div>
+                            </div>
+                            <div
+                                class="group relative overflow-hidden rounded-xl aspect-[3/4] bg-gray-900 border border-white/10 img-zoom-container">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                                <img src="images/poster4.png" alt="Poster 4" class="w-full h-full object-contain">
+                                <div class="absolute bottom-6 left-6 z-20">
+                                    <h3 class="text-2xl font-bold">Obsession</h3>
+                                    <p class="text-xs text-gray-400 font-mono mt-1">Retro Showcase</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: Marketing & Promotion -->
+            <section class="px-6 bg-brand-dark py-32 border-y border-white/5">
+                <div class="max-w-7xl mx-auto">
+                    <span class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-8 block fade-in-up">Growth
+                        Assets</span>
+                    <h2 class="text-4xl md:text-6xl font-bold tracking-tighter mb-16 fade-in-up">MARKETING
+                        &<br>PROMOTION</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- TikTok Thumbnails -->
+                        <div class="group fade-in-up">
+                            <div
+                                class="aspect-square rounded-xl overflow-hidden relative border border-white/10 img-zoom-container mb-4">
+                                <img src="images/marketing.png" alt="Marketing 1" class="w-full h-full object-cover">
+                                <div
+                                    class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <i data-lucide="play-circle" class="w-16 h-16 text-white"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold">Client Product 01</h3>
+                            <p class="text-xs text-gray-500 font-mono">Product Visual</p>
+                        </div>
+
+                        <!-- YouTube Thumbnails -->
+                        <div class="group fade-in-up delay-100">
+                            <div
+                                class="aspect-square rounded-xl overflow-hidden relative border border-white/10 img-zoom-container mb-4">
+                                <img src="images/marketing2.png" alt="Marketing 2" class="w-full h-full object-cover">
+                            </div>
+
+                            <h3 class="text-xl font-bold">Client Product 02</h3>
+                            <p class="text-xs text-gray-500 font-mono">Product Visual</p>
+                        </div>
+
+                        <!-- Profile Banner -->
+                        <div class="group fade-in-up delay-200">
+                            <div
+                                class="aspect-square rounded-xl overflow-hidden relative border border-white/10 img-zoom-container mb-4">
+                                <img src="images/marketing3.png" alt="Marketing 3" class="w-full h-full object-cover">
+                            </div>
+                            <h3 class="text-xl font-bold">Client Product 03</h3>
+                            <p class="text-xs text-gray-500 font-mono">Product Visual</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: Entertainment & Creative -->
+            <section class="px-6">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl md:text-6xl font-bold tracking-tighter mb-16 text-right fade-in-up">
+                        CREATIVE<br>ENTERTAINMENT</h2>
+                    <p class="text-gray-400 text-sm md:text-base text-right mb-12 fade-in-up delay-100">Consistent
+                        Character</p>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[300px]">
+                        <!-- Masonry-ish Grid -->
+                        <div
+                            class="col-span-2 row-span-2 relative rounded-2xl overflow-hidden border border-white/10 group fade-in-up">
+                            <img src="images/character1.png"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                alt="Character 1">
+                            <div
+                                class="absolute bottom-0 left-0 p-8 w-full bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                                <h3 class="text-2xl font-bold">AI Influencers</h3>
+                                <p class="text-sm text-gray-300">Consistent virtual personas</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="col-span-1 row-span-1 relative rounded-2xl overflow-hidden border border-white/10 group fade-in-up delay-100">
+                            <img src="images/character2.png"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                alt="Character 2">
+                        </div>
+
+                        <div
+                            class="col-span-1 row-span-1 relative rounded-2xl overflow-hidden border border-white/10 group fade-in-up delay-150">
+                            <img src="images/character3.png"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 saturate-0 group-hover:saturate-100"
+                                alt="Character 3">
+                        </div>
+
+                        <div
+                            class="col-span-2 row-span-1 relative rounded-2xl overflow-hidden border border-white/10 group fade-in-up delay-200">
+                            <img src="images/character4.png"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                alt="Character 4">
+                            <div
+                                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/60">
+                                <span
+                                    class="font-mono uppercase tracking-widest border border-white p-2 rounded-full">Explore
+                                    World</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: AI Use Cases -->
+            <section class="px-6 py-32 bg-white/5 mx-6 rounded-3xl mt-32 relative overflow-hidden">
+                <div
+                    class="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay">
+                </div>
+
+                <div class="max-w-7xl mx-auto relative z-10">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-6xl font-bold tracking-tighter mb-4 fade-in-up">TRANSFORMATION</h2>
+                        <p class="text-gray-400 max-w-lg mx-auto fade-in-up delay-100">Drag the line to blend from
+                            photo to art.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <!-- Comparison 1 -->
+                        <div class="fade-in-up">
+                            <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i data-lucide="sparkles"
+                                    class="w-5 h-5 text-gray-400"></i> Style Transfer</h3>
+                            <!-- Drag Compare Visual -->
+                            <div class="relative aspect-square rounded-2xl overflow-hidden transform-compare"
+                                data-compare>
+                                <img src="images/transform1.png"
+                                    class="absolute inset-0 w-full h-full object-cover" alt="Original portrait">
+                                <div class="compare-overlay">
+                                    <img src="images/transform2.png" class="w-full h-full object-cover"
+                                        alt="Transformed portrait">
+                                </div>
+                                <div class="compare-handle">
+                                    <div class="compare-line"></div>
+                                    <div class="compare-knob">
+                                        <span class="compare-knob-text">DRAG</span>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-4 left-4 bg-black/70 px-3 py-1 rounded text-xs font-mono">
+                                    Original</div>
+                                <div class="absolute bottom-4 right-4 bg-black/70 px-3 py-1 rounded text-xs font-mono">
+                                    Transformed</div>
+                            </div>
+                        </div>
+
+                        <!-- Use Case List -->
+                        <div class="flex flex-col justify-center space-y-6 fade-in-up delay-100">
+                            <div
+                                class="p-6 rounded-xl border border-white/10 bg-black/20 hover:bg-white/5 transition-colors cursor-pointer group">
+                                <h4 class="font-bold text-lg mb-2 group-hover:text-white transition-colors">AI Portrait
+                                    Generation</h4>
+                                <p class="text-gray-500 text-sm">Professional headshots without the studio. Perfect for
+                                    LinkedIn and resumes.</p>
+                            </div>
+                            <div
+                                class="p-6 rounded-xl border border-white/10 bg-black/20 hover:bg-white/5 transition-colors cursor-pointer group">
+                                <h4 class="font-bold text-lg mb-2 group-hover:text-white transition-colors">Lifestyle
+                                    Photos</h4>
+                                <p class="text-gray-500 text-sm">Product placement in any environment. No travel
+                                    required.</p>
+                            </div>
+                            <div
+                                class="p-6 rounded-xl border border-white/10 bg-black/20 hover:bg-white/5 transition-colors cursor-pointer group">
+                                <h4 class="font-bold text-lg mb-2 group-hover:text-white transition-colors">Asset
+                                    Generation</h4>
+                                <p class="text-gray-500 text-sm">Game assets, icons, and UI elements generated in
+                                    seconds.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/10 text-center font-mono text-xs text-gray-500">
+        <p>&copy; 2024 Ramil Flaviano. AI Gallery Portfolio.</p>
+    </footer>
+
+    <!-- Logic -->
+    <script>
+        // Initialize Lenis
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Connect GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Simple Fade In Animation for elements with .fade-in-up
+        gsap.utils.toArray('.fade-in-up').forEach((elem) => {
+            gsap.fromTo(elem,
+                { y: 50, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: "top 90%",
+                    }
+                }
+            );
+        });
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Tab Switching Logic
+        function switchTab(tabName) {
+            // Update Buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.dataset.tab === tabName) {
+                    btn.classList.add('active', 'bg-white', 'text-black', 'border-white');
+                    btn.classList.remove('hover:bg-white/5', 'text-white', 'border-white/10');
+                } else {
+                    btn.classList.remove('active', 'bg-white', 'text-black', 'border-white');
+                    btn.classList.add('hover:bg-white/5', 'text-white', 'border-white/10');
+                }
+            });
+
+            // Update Content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                if (content.id === tabName) {
+                    content.classList.remove('hidden');
+                    // Reset animations for items inside
+                    gsap.fromTo(content.children, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.1 });
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+
+            // Recalculate ScrollTrigger/Lenis layout as height changes
+            setTimeout(() => ScrollTrigger.refresh(), 500);
+        }
+
+        // Custom Cursor Logic (Copied from main site)
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Adding a slight delay/easing for the outline is done via CSS transition, just update pos
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Hover effects for links
+        document.querySelectorAll('a, button, .hover-trigger').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                document.body.classList.add('hovering');
+            });
+            el.addEventListener('mouseleave', () => {
+                document.body.classList.remove('hovering');
+            });
+        });
+
+        // Transformation compare slider drag
+        document.querySelectorAll('[data-compare]').forEach((compare) => {
+            let isDragging = false;
+
+            const setPosition = (clientX) => {
+                const rect = compare.getBoundingClientRect();
+                const offset = Math.min(Math.max(clientX - rect.left, 0), rect.width);
+                const percent = (offset / rect.width) * 100;
+                compare.style.setProperty('--compare-pos', `${percent}%`);
+            };
+
+            const startDrag = (event) => {
+                event.preventDefault();
+                isDragging = true;
+                compare.classList.add('dragging');
+                if (compare.setPointerCapture) {
+                    compare.setPointerCapture(event.pointerId);
+                }
+                setPosition(event.clientX);
+            };
+
+            const moveDrag = (event) => {
+                if (!isDragging) return;
+                setPosition(event.clientX);
+            };
+
+            const endDrag = (event) => {
+                if (!isDragging) return;
+                isDragging = false;
+                compare.classList.remove('dragging');
+                if (event && compare.releasePointerCapture) {
+                    compare.releasePointerCapture(event.pointerId);
+                }
+            };
+
+            compare.addEventListener('pointerdown', startDrag);
+            compare.addEventListener('pointermove', moveDrag);
+            compare.addEventListener('pointerup', endDrag);
+            compare.addEventListener('pointercancel', endDrag);
+            compare.addEventListener('pointerleave', endDrag);
+        });
+
+    </script>
+</body>
+
+</html>

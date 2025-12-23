@@ -29,6 +29,10 @@ const dropReference = document.getElementById('drop-reference');
 const referenceInput = document.getElementById('reference-images');
 const referencePreview = document.getElementById('reference-preview');
 
+const dropCharacter = document.getElementById('drop-character');
+const characterInput = document.getElementById('character-images');
+const characterPreview = document.getElementById('character-preview');
+
 const dropScene = document.getElementById('drop-scene');
 const sceneInput = document.getElementById('scene-image');
 const scenePreview = document.getElementById('scene-preview');
@@ -90,6 +94,7 @@ const surprisePrompts = [
 
 const state = {
   referenceImages: [],
+  characterImages: [],
   sceneImage: null,
   styleImage: null,
   activeRequests: 0,
@@ -456,6 +461,7 @@ const getReferenceImageForAspect = () => {
     return recreateState.referenceImage;
   }
   if (state.referenceImages.length) return state.referenceImages[0];
+  if (state.characterImages.length) return state.characterImages[0];
   if (state.sceneImage) return state.sceneImage;
   if (state.styleImage) return state.styleImage;
   return null;
@@ -521,6 +527,72 @@ const renderReferencePreview = () => {
     wrapper.appendChild(downloadBtn);
     wrapper.appendChild(removeBtn);
     referencePreview.appendChild(wrapper);
+  });
+};
+
+const renderCharacterPreview = () => {
+  if (state.characterImages.length === 0) {
+    characterPreview.innerHTML = '';
+    characterPreview.classList.add('hidden');
+    return;
+  }
+
+  characterPreview.classList.remove('hidden');
+  characterPreview.innerHTML = '';
+
+  state.characterImages.forEach((item, index) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'flex flex-col gap-1';
+
+    const imageWrap = document.createElement('div');
+    imageWrap.className = 'preview-item aspect-square rounded overflow-hidden relative border border-white/20';
+
+    const img = document.createElement('img');
+    img.src = item.dataUrl;
+    img.className = 'w-full h-full object-cover';
+    img.title = 'Click to edit';
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openEditor(item.dataUrl, (updatedUrl) => {
+        updateImageMeta(state.characterImages[index], updatedUrl).then(renderCharacterPreview);
+      });
+    });
+
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'absolute top-1 right-1 bg-black/50 hover:bg-black/80 text-white rounded-full p-0.5 transition-colors pointer-events-auto';
+    removeBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+    removeBtn.type = 'button';
+    removeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      state.characterImages.splice(index, 1);
+      renderCharacterPreview();
+    });
+
+    const downloadBtn = document.createElement('a');
+    downloadBtn.className = 'absolute top-1 left-1 bg-black/50 hover:bg-black/80 text-white rounded-full p-0.5 transition-colors pointer-events-auto';
+    downloadBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+    downloadBtn.href = item.dataUrl;
+    downloadBtn.download = item.name || `character-${index + 1}.png`;
+    downloadBtn.title = 'Download';
+    downloadBtn.setAttribute('aria-label', 'Download');
+    downloadBtn.addEventListener('click', (e) => e.stopPropagation());
+
+    const specInput = document.createElement('textarea');
+    specInput.rows = 2;
+    specInput.placeholder = 'Character details...';
+    specInput.value = item.spec || '';
+    specInput.className =
+      'w-full bg-black/30 border border-white/10 rounded-md px-2 py-1 text-[10px] focus:outline-none text-gray-300 placeholder-gray-600 resize-none text-left';
+    specInput.addEventListener('input', (event) => {
+      state.characterImages[index].spec = event.target.value;
+    });
+
+    imageWrap.appendChild(img);
+    imageWrap.appendChild(downloadBtn);
+    imageWrap.appendChild(removeBtn);
+    wrapper.appendChild(imageWrap);
+    wrapper.appendChild(specInput);
+    characterPreview.appendChild(wrapper);
   });
 };
 
@@ -753,6 +825,18 @@ const handleFiles = async (files, type, meta = {}) => {
     items.forEach((item) => state.referenceImages.push(item));
     renderReferencePreview();
   }
+  else if (type === 'character') {
+    const remainingSlots = 6 - state.characterImages.length;
+    if (remainingSlots <= 0) {
+      setError('Max 6 character images allowed.');
+      return;
+    }
+
+    const selected = Array.from(files).slice(0, remainingSlots);
+    const items = await Promise.all(selected.map(readFileWithMeta));
+    items.forEach((item) => state.characterImages.push({ ...item, spec: '' }));
+    renderCharacterPreview();
+  }
   else if (type === 'scene') {
     const file = files[0];
     state.sceneImage = await readFileWithMeta(file);
@@ -826,6 +910,7 @@ const setupDragDrop = (zone, input, type, meta = {}) => {
 };
 
 setupDragDrop(dropReference, referenceInput, 'reference');
+setupDragDrop(dropCharacter, characterInput, 'character');
 setupDragDrop(dropScene, sceneInput, 'scene');
 setupDragDrop(dropStyle, styleInput, 'style');
 setupDragDrop(dropRecreateReference, recreateReferenceInput, 'recreate-reference');
@@ -978,6 +1063,9 @@ const buildContentParts = () => {
   if (state.referenceImages.length) {
     notes.push('Edit the reference images with the prompt.');
   }
+  if (state.characterImages.length) {
+    notes.push('Use the character images for subject identity, pose, and wardrobe.');
+  }
   if (state.sceneImage) {
     notes.push('Use the scene image for location and environment.');
   }
@@ -991,6 +1079,15 @@ const buildContentParts = () => {
   if (state.referenceImages.length) {
     parts.push({ type: 'text', text: 'Reference images:' });
     state.referenceImages.forEach((item) => {
+      parts.push({ type: 'image_url', image_url: { url: item.dataUrl } });
+    });
+  }
+
+  if (state.characterImages.length) {
+    parts.push({ type: 'text', text: 'Character reference images:' });
+    state.characterImages.forEach((item, index) => {
+      const spec = item.spec ? `: ${item.spec}` : '';
+      parts.push({ type: 'text', text: `Character reference ${index + 1}${spec}` });
       parts.push({ type: 'image_url', image_url: { url: item.dataUrl } });
     });
   }
@@ -1552,7 +1649,7 @@ const handleSubmit = async (event) => {
   if (aspectSelect.value === 'reference') {
     const ref = getReferenceImageForAspect();
     if (!ref?.width || !ref?.height) {
-      setError('Add a reference image to use Reference aspect ratio.');
+      setError('Add a reference, character, scene, or style image to use Reference aspect ratio.');
       return;
     }
   }
@@ -1623,6 +1720,7 @@ const handleSubmit = async (event) => {
 const clearForm = () => {
   form.reset();
   state.referenceImages = [];
+  state.characterImages = [];
   state.sceneImage = null;
   state.styleImage = null;
   recreateState.referenceImage = null;
@@ -1631,6 +1729,7 @@ const clearForm = () => {
   recreateState.overrides = {};
   updateCount();
   renderReferencePreview();
+  renderCharacterPreview();
   refreshScenePreview();
   refreshStylePreview();
   refreshRecreateReferencePreview();
