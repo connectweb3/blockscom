@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#050505] text-white overflow-x-hidden antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockscom Media | Privacy + Terms</title>
+    <meta name="description"
+        content="Privacy Policy and Terms of Service for Blockscom Media. Learn how we handle data, use our services, and protect your rights.">
+
+    <link rel="icon" href="images/logo.jpg" type="image/jpeg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#050505',
+                            dark: '#0A0A0A',
+                            gray: '#1F1F1F',
+                            accent: '#FFFFFF',
+                            dim: '#888888'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f1f1f 1px, transparent 1px), linear-gradient(to bottom, #1f1f1f 1px, transparent 1px)"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --panel: rgba(255, 255, 255, 0.04);
+            --panel-border: rgba(255, 255, 255, 0.08);
+            --panel-strong: rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-panel {
+            background: var(--panel);
+            border: 1px solid var(--panel-border);
+            backdrop-filter: blur(12px);
+        }
+
+        .glass-strong {
+            background: var(--panel-strong);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .grid-bg {
+            background-size: 42px 42px;
+            mask-image: radial-gradient(circle at center, black, transparent 75%);
+            -webkit-mask-image: radial-gradient(circle at center, black, transparent 75%);
+        }
+
+        .noise-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(18px);
+            animation: reveal-up 0.9s ease forwards;
+        }
+
+        .reveal-delay-1 {
+            animation-delay: 0.12s;
+        }
+
+        .reveal-delay-2 {
+            animation-delay: 0.22s;
+        }
+
+        .reveal-delay-3 {
+            animation-delay: 0.32s;
+        }
+
+        @keyframes reveal-up {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-up {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="selection:bg-white selection:text-black">
+    <div class="noise-bg"></div>
+
+    <nav class="fixed top-0 w-full z-20 px-6 py-6 bg-black/40 backdrop-blur">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="text-xl font-bold font-mono tracking-tighter">
+                BLOCKSCOM<span class="opacity-50">MEDIA</span>
+            </a>
+            <a href="index.html"
+                class="text-xs uppercase font-mono tracking-widest border border-white/20 px-4 py-2 rounded-full hover:bg-white hover:text-black transition-colors">
+                Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <main class="relative pt-32 pb-24 px-6">
+        <div class="absolute inset-0 bg-grid-pattern grid-bg opacity-[0.04] pointer-events-none"></div>
+        <div
+            class="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-white/10 blur-[140px] opacity-60 pointer-events-none">
+        </div>
+
+        <section class="max-w-6xl mx-auto relative z-10">
+            <p class="font-mono text-xs uppercase tracking-widest text-gray-500 reveal-up">Legal</p>
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tighter mt-4 reveal-up reveal-delay-1">
+                Privacy Policy + Terms of Service
+            </h1>
+            <p class="text-gray-400 mt-6 max-w-2xl reveal-up reveal-delay-2">
+                We value clarity. This page explains how Blockscom Media handles information, the rules for using our
+                services, and what you can expect when working with us.
+            </p>
+            <div class="flex flex-wrap gap-3 mt-8 text-xs font-mono uppercase tracking-widest reveal-up reveal-delay-3">
+                <span class="px-4 py-2 rounded-full border border-white/15">Last updated: December 25, 2025</span>
+                <a href="mailto:hello@blockscom.xyz"
+                    class="px-4 py-2 rounded-full border border-white/15 hover:bg-white hover:text-black transition-colors">
+                    Contact: hello@blockscom.xyz
+                </a>
+            </div>
+        </section>
+
+        <section class="max-w-6xl mx-auto mt-16 grid gap-10 lg:grid-cols-[260px,1fr] relative z-10">
+            <aside class="glass-panel rounded-2xl p-6 h-max lg:sticky lg:top-28">
+                <p class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-4">On this page</p>
+                <nav class="flex flex-col gap-3 text-sm text-gray-400">
+                    <a href="#privacy" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#privacy-collection" class="hover:text-white transition-colors">Information we collect</a>
+                    <a href="#privacy-use" class="hover:text-white transition-colors">How we use data</a>
+                    <a href="#privacy-sharing" class="hover:text-white transition-colors">Sharing & disclosures</a>
+                    <a href="#privacy-rights" class="hover:text-white transition-colors">Your choices</a>
+                    <a href="#terms" class="hover:text-white transition-colors pt-4 border-t border-white/10">Terms of
+                        Service</a>
+                    <a href="#terms-use" class="hover:text-white transition-colors">Acceptable use</a>
+                    <a href="#terms-payments" class="hover:text-white transition-colors">Payments</a>
+                    <a href="#terms-ip" class="hover:text-white transition-colors">Intellectual property</a>
+                    <a href="#terms-liability" class="hover:text-white transition-colors">Disclaimers</a>
+                </nav>
+            </aside>
+
+            <div class="space-y-12">
+                <section id="privacy" class="glass-panel rounded-2xl p-8 md:p-10">
+                    <div class="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-gray-500">
+                        <span>Policy</span>
+                        <span class="h-px w-10 bg-white/20"></span>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-semibold mt-4">Privacy Policy</h2>
+                    <p class="text-gray-400 mt-4 leading-relaxed">
+                        This Privacy Policy describes how Blockscom Media collects, uses, and protects information when
+                        you visit our website or engage our services. By using our site, you agree to the practices
+                        described here.
+                    </p>
+
+                    <div id="privacy-collection" class="mt-10">
+                        <h3 class="text-lg font-semibold">Information we collect</h3>
+                        <ul class="mt-4 space-y-3 text-sm text-gray-400">
+                            <li><span class="text-white">Contact details.</span> Name, email, and company information
+                                provided through inquiries or project onboarding.</li>
+                            <li><span class="text-white">Project data.</span> Creative briefs, brand assets, and feedback
+                                shared while working with us.</li>
+                            <li><span class="text-white">Usage data.</span> Device, browser, and analytics signals to
+                                understand performance and improve the site.</li>
+                            <li><span class="text-white">Cookies.</span> Small files that help remember preferences and
+                                measure engagement.</li>
+                        </ul>
+                    </div>
+
+                    <div id="privacy-use" class="mt-10">
+                        <h3 class="text-lg font-semibold">How we use data</h3>
+                        <ul class="mt-4 space-y-3 text-sm text-gray-400">
+                            <li>Deliver services, respond to inquiries, and manage projects.</li>
+                            <li>Improve our site experience, content, and creative offerings.</li>
+                            <li>Maintain security, prevent misuse, and comply with legal obligations.</li>
+                        </ul>
+                    </div>
+
+                    <div id="privacy-sharing" class="mt-10">
+                        <h3 class="text-lg font-semibold">Sharing & disclosures</h3>
+                        <p class="mt-4 text-sm text-gray-400 leading-relaxed">
+                            We share information only with trusted partners who help us operate the business, such as
+                            hosting, analytics, or payment providers. We may disclose data if required by law or to
+                            protect our rights.
+                        </p>
+                    </div>
+
+                    <div id="privacy-rights" class="mt-10">
+                        <h3 class="text-lg font-semibold">Your choices</h3>
+                        <ul class="mt-4 space-y-3 text-sm text-gray-400">
+                            <li>Request access, updates, or deletion of your information.</li>
+                            <li>Disable cookies through your browser settings.</li>
+                            <li>Opt out of marketing communications at any time.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-10">
+                        <h3 class="text-lg font-semibold">Data retention & security</h3>
+                        <p class="mt-4 text-sm text-gray-400 leading-relaxed">
+                            We retain information only as long as needed for business or legal purposes. We use
+                            reasonable safeguards to protect information, but no system can be guaranteed 100% secure.
+                        </p>
+                    </div>
+
+                    <div class="mt-10">
+                        <h3 class="text-lg font-semibold">Children's privacy</h3>
+                        <p class="mt-4 text-sm text-gray-400 leading-relaxed">
+                            Our services are not directed to children under 13, and we do not knowingly collect
+                            personal information from minors.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="terms" class="glass-panel rounded-2xl p-8 md:p-10">
+                    <div class="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-gray-500">
+                        <span>Agreement</span>
+                        <span class="h-px w-10 bg-white/20"></span>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-semibold mt-4">Terms of Service</h2>
+                    <p class="text-gray-400 mt-4 leading-relaxed">
+                        These Terms of Service govern your access to and use of the Blockscom Media website and
+                        services. By accessing or using the site, you agree to these terms.
+                    </p>
+
+                    <div id="terms-use" class="mt-10">
+                        <h3 class="text-lg font-semibold">Acceptable use</h3>
+                        <ul class="mt-4 space-y-3 text-sm text-gray-400">
+                            <li>Use our site and services for lawful purposes only.</li>
+                            <li>Do not attempt to interfere with security or performance.</li>
+                            <li>Respect intellectual property and brand guidelines.</li>
+                        </ul>
+                    </div>
+
+                    <div id="terms-payments" class="mt-10">
+                        <h3 class="text-lg font-semibold">Payments & delivery</h3>
+                        <p class="mt-4 text-sm text-gray-400 leading-relaxed">
+                            Project pricing, timelines, and payment schedules are defined in written proposals or
+                            invoices. Work begins once agreed terms and deposits are received, unless stated otherwise.
+                        </p>
+                    </div>
+
+                    <div id="terms-ip" class="mt-10">
+                        <h3 class="text-lg font-semibold">Intellectual property</h3>
+                        <p class="mt-4 text-sm text-gray-400 leading-relaxed">
+                            Blockscom Media retains ownership of pre-existing tools, templates, and processes. Upon
+                            full payment, clients receive the rights outlined in their agreement for the final
+                            deliverables.
+                        </p>
+                    </div>
+
+                    <div class="mt-10">
+                        <h3 class="text-lg font-semibold">User content</h3>
+                        <p class="mt-4 text-sm text-gray-400 leading-relaxed">
+                            You confirm that any materials you supply are owned or licensed by you and do not infringe
+                            third-party rights.
+                        </p>
+                    </div>
+
+                    <div id="terms-liability" class="mt-10">
+                        <h3 class="text-lg font-semibold">Disclaimers & liability</h3>
+                        <p class="mt-4 text-sm text-gray-400 leading-relaxed">
+                            Our site and services are provided "as is" without warranties of any kind. To the fullest
+                            extent permitted by law, Blockscom Media is not liable for indirect, incidental, or
+                            consequential damages arising from use of the site or services.
+                        </p>
+                    </div>
+
+                    <div class="mt-10">
+                        <h3 class="text-lg font-semibold">Termination & changes</h3>
+                        <p class="mt-4 text-sm text-gray-400 leading-relaxed">
+                            We may suspend access for violations of these terms. We may update these terms or policies
+                            from time to time, and changes will be posted on this page with a revised date.
+                        </p>
+                    </div>
+
+                    <div class="mt-10">
+                        <h3 class="text-lg font-semibold">Contact</h3>
+                        <p class="mt-4 text-sm text-gray-400 leading-relaxed">
+                            Questions about these terms? Email us at <a href="mailto:hello@blockscom.xyz"
+                                class="text-white hover:underline">hello@blockscom.xyz</a>.
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-white/10 py-10 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-6 text-xs font-mono">
+            <span class="text-gray-500">&copy; 2024 Blockscom Media. All rights reserved.</span>
+            <div class="flex gap-4 text-gray-500">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <a href="mailto:hello@blockscom.xyz" class="hover:text-white transition-colors">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

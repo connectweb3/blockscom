@@ -263,11 +263,8 @@
 
                         <!-- Tabs Navigation -->
                         <div class="flex gap-2 mt-6 md:mt-0 fade-in-up">
-                            <button onclick="switchTab('storybook')"
-                                class="tab-btn px-6 py-2 rounded-full border border-white/10 text-sm font-mono uppercase hover:bg-white/5 transition-all active"
-                                data-tab="storybook">Storybook</button>
                             <button onclick="switchTab('bookcover')"
-                                class="tab-btn px-6 py-2 rounded-full border border-white/10 text-sm font-mono uppercase hover:bg-white/5 transition-all"
+                                class="tab-btn px-6 py-2 rounded-full border border-white/10 text-sm font-mono uppercase hover:bg-white/5 transition-all active"
                                 data-tab="bookcover">Book Covers</button>
                             <button onclick="switchTab('audiobook')"
                                 class="tab-btn px-6 py-2 rounded-full border border-white/10 text-sm font-mono uppercase hover:bg-white/5 transition-all"
@@ -280,24 +277,9 @@
 
                     <!-- Tab Content -->
                     <div class="relative fade-in-up delay-100">
-                        <!-- Storybook Grid -->
-                        <div id="storybook"
-                            class="tab-content grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div
-                                class="group relative overflow-hidden rounded-xl aspect-[3/4] bg-gray-900 border border-white/10 img-zoom-container">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                                <img src="images/story1.jpg" alt="Storybook Illustration 1"
-                                    class="w-full h-full object-cover">
-                                <div class="absolute bottom-6 left-6 z-20">
-                                    <h3 class="text-xl font-bold">Storybook Scene</h3>
-                                    <p class="text-xs text-gray-400 font-mono mt-1">Illustration</p>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- Book Cover Grid -->
                         <div id="bookcover"
-                            class="tab-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             <div
                                 class="group relative overflow-hidden rounded-xl aspect-[2/3] bg-gray-900 border border-white/10 img-zoom-container">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
