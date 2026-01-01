@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#050505] text-white overflow-x-hidden antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Gen Script Generator | Blockscom Media</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Lead Gen Script Generator | Blockscom Media">
+    <meta property="og:description" content="Generate personalized AI sales scripts for your leads.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- GSAP & Lenis for Smooth Scroll/Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#050505',
+                            dark: '#0A0A0A',
+                            gray: '#1F1F1F',
+                            accent: '#FFFFFF',
+                            dim: '#888888'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="selection:bg-white selection:text-black">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Noise Overlay -->
+    <div class="noise-bg"></div>
+
+    <!-- Scroll Progress -->
+    <div class="progress-bar"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 mix-blend-difference text-white">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="../../index.html" class="text-xl font-bold font-mono tracking-tighter hover-trigger"
+                data-cursor="link">
+                BLOCKSCOM<span class="opacity-50">MEDIA</span>
+            </a>
+
+            <div class="hidden md:flex gap-12 font-mono text-sm uppercase tracking-widest">
+                <a href="../../index.html" class="hover:text-gray-400 transition-colors hover-trigger"
+                    data-cursor="link">Home</a>
+                <a href="../index.html" class="hover:text-gray-400 transition-colors hover-trigger"
+                    data-cursor="link">Tools</a>
+            </div>
+
+            <a href="../index.html" class="md:hidden hover:text-gray-400 transition-colors hover-trigger">
+                <i data-lucide="arrow-left"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="w-full relative min-h-screen flex items-center justify-center pt-24 pb-12 px-4">
+
+        <!-- Background Grid -->
+        <div class="absolute inset-0 opacity-[0.03] grid-bg pointer-events-none"></div>
+
+        <div class="max-w-6xl w-full z-10 flex flex-col gap-12">
+
+            <div class="text-center">
+                <span class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-4 block">internal tool</span>
+                <h1 class="text-4xl md:text-6xl font-bold tracking-tighter mb-4">SCRIPT<span
+                        class="text-brand-dim">GEN</span></h1>
+                <p class="text-gray-400 max-w-lg mx-auto font-mono text-sm leading-relaxed">
+                    Generate hyper-personalized outreach scripts using simulated AI analysis.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+
+                <!-- Input Panel -->
+                <div class="glass-panel p-8 rounded-2xl flex flex-col gap-6">
+                    <div>
+                        <label class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-2 block">Target &
+                            Personalization</label>
+                        <input type="text" id="target-url" placeholder="Link OR Brand Name"
+                            class="input-field w-full p-4 rounded-lg font-mono text-sm hover-trigger"
+                            data-cursor="text">
+                    </div>
+
+                    <div>
+                        <label class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-2 block">Optional
+                            Description</label>
+                        <textarea id="target-desc" placeholder="Paste Product/Job Description or Context (Optional)"
+                            class="input-field w-full p-4 rounded-lg font-mono text-sm hover-trigger resize-none custom-scrollbar"
+                            rows="2" data-cursor="text"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-2 block">Service
+                            Category</label>
+                        <div class="relative">
+                            <select id="service-category"
+                                class="input-field w-full p-4 rounded-lg font-mono text-sm appearance-none hover-trigger cursor-pointer"
+                                data-cursor="link">
+                                <option value="social-creatives">Social Creatives</option>
+                                <option value="portfolio-website">Portfolio Website</option>
+                                <option value="business-website">Business Website</option>
+                                <option value="fb-ai">Facebook AI Automation</option>
+                                <option value="product-photo">Professional Product Photo</option>
+                                <option value="fb-ai-product">Facebook AI + Product Photo</option>
+                                <option value="blockchain">Blockchain</option>
+                            </select>
+                            <i data-lucide="chevron-down"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                    <!-- Script Options -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label
+                                class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-2 block">Language</label>
+                            <div class="relative">
+                                <select id="script-language"
+                                    class="input-field w-full p-4 rounded-lg font-mono text-sm appearance-none hover-trigger cursor-pointer"
+                                    data-cursor="link">
+                                    <option value="English">English</option>
+                                    <option value="Taglish">Taglish (Eng/Tag MIX)</option>
+                                    <option value="Tagalog">Tagalog (Conversational)</option>
+                                </select>
+                                <i data-lucide="chevron-down"
+                                    class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-2 block">Length</label>
+                            <div class="relative">
+                                <select id="script-length"
+                                    class="input-field w-full p-4 rounded-lg font-mono text-sm appearance-none hover-trigger cursor-pointer"
+                                    data-cursor="link">
+                                    <option value="Medium">Medium (~100 words)</option>
+                                    <option value="Short">Short (<50 words)</option>
+                                    <option value="Long">Long (>200 words)</option>
+                                </select>
+                                <i data-lucide="chevron-down"
+                                    class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-2 block">Script
+                            Tone</label>
+                        <div class="relative">
+                            <select id="script-type"
+                                class="input-field w-full p-4 rounded-lg font-mono text-sm appearance-none hover-trigger cursor-pointer"
+                                data-cursor="link">
+                                <option value="Professional">Professional</option>
+                                <option value="Semi-Professional">Semi-Professional</option>
+                                <option value="Emotion Selling">Emotion Selling</option>
+                            </select>
+                            <i data-lucide="chevron-down"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                    <button id="generate-btn"
+                        class="magnetic-btn mt-4 group relative w-full py-4 bg-white text-black rounded-lg font-bold overflow-hidden hover-trigger"
+                        data-cursor="link">
+                        <span
+                            class="relative z-10 transition-colors group-hover:text-white flex items-center justify-center gap-2">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i> Generate Script
+                        </span>
+                        <div
+                            class="absolute inset-0 bg-brand-dim translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Output Panel -->
+                <div class="glass-panel p-8 rounded-2xl min-h-[600px] relative flex flex-col">
+                    <label
+                        class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-4 flex justify-between items-center">
+                        <span>Generated Script</span>
+                        <button id="copy-btn"
+                            class="hidden opacity-0 hover:text-white text-gray-400 transition-colors hover-trigger flex items-center gap-1"
+                            data-cursor="link">
+                            <i data-lucide="copy" class="w-3 h-3"></i> Copy
+                        </button>
+                    </label>
+
+                    <!-- Loading State -->
+                    <div id="loading-state"
+                        class="hidden absolute inset-0 flex items-center justify-center z-20 bg-brand-black/50 backdrop-blur-sm rounded-2xl">
+                        <div class="flex flex-col items-center gap-4">
+                            <div
+                                class="w-12 h-12 rounded-full border border-white/20 pulse-ring flex items-center justify-center">
+                                <i data-lucide="zap" class="w-5 h-5 animate-pulse"></i>
+                            </div>
+                            <span class="font-mono text-xs animate-pulse">Analyzing Brand...</span>
+                        </div>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div id="empty-state"
+                        class="flex-1 flex flex-col items-center justify-center text-brand-dim p-4 text-center border-2 border-dashed border-white/5 rounded-xl">
+                        <i data-lucide="terminal-square" class="w-8 h-8 mb-4 opacity-50"></i>
+                        <p class="font-mono text-sm max-w-[200px]">Enter a link and select a service to generate a
+                            script</p>
+                    </div>
+
+                    <!-- Result Content (Textarea for editing) -->
+                    <div id="result-container" class="hidden w-full flex flex-col gap-4">
+                        <div class="bg-white/5 rounded-lg p-4 border border-white/10 flex-shrink-0">
+                            <p class="text-xs text-green-400 font-mono mb-1">✓ AI Insight detected:</p>
+                            <p id="ai-insight-text" class="text-xs text-gray-400 italic">"Detected high engagement but
+                                outdated visual style..."</p>
+                        </div>
+                        <textarea id="script-output"
+                            class="w-full min-h-[500px] bg-transparent border-none outline-none font-sans text-base leading-relaxed text-gray-100 custom-scrollbar p-2"
+                            spellcheck="false"></textarea>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

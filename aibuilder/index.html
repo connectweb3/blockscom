@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#050505] text-white overflow-x-hidden antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockscom Media | AI Automation</title>
+    <meta name="description"
+        content="Blockscom Media - High-performance AI Automation for Business. Specialized in Business Messenger AI Agents, Lead Generation, and Custom AI Workflows.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Blockscom Media | AI Automation">
+    <meta property="og:description"
+        content="Automate your business with intelligent AI Agents. Sales, Scheduling, and Operations.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#050505',
+                            dark: '#0A0A0A',
+                            gray: '#1F1F1F',
+                            accent: '#FFFFFF',
+                            dim: '#888888',
+                            neon: '#00f0ff'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f1f1f 1px, transparent 1px), linear-gradient(to bottom, #1f1f1f 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="selection:bg-white selection:text-black">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Noise Overlay -->
+    <div class="noise-bg"></div>
+
+    <!-- Scroll Progress -->
+    <div class="progress-bar"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 mix-blend-difference text-white">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-xl font-bold font-mono tracking-tighter hover-trigger" data-cursor="link">
+                BLOCKSCOM<span class="opacity-50">.AI</span>
+            </a>
+
+            <div class="hidden md:flex gap-12 font-mono text-sm uppercase tracking-widest">
+                <a href="#hero" class="hover:text-brand-neon transition-colors hover-trigger"
+                    data-cursor="link">Home</a>
+                <a href="#product" class="hover:text-brand-neon transition-colors hover-trigger" data-cursor="link">AI
+                    Agent</a>
+                <a href="#customization" class="hover:text-brand-neon transition-colors hover-trigger"
+                    data-cursor="link">Customization</a>
+                <a href="#contact" class="hover:text-brand-neon transition-colors hover-trigger"
+                    data-cursor="link">Contact</a>
+            </div>
+
+            <button class="md:hidden hover-trigger" id="menu-btn">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 bg-brand-black z-40 transform translate-x-full transition-transform duration-500 flex flex-col justify-center items-center gap-8 text-2xl font-mono">
+        <a href="#hero" class="mobile-link">Home</a>
+        <a href="#product" class="mobile-link">AI Agent</a>
+        <a href="#customization" class="mobile-link">Customization</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+        <button id="close-menu" class="absolute top-6 right-6">
+            <i data-lucide="x"></i>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="w-full relative">
+
+        <!-- Hero Section -->
+        <section id="hero" class="h-screen w-full flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03] bg-grid-pattern grid-bg pointer-events-none"></div>
+
+            <div class="max-w-7xl w-full px-6 z-10">
+                <div class="overflow-hidden">
+                    <h1 class="hero-title text-[10vw] leading-[0.85] font-bold tracking-tighter mix-blend-exclusion">
+                        <div class="overflow-hidden"><span class="block translate-y-full">INTELLIGENT</span></div>
+                        <div class="overflow-hidden"><span
+                                class="block translate-y-full text-brand-dim">AUTOMATION</span></div>
+                    </h1>
+                </div>
+
+                <div class="mt-12 flex flex-col md:flex-row justify-between items-end gap-8">
+                    <p
+                        class="hero-subtitle font-mono max-w-md text-sm md:text-base text-gray-400 opacity-0 translate-y-4">
+                        Don't waste 80% of your time on inquiries. Let our Passionate AI Agent sell your product,
+                        schedule appointments, and manage leads autonomously.
+                    </p>
+
+                    <a href="#product"
+                        class="magnetic-btn group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold overflow-hidden hover-trigger opacity-0 translate-y-4"
+                        data-cursor="link">
+                        <span class="relative z-10 transition-colors group-hover:text-white">Meet Your Agent</span>
+                        <div
+                            class="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
+                        </div>
+                        <i data-lucide="bot" class="relative z-10 w-5 h-5 transition-colors group-hover:text-white"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+                <i data-lucide="chevrons-down"></i>
+            </div>
+        </section>
+
+        <!-- Product / Features Section -->
+        <section id="product" class="py-32 px-6 relative bg-brand-dark">
+            <div class="max-w-7xl mx-auto">
+                <span
+                    class="font-mono text-xs uppercase tracking-widest text-brand-neon mb-8 block reveal-trigger">Business
+                    Messenger AI</span>
+                <h2 class="text-4xl md:text-6xl font-light leading-tight max-w-4xl reveal-trigger mb-24">
+                    Your 24/7 Sales Rep. <span class="text-gray-500">Always on, always selling.</span>
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div
+                        class="glass-panel p-8 rounded-2xl hover:border-brand-neon/50 transition-colors duration-500 service-card opacity-0 translate-y-8">
+                        <div
+                            class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 text-brand-neon">
+                            <i data-lucide="message-square" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4">Smart Conversation</h4>
+                        <p class="text-gray-400 text-sm">Engages customers naturally, answers detailed queries, and
+                            drives sales without human intervention.</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="glass-panel p-8 rounded-2xl hover:border-brand-neon/50 transition-colors duration-500 service-card opacity-0 translate-y-8"
+                        style="transition-delay: 100ms;">
+                        <div
+                            class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 text-brand-neon">
+                            <i data-lucide="sheet" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4">Google Sheets Sync</h4>
+                        <p class="text-gray-400 text-sm">Automatically captures orders and leads, organizing them
+                            instantly into your spreadsheets.</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="glass-panel p-8 rounded-2xl hover:border-brand-neon/50 transition-colors duration-500 service-card opacity-0 translate-y-8"
+                        style="transition-delay: 200ms;">
+                        <div
+                            class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 text-brand-neon">
+                            <i data-lucide="calendar-check" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4">Auto Scheduling</h4>
+                        <p class="text-gray-400 text-sm">Seamlessly books appointments and meetings, syncing directly
+                            with your calendar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Value Prop / Why AI -->
+        <section class="py-32 px-6 relative overflow-hidden">
+            <!-- Background glow -->
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-brand-neon opacity-[0.05] blur-[120px] rounded-full pointer-events-none">
+            </div>
+
+            <div class="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center gap-16">
+                <div class="flex-1">
+                    <h2 class="text-5xl md:text-7xl font-bold tracking-tighter mb-8 reveal-trigger">STOP WASTING
+                        <br><span class="text-brand-dim">YOUR TIME.</span>
+                    </h2>
+                    <p class="text-xl text-gray-400 font-light mb-8 max-w-lg">
+                        Repetitive inquiries kill productivity. Our AI Agents handle the 80% of noise so you can focus
+                        on the 20% of high-value tasks.
+                    </p>
+                    <ul class="space-y-4 font-mono text-sm text-gray-400">
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-brand-neon"></i> Zero
+                            wait times</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-brand-neon"></i> Instant
+                            lead qualification</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-brand-neon"></i>
+                            Consistent brand voice</li>
+                    </ul>
+                </div>
+                <div class="flex-1 flex justify-center">
+                    <div
+                        class="glass-panel p-12 rounded-full border-2 border-brand-neon/20 w-[300px] h-[300px] flex flex-col items-center justify-center text-center animate-pulse">
+                        <span class="text-5xl font-bold text-white">RECLAIM</span>
+                        <span class="text-sm font-mono text-gray-400 mt-2 uppercase tracking-widest">YOUR TIME</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customization CTA -->
+        <section id="customization"
+            class="py-32 px-6 flex justify-center items-center relative overflow-hidden bg-brand-gray/20">
+            <div class="absolute inset-0 bg-grid-pattern opacity-[0.05]"></div>
+
+            <div class="relative z-10 text-center max-w-3xl">
+                <p class="font-mono text-sm text-brand-neon mb-6 uppercase tracking-widest">Custom Automation</p>
+                <h2 class="text-4xl md:text-6xl font-bold mb-8 tracking-tighter">Need a Custom Solution?</h2>
+                <p class="text-gray-400 mb-12 text-lg">
+                    Every business is unique. Tell us what repetitive tasks are slowing you down. We build custom AI
+                    workflows tailored to your product.
+                </p>
+
+                <div class="flex flex-col md:flex-row gap-6 justify-center">
+                    <a href="https://www.facebook.com/blockscommedia" target="_blank"
+                        class="hover-trigger relative inline-block group" data-cursor="link">
+                        <span
+                            class="relative z-10 block px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                            Get a Quote
+                        </span>
+                        <div
+                            class="absolute inset-0 rounded-full blur-lg bg-white/50 group-hover:bg-white/80 transition-colors duration-300">
+                        </div>
+                    </a>
+
+                    <a href="https://www.facebook.com/blockscommedia" target="_blank"
+                        class="hover-trigger relative inline-block group" data-cursor="link">
+                        <span
+                            class="relative z-10 block px-8 py-4 border border-white/20 text-white font-bold rounded-full overflow-hidden transition-all duration-300 group-hover:bg-white/10">
+                            Contact Us
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact" class="bg-black py-24 px-6 border-t border-white/10">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold font-mono mb-6">BLOCKSCOM<span class="text-brand-dim">.AI</span></h3>
+                    <p class="text-gray-500 max-w-xs text-sm">
+                        Empowering businesses with intelligent automation solutions.
+                    </p>
+                </div>
+
+                <div class="flex gap-12 font-mono text-sm">
+                    <div class="flex flex-col gap-4">
+                        <span class="text-white font-bold">Connect</span>
+                        <a href="https://www.facebook.com/blockscommedia" target="_blank"
+                            class="text-gray-500 hover:text-white transition-colors hover-trigger"
+                            data-cursor="link">Facebook</a>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <span class="text-white font-bold">Inquiries</span>
+                        <a href="https://www.facebook.com/blockscommedia" target="_blank"
+                            class="text-gray-500 hover:text-white transition-colors hover-trigger"
+                            data-cursor="link">Get Quote</a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 flex justify-between items-center text-xs font-mono text-gray-600">
+                <span>&copy; 2025 Blockscom Media.</span>
+                <span>All Rights Reserved.</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

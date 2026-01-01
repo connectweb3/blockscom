@@ -1,0 +1,81 @@
+/* Custom Styles for Futuristic Feel - Blockscom Replica */
+
+body {
+    cursor: none;
+    /* Custom cursor implementation */
+}
+
+.cursor-dot,
+.cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: white;
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+/* Hover States for Cursor */
+body.hovering .cursor-outline {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: transparent;
+}
+
+/* Glassmorphism Utility */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Noise Texture */
+.noise-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9000;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Button Animations */
+.magnetic-btn {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Grid Background Animation Utility */
+.grid-bg {
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at center, black, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+}
+
+/* Scroll Progress Bar */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: white;
+    width: 0%;
+    z-index: 10000;
+}
