@@ -413,10 +413,13 @@
                         <div>
                             <span class="font-mono text-xs uppercase tracking-widest text-brand-neon mb-4 block">Add-on
                                 Service</span>
-                            <h3 class="text-3xl md:text-4xl font-bold mb-6 tracking-tighter">Professional <span
-                                    class="text-brand-dim">Product Photos</span></h3>
-                            <p class="text-gray-400 mb-8">High-quality, studio-grade product photography to elevate your
-                                brand presence.</p>
+                            <h3 class="text-3xl md:text-4xl font-bold mb-6 tracking-tighter">Premium <span
+                                    class="text-brand-dim">Studio-Grade Photography</span></h3>
+                            <p class="text-gray-400 mb-8">Elevate your brand with high-definition, professionally edited product visuals designed to captivate and convert.</p>
+                            
+                            <div class="mb-6 inline-block px-4 py-2 rounded-lg bg-brand-neon/10 border border-brand-neon/20">
+                                <span class="text-brand-neon text-xs font-mono uppercase tracking-wider">Sample of what you get when you avail</span>
+                            </div>
 
                             <div class="space-y-4 font-mono">
                                 <div
@@ -437,20 +440,31 @@
                             </div>
                         </div>
 
-                        <!-- Right: Images -->
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="col-span-2">
-                                <img src="../images/marketing.png" alt="Product Photography Sample 1"
-                                    class="w-full h-48 object-cover rounded-xl border border-white/10 shadow-lg hover:scale-105 transition-transform duration-500">
+                        <!-- Right: Image Slider -->
+                        <div class="relative overflow-hidden w-full h-[400px] rounded-2xl border border-white/10 glass-panel">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="flex gap-4 animate-marquee whitespace-nowrap">
+                                    <!-- First Set -->
+                                    <img src="images/1.png" class="w-64 h-80 object-cover rounded-xl shadow-lg" alt="Sample 1">
+                                    <img src="images/2.png" class="w-64 h-80 object-cover rounded-xl shadow-lg" alt="Sample 2">
+                                    <img src="images/3.png" class="w-64 h-80 object-cover rounded-xl shadow-lg" alt="Sample 3">
+                                    <img src="images/4.png" class="w-64 h-80 object-cover rounded-xl shadow-lg" alt="Sample 4">
+                                    <img src="images/5.png" class="w-64 h-80 object-cover rounded-xl shadow-lg" alt="Sample 5">
+                                    <img src="images/6.png" class="w-64 h-80 object-cover rounded-xl shadow-lg" alt="Sample 6">
+                                    
+                                    <!-- Duplicate Set for Seamless Loop -->
+                                    <img src="images/1.png" class="w-64 h-80 object-cover rounded-xl shadow-lg" alt="Sample 1">
+                                    <img src="images/2.png" class="w-64 h-80 object-cover rounded-xl shadow-lg" alt="Sample 2">
+                                    <img src="images/3.png" class="w-64 h-80 object-cover rounded-xl shadow-lg" alt="Sample 3">
+                                    <img src="images/4.png" class="w-64 h-80 object-cover rounded-xl shadow-lg" alt="Sample 4">
+                                    <img src="images/5.png" class="w-64 h-80 object-cover rounded-xl shadow-lg" alt="Sample 5">
+                                    <img src="images/6.png" class="w-64 h-80 object-cover rounded-xl shadow-lg" alt="Sample 6">
+                                </div>
                             </div>
-                            <div>
-                                <img src="../images/marketing2.png" alt="Product Photography Sample 2"
-                                    class="w-full h-40 object-cover rounded-xl border border-white/10 shadow-lg hover:scale-105 transition-transform duration-500">
-                            </div>
-                            <div>
-                                <img src="../images/marketing3.png" alt="Product Photography Sample 3"
-                                    class="w-full h-40 object-cover rounded-xl border border-white/10 shadow-lg hover:scale-105 transition-transform duration-500">
-                            </div>
+                            
+                            <!-- Vignette for smoother edges -->
+                            <div class="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-black/80 to-transparent z-10 pointer-events-none"></div>
+                            <div class="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-black/80 to-transparent z-10 pointer-events-none"></div>
                         </div>
                     </div>
                 </div>
